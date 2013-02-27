@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2013 at 06:58 PM
+-- Generation Time: Feb 27, 2013 at 08:55 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -132,7 +132,15 @@ CREATE TABLE IF NOT EXISTS `education` (
   `edu_gelar` varchar(10) NOT NULL,
   `edu_name` varchar(30) NOT NULL,
   PRIMARY KEY (`edu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `education`
+--
+
+INSERT INTO `education` (`edu_id`, `edu_year`, `edu_gelar`, `edu_name`) VALUES
+(1, 2010, 'S1', 'Sistem Informasi'),
+(2, 2011, 'S2', 'Teknik Informasi');
 
 -- --------------------------------------------------------
 
@@ -181,7 +189,14 @@ CREATE TABLE IF NOT EXISTS `medical` (
   `medic_date` date NOT NULL,
   `medic_description` text NOT NULL,
   PRIMARY KEY (`medic_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `medical`
+--
+
+INSERT INTO `medical` (`medic_id`, `medic_date`, `medic_description`) VALUES
+(2, '2013-12-12', 'Flue');
 
 -- --------------------------------------------------------
 
@@ -359,7 +374,14 @@ CREATE TABLE IF NOT EXISTS `work_history` (
   `history_date` date NOT NULL,
   `history_description` text NOT NULL,
   PRIMARY KEY (`history_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `work_history`
+--
+
+INSERT INTO `work_history` (`history_id`, `history_date`, `history_description`) VALUES
+(1, '2013-12-12', '41Studio');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
