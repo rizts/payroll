@@ -28,7 +28,7 @@
                                     <li><?php echo anchor('education', 'Education'); ?></li>
                                     <li><?php echo anchor('work_histories', 'Work History'); ?></li>
                                     <li><?php echo anchor('medical_histories', 'Medical History'); ?></li>
-                                    <li><?php echo anchor('salary_component', 'Salary Component'); ?></li>
+                                    <li><?php echo anchor('salary_components', 'Salary Component'); ?></li>
                                     <li><?php echo anchor('salary', 'Salary'); ?></li>
                                 </ul>
                             </li>
