@@ -14,7 +14,7 @@
                 <ul>
                     <li>Master
                         <ul>
-                            <li><?php echo anchor('branchs', 'Branch'); ?></li>
+                            <li><?php echo anchor('branches', 'Branch'); ?></li>
                             <li><?php echo anchor('departements', 'Departements'); ?></li>
                             <li><?php echo anchor('status_pajak_karyawan', 'Status Pajak Karyawan'); ?></li>
                             <li><?php echo anchor('status_karyawan', 'Status Karyawan'); ?></li>
@@ -24,10 +24,10 @@
                             <li>
                             <?php echo anchor('staff', 'Staff'); ?>
                                 <ul>
-                                    <li><?php echo anchor('family', 'Family'); ?></li>
+                                    <li><?php echo anchor('families', 'Family'); ?></li>
                                     <li><?php echo anchor('education', 'Education'); ?></li>
-                                    <li><?php echo anchor('work_history', 'Work History'); ?></li>
-                                    <li><?php echo anchor('medical_hitory', 'Medical History'); ?></li>
+                                    <li><?php echo anchor('work_histories', 'Work History'); ?></li>
+                                    <li><?php echo anchor('medical_histories', 'Medical History'); ?></li>
                                     <li><?php echo anchor('salary_component', 'Salary Component'); ?></li>
                                     <li><?php echo anchor('salary', 'Salary'); ?></li>
                                 </ul>

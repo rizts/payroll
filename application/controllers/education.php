@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Branchs extends CI_Controller {
+class education extends CI_Controller {
 
     private $limit = 10;
 
@@ -13,66 +13,77 @@ class Branchs extends CI_Controller {
     }
 
     public function index($offset = 0) {
-        $data['title'] = "Branch";
-        $data['btn_add'] = anchor('branchs/add', 'Add new branch');
+        $data['title'] = "Education";
+        $data['btn_add'] = anchor('education/add', 'Add new Education');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
         // load data
-        $data['branchs'] = $this->branch_model->get_page_list($this->limit, $offset)->result();
+        $data['educations'] = $this->education_model->get_page_list($this->limit, $offset)->result();
 
         // generate paginate
         $this->load->library('pagination');
-        $config['base_url'] = site_url('branchs/index/');
-        $config['total_rows'] = $this->branch_model->count_all();
+        $config['base_url'] = site_url('education/index/');
+        $config['total_rows'] = $this->education_model->count_all();
         $config['per_page'] = $this->limit;
         $config['uri_segment'] = $uri_segment;
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
 
-        $this->load->view('branchs/index', $data);
+        $this->load->view('staff_education/index', $data);
     }
 
     function add() {
-        $data['title'] = 'Add new branch';
-        $data['form_action'] = site_url('branchs/save');
-        $data['link_back'] = anchor('branchs/', 'Back', array('class' => 'back'));
+        $data['title'] = 'Add new Education';
+        $data['form_action'] = site_url('education/save');
+        $data['link_back'] = anchor('education/', 'Back', array('class' => 'back'));
 
         $data['id'] = '';
-        $data['branch_name'] = array('name' => 'branch_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Branch');
+        $data['edu_year'] = array('name' => 'edu_year');
+        $data['edu_gelar'] = array('name' => 'edu_gelar');
+        $data['edu_name'] = array('name' => 'edu_name');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Education');
 
-        $this->load->view('branchs/frm_branch', $data);
+        $this->load->view('staff_education/frm_education', $data);
     }
 
     function edit($id) {
-        $branch = $this->branch_model->find($id)->row();
-        $data['id'] = $branch->branch_id;
-        $data['branch_name'] = array('name' => 'branch_name', 'value' => $branch->branch_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Branch');
+        $edu = $this->education_model->find($id)->row();
+        $data['id'] = $edu->edu_id;
+        $data['edu_year'] = array('name' => 'edu_year', 'value' => $edu->edu_year);
+        $data['edu_gelar'] = array('name' => 'edu_gelar', 'value' => $edu->edu_gelar);
+        $data['edu_name'] = array('name' => 'edu_name', 'value' => $edu->edu_name);
 
-        $data['title'] = 'Update branch';
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Education');
+
+        $data['title'] = 'Update Education';
         $data['message'] = '';
-        $data['form_action'] = site_url('branchs/update');
-        $data['link_back'] = anchor('branchs/', 'Back');
+        $data['form_action'] = site_url('education/update');
+        $data['link_back'] = anchor('education/', 'Back');
 
-        $this->load->view('branchs/frm_branch', $data);
+        $this->load->view('staff_education/frm_education', $data);
     }
 
     function save() {
-        $this->form_validation->set_rules('branch_name', 'branch_name', 'required');
+        $this->form_validation->set_rules('edu_year', 'edu_year', 'required');
+        $this->form_validation->set_rules('edu_gelar', 'edu_gelar', 'required');
+        $this->form_validation->set_rules('edu_name', 'edu_name', 'required');
 
         if ($this->form_validation->run() == FALSE) {
             $data['message'] = '';
         } else {
-            $branch = array('branch_name' => $this->input->post('branch_name'));
-            $this->branch_model->save($branch);
+            $edu = array(
+                'edu_year' => $this->input->post('edu_year'),
+                'edu_gelar' => $this->input->post('edu_gelar'),
+                'edu_name' => $this->input->post('edu_name')
+            );
+            $this->education_model->save($edu);
 
             // set user message
-            $data['message'] = '<div class="success">add new branch success</div>';
-            redirect('branchs/', 'refresh');
+            $data['message'] = '<div class="success">add new Education success</div>';
+            redirect('education/', 'refresh');
         }
     }
 
@@ -82,17 +93,21 @@ class Branchs extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('message', '<div class="error">' . validation_errors() . '</div>');
-            redirect('branchs/');
+            redirect('education/');
         } else {
-            $branch = array('branch_name' => $this->input->post('branch_name'));
-            $this->branch_model->update($id, $branch);
-            redirect('branchs/');
+            $edu = array(
+                'edu_year' => $this->input->post('edu_year'),
+                'edu_gelar' => $this->input->post('edu_gelar'),
+                'edu_name' => $this->input->post('edu_name')
+            );
+            $this->education_model->update($id, $edu);
+            redirect('education/');
         }
     }
 
     function delete($id) {
-        $this->branch_model->delete($id);
-        redirect('branchs/', 'refresh');
+        $this->education_model->delete($id);
+        redirect('education/', 'refresh');
     }
 
 }

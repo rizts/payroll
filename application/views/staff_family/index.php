@@ -21,7 +21,7 @@
                     <td>Action</td>
                 </tr>
                 <?php
-                foreach ($familys as $row) {
+                foreach ($families as $row) {
                 ?>
                     <tr>
                         <td><?php echo $row->staff_fam_id; ?></td>
@@ -33,8 +33,8 @@
                         <td><?php echo $row->staff_fam_sex; ?></td>
                         <td><?php echo $row->staff_fam_relation; ?></td>
                         <td>
-                        <?php echo anchor('family/edit/' . $row->staff_fam_id, 'Edit'); ?>
-                        <?php echo anchor('family/delete/' . $row->staff_fam_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this family?')")); ?>
+                        <?php echo anchor('families/edit/' . $row->staff_fam_id, 'Edit'); ?>
+                        <?php echo anchor('families/delete/' . $row->staff_fam_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this family?')")); ?>
                     </td>
                 </tr>
                 <?php

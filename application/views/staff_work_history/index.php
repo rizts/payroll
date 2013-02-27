@@ -7,26 +7,24 @@
 
     <body>
         <div>
-            <h2>Listing Education</h2>
+            <h2>Listing Work History</h2>
             <table border="1">
                 <tr>
                     <td>Edu ID</td>
-                    <td>Education Year</td>
-                    <td>Education Gelar</td>
-                    <td>Education Name</td>
+                    <td>History Date</td>
+                    <td>History Description</td>
                     <td>Action</td>
                 </tr>
                 <?php
-                foreach ($educations as $row) {
+                foreach ($work_histories as $row) {
                 ?>
                     <tr>
-                        <td><?php echo $row->edu_id; ?></td>
-                        <td><?php echo $row->edu_year; ?></td>
-                        <td><?php echo $row->edu_gelar; ?></td>
-                        <td><?php echo $row->edu_name; ?></td>
+                        <td><?php echo $row->history_id; ?></td>
+                        <td><?php echo $row->history_date; ?></td>
+                        <td><?php echo $row->history_description; ?></td>
                         <td>
-                        <?php echo anchor('education/edit/' . $row->edu_id, 'Edit'); ?>
-                        <?php echo anchor('education/delete/' . $row->edu_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this education?')")); ?>
+                        <?php echo anchor('work_histories/edit/' . $row->history_id, 'Edit'); ?>
+                        <?php echo anchor('work_histories/delete/' . $row->history_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this work history?')")); ?>
                     </td>
                 </tr>
                 <?php
