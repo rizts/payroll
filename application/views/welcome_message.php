@@ -20,7 +20,7 @@
                             <li><?php echo anchor('status_karyawan', 'Status Karyawan'); ?></li>
                             <li><?php echo anchor('status_nikah', 'Status Nikah'); ?></li>
                             <li><?php echo anchor('jabatan', 'Jabatan'); ?></li>
-                            <li><?php echo anchor('gaji', 'Component(Gaji)'); ?></li>
+                            <li><?php echo anchor('components', 'Component(Gaji)'); ?></li>
                             <li>
                             <?php echo anchor('staff', 'Staff'); ?>
                                 <ul>
