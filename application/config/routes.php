@@ -39,6 +39,12 @@
 */
 
 $route['default_controller'] = "welcome";
+// Master link url
+$route["staff/(:num)/families/index"] = "families/index";
+$route["staff/(:num)/families/add"] = "families/add";
+
+$route["staff/(:num)/educations/index"] = "educations/index";
+$route["staff/(:num)/educations/add"] = "educations/add";
 $route['404_override'] = '';
 
 

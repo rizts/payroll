@@ -20,7 +20,7 @@ class Families extends CI_Controller {
         // offset
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
-
+        
         // load data
         $data['families'] = $this->family_model->get_page_list($this->limit, $offset)->result();
 
@@ -36,12 +36,13 @@ class Families extends CI_Controller {
         $this->load->view('staff_family/index', $data);
     }
 
-    function add() {
+    function add() {        
         $data['title'] = 'Add new family';
-        $data['form_action'] = site_url('families/save');
+        $data['form_action'] = site_url('staff/families/save');
         $data['link_back'] = anchor('families/', 'Back', array('class' => 'back'));
 
         $data['id'] = '';
+        $data['staff_id'] = $this->uri->segment(2);
         $data['staff_fam_id'] = array('name' => 'staff_fam_id');
         $data['staff_fam_staff_id'] = array('name' => 'staff_fam_staff_id');
         $data['staff_fam_order'] = array('name' => 'staff_fam_order');
@@ -110,6 +111,7 @@ class Families extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $data['message'] = '';
         } else {
+            $staff_id = $this->uri->segment(2);
             $family = array(
                 'staff_fam_id' => $this->input->post('staff_fam_id'),
                 'staff_fam_staff_id' => $this->input->post('staff_fam_staff_id'),
@@ -124,7 +126,7 @@ class Families extends CI_Controller {
 
             // set user message
             $data['message'] = '<div class="success">add new family success</div>';
-            redirect('families/', 'refresh');
+            redirect('staff/'.$staff_id.'/families/index', 'refresh');
         }
     }
 

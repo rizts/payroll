@@ -24,8 +24,6 @@
                     <td>Staff Status Cabang</td>
                     <td>Staff Status Departement</td>
                     <td>Staff Status Jabatan</td>
-                    <td>Staff Status Birthdate</td>
-                    <td>Staff Status Birthplace</td>
                     <td>Action</td>
                 </tr>
                 <?php
@@ -46,10 +44,12 @@
                         <td><?php echo $row->staff_cabang; ?></td>
                         <td><?php echo $row->staff_departement; ?></td>
                         <td><?php echo $row->staff_jabatan; ?></td>
-                        <td><?php echo $row->staff_birthdate; ?></td>
-                        <td><?php echo $row->staff_birthplace; ?></td>
                         <td>
-                        <?php echo anchor('staff/edit/' . $row->staff_id, 'Edit'); ?>
+                        <?php echo anchor('staff/'.$row->staff_id.'/families/add', 'Family'); ?> |
+                        <?php echo anchor('staff/'.$row->staff_id.'/educations/add', 'Education'); ?> |
+                        <?php echo anchor('staff/'.$row->staff_id.'/work_histories/add', 'Work'); ?> |
+                        <?php echo anchor('staff/'.$row->staff_id.'/medical_histories/add', 'Medical'); ?> |
+                        <?php echo anchor('staff/edit/' . $row->staff_id, 'Edit'); ?> |
                         <?php echo anchor('staff/delete/' . $row->staff_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this staff?')")); ?>
 
                     </td>
