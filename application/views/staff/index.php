@@ -8,6 +8,7 @@
     <body>
         <div>
             <h2>Listing Staff</h2>
+            <?php echo $message; ?>
             <table border="1">
                 <tr>
                     <td>Staff ID</td>

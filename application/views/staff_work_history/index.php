@@ -23,8 +23,8 @@
                         <td><?php echo $row->history_date; ?></td>
                         <td><?php echo $row->history_description; ?></td>
                         <td>
-                        <?php echo anchor('work_histories/edit/' . $row->history_id, 'Edit'); ?>
-                        <?php echo anchor('work_histories/delete/' . $row->history_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this work history?')")); ?>
+                        <?php echo anchor('staff/'.$staff_id.'/work_histories/edit/' . $row->history_id, 'Edit'); ?>
+                        <?php echo anchor('staff/'.$staff_id.'/work_histories/delete/' . $row->history_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this work history?')")); ?>
                     </td>
                 </tr>
                 <?php

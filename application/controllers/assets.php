@@ -15,6 +15,7 @@ class Assets extends CI_Controller {
 
     public function index($offset = 0) {
         $data['title'] = "Branch";
+        $data['message'] = "";
         $data['btn_add'] = anchor('branchs/add', 'Add new branch');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset

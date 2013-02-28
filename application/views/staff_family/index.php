@@ -8,10 +8,10 @@
     <body>
         <div>
             <h2>Listing Family</h2>
+            <?php echo $message; ?>
             <table border="1">
                 <tr>
                     <td>Branch ID</td>
-                    <td>Family Staff ID </td>
                     <td>Family Order</td>
                     <td>Family Name</td>
                     <td>Birthdate</td>
@@ -24,17 +24,16 @@
                 foreach ($families as $row) {
                 ?>
                     <tr>
-                        <td><?php echo $row->staff_fam_id; ?></td>
-                        <td><?php echo $row->staff_fam_staff_id; ?></td>
+                        <td><?php echo $row->staff_fam_id; ?></td>                        
                         <td><?php echo $row->staff_fam_order; ?></td>
                         <td><?php echo $row->staff_fam_name; ?></td>
-                        <td><?php echo $row->staff_fam_bithdate; ?></td>
+                        <td><?php echo $row->staff_fam_birthdate; ?></td>
                         <td><?php echo $row->staff_fam_birthplace; ?></td>
                         <td><?php echo $row->staff_fam_sex; ?></td>
                         <td><?php echo $row->staff_fam_relation; ?></td>
                         <td>
-                        <?php echo anchor('families/edit/' . $row->staff_fam_id, 'Edit'); ?>
-                        <?php echo anchor('families/delete/' . $row->staff_fam_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this family?')")); ?>
+                        <?php echo anchor('staff/'.$staff_id.'/families/edit/' . $row->staff_fam_id, 'Edit'); ?>
+                        <?php echo anchor('staff/'.$staff_id.'/families/delete/' . $row->staff_fam_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this family?')")); ?>
                     </td>
                 </tr>
                 <?php

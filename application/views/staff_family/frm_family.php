@@ -6,7 +6,7 @@
     </head>
 
     <body>
-        <?php echo form_open($form_action) . form_hidden('id', $id) . form_hidden('staff_fam_staff_id', $staff_id); ?>
+        <?php echo form_open($form_action) . form_hidden('id', $id) ?>
         <table>
             <tr>
                 <td>staff_fam_order</td>
@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <td>staff_fam_bithdate</td>
-                <td><?php echo form_input($staff_fam_bithdate); ?></td>
+                <td><?php echo form_input($staff_fam_birthdate); ?></td>
             </tr>
             <tr>
                 <td>staff_fam_birthplace</td>

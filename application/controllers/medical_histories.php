@@ -15,7 +15,8 @@ class Medical_Histories extends CI_Controller {
 
     public function index($offset = 0) {
         $data['title'] = "Medical History";
-        $data['btn_add'] = anchor('medical_histories/add', 'Add new medical');
+        $data['staff_id'] = $this->uri->segment(2);
+        $data['btn_add'] = anchor('staff/' . $data['staff_id'] . '/medical_histories/add', 'Add New Medical');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset
         $uri_segment = 3;
@@ -26,7 +27,7 @@ class Medical_Histories extends CI_Controller {
 
         // generate paginate
         $this->load->library('pagination');
-        $config['base_url'] = site_url('medical_histories/index/');
+        $config['base_url'] = site_url('staff/' . $data['staff_id'] . '/medical_histories/index/');
         $config['total_rows'] = $this->mh_model->count_all();
         $config['per_page'] = $this->limit;
         $config['uri_segment'] = $uri_segment;
@@ -37,9 +38,10 @@ class Medical_Histories extends CI_Controller {
     }
 
     function add() {
+        $staff_id = $this->uri->segment(2);
         $data['title'] = 'Add new Medical History';
-        $data['form_action'] = site_url('medical_histories/save');
-        $data['link_back'] = anchor('medical_histories/', 'Back', array('class' => 'back'));
+        $data['form_action'] = site_url('staff/' . $staff_id . '/medical_histories/save');
+        $data['link_back'] = anchor('staff/' . $staff_id . '/medical_histories/index', 'Back', array('class' => 'back'));
 
         $data['id'] = '';
         $data['medic_date'] = array('name' => 'medic_date');
@@ -49,8 +51,10 @@ class Medical_Histories extends CI_Controller {
         $this->load->view('staff_medical_history/frm_medical', $data);
     }
 
-    function edit($id) {
-        $mh = $this->mh_model->find($id)->row();
+    function edit() {
+        $medic_id = $this->uri->segment(5);
+        $staff_id = $this->uri->segment(2);
+        $mh = $this->mh_model->find($medic_id)->row();
         $data['id'] = $mh->medic_id;
         $data['medic_date'] = array('name' => 'medic_date', 'value' => $mh->medic_date);
         $data['medic_description'] = array('name' => 'medic_description', 'value' => $mh->medic_description);
@@ -59,13 +63,14 @@ class Medical_Histories extends CI_Controller {
 
         $data['title'] = 'Update Medical History';
         $data['message'] = '';
-        $data['form_action'] = site_url('medical_histories/update');
-        $data['link_back'] = anchor('medical_histories/', 'Back');
+        $data['form_action'] = site_url('staff/' . $staff_id . '/medical_histories/update');
+        $data['link_back'] = anchor('staff/' . $staff_id . '/medical_histories/index', 'Back');
 
         $this->load->view('staff_medical_history/frm_medical', $data);
     }
 
     function save() {
+        $staff_id = $this->uri->segment(2);
         $this->form_validation->set_rules('medic_date', 'Date', 'required');
         $this->form_validation->set_rules('medic_description', 'Description', 'required');
 
@@ -80,31 +85,28 @@ class Medical_Histories extends CI_Controller {
 
             // set user message
             $data['message'] = '<div class="success">add new medical success</div>';
-            redirect('medical_histories/', 'refresh');
+            redirect('staff/' . $staff_id . '/medical_histories/index');
         }
     }
 
     function update() {
+        $staff_id = $this->uri->segment(2);
         $id = $this->input->post('id');
-        $this->form_validation->set_rules('id', 'ID Record', 'required');
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->session->set_flashdata('message', '<div class="error">' . validation_errors() . '</div>');
-            redirect('medical_histories/');
-        } else {
-            $mh = array(
-                'medic_date' => $this->input->post('medic_date'),
-                'medic_description' => $this->input->post('medic_description')
-            );
+        $mh = array(
+            'medic_date' => $this->input->post('medic_date'),
+            'medic_description' => $this->input->post('medic_description')
+        );
 
-            $this->mh_model->update($id, $mh);
-            redirect('medical_histories/');
-        }
+        $this->mh_model->update($id, $mh);
+        redirect('staff/'.$staff_id.'/medical_histories/index');
     }
 
-    function delete($id) {
-        $this->mh_model->delete($id);
-        redirect('medical_histories/', 'refresh');
+    function delete() {
+        $medic_id = $this->uri->segment(5);
+        $staff_id = $this->uri->segment(2);
+        $this->mh_model->delete($medic_id);
+        redirect('staff/'.$staff_id.'/medical_histories/index', 'refresh');
     }
 
 }

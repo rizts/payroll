@@ -22,6 +22,7 @@ class Staff extends CI_Controller {
 
     public function index($offset = 0) {
         $data['title'] = "Staff";
+        $data['message'] = "";
         $data['btn_add'] = anchor('staff/add', 'Add new Staff');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset
