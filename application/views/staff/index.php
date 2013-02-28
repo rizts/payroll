@@ -19,8 +19,6 @@
                     <td>Staff Email</td>
                     <td>Staff Phone Home</td>
                     <td>Staff Phone HP</td>
-                    <td>Staff Status Pajak</td>
-                    <td>Staff Status Nikah</td>
                     <td>Staff Status Karyawan</td>
                     <td>Staff Status Cabang</td>
                     <td>Staff Status Departement</td>
@@ -39,17 +37,15 @@
                         <td><?php echo $row->staff_email; ?></td>
                         <td><?php echo $row->staff_phone_home; ?></td>
                         <td><?php echo $row->staff_phone_hp; ?></td>
-                        <td><?php echo $row->staff_status_pajak; ?></td>
-                        <td><?php echo $row->staff_status_nikah; ?></td>
                         <td><?php echo $row->staff_status_karyawan; ?></td>
                         <td><?php echo $row->staff_cabang; ?></td>
                         <td><?php echo $row->staff_departement; ?></td>
                         <td><?php echo $row->staff_jabatan; ?></td>
                         <td>
-                        <?php echo anchor('staff/'.$row->staff_id.'/families/add', 'Family'); ?> |
-                        <?php echo anchor('staff/'.$row->staff_id.'/educations/add', 'Education'); ?> |
-                        <?php echo anchor('staff/'.$row->staff_id.'/work_histories/add', 'Work'); ?> |
-                        <?php echo anchor('staff/'.$row->staff_id.'/medical_histories/add', 'Medical'); ?> |
+                        <?php echo anchor('staff/'.$row->staff_id.'/families/index', 'Family'); ?> |
+                        <?php echo anchor('staff/'.$row->staff_id.'/educations/index', 'Education'); ?> |
+                        <?php echo anchor('staff/'.$row->staff_id.'/work_histories/index', 'Work'); ?> |
+                        <?php echo anchor('staff/'.$row->staff_id.'/medical_histories/index', 'Medical'); ?> |
                         <?php echo anchor('staff/edit/' . $row->staff_id, 'Edit'); ?> |
                         <?php echo anchor('staff/delete/' . $row->staff_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this staff?')")); ?>
 
