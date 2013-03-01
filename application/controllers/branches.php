@@ -5,29 +5,29 @@ if (!defined('BASEPATH'))
 
 class Branches extends CI_Controller {
 
-    private $limit = 10;
+    private $limit = 5;
 
     public function __construct() {
         parent::__construct();
-        $this->load->library(array('form_validation'));
-        $this->load->model('mbranch', 'branch_model');
+        $this->load->model('Branch', 'branch_model');
+        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
+        $branch_list = new Branch();
+        $total_rows = $branch_list->count();
         $data['title'] = "Branch";
-        $data['btn_add'] = anchor('branches/add', 'Add new branch');
+        $data['btn_add'] = anchor('branches/add', 'Add New Branch');
         $data['btn_home'] = anchor(base_url(), 'Home');
-        // offset
+
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        // load data
-        $data['branchs'] = $this->branch_model->get_page_list($this->limit, $offset)->result();
+        $branch_list->order_by('branch_name');
+        $data['branch_list'] = $branch_list->get($this->limit, $offset)->all;
 
-        // generate paginate
-        $this->load->library('pagination');
-        $config['base_url'] = site_url('branches/index/');
-        $config['total_rows'] = $this->branch_model->count_all();
+        $config['base_url'] = site_url("branches/index");
+        $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->limit;
         $config['uri_segment'] = $uri_segment;
         $this->pagination->initialize($config);
@@ -68,8 +68,9 @@ class Branches extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $data['message'] = '';
         } else {
-            $branch = array('branch_name' => $this->input->post('branch_name'));
-            $this->branch_model->save($branch);
+            $branch = new Branch();
+            $branch->branch_name = $this->input->post('branch_name');
+            $branch->save();
 
             // set user message
             $data['message'] = '<div class="success">add new branch success</div>';
@@ -92,8 +93,11 @@ class Branches extends CI_Controller {
     }
 
     function delete($id) {
-        $this->branch_model->delete($id);
-        redirect('branches/', 'refresh');
+        $branch = new Branch();
+        $branch->deleted($id);
+        $this->session->set_flashdata('message', 'Branch successfully deleted!');
+
+        redirect('branches/');
     }
 
 }

@@ -15,7 +15,7 @@
                     <td>Action</td>
                 </tr>
                 <?php
-                foreach ($branchs as $row) {
+                foreach ($branch_list as $row) {
                 ?>
                     <tr>
                         <td><?php echo $row->branch_id; ?></td>
@@ -35,5 +35,5 @@
                     <br>
         <?php echo $btn_add . " - " . $btn_home; ?>
     </body>
-</html> 
+</html>
 
