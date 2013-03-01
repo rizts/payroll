@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2013 at 08:55 PM
+-- Generation Time: Mar 01, 2013 at 02:59 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -54,24 +54,23 @@ CREATE TABLE IF NOT EXISTS `assets_detail` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `branch`
+-- Table structure for table `branches`
 --
 
-CREATE TABLE IF NOT EXISTS `branch` (
+CREATE TABLE IF NOT EXISTS `branches` (
   `branch_id` int(11) NOT NULL AUTO_INCREMENT,
   `branch_name` varchar(50) NOT NULL,
   PRIMARY KEY (`branch_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
--- Dumping data for table `branch`
+-- Dumping data for table `branches`
 --
 
-INSERT INTO `branch` (`branch_id`, `branch_name`) VALUES
+INSERT INTO `branches` (`branch_id`, `branch_name`) VALUES
 (1, 'Bandung'),
-(2, 'Jakarta'),
-(3, 'Surabaya'),
-(4, 'Bali');
+(4, 'Bali'),
+(10, 'Jakarata');
 
 -- --------------------------------------------------------
 
@@ -132,15 +131,15 @@ CREATE TABLE IF NOT EXISTS `education` (
   `edu_gelar` varchar(10) NOT NULL,
   `edu_name` varchar(30) NOT NULL,
   PRIMARY KEY (`edu_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `education`
 --
 
 INSERT INTO `education` (`edu_id`, `edu_year`, `edu_gelar`, `edu_name`) VALUES
-(1, 2010, 'S1', 'Sistem Informasi'),
-(2, 2011, 'S2', 'Teknik Informasi');
+(3, 2005, '-', 'SMU Angkasa'),
+(4, 2011, 'S1', 'LPKIA');
 
 -- --------------------------------------------------------
 
@@ -153,19 +152,20 @@ CREATE TABLE IF NOT EXISTS `family` (
   `staff_fam_staff_id` int(11) NOT NULL,
   `staff_fam_order` varchar(20) NOT NULL,
   `staff_fam_name` varchar(30) NOT NULL,
-  `staff_fam_bithdate` date NOT NULL,
+  `staff_fam_birthdate` date NOT NULL,
   `staff_fam_birthplace` varchar(30) NOT NULL,
   `staff_fam_sex` varchar(10) NOT NULL,
   `staff_fam_relation` varchar(10) NOT NULL,
   PRIMARY KEY (`staff_fam_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `family`
 --
 
-INSERT INTO `family` (`staff_fam_id`, `staff_fam_staff_id`, `staff_fam_order`, `staff_fam_name`, `staff_fam_bithdate`, `staff_fam_birthplace`, `staff_fam_sex`, `staff_fam_relation`) VALUES
-(1, 1, '', 'Jasmine', '2011-05-05', 'Bandung', 'Perempuan', 'Anak 1');
+INSERT INTO `family` (`staff_fam_id`, `staff_fam_staff_id`, `staff_fam_order`, `staff_fam_name`, `staff_fam_birthdate`, `staff_fam_birthplace`, `staff_fam_sex`, `staff_fam_relation`) VALUES
+(5, 1, 'Kandung', 'Jasmine Zahirra Bintang Laksan', '0000-00-00', 'Bandung', 'Perempuan', 'Anak 1'),
+(12, 1, 'Kandung', 'Radit Satria Laksana', '0000-00-00', 'Bandung', 'Laki', 'Anak 2');
 
 -- --------------------------------------------------------
 
@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `medical` (
 --
 
 INSERT INTO `medical` (`medic_id`, `medic_date`, `medic_description`) VALUES
-(2, '2013-12-12', 'Flue');
+(2, '2013-12-12', 'Flue wae');
 
 -- --------------------------------------------------------
 
@@ -214,16 +214,23 @@ CREATE TABLE IF NOT EXISTS `salary` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sallary_component`
+-- Table structure for table `salary_component`
 --
 
-CREATE TABLE IF NOT EXISTS `sallary_component` (
+CREATE TABLE IF NOT EXISTS `salary_component` (
   `gaji_id` int(11) NOT NULL AUTO_INCREMENT,
   `gaji_component_id` int(11) NOT NULL,
   `gaji_daily_value` decimal(10,0) NOT NULL,
   `gaji_amount_value` decimal(10,0) NOT NULL,
   PRIMARY KEY (`gaji_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `salary_component`
+--
+
+INSERT INTO `salary_component` (`gaji_id`, `gaji_component_id`, `gaji_daily_value`, `gaji_amount_value`) VALUES
+(1, 1, 1200090, 67676);
 
 -- --------------------------------------------------------
 
@@ -259,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `staff` (
 --
 
 INSERT INTO `staff` (`staff_id`, `staff_nik`, `staff_kode_absen`, `staff_name`, `staff_address`, `staff_email`, `staff_email_alternatif`, `staff_phone_home`, `staff_phone_hp`, `staff_status_pajak`, `staff_status_nikah`, `staff_status_karyawan`, `staff_cabang`, `staff_departement`, `staff_jabatan`, `staff_photo`, `staff_birthdate`, `staff_birthplace`, `staff_sex`) VALUES
-(1, 6305280, 'JK', 'Marc Shances', '4th Avenue, 8990', 'marc@gmail.com', 'marc@gmail.com', '111222333444', '081222333444', 'K1', 'Married', 'Freelance', 'Jakarta', 'Marketing', 'Staff', '-', '0000-00-00', 'California', '0');
+(1, 6305280, 'JK', 'Dikdik Tasdik Laksana', 'Komp. Margahayu Kencana Blok I 1 No.9', 'dikdik.zahirra@gmail.com', 'dikdik.zahirra@gmail.com', '082116914224', '5410000', 'K1', 'Married', 'Tetap', 'Bandung', 'Transportation', 'Supervisor', '-', '0000-00-00', 'Bandung', '0');
 
 -- --------------------------------------------------------
 
@@ -374,14 +381,15 @@ CREATE TABLE IF NOT EXISTS `work_history` (
   `history_date` date NOT NULL,
   `history_description` text NOT NULL,
   PRIMARY KEY (`history_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `work_history`
 --
 
 INSERT INTO `work_history` (`history_id`, `history_date`, `history_description`) VALUES
-(1, '2013-12-12', '41Studio');
+(5, '0000-00-00', '41Studio'),
+(6, '0000-00-00', 'BPR34');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
