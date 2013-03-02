@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 02, 2013 at 12:53 PM
+-- Generation Time: Mar 02, 2013 at 01:26 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -201,6 +201,27 @@ CREATE TABLE IF NOT EXISTS `fiscal` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `maritals_status`
+--
+
+CREATE TABLE IF NOT EXISTS `maritals_status` (
+  `sn_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sn_name` varchar(8) NOT NULL,
+  PRIMARY KEY (`sn_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `maritals_status`
+--
+
+INSERT INTO `maritals_status` (`sn_id`, `sn_name`) VALUES
+(1, 'Single'),
+(2, 'Married'),
+(4, 'Divorce');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `medical`
 --
 
@@ -287,27 +308,6 @@ CREATE TABLE IF NOT EXISTS `staff` (
 
 INSERT INTO `staff` (`staff_id`, `staff_nik`, `staff_kode_absen`, `staff_name`, `staff_address`, `staff_email`, `staff_email_alternatif`, `staff_phone_home`, `staff_phone_hp`, `staff_status_pajak`, `staff_status_nikah`, `staff_status_karyawan`, `staff_cabang`, `staff_departement`, `staff_jabatan`, `staff_photo`, `staff_birthdate`, `staff_birthplace`, `staff_sex`) VALUES
 (1, 6305280, 'JK', 'Dikdik Tasdik Laksana', 'Komp. Margahayu Kencana Blok I 1 No.9', 'dikdik.zahirra@gmail.com', 'dikdik.zahirra@gmail.com', '082116914224', '5410000', 'K1', 'Married', 'Tetap', 'Bandung', 'Transportation', 'Supervisor', '-', '0000-00-00', 'Bandung', '0');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `status_nikah`
---
-
-CREATE TABLE IF NOT EXISTS `status_nikah` (
-  `sn_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sn_name` varchar(8) NOT NULL,
-  PRIMARY KEY (`sn_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `status_nikah`
---
-
-INSERT INTO `status_nikah` (`sn_id`, `sn_name`) VALUES
-(1, 'Single'),
-(2, 'Married'),
-(4, 'Divorce');
 
 -- --------------------------------------------------------
 
