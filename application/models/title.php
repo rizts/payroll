@@ -6,7 +6,7 @@ class Title extends DataMapper {
     var $validation = array(
         'title_name' => array(
             'label' => 'Title Name',
-            'rules' => array('Required')
+            'rules' => array('required')
         )
     );
 
@@ -23,7 +23,7 @@ class Title extends DataMapper {
         $title = new Title();
         $title->get();
         foreach ($title as $row) {
-            $data[''] = '[ Pilih Jabatan ]';
+            $data[''] = '[ Title ]';
             $data[$row->title_name] = $row->title_name;
         }
         return $data;

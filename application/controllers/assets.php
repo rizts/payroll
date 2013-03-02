@@ -7,94 +7,33 @@ class Assets extends CI_Controller {
 
     private $limit = 10;
 
-    public function __construct() {
+    function __construct() {
         parent::__construct();
-        $this->load->library(array('form_validation'));
-        $this->load->model('mbranch', 'branch_model');
+        $this->load->model('Asset');
+        $this->load->model('Asset_Detail');
+        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
-        $data['title'] = "Branch";
-        $data['message'] = "";
-        $data['btn_add'] = anchor('branchs/add', 'Add new branch');
-        $data['btn_home'] = anchor(base_url(), 'Home');
-        // offset
-        $uri_segment = 3;
-        $offset = $this->uri->segment($uri_segment);
+// Create new User
+        $a = new Asset();
 
-        // load data
-        $data['branchs'] = $this->branch_model->get_page_list($this->limit, $offset)->result();
+// Enter values into required fields
+//        $a->asset_name = "Table Office";
+//        $a->asset_status = TRUE;
+//        $a->date = "2013-09-09";
+//        $a->staff_id = "1";
+        $a->where('asset_name', 'Table Office')->get();
 
-        // generate paginate
-        $this->load->library('pagination');
-        $config['base_url'] = site_url('branchs/index/');
-        $config['total_rows'] = $this->branch_model->count_all();
-        $config['per_page'] = $this->limit;
-        $config['uri_segment'] = $uri_segment;
-        $this->pagination->initialize($config);
-        $data['pagination'] = $this->pagination->create_links();
+// Get country object for Australia
+        $ad = new Asset_Detail();
+        $ad->asset_id = $a->asset_id;
+        $ad->date = '2013-09-09';
+        $ad->descriptions = 'Description';
+        $ad->assetd_status = 'Active';
 
-        $this->load->view('branchs/index', $data);
-    }
-
-    function add() {
-        $data['title'] = 'Add new branch';
-        $data['form_action'] = site_url('branchs/save');
-        $data['link_back'] = anchor('branchs/', 'Back', array('class' => 'back'));
-
-        $data['id'] = '';
-        $data['branch_name'] = array('name' => 'branch_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Branch');
-
-        $this->load->view('branchs/frm_branch', $data);
-    }
-
-    function edit($id) {
-        $branch = $this->branch_model->find($id)->row();
-        $data['id'] = $branch->branch_id;
-        $data['branch_name'] = array('name' => 'branch_name', 'value' => $branch->branch_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Branch');
-
-        $data['title'] = 'Update branch';
-        $data['message'] = '';
-        $data['form_action'] = site_url('branchs/update');
-        $data['link_back'] = anchor('branchs/', 'Back');
-
-        $this->load->view('branchs/frm_branch', $data);
-    }
-
-    function save() {
-        $this->form_validation->set_rules('branch_name', 'branch_name', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $data['message'] = '';
-        } else {
-            $branch = array('branch_name' => $this->input->post('branch_name'));
-            $this->branch_model->save($branch);
-
-            // set user message
-            $data['message'] = '<div class="success">add new branch success</div>';
-            redirect('branchs/', 'refresh');
-        }
-    }
-
-    function update() {
-        $id = $this->input->post('id');
-        $this->form_validation->set_rules('id', 'ID Record', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->session->set_flashdata('message', '<div class="error">' . validation_errors() . '</div>');
-            redirect('branchs/');
-        } else {
-            $branch = array('branch_name' => $this->input->post('branch_name'));
-            $this->branch_model->update($id, $branch);
-            redirect('branchs/');
-        }
-    }
-
-    function delete($id) {
-        $this->branch_model->delete($id);
-        redirect('branchs/', 'refresh');
+// Save new user and also save a relationship to the country
+        $ad->save();
     }
 
 }

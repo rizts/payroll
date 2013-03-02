@@ -15,11 +15,11 @@
                     <li>Master
                         <ul>
                             <li><?php echo anchor('branches', 'Branch'); ?></li>
-                            <li><?php echo anchor('departements', 'Departements'); ?></li>
+                            <li><?php echo anchor('departments', 'Departements'); ?></li>
                             <li><?php echo anchor('status_pajak_karyawan', 'Status Pajak Karyawan'); ?></li>
                             <li><?php echo anchor('status_karyawan', 'Status Karyawan'); ?></li>
                             <li><?php echo anchor('status_nikah', 'Status Nikah'); ?></li>
-                            <li><?php echo anchor('jabatan', 'Jabatan'); ?></li>
+                            <li><?php echo anchor('titles', 'Title'); ?></li>
                             <li><?php echo anchor('components', 'Component(Gaji)'); ?></li>
                             <li>
                             <?php echo anchor('staff', 'Staff'); ?>

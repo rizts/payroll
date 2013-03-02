@@ -8,6 +8,7 @@
     <body>
         <div>
             <h2>Listing Title</h2>
+            <?php echo $this->session->flashdata('message'); ?>
             <table border="1">
                 <tr>
                     <td>Jab ID</td>

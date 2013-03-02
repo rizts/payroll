@@ -6,6 +6,7 @@
     </head>
 
     <body>
+        <?php echo $this->session->flashdata('message'); ?>
         <?php echo form_open($form_action) . form_hidden('id', $id); ?>
         Jabatan
         <?php echo form_input($title_name); ?>

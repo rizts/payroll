@@ -10,6 +10,7 @@ class Departments extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Department');
+        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {

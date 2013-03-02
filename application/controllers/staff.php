@@ -12,9 +12,9 @@ class Staff extends CI_Controller {
         $this->load->library('form_validation');
 
         $this->load->model('mstaff', 'staff_model');
-        $this->load->model('branch', 'branch_model');
-        $this->load->model('department', 'dept_model');
-        $this->load->model('mjabatan', 'jbt_model');
+        $this->load->model('Branch', 'branch_model');
+        $this->load->model('Department', 'dept_model');
+        $this->load->model('Title', 'jbt_model');
         $this->load->model('mstatus_nikah', 'sn_model');
         $this->load->model('mstatus_karyawan', 'sk_model');
         $this->load->model('mstatus_pajak_karyawan', 'spk_model');
