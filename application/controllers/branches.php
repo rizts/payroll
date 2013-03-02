@@ -5,11 +5,11 @@ if (!defined('BASEPATH'))
 
 class Branches extends CI_Controller {
 
-    private $limit = 5;
+    private $limit = 10;
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Branch', 'branch_model');
+        $this->load->model('Branch');
         $this->output->enable_profiler(TRUE);
     }
 
@@ -57,7 +57,6 @@ class Branches extends CI_Controller {
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Branch');
 
         $data['title'] = 'Update branch';
-        $data['message'] = '';
         $data['form_action'] = site_url('branches/update');
         $data['link_back'] = anchor('branches/', 'Back');
 

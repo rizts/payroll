@@ -20,8 +20,7 @@ class Branch extends DataMapper {
     }
 
     function list_drop() {
-        $branch = new Branch();
-        
+        $branch = new Branch();        
         $branch->get();
         foreach ($branch as $row) {
             $data[''] = '[ Pilih Cabang ]';
