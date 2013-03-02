@@ -26,7 +26,7 @@
                         <td><?php echo $row->gaji_amount_value; ?></td>
                         <td>
                         <?php echo anchor('salary_components/edit/' . $row->gaji_id, 'Edit'); ?>
-                        <?php echo anchor('salary_components/delete/' . $row->gaji_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this salary component?')")); ?>
+                        <?php echo anchor('salary_components/delete/' . $row->gaji_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
                     </td>
                 </tr>
                 <?php

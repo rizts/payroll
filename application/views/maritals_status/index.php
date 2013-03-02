@@ -7,24 +7,23 @@
 
     <body>
         <div>
-            <h2>Listing Component(Gaji)</h2>
+            <h2>Listing Marital Status</h2>
+            <?php echo $this->session->flashdata('message'); ?>
             <table border="1">
                 <tr>
-                    <td>Com ID</td>
-                    <td>Comp Name</td>
-                    <td>Comp Type</td>
+                    <td>SN ID</td>
+                    <td>Status Nikah</td>
                     <td>Action</td>
                 </tr>
                 <?php
-                foreach ($components as $row) {
+                foreach ($marital_list as $row) {
                 ?>
                     <tr>
-                        <td><?php echo $row->comp_id; ?></td>
-                        <td><?php echo $row->comp_name; ?></td>
-                        <td><?php echo $row->comp_type; ?></td>
+                        <td><?php echo $row->sn_id; ?></td>
+                        <td><?php echo $row->sn_name; ?></td>
                         <td>
-                        <?php echo anchor('components/edit/' . $row->comp_id, 'Edit'); ?>
-                        <?php echo anchor('components/delete/' . $row->comp_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
+                        <?php echo anchor('maritals_status/edit/' . $row->sn_id, 'Edit'); ?>
+                        <?php echo anchor('maritals_status/delete/' . $row->sn_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
 
                     </td>
                 </tr>

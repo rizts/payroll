@@ -47,7 +47,7 @@
                         <?php echo anchor('staff/'.$row->staff_id.'/work_histories/index', 'Work'); ?> |
                         <?php echo anchor('staff/'.$row->staff_id.'/medical_histories/index', 'Medical'); ?> |
                         <?php echo anchor('staff/edit/' . $row->staff_id, 'Edit'); ?> |
-                        <?php echo anchor('staff/delete/' . $row->staff_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this staff?')")); ?>
+                        <?php echo anchor('staff/delete/' . $row->staff_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
 
                     </td>
                 </tr>

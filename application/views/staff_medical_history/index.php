@@ -24,7 +24,7 @@
                         <td><?php echo $row->medic_description; ?></td>
                         <td>
                         <?php echo anchor('staff/' . $staff_id . '/medical_histories/edit/' . $row->medic_id, 'Edit'); ?>
-                        <?php echo anchor('staff/' . $staff_id . '/medical_histories/delete/' . $row->medic_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this medical history?')")); ?>
+                        <?php echo anchor('staff/' . $staff_id . '/medical_histories/delete/' . $row->medic_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
                     </td>
                 </tr>
                 <?php

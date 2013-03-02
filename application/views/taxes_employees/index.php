@@ -25,7 +25,7 @@
                         <td><?php echo $row->sp_ptkp; ?></td>
                         <td>
                         <?php echo anchor('taxes_employees/edit/' . $row->sp_id, 'Edit'); ?>
-                        <?php echo anchor('taxes_employees/delete/' . $row->sp_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this SPK?')")); ?>
+                        <?php echo anchor('taxes_employees/delete/' . $row->sp_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
 
                     </td>
                 </tr>

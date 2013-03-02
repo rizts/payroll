@@ -33,7 +33,7 @@
                         <td><?php echo $row->staff_fam_relation; ?></td>
                         <td>
                         <?php echo anchor('staff/'.$staff_id.'/families/edit/' . $row->staff_fam_id, 'Edit'); ?>
-                        <?php echo anchor('staff/'.$staff_id.'/families/delete/' . $row->staff_fam_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this family?')")); ?>
+                        <?php echo anchor('staff/'.$staff_id.'/families/delete/' . $row->staff_fam_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
                     </td>
                 </tr>
                 <?php

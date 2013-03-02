@@ -23,7 +23,7 @@
                         <td><?php echo $row->sk_name; ?></td>
                         <td>
                         <?php echo anchor('employees_status/edit/' . $row->sk_id, 'Edit'); ?>
-                        <?php echo anchor('employees_status/delete/' . $row->sk_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this SK?')")); ?>
+                        <?php echo anchor('employees_status/delete/' . $row->sk_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
 
                     </td>
                 </tr>

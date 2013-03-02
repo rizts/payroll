@@ -23,7 +23,7 @@
                         <td><?php echo $row->dept_name; ?></td>
                         <td>
                         <?php echo anchor('departments/edit/' . $row->dept_id, 'Edit'); ?>
-                        <?php echo anchor('departments/delete/' . $row->dept_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this departement?')")); ?>
+                        <?php echo anchor('departments/delete/' . $row->dept_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
 
                     </td>
                 </tr>
