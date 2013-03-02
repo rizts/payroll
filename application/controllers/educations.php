@@ -15,7 +15,7 @@ class Educations extends CI_Controller {
     public function index($offset = 0) {
         $data['title'] = "Education";
         $data['staff_id'] = $this->uri->segment(2);
-        $data['btn_add'] = anchor('staff/' . $data['staff_id'] . '/educations/add', 'Add New Education');
+        $data['btn_add'] = anchor('staff/' . $data['staff_id'] . '/educations/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset
         $uri_segment = 5;
@@ -46,7 +46,7 @@ class Educations extends CI_Controller {
         $data['edu_year'] = array('name' => 'edu_year');
         $data['edu_gelar'] = array('name' => 'edu_gelar');
         $data['edu_name'] = array('name' => 'edu_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Education');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('staff_education/frm_education', $data);
     }
@@ -62,7 +62,7 @@ class Educations extends CI_Controller {
 
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Education');
 
-        $data['title'] = 'Update Education';
+        $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('staff/' . $staff_id . '/educations/update');
         $data['link_back'] = anchor('staff/' . $staff_id . '/educations/index', 'Back');

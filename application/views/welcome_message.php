@@ -22,13 +22,18 @@
                             <li><?php echo anchor('titles', 'Title'); ?></li>
                             <li><?php echo anchor('components', 'Component(Gaji)'); ?></li>
                             <li>
-                            <?php echo anchor('staff', 'Staff'); ?>
+                                <?php echo anchor('staff', 'Staff'); ?>
                                 <ul>
                                     <li><?php echo anchor('salary_components', 'Salary Component'); ?></li>
                                     <li><?php echo anchor('salary', 'Salary'); ?></li>
                                 </ul>
                             </li>
-                            <li><?php echo anchor('assets', 'Assets'); ?></li>
+                            <li>
+                                <?php echo anchor('assets', 'Assets'); ?>
+                                <ul>
+                                    <li><?php echo anchor('assets_detail', 'Assets Detail'); ?></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                 </ul>

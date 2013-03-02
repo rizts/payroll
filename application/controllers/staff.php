@@ -15,15 +15,15 @@ class Staff extends CI_Controller {
         $this->load->model('Branch', 'branch_model');
         $this->load->model('Department', 'dept_model');
         $this->load->model('Title', 'jbt_model');
-        $this->load->model('mstatus_nikah', 'sn_model');
-        $this->load->model('mstatus_karyawan', 'sk_model');
-        $this->load->model('mstatus_pajak_karyawan', 'spk_model');
+        $this->load->model('Marital', 'sn_model');
+        $this->load->model('employee_status', 'sk_model');
+        $this->load->model('tax_employee', 'spk_model');
     }
 
     public function index($offset = 0) {
         $data['title'] = "Staff";
         $data['message'] = "";
-        $data['btn_add'] = anchor('staff/add', 'Add new Staff');
+        $data['btn_add'] = anchor('staff/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset
         $uri_segment = 3;
@@ -47,7 +47,7 @@ class Staff extends CI_Controller {
     function add() {
         $data['title'] = 'Add new Staff';
         $data['form_action'] = site_url('staff/save');
-        $data['link_back'] = anchor('staff/', 'Back', array('class' => 'back'));
+        $data['link_back'] = anchor('staff/', 'Back');
 
         $data['id'] = '';
         $data['staff_nik'] = array('name' => 'staff_nik');
@@ -100,7 +100,7 @@ class Staff extends CI_Controller {
         );
         $sex_selected = 'Laki';
         $data['staff_sex'] = form_dropdown('staff_sex', $options_sex, $sex_selected);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Staff');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('staff/frm_staff', $data);
     }
@@ -160,7 +160,7 @@ class Staff extends CI_Controller {
         );
         $sex_selected = $staff->staff_sex;
         $data['staff_sex'] = form_dropdown('staff_sex', $options_sex, $sex_selected);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Staff');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
 
         $data['title'] = 'Update Staff';
         $data['message'] = '';

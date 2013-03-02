@@ -17,7 +17,7 @@ class Titles extends CI_Controller {
         $title_list = new Title();
         $total_rows = $title_list->count();
         $data['title'] = "Titles";
-        $data['btn_add'] = anchor('titles/add', 'Add New Title');
+        $data['btn_add'] = anchor('titles/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
@@ -43,7 +43,7 @@ class Titles extends CI_Controller {
 
         $data['id'] = '';
         $data['title_name'] = array('name' => 'title_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Jabatan');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('titles/frm_title', $data);
     }
@@ -53,7 +53,7 @@ class Titles extends CI_Controller {
         $rs = $title->where('title_id', $id)->get();
         $data['id'] = $rs->title_id;
         $data['title_name'] = array('name' => 'title_name', 'value' => $rs->title_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Title');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
 
         $data['title'] = 'Update Title';
         $data['form_action'] = site_url('titles/update');

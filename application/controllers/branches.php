@@ -17,7 +17,7 @@ class Branches extends CI_Controller {
         $branch_list = new Branch();
         $total_rows = $branch_list->count();
         $data['title'] = "Branch";
-        $data['btn_add'] = anchor('branches/add', 'Add New Branch');
+        $data['btn_add'] = anchor('branches/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
@@ -43,7 +43,7 @@ class Branches extends CI_Controller {
 
         $data['id'] = '';
         $data['branch_name'] = array('name' => 'branch_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Branch');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('branches/frm_branch', $data);
     }
@@ -54,9 +54,9 @@ class Branches extends CI_Controller {
         $rs = $branch->where('branch_id', $id)->get();
         $data['id'] = $rs->branch_id;
         $data['branch_name'] = array('name' => 'branch_name', 'value' => $rs->branch_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Branch');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
 
-        $data['title'] = 'Update branch';
+        $data['title'] = 'Update Branch';
         $data['form_action'] = site_url('branches/update');
         $data['link_back'] = anchor('branches/', 'Back');
 

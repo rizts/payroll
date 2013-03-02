@@ -22,7 +22,7 @@ class Asset extends DataMapper {
             'rules' => array('required')
         ),
         'date' => array(
-            'label' => 'Asset Name',
+            'label' => 'Date Transaction',
             'rules' => array('required')
         )
     );

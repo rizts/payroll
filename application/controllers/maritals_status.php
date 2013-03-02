@@ -16,7 +16,7 @@ class Maritals_Status extends CI_Controller {
         $marital_list = new Marital();
         $total_rows = $marital_list->count();
         $data['title'] = "Maritals Status";
-        $data['btn_add'] = anchor('maritals_status/add', 'Add New Marital Status');
+        $data['btn_add'] = anchor('maritals_status/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
@@ -42,7 +42,7 @@ class Maritals_Status extends CI_Controller {
 
         $data['id'] = '';
         $data['sn_name'] = array('name' => 'sn_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Maritals');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('maritals_status/frm_maritals_status', $data);
     }
@@ -54,7 +54,7 @@ class Maritals_Status extends CI_Controller {
         $data['sn_name'] = array('name' => 'sn_name', 'value' => $rs->sn_name);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Status Nikah');
 
-        $data['title'] = 'Update Status Nikah';
+        $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('maritals_status/update');
         $data['link_back'] = anchor('maritals_status/', 'Back');

@@ -18,7 +18,7 @@ class Employees_Status extends CI_Controller {
 
         $total_rows = $es_list->count();
         $data['title'] = "Employees Status";
-        $data['btn_add'] = anchor('employees_status/add', 'Add New Employee Status');
+        $data['btn_add'] = anchor('employees_status/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
@@ -40,11 +40,11 @@ class Employees_Status extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Employee Status';
         $data['form_action'] = site_url('employees_status/save');
-        $data['link_back'] = anchor('employees_status/', 'Back', array('class' => 'back'));
+        $data['link_back'] = anchor('employees_status/', 'Back');
 
         $data['id'] = '';
         $data['sk_name'] = array('name' => 'sk_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Employee Status');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('employees_status/frm_employees_status', $data);
     }
@@ -57,7 +57,7 @@ class Employees_Status extends CI_Controller {
         $data['sk_name'] = array('name' => 'sk_name', 'value' => $rs->sk_name);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Status Karyawan');
 
-        $data['title'] = 'Update Employee Status';
+        $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('employees_status/update');
         $data['link_back'] = anchor('employees_status/', 'Back');

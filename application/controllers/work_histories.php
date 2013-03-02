@@ -16,7 +16,7 @@ class Work_Histories extends CI_Controller {
     public function index($offset = 0) {
         $data['title'] = "Work History";
         $data['staff_id'] = $this->uri->segment(2);
-        $data['btn_add'] = anchor('staff/' . $data['staff_id'] . '/work_histories/add', 'Add New Work');
+        $data['btn_add'] = anchor('staff/' . $data['staff_id'] . '/work_histories/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset
         $uri_segment = 5;
@@ -41,12 +41,12 @@ class Work_Histories extends CI_Controller {
         $data['title'] = 'Add new work history';
         $staff_id = $this->uri->segment(2);
         $data['form_action'] = site_url('staff/' . $staff_id . '/work_histories/save');
-        $data['link_back'] = anchor('staff/' . $staff_id . '/work_histories/', 'Back', array('class' => 'back'));
+        $data['link_back'] = anchor('staff/' . $staff_id . '/work_histories/', 'Back');
 
         $data['id'] = '';
         $data['history_date'] = array('name' => 'history_date');
         $data['history_description'] = array('name' => 'history_description');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Work');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('staff_work_history/frm_work', $data);
     }
@@ -59,7 +59,7 @@ class Work_Histories extends CI_Controller {
         $data['history_date'] = array('name' => 'history_date', 'value' => $wh->history_date);
         $data['history_description'] = array('name' => 'history_description', 'value' => $wh->history_description);
 
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Work');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
 
         $data['title'] = 'Update Work History';
         $data['message'] = '';

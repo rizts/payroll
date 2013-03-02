@@ -16,7 +16,7 @@ class Medical_Histories extends CI_Controller {
     public function index($offset = 0) {
         $data['title'] = "Medical History";
         $data['staff_id'] = $this->uri->segment(2);
-        $data['btn_add'] = anchor('staff/' . $data['staff_id'] . '/medical_histories/add', 'Add New Medical');
+        $data['btn_add'] = anchor('staff/' . $data['staff_id'] . '/medical_histories/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset
         $uri_segment = 3;
@@ -46,7 +46,7 @@ class Medical_Histories extends CI_Controller {
         $data['id'] = '';
         $data['medic_date'] = array('name' => 'medic_date');
         $data['medic_description'] = array('name' => 'medic_description');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Medical');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('staff_medical_history/frm_medical', $data);
     }
@@ -61,7 +61,7 @@ class Medical_Histories extends CI_Controller {
 
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Medical');
 
-        $data['title'] = 'Update Medical History';
+        $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('staff/' . $staff_id . '/medical_histories/update');
         $data['link_back'] = anchor('staff/' . $staff_id . '/medical_histories/index', 'Back');

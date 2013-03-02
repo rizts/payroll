@@ -15,7 +15,7 @@ class Salary_Components extends CI_Controller {
 
     public function index($offset = 0) {
         $data['title'] = "Salary Component";
-        $data['btn_add'] = anchor('salary_components/add', 'Add new Salary Comp');
+        $data['btn_add'] = anchor('salary_components/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset
         $uri_segment = 3;
@@ -45,7 +45,7 @@ class Salary_Components extends CI_Controller {
         $data['gaji_component_id'] = array('name' => 'gaji_component_id');
         $data['gaji_daily_value'] = array('name' => 'gaji_daily_value');
         $data['gaji_amount_value'] = array('name' => 'gaji_amount_value');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Salary');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('staff_salary_components/frm_salary_component', $data);
     }
@@ -59,7 +59,7 @@ class Salary_Components extends CI_Controller {
 
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Salary');
 
-        $data['title'] = 'Update Salary Component';
+        $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('salary_components/update');
         $data['link_back'] = anchor('salary_components/', 'Back');

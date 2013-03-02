@@ -15,7 +15,7 @@ class Components extends CI_Controller {
 
     public function index($offset = 0) {
         $data['title'] = "Gaji";
-        $data['btn_add'] = anchor('components/add', 'Add new gaji');
+        $data['btn_add'] = anchor('components/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset
         $uri_segment = 3;
@@ -39,7 +39,7 @@ class Components extends CI_Controller {
     function add() {
         $data['title'] = 'Add new Gaji';
         $data['form_action'] = site_url('components/save');
-        $data['link_back'] = anchor('components/', 'Back', array('class' => 'back'));
+        $data['link_back'] = anchor('components/', 'Back');
 
         $options = array(
             'Daily' => 'Daily',
@@ -50,7 +50,7 @@ class Components extends CI_Controller {
         $selected = 'Monthly';
         $data['comp_name'] = array('name' => 'comp_name');
         $data['comp_type'] = form_dropdown('comp_type', $options, $selected);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Gaji');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('components/frm_gaji', $data);
     }
@@ -68,7 +68,7 @@ class Components extends CI_Controller {
         $data['comp_name'] = array('name' => 'comp_name', 'value' => $gaji->comp_name);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Gaji');
 
-        $data['title'] = 'Update Gaji';
+        $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('components/update');
         $data['link_back'] = anchor('components/', 'Back');

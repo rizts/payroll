@@ -17,7 +17,7 @@ class Families extends CI_Controller {
         $data['title'] = "Family";
         $data['staff_id'] = $this->uri->segment(2);
         $data['message'] = "";
-        $data['btn_add'] = anchor('staff/'.$data['staff_id'].'/families/add', 'Add New Family');
+        $data['btn_add'] = anchor('staff/'.$data['staff_id'].'/families/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
         // offset
         $uri_segment = 5;
@@ -39,9 +39,9 @@ class Families extends CI_Controller {
     }
 
     function add() {
-        $data['title'] = 'Add new family';
+        $data['title'] = 'Add New Family';
         $data['form_action'] = site_url('staff/' . $this->uri->segment(2) . '/families/save');
-        $data['link_back'] = anchor('staff/' . $this->uri->segment(2) . '/families/index', 'Back', array('class' => 'back'));
+        $data['link_back'] = anchor('staff/' . $this->uri->segment(2) . '/families/index', 'Back');
 
         $data['id'] = '';
         $data['staff_id'] = $this->uri->segment(2);
@@ -67,7 +67,7 @@ class Families extends CI_Controller {
         );
         $relation_selected = 'Anak 1';
         $data['staff_fam_relation'] = form_dropdown('staff_fam_relation', $options_relation, $relation_selected);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Family');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('staff_family/frm_family', $data);
     }
@@ -100,7 +100,7 @@ class Families extends CI_Controller {
         $data['staff_fam_relation'] = form_dropdown('staff_fam_relation', $options_relation, $relation_selected);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Family');
 
-        $data['title'] = 'Update Family';
+        $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('staff/' . $staff_id . '/families/update');
         $data['link_back'] = anchor('staff/' . $staff_id . '/families/', 'Back');

@@ -16,7 +16,7 @@ class Taxes_Employees extends CI_Controller {
         $tax_list = new Tax_Employee();
         $total_rows = $tax_list->count();
         $data['title'] = "Taxes Employees";
-        $data['btn_add'] = anchor('taxes_employees/add', 'Add New Taxes');
+        $data['btn_add'] = anchor('taxes_employees/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
@@ -43,7 +43,7 @@ class Taxes_Employees extends CI_Controller {
         $data['id'] = '';
         $data['sp_status'] = array('name' => 'sp_status');
         $data['sp_ptkp'] = array('name' => 'sp_ptkp');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save Taxes');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
         $this->load->view('taxes_employees/frm_taxes_employees', $data);
     }
@@ -54,7 +54,7 @@ class Taxes_Employees extends CI_Controller {
         $data['id'] = $rs->sp_id;
         $data['sp_status'] = array('name' => 'sp_status', 'value' => $rs->sp_status);
         $data['sp_ptkp'] = array('name' => 'sp_ptkp', 'value' => $rs->sp_ptkp);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update SPK');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
 
         $data['title'] = 'Update Taxes Employees';
         $data['message'] = '';
