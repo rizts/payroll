@@ -7,23 +7,23 @@
 
     <body>
         <div>
-            <h2>Listing Branch</h2>
+            <h2>Listing Departement</h2>
             <?php echo $this->session->flashdata('message'); ?>
             <table border="1">
                 <tr>
-                    <td>Branch ID</td>
-                    <td>Branch Name</td>
+                    <td>Dept ID</td>
+                    <td>Departement Name</td>
                     <td>Action</td>
                 </tr>
                 <?php
-                foreach ($branch_list as $row) {
+                foreach ($dept_list as $row) {
                 ?>
                     <tr>
-                        <td><?php echo $row->branch_id; ?></td>
-                        <td><?php echo $row->branch_name; ?></td>
+                        <td><?php echo $row->dept_id; ?></td>
+                        <td><?php echo $row->dept_name; ?></td>
                         <td>
-                        <?php echo anchor('branches/edit/' . $row->branch_id, 'Edit'); ?>
-                        <?php echo anchor('branches/delete/' . $row->branch_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this branchhu?')")); ?>
+                        <?php echo anchor('departments/edit/' . $row->dept_id, 'Edit'); ?>
+                        <?php echo anchor('departments/delete/' . $row->dept_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete this departement?')")); ?>
 
                     </td>
                 </tr>
@@ -36,5 +36,5 @@
                     <br>
         <?php echo $btn_add . " - " . $btn_home; ?>
     </body>
-</html>
+</html> 
 

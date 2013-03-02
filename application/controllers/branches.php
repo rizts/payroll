@@ -49,9 +49,11 @@ class Branches extends CI_Controller {
     }
 
     function edit($id) {
-        $branch = $this->branch_model->find($id)->row();
-        $data['id'] = $branch->branch_id;
-        $data['branch_name'] = array('name' => 'branch_name', 'value' => $branch->branch_name);
+        $branch = new Branch();
+
+        $rs = $branch->where('branch_id', $id)->get();
+        $data['id'] = $rs->branch_id;
+        $data['branch_name'] = array('name' => 'branch_name', 'value' => $rs->branch_name);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Branch');
 
         $data['title'] = 'Update branch';
@@ -63,40 +65,34 @@ class Branches extends CI_Controller {
     }
 
     function save() {
-        $this->form_validation->set_rules('branch_name', 'branch_name', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $data['message'] = '';
+        $branch = new Branch();
+        $branch->branch_name = $this->input->post('branch_name');
+        if ($branch->save()) {
+            $this->session->set_flashdata('message', 'Branch successfully created!');
+            redirect('branches/');
         } else {
-            $branch = new Branch();
-            $branch->branch_name = $this->input->post('branch_name');
-            $branch->save();
-
-            // set user message
-            $data['message'] = '<div class="success">add new branch success</div>';
-            redirect('branches/', 'refresh');
+            // Failed
+            $branch->error_message('custom', 'Branch Name required');
+            $msg = $branch->error->custom;
+            $this->session->set_flashdata('message', $msg);
+            redirect('branches/add');
         }
     }
 
     function update() {
-        $id = $this->input->post('id');
-        $this->form_validation->set_rules('id', 'ID Record', 'required');
+        $branch = new Branch();
+        $branch->where('branch_id', $this->input->post('id'))
+                ->update('branch_name', $this->input->post('branch_name'));
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->session->set_flashdata('message', '<div class="error">' . validation_errors() . '</div>');
-            redirect('branches/');
-        } else {
-            $branch = array('branch_name' => $this->input->post('branch_name'));
-            $this->branch_model->update($id, $branch);
-            redirect('branches/');
-        }
+        $this->session->set_flashdata('message', 'Branch Update successfuly.');
+        redirect('branches/');
     }
 
     function delete($id) {
         $branch = new Branch();
-        $branch->deleted($id);
-        $this->session->set_flashdata('message', 'Branch successfully deleted!');
+        $branch->_delete($id);
 
+        $this->session->set_flashdata('message', 'Branch successfully deleted!');
         redirect('branches/');
     }
 
