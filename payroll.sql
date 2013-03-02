@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 01, 2013 at 02:59 PM
+-- Generation Time: Mar 02, 2013 at 10:56 AM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -31,17 +31,24 @@ CREATE TABLE IF NOT EXISTS `assets` (
   `asset_name` varchar(30) NOT NULL,
   `asset_status` tinyint(1) NOT NULL,
   `staff_id` int(11) NOT NULL,
-  `date` int(11) NOT NULL,
+  `date` datetime NOT NULL,
   PRIMARY KEY (`asset_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `assets`
+--
+
+INSERT INTO `assets` (`asset_id`, `asset_name`, `asset_status`, `staff_id`, `date`) VALUES
+(4, 'Table Office', 1, 1, '2013-09-09 00:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assets_detail`
+-- Table structure for table `asset_details`
 --
 
-CREATE TABLE IF NOT EXISTS `assets_detail` (
+CREATE TABLE IF NOT EXISTS `asset_details` (
   `assetd_id` int(11) NOT NULL AUTO_INCREMENT,
   `asset_id` int(11) NOT NULL,
   `date` date NOT NULL,
@@ -49,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `assets_detail` (
   `descriptions` text NOT NULL,
   `assetd_status` tinyint(1) NOT NULL,
   PRIMARY KEY (`assetd_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
@@ -61,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `branches` (
   `branch_id` int(11) NOT NULL AUTO_INCREMENT,
   `branch_name` varchar(50) NOT NULL,
   PRIMARY KEY (`branch_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `branches`
@@ -69,8 +76,8 @@ CREATE TABLE IF NOT EXISTS `branches` (
 
 INSERT INTO `branches` (`branch_id`, `branch_name`) VALUES
 (1, 'Bandung'),
-(4, 'Bali'),
-(10, 'Jakarata');
+(4, 'Bali Tah'),
+(10, 'Jakarta');
 
 -- --------------------------------------------------------
 
@@ -98,20 +105,20 @@ INSERT INTO `component` (`comp_id`, `comp_name`, `comp_type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departement`
+-- Table structure for table `departments`
 --
 
-CREATE TABLE IF NOT EXISTS `departement` (
+CREATE TABLE IF NOT EXISTS `departments` (
   `dept_id` int(11) NOT NULL AUTO_INCREMENT,
   `dept_name` varchar(50) NOT NULL,
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
--- Dumping data for table `departement`
+-- Dumping data for table `departments`
 --
 
-INSERT INTO `departement` (`dept_id`, `dept_name`) VALUES
+INSERT INTO `departments` (`dept_id`, `dept_name`) VALUES
 (1, 'Accounting'),
 (2, 'Marketing'),
 (3, 'Reservation'),
@@ -351,20 +358,20 @@ CREATE TABLE IF NOT EXISTS `sub_gaji` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `title`
+-- Table structure for table `titles`
 --
 
-CREATE TABLE IF NOT EXISTS `title` (
+CREATE TABLE IF NOT EXISTS `titles` (
   `title_id` int(11) NOT NULL AUTO_INCREMENT,
   `title_name` varchar(20) NOT NULL,
   PRIMARY KEY (`title_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
--- Dumping data for table `title`
+-- Dumping data for table `titles`
 --
 
-INSERT INTO `title` (`title_id`, `title_name`) VALUES
+INSERT INTO `titles` (`title_id`, `title_name`) VALUES
 (1, 'Manager'),
 (2, 'General Manager'),
 (3, 'Supervisor'),
