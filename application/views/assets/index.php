@@ -28,9 +28,9 @@
                         <td><?php echo $row->staff_id; ?></td>
                         <td><?php echo $row->date; ?></td>
                         <td>
-                        <?php echo anchor('assets/edit/' . $row->asset_id, 'Edit'); ?>
+                        <?php echo anchor('assets/'.$row->asset_id.'/details/add', 'Add Detail'); ?> |
+                        <?php echo anchor('assets/edit/' . $row->asset_id, 'Edit'); ?> |
                         <?php echo anchor('assets/delete/' . $row->asset_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
-
                     </td>
                 </tr>
                 <?php } ?>

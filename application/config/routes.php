@@ -75,6 +75,13 @@ $route["staff/(:num)/medical_histories/delete/(:num)"] = "medical_histories/dele
 $route["staff/(:num)/medical_histories/save"] = "medical_histories/save";
 $route["staff/(:num)/medical_histories/update"] = "medical_histories/update";
 
+$route["assets/(:num)/details/index"] = "assets_details/index";
+$route["assets/(:num)/details/index/(:num)"] = "assets_details/index";
+$route["assets/(:num)/details/add"] = "assets_details/add";
+$route["assets/(:num)/details/edit/(:num)"] = "assets_details/edit";
+$route["assets/(:num)/details/delete/(:num)"] = "assets_details/delete";
+$route["assets/(:num)/details/save"] = "assets_details/save";
+$route["assets/(:num)/details/update"] = "assets_details/update";
 
 $route['404_override'] = '';
 
