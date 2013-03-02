@@ -41,7 +41,7 @@ class Families extends CI_Controller {
     function add() {
         $data['title'] = 'Add new family';
         $data['form_action'] = site_url('staff/' . $this->uri->segment(2) . '/families/save');
-        $data['link_back'] = anchor('families/', 'Back', array('class' => 'back'));
+        $data['link_back'] = anchor('staff/' . $this->uri->segment(2) . '/families/index', 'Back', array('class' => 'back'));
 
         $data['id'] = '';
         $data['staff_id'] = $this->uri->segment(2);

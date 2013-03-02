@@ -16,8 +16,8 @@
                         <ul>
                             <li><?php echo anchor('branches', 'Branch'); ?></li>
                             <li><?php echo anchor('departments', 'Departements'); ?></li>
-                            <li><?php echo anchor('status_pajak_karyawan', 'Status Pajak Karyawan'); ?></li>
-                            <li><?php echo anchor('status_karyawan', 'Status Karyawan'); ?></li>
+                            <li><?php echo anchor('taxes_employees', 'Taxes Employees'); ?></li>
+                            <li><?php echo anchor('employees_status', 'Employees Status'); ?></li>
                             <li><?php echo anchor('status_nikah', 'Status Nikah'); ?></li>
                             <li><?php echo anchor('titles', 'Title'); ?></li>
                             <li><?php echo anchor('components', 'Component(Gaji)'); ?></li>

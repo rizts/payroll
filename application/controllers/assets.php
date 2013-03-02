@@ -19,11 +19,11 @@ class Assets extends CI_Controller {
         $a = new Asset();
 
 // Enter values into required fields
-//        $a->asset_name = "Table Office";
-//        $a->asset_status = TRUE;
-//        $a->date = "2013-09-09";
-//        $a->staff_id = "1";
-        $a->where('asset_name', 'Table Office')->get();
+        $a->asset_name = "Table Office";
+        $a->asset_status = TRUE;
+        $a->date = "2013-09-09";
+        $a->staff_id = "1";
+//        $a->where('asset_name', 'Table Office')->get();
 
 // Get country object for Australia
         $ad = new Asset_Detail();
@@ -33,7 +33,7 @@ class Assets extends CI_Controller {
         $ad->assetd_status = 'Active';
 
 // Save new user and also save a relationship to the country
-        $ad->save();
+        $a->save();
     }
 
 }

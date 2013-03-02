@@ -23,7 +23,7 @@ class Branches extends CI_Controller {
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $branch_list->order_by('branch_name');
+        $branch_list->order_by('branch_name', 'ASC');
         $data['branch_list'] = $branch_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("branches/index");
@@ -37,7 +37,7 @@ class Branches extends CI_Controller {
     }
 
     function add() {
-        $data['title'] = 'Add new branch';
+        $data['title'] = 'Add New Branch';
         $data['form_action'] = site_url('branches/save');
         $data['link_back'] = anchor('branches/', 'Back', array('class' => 'back'));
 
