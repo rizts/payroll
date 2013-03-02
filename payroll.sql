@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 02, 2013 at 10:56 AM
+-- Generation Time: Mar 02, 2013 at 12:53 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -33,14 +33,7 @@ CREATE TABLE IF NOT EXISTS `assets` (
   `staff_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`asset_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `assets`
---
-
-INSERT INTO `assets` (`asset_id`, `asset_name`, `asset_status`, `staff_id`, `date`) VALUES
-(4, 'Table Office', 1, 1, '2013-09-09 00:00:00');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -151,6 +144,27 @@ INSERT INTO `education` (`edu_id`, `edu_year`, `edu_gelar`, `edu_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `employees_status`
+--
+
+CREATE TABLE IF NOT EXISTS `employees_status` (
+  `sk_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sk_name` varchar(10) NOT NULL,
+  PRIMARY KEY (`sk_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `employees_status`
+--
+
+INSERT INTO `employees_status` (`sk_id`, `sk_name`) VALUES
+(1, 'Kontrak'),
+(2, 'Tetap'),
+(4, 'Freelance');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `family`
 --
 
@@ -171,8 +185,7 @@ CREATE TABLE IF NOT EXISTS `family` (
 --
 
 INSERT INTO `family` (`staff_fam_id`, `staff_fam_staff_id`, `staff_fam_order`, `staff_fam_name`, `staff_fam_birthdate`, `staff_fam_birthplace`, `staff_fam_sex`, `staff_fam_relation`) VALUES
-(5, 1, 'Kandung', 'Jasmine Zahirra Bintang Laksan', '0000-00-00', 'Bandung', 'Perempuan', 'Anak 1'),
-(12, 1, 'Kandung', 'Radit Satria Laksana', '0000-00-00', 'Bandung', 'Laki', 'Anak 2');
+(5, 1, 'Kandung', 'Jasmine Zahirra Bintang Laksan', '2013-01-10', 'Bandung', 'Perempuan', 'Anak 1');
 
 -- --------------------------------------------------------
 
@@ -278,27 +291,6 @@ INSERT INTO `staff` (`staff_id`, `staff_nik`, `staff_kode_absen`, `staff_name`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `status_karyawan`
---
-
-CREATE TABLE IF NOT EXISTS `status_karyawan` (
-  `sk_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sk_name` varchar(10) NOT NULL,
-  PRIMARY KEY (`sk_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `status_karyawan`
---
-
-INSERT INTO `status_karyawan` (`sk_id`, `sk_name`) VALUES
-(1, 'Kontrak'),
-(2, 'Tetap'),
-(4, 'Freelance');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `status_nikah`
 --
 
@@ -320,30 +312,6 @@ INSERT INTO `status_nikah` (`sn_id`, `sn_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `status_pajak_karyawan`
---
-
-CREATE TABLE IF NOT EXISTS `status_pajak_karyawan` (
-  `sp_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sp_status` varchar(2) NOT NULL,
-  `sp_ptkp` int(11) NOT NULL,
-  PRIMARY KEY (`sp_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `status_pajak_karyawan`
---
-
-INSERT INTO `status_pajak_karyawan` (`sp_id`, `sp_status`, `sp_ptkp`) VALUES
-(1, 'TK', 0),
-(2, 'K0', 0),
-(3, 'K1', 0),
-(4, 'K2', 0),
-(5, 'K3', 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `sub_gaji`
 --
 
@@ -354,6 +322,30 @@ CREATE TABLE IF NOT EXISTS `sub_gaji` (
   `salary_daily_value` decimal(10,0) NOT NULL,
   `salary_amount_value` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `taxes_employees`
+--
+
+CREATE TABLE IF NOT EXISTS `taxes_employees` (
+  `sp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sp_status` varchar(3) NOT NULL,
+  `sp_ptkp` int(11) NOT NULL,
+  PRIMARY KEY (`sp_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `taxes_employees`
+--
+
+INSERT INTO `taxes_employees` (`sp_id`, `sp_status`, `sp_ptkp`) VALUES
+(1, 'TK', 0),
+(2, 'K0', 0),
+(3, 'K1', 0),
+(4, 'K2', 0),
+(5, 'K3', 0);
 
 -- --------------------------------------------------------
 
