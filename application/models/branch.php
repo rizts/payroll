@@ -2,8 +2,8 @@
 
 class Branch extends DataMapper {
 
-    var $table = "branches";
-    var $validation = array(
+    public $table = "branches";
+    public $validation = array(
         'branch_name' => array(
             'label' => 'Branch Name',
             'rules' => array('required')
@@ -20,7 +20,7 @@ class Branch extends DataMapper {
     }
 
     function list_drop() {
-        $branch = new Branch();        
+        $branch = new Branch();
         $branch->get();
         foreach ($branch as $row) {
             $data[''] = '[ Pilih Cabang ]';

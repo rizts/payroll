@@ -9,25 +9,25 @@ class Salary_Components extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library(array('form_validation'));
-        $this->load->model('msalary_component', 'sc_model');
+        $this->load->model('Salary_Component');
+        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
+        $salary_component = new Salary_Component();
+        $total_rows = $salary_component->count();
         $data['title'] = "Salary Component";
         $data['btn_add'] = anchor('salary_components/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
-        // offset
+
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        // load data
-        $data['salary_components'] = $this->sc_model->get_page_list($this->limit, $offset)->result();
+        $salary_component->order_by('gaji_id', 'ASC');
+        $data['salary_components'] = $salary_component->get($this->limit, $offset)->all;
 
-        // generate paginate
-        $this->load->library('pagination');
-        $config['base_url'] = site_url('salary_components/index/');
-        $config['total_rows'] = $this->sc_model->count_all();
+        $config['base_url'] = site_url('salary_components/index');
+        $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->limit;
         $config['uri_segment'] = $uri_segment;
         $this->pagination->initialize($config);
@@ -51,16 +51,17 @@ class Salary_Components extends CI_Controller {
     }
 
     function edit($id) {
-        $field = $this->sc_model->find($id)->row();
-        $data['id'] = $field->gaji_id;
-        $data['gaji_component_id'] = array('name' => 'gaji_component_id', 'value' => $field->gaji_component_id);
-        $data['gaji_daily_value'] = array('name' => 'gaji_daily_value', 'value' => $field->gaji_daily_value);
-        $data['gaji_amount_value'] = array('name' => 'gaji_amount_value', 'value' => $field->gaji_amount_value);
+        $salary_component = new Salary_Component();
 
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Salary');
+        $rs = $salary_component->where('gaji_id', $id)->get();
+        $data['id'] = $rs->gaji_id;
+        $data['gaji_component_id'] = array('name' => 'gaji_component_id', 'value' => $rs->gaji_component_id);
+        $data['gaji_daily_value'] = array('name' => 'gaji_daily_value', 'value' => $rs->gaji_daily_value);
+        $data['gaji_amount_value'] = array('name' => 'gaji_amount_value', 'value' => $rs->gaji_amount_value);
+
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
 
         $data['title'] = 'Update';
-        $data['message'] = '';
         $data['form_action'] = site_url('salary_components/update');
         $data['link_back'] = anchor('salary_components/', 'Back');
 
@@ -68,46 +69,42 @@ class Salary_Components extends CI_Controller {
     }
 
     function save() {
-        $this->form_validation->set_rules('gaji_daily_value', 'Gaji Value', 'required');
+        $salary_component = new Salary_Component();
 
-        if ($this->form_validation->run() == FALSE) {
-            $data['message'] = '';
+        $salary_component->gaji_component_id = $this->input->post('gaji_component_id');
+        $salary_component->gaji_daily_value = $this->input->post('gaji_daily_value');
+        $salary_component->gaji_amount_value = $this->input->post('gaji_amount_value');
+        if ($salary_component->save()) {
+            $this->session->set_flashdata('message', 'Branch successfully created!');
+            redirect('salary_components/');
         } else {
-            $field = array(
-                'gaji_component_id' => $this->input->post('gaji_component_id'),
-                'gaji_daily_value' => $this->input->post('gaji_daily_value'),
-                'gaji_amount_value' => $this->input->post('gaji_amount_value')
-            );
-            $this->sc_model->save($field);
-
-            // set user message
-            $data['message'] = '<div class="success">add new salary success</div>';
-            redirect('salary_components/', 'refresh');
+            // Failed
+            $salary_component->error_message('custom', 'Field required');
+            $msg = $salary_component->error->custom;
+            $this->session->set_flashdata('message', $msg);
+            redirect('salary_components/');
         }
     }
 
     function update() {
-        $id = $this->input->post('id');
-        $this->form_validation->set_rules('id', 'ID Record', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->session->set_flashdata('message', '<div class="error">' . validation_errors() . '</div>');
-            redirect('salary_components/');
-        } else {
-            $field = array(
-                'gaji_component_id' => $this->input->post('gaji_component_id'),
-                'gaji_daily_value' => $this->input->post('gaji_daily_value'),
-                'gaji_amount_value' => $this->input->post('gaji_amount_value')
-            );
-
-            $this->sc_model->update($id, $field);
-            redirect('salary_components/');
-        }
+        $salary_component = new Salary_Component();
+        $salary_component->where('gaji_id', $this->input->post('id'))
+                ->update(array(
+                    'staff_id' => $this->input->post('staff_id'),
+                    'gaji_component_id' => $this->input->post('gaji_component_id'),
+                    'gaji_daily_value' => $this->input->post('gaji_daily_value'),
+                    'gaji_amount_value' => $this->input->post('gaji_amount_value')
+                ));
+        $this->session->set_flashdata('message', 'Update successfully deleted!');
+        redirect('salary_components/');
     }
 
     function delete($id) {
-        $this->sc_model->delete($id);
-        redirect('salary_components/', 'refresh');
+        $salary_component = new Salary_Component();
+        $salary_component->_delete($id);
+
+        $this->session->set_flashdata('message', 'Salary successfully deleted!');
+        redirect('salary_components/');
     }
 
 }

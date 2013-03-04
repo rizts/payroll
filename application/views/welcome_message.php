@@ -25,7 +25,7 @@
                                 <?php echo anchor('staffs', 'Staff'); ?>
                                 <ul>
                                     <li><?php echo anchor('salary_components', 'Salary Component'); ?></li>
-                                    <li><?php echo anchor('salary', 'Salary'); ?></li>
+                                    <li><?php echo anchor('salaries', 'Salary'); ?></li>
                                 </ul>
                             </li>
                             <li>
