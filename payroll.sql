@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 04, 2013 at 03:49 PM
+-- Generation Time: Mar 04, 2013 at 09:48 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `assets` (
   `staff_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`asset_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `assets`
@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS `assets` (
 
 INSERT INTO `assets` (`asset_id`, `asset_name`, `asset_status`, `staff_id`, `date`) VALUES
 (1, 'Table Office', 1, 1, '2013-09-09 00:00:00'),
-(2, 'Motor Honda Supra RX', 1, 1, '2013-01-10 00:00:00');
+(2, 'Motor Honda Supra RX', 1, 1, '2013-01-10 00:00:00'),
+(3, 'Kursi', 1, 2, '2013-01-10 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -57,7 +58,15 @@ CREATE TABLE IF NOT EXISTS `asset_details` (
   `descriptions` text NOT NULL,
   `assetd_status` tinyint(1) NOT NULL,
   PRIMARY KEY (`assetd_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `asset_details`
+--
+
+INSERT INTO `asset_details` (`assetd_id`, `asset_id`, `date`, `staff_id`, `descriptions`, `assetd_status`) VALUES
+(3, 3, '0000-00-00', 1, 'dscription dscription dscription dscription dscription ', 1),
+(4, 3, '0000-00-00', 1, 'dasfsd fsd fsdf ', 0);
 
 -- --------------------------------------------------------
 
@@ -83,21 +92,21 @@ INSERT INTO `branches` (`branch_id`, `branch_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `component`
+-- Table structure for table `components`
 --
 
-CREATE TABLE IF NOT EXISTS `component` (
+CREATE TABLE IF NOT EXISTS `components` (
   `comp_id` int(11) NOT NULL AUTO_INCREMENT,
   `comp_name` varchar(20) NOT NULL,
   `comp_type` varchar(8) NOT NULL COMMENT 'kalau Opsi daily ketika input gaji maka opsi amount_daily muncul, misalnya uang makan',
   PRIMARY KEY (`comp_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `component`
+-- Dumping data for table `components`
 --
 
-INSERT INTO `component` (`comp_id`, `comp_name`, `comp_type`) VALUES
+INSERT INTO `components` (`comp_id`, `comp_name`, `comp_type`) VALUES
 (4, 'Gaji Pokok', 'Monthly'),
 (5, 'Tunjangan Jabatan', 'Monthly'),
 (6, 'Uang Makan', 'Daily'),
@@ -242,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `medical_histories` (
   `medic_date` date NOT NULL,
   `medic_description` text NOT NULL,
   PRIMARY KEY (`medic_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `medical_histories`
@@ -255,36 +264,45 @@ INSERT INTO `medical_histories` (`medic_id`, `staff_id`, `medic_date`, `medic_de
 -- --------------------------------------------------------
 
 --
--- Table structure for table `salary`
+-- Table structure for table `salaries`
 --
 
-CREATE TABLE IF NOT EXISTS `salary` (
+CREATE TABLE IF NOT EXISTS `salaries` (
   `salary_id` int(11) NOT NULL AUTO_INCREMENT,
   `salary_periode` date NOT NULL,
   `salary_staffid` int(11) NOT NULL,
   PRIMARY KEY (`salary_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `salaries`
+--
+
+INSERT INTO `salaries` (`salary_id`, `salary_periode`, `salary_staffid`) VALUES
+(2, '2010-01-01', 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `salary_component`
+-- Table structure for table `salary_components`
 --
 
-CREATE TABLE IF NOT EXISTS `salary_component` (
+CREATE TABLE IF NOT EXISTS `salary_components` (
   `gaji_id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_id` int(11) NOT NULL,
   `gaji_component_id` int(11) NOT NULL,
   `gaji_daily_value` decimal(10,0) NOT NULL,
   `gaji_amount_value` decimal(10,0) NOT NULL,
   PRIMARY KEY (`gaji_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `salary_component`
+-- Dumping data for table `salary_components`
 --
 
-INSERT INTO `salary_component` (`gaji_id`, `gaji_component_id`, `gaji_daily_value`, `gaji_amount_value`) VALUES
-(1, 1, 1200090, 67676);
+INSERT INTO `salary_components` (`gaji_id`, `staff_id`, `gaji_component_id`, `gaji_daily_value`, `gaji_amount_value`) VALUES
+(1, 0, 1, 1200090, 67676),
+(2, 0, 2, 100100, 200200);
 
 -- --------------------------------------------------------
 

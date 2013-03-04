@@ -9,25 +9,24 @@ class Components extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library(array('form_validation'));
-        $this->load->model('mgaji', 'gaji_model');
+        $this->load->model('Component');
     }
 
     public function index($offset = 0) {
-        $data['title'] = "Gaji";
+        $component = new Component();
+        $total_rows = $component->count();
+        $data['title'] = "Component";
         $data['btn_add'] = anchor('components/add', 'Add New');
         $data['btn_home'] = anchor(base_url(), 'Home');
-        // offset
+
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        // load data
-        $data['components'] = $this->gaji_model->get_page_list($this->limit, $offset)->result();
+        $component->order_by('comp_name', 'ASC');
+        $data['components'] = $component->get($this->limit, $offset)->all;
 
-        // generate paginate
-        $this->load->library('pagination');
-        $config['base_url'] = site_url('components/index/');
-        $config['total_rows'] = $this->gaji_model->count_all();
+        $config['base_url'] = site_url("components/index");
+        $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->limit;
         $config['uri_segment'] = $uri_segment;
         $this->pagination->initialize($config);
@@ -37,7 +36,7 @@ class Components extends CI_Controller {
     }
 
     function add() {
-        $data['title'] = 'Add new Gaji';
+        $data['title'] = 'Add New Gaji';
         $data['form_action'] = site_url('components/save');
         $data['link_back'] = anchor('components/', 'Back');
 
@@ -52,70 +51,64 @@ class Components extends CI_Controller {
         $data['comp_type'] = form_dropdown('comp_type', $options, $selected);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
-        $this->load->view('components/frm_gaji', $data);
+        $this->load->view('components/frm_components', $data);
     }
 
     function edit($id) {
-        $gaji = $this->gaji_model->find($id)->row();
+        $component = new Component();
+        $rs = $component->where('comp_id', $id)->get();
         $options = array(
             'Daily' => 'Daily',
             'Monthly' => 'Monthly',
             'Yearly' => 'Yearly',
         );
-        $selected = $gaji->comp_type;
-        $data['id'] = $gaji->comp_id;
+        $selected = $rs->comp_type;
+        $data['id'] = $rs->comp_id;
         $data['comp_type'] = form_dropdown('comp_type', $options, $selected);
-        $data['comp_name'] = array('name' => 'comp_name', 'value' => $gaji->comp_name);
+        $data['comp_name'] = array('name' => 'comp_name', 'value' => $rs->comp_name);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Gaji');
 
         $data['title'] = 'Update';
-        $data['message'] = '';
         $data['form_action'] = site_url('components/update');
         $data['link_back'] = anchor('components/', 'Back');
 
-        $this->load->view('components/frm_gaji', $data);
+        $this->load->view('components/frm_components', $data);
     }
 
     function save() {
-        $this->form_validation->set_rules('comp_name', 'comp_name', 'required');
-        $this->form_validation->set_rules('comp_type', 'comp_type', 'required');
-
-        if ($this->form_validation->run() == FALSE) {
-            $data['message'] = '';
+        $component = new Component();
+        $component->comp_name = $this->input->post('comp_name');
+        $component->comp_type = $this->input->post('comp_type');
+        if ($component->save()) {
+            $this->session->set_flashdata('message', 'Component successfully created!');
+            redirect('components/');
         } else {
-            $gaji = array(
-                'comp_name' => $this->input->post('comp_name'),
-                'comp_type' => $this->input->post('comp_type')
-            );
-            $this->gaji_model->save($gaji);
-
-            // set user message
-            $data['message'] = '<div class="success">add new gaji success</div>';
-            redirect('components/', 'refresh');
+            // Failed
+            $component->error_message('custom', 'Component Name required');
+            $msg = $component->error->custom;
+            $this->session->set_flashdata('message', $msg);
+            redirect('components/add');
         }
     }
 
     function update() {
-        $id = $this->input->post('id');
-        $this->form_validation->set_rules('id', 'ID Record', 'required');
+        $component = new Component();
+        $component->where('comp_id', $this->input->post('id'))
+                ->update(array(
+                    'comp_name' => $this->input->post('comp_name'),
+                    'comp_type' => $this->input->post('comp_type')
+                ));
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->session->set_flashdata('message', '<div class="error">' . validation_errors() . '</div>');
-            redirect('components/');
-        } else {
-            $gaji = array(
-                'comp_name' => $this->input->post('comp_name'),
-                'comp_type' => $this->input->post('comp_type')
-            );
-
-            $this->gaji_model->update($id, $gaji);
-            redirect('components/');
-        }
+        $this->session->set_flashdata('message', 'Component Update successfuly.');
+        redirect('components/');
     }
 
     function delete($id) {
-        $this->gaji_model->delete($id);
-        redirect('components/', 'refresh');
+        $component = new Component();
+        $component->_delete($id);
+
+        $this->session->set_flashdata('message', 'Component successfully deleted!');
+        redirect('components/');
     }
 
 }
