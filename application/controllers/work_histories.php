@@ -57,7 +57,7 @@ class Work_Histories extends CI_Controller {
         $work = new Work();
         $work_id = $this->uri->segment(5);
         $staff_id = $this->uri->segment(2);
-        $rs = $rs->where('history_id', $work_id)->get();
+        $rs = $work->where('history_id', $work_id)->get();
         $data['id'] = $rs->history_id;
         $data['history_date'] = array('name' => 'history_date', 'value' => $rs->history_date);
         $data['history_description'] = array('name' => 'history_description', 'value' => $rs->history_description);
@@ -96,12 +96,12 @@ class Work_Histories extends CI_Controller {
         $work = new Work();
         $id = $this->input->post('id');
         $staff_id = $this->uri->segment(2);
-        $work->where('edu_id', $id)->update(array(
+        $work->where('history_id', $id)->update(array(
             'history_date' => $this->input->post('history_date'),
             'history_description' => $this->input->post('history_description')
         ));
         $this->session->set_flashdata('message', 'Work Update successfuly.');
-        redirect('staff/' . $staff_id . '/work_histories/index');
+        redirect('staffs/' . $staff_id . '/work_histories/index');
     }
 
     function delete() {

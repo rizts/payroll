@@ -7,6 +7,7 @@
 
     <body>
         <div>
+            <?php echo $this->session->flashdata('message'); ?>
             <h2>Listing Medical History</h2>
             <table border="1">
                 <tr>
@@ -23,8 +24,8 @@
                         <td><?php echo $row->medic_date; ?></td>
                         <td><?php echo $row->medic_description; ?></td>
                         <td>
-                        <?php echo anchor('staff/' . $staff_id . '/medical_histories/edit/' . $row->medic_id, 'Edit'); ?>
-                        <?php echo anchor('staff/' . $staff_id . '/medical_histories/delete/' . $row->medic_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
+                        <?php echo anchor('staffs/' . $row->staff_id . '/medical_histories/edit/' . $row->medic_id, 'Edit'); ?>
+                        <?php echo anchor('staffs/' . $row->staff_id . '/medical_histories/delete/' . $row->medic_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
                     </td>
                 </tr>
                 <?php
