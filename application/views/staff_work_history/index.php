@@ -8,6 +8,7 @@
     <body>
         <div>
             <h2>Listing Work History</h2>
+            <?php echo $this->session->flashdata('message'); ?>
             <table border="1">
                 <tr>
                     <td>Edu ID</td>
@@ -23,8 +24,8 @@
                         <td><?php echo $row->history_date; ?></td>
                         <td><?php echo $row->history_description; ?></td>
                         <td>
-                        <?php echo anchor('staff/'.$staff_id.'/work_histories/edit/' . $row->history_id, 'Edit'); ?>
-                        <?php echo anchor('staff/'.$staff_id.'/work_histories/delete/' . $row->history_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
+                        <?php echo anchor('staffs/'.$row->staff_id.'/work_histories/edit/' . $row->history_id, 'Edit'); ?>
+                        <?php echo anchor('staffs/'.$row->staff_id.'/work_histories/delete/' . $row->history_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
                     </td>
                 </tr>
                 <?php

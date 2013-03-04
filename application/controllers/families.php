@@ -21,7 +21,7 @@ class Families extends CI_Controller {
         $total_rows = $family->count();
         $data['title'] = "Family";
         $data['btn_add'] = anchor('staffs/' . $data['staff_id'] . '/families/add', 'Add New');
-        $data['btn_home'] = anchor(base_url(), 'Home');
+        $data['btn_home'] = anchor('staffs', 'Home');
 
         $uri_segment = 5;
         $offset = $this->uri->segment($uri_segment);
@@ -29,8 +29,7 @@ class Families extends CI_Controller {
 
         $data['families'] = $family
                         ->where('staff_fam_staff_id', $data['staff_id'])
-                        ->get($this->limit, $offset)
-                ->all;
+                        ->get($this->limit, $offset)->all;
         $config['base_url'] = site_url('staffs/' . $data['staff_id'] . '/families/index');
         $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->limit;

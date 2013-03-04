@@ -3,7 +3,11 @@
 class Staff extends DataMapper {
 
     public $table = "staffs";
-    public $has_many = array('family');
+    public $has_many = array(
+        'family',
+        'education',
+        'work'
+    );
     public $validation = array(
         'staff_nik' => array(
             'label' => 'Staff NIK',

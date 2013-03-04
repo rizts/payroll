@@ -8,7 +8,7 @@
     <body>
         <div>
             <h2>Listing Family</h2>
-            <?php //echo $message; ?>
+            <?php echo $this->session->flashdata('message'); ?>
             <table border="1">
                 <tr>
                     <td>Branch ID</td>

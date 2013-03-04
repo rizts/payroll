@@ -9,26 +9,28 @@ class Work_Histories extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library(array('form_validation'));
-        $this->load->model('mwork_history', 'wh_model');
+        $this->load->model('Work');
     }
 
     public function index($offset = 0) {
-        $data['title'] = "Work History";
+        $work = new Work();
         $data['staff_id'] = $this->uri->segment(2);
-        $data['btn_add'] = anchor('staff/' . $data['staff_id'] . '/work_histories/add', 'Add New');
-        $data['btn_home'] = anchor(base_url(), 'Home');
-        // offset
+        $work->where('staff_id', $data['staff_id'])->order_by('history_date', 'ASC');
+
+        $total_rows = $work->count();
+        $data['title'] = "Work Histories";
+        $data['btn_add'] = anchor('staffs/' . $data['staff_id'] . '/work_histories/add', 'Add New');
+        $data['btn_home'] = anchor('staffs', 'Home');
+
         $uri_segment = 5;
         $offset = $this->uri->segment($uri_segment);
 
-        // load data
-        $data['work_histories'] = $this->wh_model->get_page_list($this->limit, $offset)->result();
 
-        // generate paginate
-        $this->load->library('pagination');
-        $config['base_url'] = site_url('staff/' . $data['staff_id'] . '/work_histories/index/');
-        $config['total_rows'] = $this->wh_model->count_all();
+        $data['work_histories'] = $work
+                        ->where('staff_id', $data['staff_id'])
+                        ->get($this->limit, $offset)->all;
+        $config['base_url'] = site_url('staffs/' . $data['staff_id'] . '/work_histories/index');
+        $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->limit;
         $config['uri_segment'] = $uri_segment;
         $this->pagination->initialize($config);
@@ -38,10 +40,10 @@ class Work_Histories extends CI_Controller {
     }
 
     function add() {
-        $data['title'] = 'Add new work history';
+        $data['title'] = 'Add New Work';
         $staff_id = $this->uri->segment(2);
-        $data['form_action'] = site_url('staff/' . $staff_id . '/work_histories/save');
-        $data['link_back'] = anchor('staff/' . $staff_id . '/work_histories/', 'Back');
+        $data['form_action'] = site_url('staffs/' . $staff_id . '/work_histories/save');
+        $data['link_back'] = anchor('staffs/' . $staff_id . '/work_histories/', 'Back');
 
         $data['id'] = '';
         $data['history_date'] = array('name' => 'history_date');
@@ -52,62 +54,63 @@ class Work_Histories extends CI_Controller {
     }
 
     function edit() {
+        $work = new Work();
         $work_id = $this->uri->segment(5);
         $staff_id = $this->uri->segment(2);
-        $wh = $this->wh_model->find($work_id)->row();
-        $data['id'] = $wh->history_id;
-        $data['history_date'] = array('name' => 'history_date', 'value' => $wh->history_date);
-        $data['history_description'] = array('name' => 'history_description', 'value' => $wh->history_description);
+        $rs = $rs->where('history_id', $work_id)->get();
+        $data['id'] = $rs->history_id;
+        $data['history_date'] = array('name' => 'history_date', 'value' => $rs->history_date);
+        $data['history_description'] = array('name' => 'history_description', 'value' => $rs->history_description);
 
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
 
         $data['title'] = 'Update Work History';
         $data['message'] = '';
-        $data['form_action'] = site_url('staff/' . $staff_id . '/work_histories/update');
-        $data['link_back'] = anchor('staff/' . $staff_id . '/work_histories/index', 'Back');
+        $data['form_action'] = site_url('staffs/' . $staff_id . '/work_histories/update');
+        $data['link_back'] = anchor('staffs/' . $staff_id . '/work_histories/index', 'Back');
 
         $this->load->view('staff_work_history/frm_work', $data);
     }
 
     function save() {
+        $work = new Work();
         $staff_id = $this->uri->segment(2);
-        $this->form_validation->set_rules('history_date', 'Date', 'required');
-        $this->form_validation->set_rules('history_description', 'Description', 'required');
 
-        if ($this->form_validation->run() == FALSE) {
-            $data['message'] = '';
+        $work->staff_id = $staff_id;
+        $work->history_date = $this->input->post('history_date');
+        $work->history_description = $this->input->post('history_description');
+
+        if ($work->save()) {
+            $this->session->set_flashdata('message', 'Work successfully created!');
+            redirect('staffs/' . $staff_id . '/work_histories/index');
         } else {
-            $wh = array(
-                'history_date' => $this->input->post('history_date'),
-                'history_description' => $this->input->post('history_description')
-            );
-            $this->wh_model->save($wh);
-
-            // set user message
-            $data['message'] = '<div class="success">add new work success</div>';
-            redirect('staff/' . $staff_id . '/work_histories/index');
+            // Failed
+            $work->error_message('custom', 'Field required');
+            $msg = $work->error->custom;
+            $this->session->set_flashdata('message', $msg);
+            redirect('staffs/' . $staff_id . '/work_histories/add');
         }
     }
 
     function update() {
+        $work = new Work();
         $id = $this->input->post('id');
         $staff_id = $this->uri->segment(2);
-
-        $wh = array(
+        $work->where('edu_id', $id)->update(array(
             'history_date' => $this->input->post('history_date'),
             'history_description' => $this->input->post('history_description')
-        );
-
-        $this->wh_model->update($id, $wh);
+        ));
+        $this->session->set_flashdata('message', 'Work Update successfuly.');
         redirect('staff/' . $staff_id . '/work_histories/index');
     }
 
     function delete() {
+        $work = new Work();
         $work_id = $this->uri->segment(5);
         $staff_id = $this->uri->segment(2);
 
-        $this->wh_model->delete($work_id);
-        redirect('staff/' . $staff_id . '/work_histories/index');
+        $work->_delete($work_id);
+        redirect('staffs/' . $staff_id . '/work_histories/index');
     }
 
 }

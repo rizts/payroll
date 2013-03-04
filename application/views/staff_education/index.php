@@ -25,8 +25,8 @@
                         <td><?php echo $row->edu_gelar; ?></td>
                         <td><?php echo $row->edu_name; ?></td>
                         <td>
-                        <?php echo anchor('staff/'.$staff_id.'/educations/edit/' . $row->edu_id, 'Edit'); ?>
-                        <?php echo anchor('staff/'.$staff_id.'/educations/delete/' . $row->edu_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
+                        <?php echo anchor('staffs/'.$staff_id.'/educations/edit/' . $row->edu_id, 'Edit'); ?>
+                        <?php echo anchor('staffs/'.$staff_id.'/educations/delete/' . $row->edu_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
                     </td>
                 </tr>
                 <?php
