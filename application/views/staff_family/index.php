@@ -8,7 +8,7 @@
     <body>
         <div>
             <h2>Listing Family</h2>
-            <?php echo $message; ?>
+            <?php //echo $message; ?>
             <table border="1">
                 <tr>
                     <td>Branch ID</td>
@@ -24,7 +24,7 @@
                 foreach ($families as $row) {
                 ?>
                     <tr>
-                        <td><?php echo $row->staff_fam_id; ?></td>                        
+                        <td><?php echo $row->staff_fam_id; ?></td>
                         <td><?php echo $row->staff_fam_order; ?></td>
                         <td><?php echo $row->staff_fam_name; ?></td>
                         <td><?php echo $row->staff_fam_birthdate; ?></td>
@@ -32,8 +32,8 @@
                         <td><?php echo $row->staff_fam_sex; ?></td>
                         <td><?php echo $row->staff_fam_relation; ?></td>
                         <td>
-                        <?php echo anchor('staff/'.$staff_id.'/families/edit/' . $row->staff_fam_id, 'Edit'); ?>
-                        <?php echo anchor('staff/'.$staff_id.'/families/delete/' . $row->staff_fam_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
+                        <?php echo anchor('staffs/' . $staff_id . '/families/edit/' . $row->staff_fam_id, 'Edit'); ?>
+                        <?php echo anchor('staffs/' . $staff_id . '/families/delete/' . $row->staff_fam_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
                     </td>
                 </tr>
                 <?php

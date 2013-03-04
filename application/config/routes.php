@@ -43,37 +43,37 @@ if (!defined('BASEPATH'))
 
 $route['default_controller'] = "welcome";
 // Master link url
-$route["staff/(:num)/families/index"] = "families/index";
-$route["staff/(:num)/families/index/(:num)"] = "families/index";
-$route["staff/(:num)/families/add"] = "families/add";
-$route["staff/(:num)/families/edit/(:num)"] = "families/edit/";
-$route["staff/(:num)/families/delete/(:num)"] = "families/delete";
-$route["staff/(:num)/families/save"] = "families/save";
-$route["staff/(:num)/families/update"] = "families/update";
+$route["staffs/(:num)/families/index"] = "families/index";
+$route["staffs/(:num)/families/index/(:num)"] = "families/index";
+$route["staffs/(:num)/families/add"] = "families/add";
+$route["staffs/(:num)/families/edit/(:num)"] = "families/edit/";
+$route["staffs/(:num)/families/delete/(:num)"] = "families/delete";
+$route["staffs/(:num)/families/save"] = "families/save";
+$route["staffs/(:num)/families/update"] = "families/update";
 
-$route["staff/(:num)/educations/index"] = "educations/index";
-$route["staff/(:num)/educations/index/(:num)"] = "educations/index";
-$route["staff/(:num)/educations/add"] = "educations/add";
-$route["staff/(:num)/educations/edit/(:num)"] = "educations/edit";
-$route["staff/(:num)/educations/delete/(:num)"] = "educations/delete";
-$route["staff/(:num)/educations/save"] = "educations/save";
-$route["staff/(:num)/educations/update"] = "educations/update";
+$route["staffs/(:num)/educations/index"] = "educations/index";
+$route["staffs/(:num)/educations/index/(:num)"] = "educations/index";
+$route["staffs/(:num)/educations/add"] = "educations/add";
+$route["staffs/(:num)/educations/edit/(:num)"] = "educations/edit";
+$route["staffs/(:num)/educations/delete/(:num)"] = "educations/delete";
+$route["staffs/(:num)/educations/save"] = "educations/save";
+$route["staffs/(:num)/educations/update"] = "educations/update";
 
-$route["staff/(:num)/work_histories/index"] = "work_histories/index";
-$route["staff/(:num)/work_histories/index/(:num)"] = "work_histories/index";
-$route["staff/(:num)/work_histories/add"] = "work_histories/add";
-$route["staff/(:num)/work_histories/edit/(:num)"] = "work_histories/edit";
-$route["staff/(:num)/work_histories/delete/(:num)"] = "work_histories/delete";
-$route["staff/(:num)/work_histories/save"] = "work_histories/save";
-$route["staff/(:num)/work_histories/update"] = "work_histories/update";
+$route["staffs/(:num)/work_histories/index"] = "work_histories/index";
+$route["staffs/(:num)/work_histories/index/(:num)"] = "work_histories/index";
+$route["staffs/(:num)/work_histories/add"] = "work_histories/add";
+$route["staffs/(:num)/work_histories/edit/(:num)"] = "work_histories/edit";
+$route["staffs/(:num)/work_histories/delete/(:num)"] = "work_histories/delete";
+$route["staffs/(:num)/work_histories/save"] = "work_histories/save";
+$route["staffs/(:num)/work_histories/update"] = "work_histories/update";
 
-$route["staff/(:num)/medical_histories/index"] = "medical_histories/index";
-$route["staff/(:num)/medical_histories/index/(:num)"] = "medical_histories/index";
-$route["staff/(:num)/medical_histories/add"] = "medical_histories/add";
-$route["staff/(:num)/medical_histories/edit/(:num)"] = "medical_histories/edit";
-$route["staff/(:num)/medical_histories/delete/(:num)"] = "medical_histories/delete";
-$route["staff/(:num)/medical_histories/save"] = "medical_histories/save";
-$route["staff/(:num)/medical_histories/update"] = "medical_histories/update";
+$route["staffs/(:num)/medical_histories/index"] = "medical_histories/index";
+$route["staffs/(:num)/medical_histories/index/(:num)"] = "medical_histories/index";
+$route["staffs/(:num)/medical_histories/add"] = "medical_histories/add";
+$route["staffs/(:num)/medical_histories/edit/(:num)"] = "medical_histories/edit";
+$route["staffs/(:num)/medical_histories/delete/(:num)"] = "medical_histories/delete";
+$route["staffs/(:num)/medical_histories/save"] = "medical_histories/save";
+$route["staffs/(:num)/medical_histories/update"] = "medical_histories/update";
 
 $route["assets/(:num)/details/index"] = "assets_details/index";
 $route["assets/(:num)/details/index/(:num)"] = "assets_details/index";

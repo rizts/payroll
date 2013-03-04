@@ -22,7 +22,7 @@
                             <li><?php echo anchor('titles', 'Title'); ?></li>
                             <li><?php echo anchor('components', 'Component(Gaji)'); ?></li>
                             <li>
-                                <?php echo anchor('staff', 'Staff'); ?>
+                                <?php echo anchor('staffs', 'Staff'); ?>
                                 <ul>
                                     <li><?php echo anchor('salary_components', 'Salary Component'); ?></li>
                                     <li><?php echo anchor('salary', 'Salary'); ?></li>
