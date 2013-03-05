@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 04, 2013 at 09:48 PM
+-- Generation Time: Mar 05, 2013 at 08:25 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `assets` (
   `staff_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`asset_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `assets`
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `branches` (
   `branch_id` int(11) NOT NULL AUTO_INCREMENT,
   `branch_name` varchar(50) NOT NULL,
   PRIMARY KEY (`branch_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `branches`
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `branches` (
 
 INSERT INTO `branches` (`branch_id`, `branch_name`) VALUES
 (1, 'Bandung'),
-(4, 'Bali Tah'),
+(4, 'Bali'),
 (10, 'Jakarta');
 
 -- --------------------------------------------------------
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `departments` (
   `dept_id` int(11) NOT NULL AUTO_INCREMENT,
   `dept_name` varchar(50) NOT NULL,
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `departments`
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `employees_status` (
   `sk_id` int(11) NOT NULL AUTO_INCREMENT,
   `sk_name` varchar(10) NOT NULL,
   PRIMARY KEY (`sk_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `employees_status`
@@ -228,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `maritals_status` (
   `sn_id` int(11) NOT NULL AUTO_INCREMENT,
   `sn_name` varchar(8) NOT NULL,
   PRIMARY KEY (`sn_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `maritals_status`
@@ -331,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `staffs` (
   `staff_birthplace` varchar(20) NOT NULL,
   `staff_sex` varchar(10) NOT NULL,
   PRIMARY KEY (`staff_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `staffs`
@@ -339,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `staffs` (
 
 INSERT INTO `staffs` (`staff_id`, `staff_nik`, `staff_kode_absen`, `staff_name`, `staff_address`, `staff_email`, `staff_email_alternatif`, `staff_phone_home`, `staff_phone_hp`, `staff_status_pajak`, `staff_status_nikah`, `staff_status_karyawan`, `staff_cabang`, `staff_departement`, `staff_jabatan`, `staff_photo`, `staff_birthdate`, `staff_birthplace`, `staff_sex`) VALUES
 (1, 6305280, 'JK', 'Dikdik Tasdik Laksana', 'Komp. Margahayu Kencana Blok I 1 No.9', 'dikdik.zahirra@gmail.com', 'dikdik.zahirra@gmail.com', '082116914224', '5410000', 'K1', 'Married', 'Tetap', 'Bandung', 'Transportation', 'Supervisor', '-', '0000-00-00', 'Bandung', '0'),
-(2, 6305281, 'JK - ', 'Jasmine Zahirra', 'Komp. Margahayu Kencana Blok I 1 No. 9', 'jasmine@gmail.com', 'jasmine@gmail.com', '909090909090', '090909090909', 'K2', 'Single', 'Tetap', 'Bandung', 'Accounting', 'Manager', '909090990', '2011-05-05', 'Bandung', '0');
+(2, 6305281, 'JK - ', 'Jasmine Zahirra', 'Komp. Margahayu Kencana Blok I 1 No. 19', 'jasmine@gmail.com', 'jasmine@gmail.com', '909090909090', '090909090909', 'K2', 'Single', 'Tetap', 'Bandung', 'Accounting', 'Manager', '909090990', '2011-05-05', 'Bandung', '0');
 
 -- --------------------------------------------------------
 
@@ -366,18 +366,18 @@ CREATE TABLE IF NOT EXISTS `taxes_employees` (
   `sp_status` varchar(3) NOT NULL,
   `sp_ptkp` int(11) NOT NULL,
   PRIMARY KEY (`sp_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `taxes_employees`
 --
 
 INSERT INTO `taxes_employees` (`sp_id`, `sp_status`, `sp_ptkp`) VALUES
-(1, 'TK', 0),
-(2, 'K0', 0),
-(3, 'K1', 0),
-(4, 'K2', 0),
-(5, 'K3', 0);
+(1, 'TK', 500),
+(2, 'K0', 100),
+(3, 'K1', 200),
+(4, 'K2', 300),
+(5, 'K3', 400);
 
 -- --------------------------------------------------------
 
@@ -389,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `titles` (
   `title_id` int(11) NOT NULL AUTO_INCREMENT,
   `title_name` varchar(20) NOT NULL,
   PRIMARY KEY (`title_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `titles`
