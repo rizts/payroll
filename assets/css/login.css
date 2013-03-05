@@ -1,0 +1,54 @@
+body{
+  font: 12px arial;
+  background: url("../images/login-background.jpg");  
+}
+
+#the_form input{
+  margin: 0;
+}
+
+.cl{
+  clear: both;
+  display: block;
+}
+
+#glass_wrap{
+  background: rgba(0,0,0,0.2);
+  width: 400px;
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px;
+}
+
+#form_wrap{
+  background: #fff;
+}
+
+#form_wrap #heading{
+  padding: 10px;
+  margin: 0;
+  font: bold 15px arial;
+  background: -webkit-linear-gradient(top, #fff, #ddd);
+  background: -moz-linear-gradient(top, #fff, #ddd);
+  border-bottom: 1px solid #CECECE;
+  text-shadow: 1px 1px 0px black;
+  color: white;
+}
+
+#form_wrap #inner_wrap{
+  padding: 10px;
+}
+
+#the_logo{
+  float: left;
+  width: 36%;
+  margin-right: 2%;
+}
+
+#the_form{
+  float: left;
+  width: 60%;
+}
+
+
