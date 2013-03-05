@@ -1,3 +1,4 @@
+<?php get_header(); ?>
 <div class="wrap">
     <h2>Listing Marital Status</h2>
     <?php echo $this->session->flashdata('message'); ?>

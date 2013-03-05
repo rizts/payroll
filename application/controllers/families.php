@@ -10,7 +10,7 @@ class Families extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Family');
-        $this->output->enable_profiler(TRUE);
+//        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {

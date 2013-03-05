@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 <div class="wrap">
+    <h2>Form Salary Component</h2>
     <?php echo form_open($form_action) . form_hidden('id', $id); ?>
     <table>
         <tr>

@@ -1,8 +1,9 @@
 <?php get_header(); ?>
 <div class="wrap">
+    <h2>Form Marital</h2>
     <?php echo $this->session->flashdata('message'); ?>
     <?php echo form_open($form_action) . form_hidden('id', $id); ?>
-    Status Nikah
+    Marital Status
     <?php echo form_input($sn_name); ?>
     <?php echo form_submit($btn_save); ?>
     <?php echo form_close() ?>
