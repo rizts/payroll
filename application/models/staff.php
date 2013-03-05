@@ -16,11 +16,15 @@ class Staff extends DataMapper {
         'staff_kode_absen' => array(
             'label' => 'Code Absen',
             'rules' => array('required')
-        ),
-        'staff_name' => array(
-            'label' => 'Staff Name',
-            'rules' => array('required')
         )
+//        'staff_name' => array(
+//            'label' => 'Staff Name',
+//            'rules' => array('required')
+//        ),
+//        'staff_email' => array(
+//            'label' => 'Email Address',
+//            'rules' => array('required', 'trim', 'unique', 'valid_email')
+//        )
     );
 
     function __construct($id = NULL) {

@@ -16,7 +16,7 @@ class Staffs extends CI_Controller {
         $this->load->model('Marital');
         $this->load->model('Employee_Status');
         $this->load->model('Tax_Employee');
-        $this->output->enable_profiler(TRUE);
+//        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
@@ -44,7 +44,7 @@ class Staffs extends CI_Controller {
 
     function add() {
         $data['title'] = 'Add New Staff';
-        $data['form_action'] = site_url('staffs/save');
+        $data['form_action'] = site_url('staffs/go_upload');
         $data['link_back'] = anchor('staffs/', 'Back');
 
         $data['id'] = '';
@@ -216,7 +216,7 @@ class Staffs extends CI_Controller {
             $this->session->set_flashdata('message', 'Staff successfully created!');
             redirect('staffs/');
         } else {
-            // Failed
+// Failed
             $staff->error_message('custom', 'Field required');
             $msg = $staff->error->custom;
             $this->session->set_flashdata('message', $msg);
@@ -253,8 +253,77 @@ class Staffs extends CI_Controller {
     }
 
     function delete($id) {
-        $this->staff_model->_delete($id);
-        redirect('staffs/', 'refresh');
+        $staff = new Staff();
+        $staff->_delete($id);
+        redirect('staffs/');
+    }
+
+    function do_upload() {
+        $config['upload_path'] = './assets/public/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '100';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload()) {
+//            $error = array('error' => );
+            $this->session->set_flashdata('message', $this->upload->display_errors());
+            $this->load->view('staffs/frm_staff', $data);
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+
+            $this->load->view('staffs/frm_staff', $data);
+        }
+    }
+
+    public function go_upload() {
+        $config['upload_path'] = './assets/public/';
+        $config['allowed_types'] = 'gif|jpg|png|bmp|jpeg';
+        $config['max_size'] = '0';
+        $config['max_width'] = '0';
+        $config['max_height'] = '0';
+        /* Load the upload library */
+        $this->load->library('upload', $config);
+
+        /* Create the config for image library */
+        /* (pretty self-explanatory) */
+        $configThumb = array();
+        $configThumb['image_library'] = 'gd2';
+        $configThumb['source_image'] = '';
+        $configThumb['create_thumb'] = TRUE;
+        $configThumb['maintain_ratio'] = TRUE;
+        /* Set the height and width or thumbs */
+        /* Do not worry - CI is pretty smart in resizing */
+        /* It will create the largest thumb that can fit in those dimensions */
+        /* Thumbs will be saved in same upload dir but with a _thumb suffix */
+        /* e.g. 'image.jpg' thumb would be called 'image_thumb.jpg' */
+        $configThumb['width'] = 140;
+        $configThumb['height'] = 210;
+        /* Load the image library */
+        $this->load->library('image_lib');
+
+        /* We have 5 files to upload
+         * If you want more - change the 6 below as needed
+         */
+        $upload = $this->upload->do_upload('userfile');
+        /* File failed to upload - continue */
+        if ($upload === FALSE)
+            continue;
+        /* Get the data about the file */
+        $data = $this->upload->data();
+
+        $uploadedFiles = $data;
+        /* If the file is an image - create a thumbnail */
+        if ($data['is_image'] == 1) {
+            $configThumb['source_image'] = $data['full_path'];
+            $this->image_lib->initialize($configThumb);
+            $this->image_lib->resize();
+        }
+
+        /* And display the form again */
+//        $this->load->view('upload_form');
     }
 
 }

@@ -11,7 +11,7 @@ class Assets_Details extends CI_Controller {
         parent::__construct();
         $this->load->model('Asset');
         $this->load->model('Asset_Detail');
-        $this->output->enable_profiler(TRUE);
+//        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
