@@ -3,13 +3,14 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Salaries extends CI_Controller {
+class Sub_Salaries extends CI_Controller {
 
     private $limit = 10;
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Salary');
+        $this->load->model('Sub_Salary');
+        $this->load->model('Component');
 //        $this->output->enable_profiler(TRUE);
     }
 
@@ -33,7 +34,7 @@ class Salaries extends CI_Controller {
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
 
-        $this->load->view('salaries/index', $data);
+        $this->load->view('sub_salaries/index', $data);
     }
 
     function add() {
@@ -42,11 +43,18 @@ class Salaries extends CI_Controller {
         $data['link_back'] = anchor('salaries/', 'Back');
 
         $data['id'] = '';
-        $data['salary_periode'] = array('name' => 'salary_periode');
-        $data['salary_staffid'] = array('name' => 'salary_staffid');
+        // Component
+        $component = new Component();
+        $components = $component->list_drop();
+        $comp_selected = '';
+        $data['salary_component_id'] = form_dropdown('salary_component_id', $components, $comp_selected);
+
+        $data['salary_period'] = array('name' => 'salary_period');
+        $data['salary_daily_value'] = array('name' => 'salary_daily_value');
+        $data['salary_amount_value'] = array('name' => 'salary_amount_value');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
-        $this->load->view('salaries/frm_salaries', $data);
+        $this->load->view('sub_salaries/frm_sub_salaries', $data);
     }
 
     function edit($id) {
@@ -54,28 +62,37 @@ class Salaries extends CI_Controller {
 
         $rs = $salary->where('salary_id', $id)->get();
         $data['id'] = $rs->salary_id;
-        $data['salary_periode'] = array('name' => 'salary_periode', 'value' => $rs->salary_periode);
-        $data['salary_staffid'] = array('name' => 'salary_staffid', 'value' => $rs->salary_staffid);
+        // Component
+        $component = new Component();
+        $components = $component->list_drop();
+        $comp_selected = $rs->salary_component_id;
+        $data['salary_component_id'] = form_dropdown('salary_component_id', $components, $comp_selected);
+        $data['salary_period'] = array('name' => 'salary_period', 'value'=> $rs->salary_period);
+        $data['salary_daily_value'] = array('name' => 'salary_daily_value', 'value'=> $rs->salary_daily_value);
+        $data['salary_amount_value'] = array('name' => 'salary_amount_value', 'value'=> $rs->salary_amount_value);
+
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
 
         $data['title'] = 'Update';
         $data['form_action'] = site_url('salaries/update');
         $data['link_back'] = anchor('salaries/', 'Back');
 
-        $this->load->view('salaries/frm_salaries', $data);
+        $this->load->view('sub_salaries/frm_sub_salaries', $data);
     }
 
     function save() {
-        $salary = new Salary();
-        $salary->salary_periode = $this->input->post('salary_periode');
-        $salary->salary_staffid = $this->input->post('salary_staffid');
-        if ($salary->save()) {
-            $this->session->set_flashdata('message', 'Salary successfully created!');
+        $sub_salary = new Sub_Salary();
+        $sub_salary->salary_component_id = $this->input->post('salary_component_id');
+        $sub_salary->salary_period = $this->input->post('salary_period');
+        $sub_salary->salary_daily_value = $this->input->post('salary_daily_value');
+        $sub_salary->salary_amount_value = $this->input->post('salary_amount_value');
+        if ($sub_salary->save()) {
+            $this->session->set_flashdata('message', 'Sub Salary successfully created!');
             redirect('salaries/');
         } else {
             // Failed
-            $salary->error_message('custom', 'Salary Name required');
-            $msg = $salary->error->custom;
+            $sub_salary->error_message('custom', 'Field required');
+            $msg = $sub_salary->error->custom;
             $this->session->set_flashdata('message', $msg);
             redirect('salaries/add');
         }

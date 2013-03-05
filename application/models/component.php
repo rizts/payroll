@@ -23,6 +23,16 @@ class Component extends DataMapper {
         $this->db->delete($this->table);
     }
 
+    function list_drop() {
+        $component = new Component();
+        $component->get();
+        foreach ($component as $row) {
+            $data[''] = '[ Components ]';
+            $data[$row->comp_id] = $row->comp_name .' - '. $row->comp_type;
+        }
+        return $data;
+    }
+
 }
 
 ?>

@@ -83,6 +83,15 @@ $route["assets/(:num)/details/delete/(:num)"] = "assets_details/delete";
 $route["assets/(:num)/details/save"] = "assets_details/save";
 $route["assets/(:num)/details/update"] = "assets_details/update";
 
+// Salaries and Sub Table Salarie
+$route["salaries/(:num)/sub_salaries/index"] = "sub_salaries/index";
+$route["salaries/(:num)/sub_salaries/index/(:num)"] = "sub_salaries/index";
+$route["salaries/(:num)/sub_salaries/add"] = "sub_salaries/add";
+$route["salaries/(:num)/sub_salaries/edit/(:num)"] = "sub_salaries/edit";
+$route["salaries/(:num)/sub_salaries/delete/(:num)"] = "sub_salaries/delete";
+$route["salaries/(:num)/sub_salaries/save"] = "sub_salaries/save";
+$route["salaries/(:num)/sub_salaries/update"] = "sub_salaries/update";
+
 $route['404_override'] = '';
 
 

@@ -5,7 +5,7 @@
     <table>
         <tr>
             <td>Component ID</td>
-            <td><?php echo form_input($gaji_component_id); ?></td>
+            <td><?php echo $gaji_component_id; ?></td>
         </tr>
         <tr>
             <td>Gaji Daily</td>
