@@ -19,7 +19,7 @@ class Sub_Salary extends DataMapper {
     }
 
     function _delete($id) {
-        $this->db->where('salary_id', $id);
+        $this->db->where('sub_id', $id);
         $this->db->delete($this->table);
     }
 

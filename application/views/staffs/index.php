@@ -45,6 +45,7 @@
                             <li><?php echo anchor('staffs/' . $row->staff_id . '/educations/index', '<i class="icon-book"></i> Education'); ?></li>
                             <li><?php echo anchor('staffs/' . $row->staff_id . '/work_histories/index', '<i class="icon-briefcase"></i> Work'); ?></li>
                             <li><?php echo anchor('staffs/' . $row->staff_id . '/medical_histories/index', '<i class="icon-plus"></i> Medical'); ?></li>
+                            <li><?php echo anchor('staffs/' . $row->staff_id . '/salary_components/index', '<i class="icon-plus"></i> Salary Components'); ?></li>
                             <li class="divider"></li>
                             <li><?php echo anchor('staffs/edit/' . $row->staff_id, '<i class="icon-pencil"></i> Edit'); ?></li>
                             <li><?php echo anchor('staffs/delete/' . $row->staff_id, '<i class="icon-trash"></i> Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?></li>

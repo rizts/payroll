@@ -75,6 +75,15 @@ $route["staffs/(:num)/medical_histories/delete/(:num)"] = "medical_histories/del
 $route["staffs/(:num)/medical_histories/save"] = "medical_histories/save";
 $route["staffs/(:num)/medical_histories/update"] = "medical_histories/update";
 
+$route["staffs/(:num)/salary_components/index"] = "salary_components/index";
+$route["staffs/(:num)/salary_components/index/(:num)"] = "salary_components/index";
+$route["staffs/(:num)/salary_components/add"] = "salary_components/add";
+$route["staffs/(:num)/salary_components/edit/(:num)"] = "salary_components/edit";
+$route["staffs/(:num)/salary_components/delete/(:num)"] = "salary_components/delete";
+$route["staffs/(:num)/salary_components/save"] = "salary_components/save";
+$route["staffs/(:num)/salary_components/update"] = "salary_components/update";
+
+// Assets
 $route["assets/(:num)/details/index"] = "assets_details/index";
 $route["assets/(:num)/details/index/(:num)"] = "assets_details/index";
 $route["assets/(:num)/details/add"] = "assets_details/add";
