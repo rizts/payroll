@@ -16,7 +16,7 @@ class Staffs extends CI_Controller {
         $this->load->model('Marital');
         $this->load->model('Employee_Status');
         $this->load->model('Tax_Employee');
-//        $this->output->enable_profiler(TRUE);
+        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
@@ -260,6 +260,8 @@ class Staffs extends CI_Controller {
 
     public function show($id) {
         $staff = new Staff();
+        $family = new Family();
+        $data['families'] = $staff->where('staff_id', $id)->get();
         $rs = $staff->where('staff_id', $id)->get();
         $data['staff_nik'] = $rs->staff_nik;
         $data['staff_kode_absen'] = $rs->staff_kode_absen;

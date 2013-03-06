@@ -55,7 +55,6 @@
             "common.js"
         ));
         ?>
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/bootstap/js/newfile.js"></script>
     </head>
     <body>
         <div class="nav-fixed-left">

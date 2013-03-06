@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2013 at 08:25 PM
+-- Generation Time: Mar 06, 2013 at 03:19 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.5
 
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `branches` (
   `branch_id` int(11) NOT NULL AUTO_INCREMENT,
   `branch_name` varchar(50) NOT NULL,
   PRIMARY KEY (`branch_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `branches`
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `components` (
   `comp_name` varchar(20) NOT NULL,
   `comp_type` varchar(8) NOT NULL COMMENT 'kalau Opsi daily ketika input gaji maka opsi amount_daily muncul, misalnya uang makan',
   PRIMARY KEY (`comp_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `components`
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `departments` (
   `dept_id` int(11) NOT NULL AUTO_INCREMENT,
   `dept_name` varchar(50) NOT NULL,
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `departments`
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `employees_status` (
   `sk_id` int(11) NOT NULL AUTO_INCREMENT,
   `sk_name` varchar(10) NOT NULL,
   PRIMARY KEY (`sk_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `employees_status`
@@ -210,12 +210,12 @@ INSERT INTO `families` (`staff_fam_id`, `staff_fam_staff_id`, `staff_fam_order`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fiscal`
+-- Table structure for table `fiscals`
 --
 
-CREATE TABLE IF NOT EXISTS `fiscal` (
-  `date` date NOT NULL,
-  `status` varchar(5) NOT NULL
+CREATE TABLE IF NOT EXISTS `fiscals` (
+  `date` varchar(6) NOT NULL DEFAULT '000000',
+  `status` varchar(5) NOT NULL DEFAULT 'open'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -228,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `maritals_status` (
   `sn_id` int(11) NOT NULL AUTO_INCREMENT,
   `sn_name` varchar(8) NOT NULL,
   PRIMARY KEY (`sn_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `maritals_status`
@@ -294,15 +294,14 @@ CREATE TABLE IF NOT EXISTS `salary_components` (
   `gaji_daily_value` decimal(10,0) NOT NULL,
   `gaji_amount_value` decimal(10,0) NOT NULL,
   PRIMARY KEY (`gaji_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `salary_components`
 --
 
 INSERT INTO `salary_components` (`gaji_id`, `staff_id`, `gaji_component_id`, `gaji_daily_value`, `gaji_amount_value`) VALUES
-(1, 0, 1, 1200090, 67676),
-(2, 0, 2, 100100, 200200);
+(6, 1, 6, 1000089, 10067);
 
 -- --------------------------------------------------------
 
@@ -331,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `staffs` (
   `staff_birthplace` varchar(20) NOT NULL,
   `staff_sex` varchar(10) NOT NULL,
   PRIMARY KEY (`staff_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `staffs`
@@ -344,16 +343,25 @@ INSERT INTO `staffs` (`staff_id`, `staff_nik`, `staff_kode_absen`, `staff_name`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sub_gaji`
+-- Table structure for table `sub_salaries`
 --
 
-CREATE TABLE IF NOT EXISTS `sub_gaji` (
+CREATE TABLE IF NOT EXISTS `sub_salaries` (
+  `sub_id` int(11) NOT NULL AUTO_INCREMENT,
   `salary_id` int(11) NOT NULL,
-  `salary_period` date NOT NULL,
+  `salary_periode` date NOT NULL,
   `salary_component_id` int(11) NOT NULL,
   `salary_daily_value` decimal(10,0) NOT NULL,
-  `salary_amount_value` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `salary_amount_value` decimal(10,0) NOT NULL,
+  PRIMARY KEY (`sub_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `sub_salaries`
+--
+
+INSERT INTO `sub_salaries` (`sub_id`, `salary_id`, `salary_periode`, `salary_component_id`, `salary_daily_value`, `salary_amount_value`) VALUES
+(1, 2, '2013-01-01', 2013, 9000, 1500000);
 
 -- --------------------------------------------------------
 
@@ -366,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `taxes_employees` (
   `sp_status` varchar(3) NOT NULL,
   `sp_ptkp` int(11) NOT NULL,
   PRIMARY KEY (`sp_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `taxes_employees`
@@ -389,7 +397,7 @@ CREATE TABLE IF NOT EXISTS `titles` (
   `title_id` int(11) NOT NULL AUTO_INCREMENT,
   `title_name` varchar(20) NOT NULL,
   PRIMARY KEY (`title_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `titles`
