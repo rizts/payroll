@@ -258,6 +258,31 @@ class Staffs extends CI_Controller {
         redirect('staffs/');
     }
 
+    public function show($id) {
+        $staff = new Staff();
+        $rs = $staff->where('staff_id', $id)->get();
+        $data['staff_nik'] = $rs->staff_nik;
+        $data['staff_kode_absen'] = $rs->staff_kode_absen;
+        $data['staff_name'] = $rs->staff_name;
+        $data['staff_address'] = $rs->staff_address;
+        $data['staff_email'] = $rs->staff_email;
+        $data['staff_email_alternatif'] = $rs->staff_email_alternatif;
+        $data['staff_phone_home'] = $rs->staff_phone_home;
+        $data['staff_phone_hp'] = $rs->staff_phone_hp;
+        $data['staff_status_pajak'] = $rs->staff_status_pajak;
+        $data['staff_status_nikah'] = $rs->staff_status_nikah;
+        $data['staff_status_karyawan'] = $rs->staff_status_karyawan;
+        $data['staff_cabang'] = $rs->staff_cabang;
+        $data['staff_departement'] = $rs->staff_departement;
+        $data['staff_jabatan'] = $rs->staff_jabatan;
+        $data['staff_photo'] = $rs->staff_photo;
+        $data['staff_birthdate'] = $rs->staff_birthdate;
+        $data['staff_birthplace'] = $rs->staff_birthplace;
+        $data['staff_sex'] = $rs->staff_sex;
+        $data['back'] = anchor('staffs/', 'Back');
+        $this->load->view('staffs/show', $data);
+    }
+
     function do_upload() {
         $config['upload_path'] = './assets/public/';
         $config['allowed_types'] = 'gif|jpg|png';
