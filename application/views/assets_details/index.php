@@ -18,8 +18,7 @@
                 <td><?php echo $row->staff_id; ?></td>
                 <td><?php echo $row->descriptions; ?></td>
                 <td><?php echo $row->assetd_status == 1 ? 'Enable' : 'Disable'; ?></td>
-                <td>
-                <?php echo anchor('assets/' . $row->asset_id . '/details/add', 'Add Detail'); ?> |
+                <td>                
                 <?php echo anchor('assets/' . $row->asset_id . '/details/edit/' . $row->assetd_id, 'Edit'); ?> |
                 <?php echo anchor('assets/' . $row->asset_id . '/details/delete/' . $row->assetd_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
             </td>

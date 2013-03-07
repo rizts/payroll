@@ -202,7 +202,22 @@
                                         </p>
                                     </div>
                                     <div class="tab-pane fade" id="assets">
-                                        Assets
+                                        <table class="table table-striped">
+                                            <tbody>
+                                    <?php foreach ($asset_details as $asset) {
+                                    ?>
+                                                <tr>                                                    
+                                                    <td><?php echo $asset->descriptions; ?></td>
+                                                    <td><?php echo $asset->assetd_status; ?></td>
+                                                </tr>
+                                    <?php } ?>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <p>
+                                <?php echo anchor('#', 'Add New Educations', array('class' => 'btn btn-block btn-primary')); ?>
+                                        </p>
+            
                                     </div>
                                 </div>
 
@@ -220,5 +235,5 @@
                     })
                 </script>
             </div>
-            
+
 <?php get_footer(); ?>

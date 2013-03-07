@@ -275,6 +275,9 @@ class Staffs extends CI_Controller {
         $medical = new Medical();
         $data['medicals'] = $medical->where('staff_id', $rs->staff_id)->get();
 
+        $asset_detail = new Asset_Detail();
+        $data['asset_details'] = $asset_detail->where('staff_id', $rs->staff_id)->get();
+
         $data['staff_id'] = $rs->staff_id;
         $data['staff_nik'] = $rs->staff_nik;
         $data['staff_kode_absen'] = $rs->staff_kode_absen;

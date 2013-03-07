@@ -1,5 +1,13 @@
 <?php get_header(); ?>
 <div class="wrap">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#date" ).datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+        });
+    </script>
+
     <?php echo $this->session->flashdata('message'); ?>
     <?php echo form_open($form_action) . form_hidden('id', $id); ?>
     <table>
@@ -9,7 +17,7 @@
         </tr>
         <tr>
             <td>Staff ID</td>
-            <td><?php echo form_input($staff_id); ?></td>
+            <td><?php echo $staff_id; ?></td>
         </tr>
         <tr>
             <td valign="top">Description</td>
