@@ -4,10 +4,6 @@ class Salary_Component extends DataMapper {
 
     public $table = "salary_components";
     public $validation = array(
-        'gaji_daily_value' => array(
-            'label' => 'Daily',
-            'rules' => array('required')
-        ),
         'gaji_amount_value' => array(
             'label' => 'Value',
             'rules' => array('required')

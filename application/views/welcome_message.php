@@ -51,11 +51,23 @@
                             <div class="span5">
                                 <div class="section section-small">
                                     <div class="section-header">
-                                        <h5>Calendar Reminders</h5>
+                                        <h5>Reminders</h5>
                                     </div>
                                     <div class="section-content">
                                         <p>
-
+                                            in progress
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span5">
+                                <div class="section section-small">
+                                    <div class="section-header">
+                                        <h5>Reminders</h5>
+                                    </div>
+                                    <div class="section-content">
+                                        <p>
+                                            in progress
                                         </p>
                                     </div>
                                 </div>

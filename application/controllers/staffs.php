@@ -24,8 +24,8 @@ class Staffs extends CI_Controller {
         $staff_list = new Staff();
         $total_rows = $staff_list->count();
         $data['title'] = "Staffs";
-        $data['btn_add'] = anchor('staffs/add', 'Add New');
-        $data['btn_home'] = anchor(base_url(), 'Home');
+        $data['btn_add'] = anchor('staffs/add', 'Add New', array('class'=>'btn btn-primary'));
+        $data['btn_home'] = anchor(base_url(), 'Back', array('class'=>'btn'));
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);

@@ -43,7 +43,7 @@ class Work_Histories extends CI_Controller {
         $data['title'] = 'Add New Work';
         $staff_id = $this->uri->segment(2);
         $data['form_action'] = site_url('staffs/' . $staff_id . '/work_histories/save');
-        $data['link_back'] = anchor('staffs/' . $staff_id . '/work_histories/', 'Back');
+        $data['link_back'] = anchor('staffs/' . $staff_id . '/work_histories/index', 'Back');
 
         $data['id'] = '';
         $data['history_date'] = array('name' => 'history_date', 'id' => 'history_date');

@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Payroll</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/application.css"/>
+        
         <?php
         echo load_css(array(
             "css_compiled/photon-min.css",
@@ -58,11 +59,11 @@
 
         <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-modal.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-tab.js" type="text/javascript"></script>
-<!--        <script src="<?php echo base_url(); ?>assets/bootstrap/js/jquery.js" type="text/javascript"></script>-->
-
+        
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap-responsive.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/docs.css"/>
+        
 
     </head>
     <body>

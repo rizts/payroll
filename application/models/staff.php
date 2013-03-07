@@ -38,6 +38,16 @@ class Staff extends DataMapper {
         $this->db->delete($this->table);
     }
 
+    function list_drop() {
+        $staff = new Staff();
+        $staff->get();
+        foreach ($staff as $row) {
+            $data[''] = '[ Staffs ]';
+            $data[$row->staff_id] = $row->staff_name;
+        }
+        return $data;
+    }
+
 }
 
 ?>

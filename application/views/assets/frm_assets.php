@@ -12,8 +12,8 @@
             <td><?php echo $asset_status; ?></td>
         </tr>
         <tr>
-            <td>Staff ID</td>
-            <td><?php echo form_input($staff_id); ?></td>
+            <td>Staff</td>
+            <td><?php echo $staff_id; ?></td>
         </tr>
         <tr>
             <td>Date</td>

@@ -51,7 +51,12 @@ class Assets extends CI_Controller {
         $status_selected = '1';
         $data['asset_status'] = form_dropdown('asset_status', $options_status, $status_selected);
 
-        $data['staff_id'] = array('name' => 'staff_id');
+        // Staffs
+        $staff = new Staff();
+        $list_staff = $staff->list_drop();
+        $staff_selected = '';
+        $data['staff_id'] = form_dropdown('staff_id', $list_staff, $staff_selected);
+
         $data['date'] = array('name' => 'date');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
@@ -69,7 +74,14 @@ class Assets extends CI_Controller {
         );
         $status_selected = $rs->asset_status;
         $data['asset_status'] = form_dropdown('asset_status', $options_status, $status_selected);
-        $data['staff_id'] = array('name' => 'staff_id', 'value' => $rs->staff_id);
+
+                // Staffs
+        $staff = new Staff();
+        $list_staff = $staff->list_drop();
+        $staff_selected = $rs->staff_id;
+        $data['staff_id'] = form_dropdown('staff_id', $list_staff, $staff_selected);
+
+
         $data['date'] = array('name' => 'date', 'value' => $rs->date);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
 
