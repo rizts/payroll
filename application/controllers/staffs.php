@@ -267,10 +267,13 @@ class Staffs extends CI_Controller {
         $data['families'] = $family->where('staff_fam_staff_id', $rs->staff_id)->get();
 
         $work = new Work();
-        $data['work_histories'] = $work->where('staff_id', $rs->staff_id)->get();
+        $data['works'] = $work->where('staff_id', $rs->staff_id)->get();
 
         $education = new Education();
         $data['educations'] = $education->where('staff_id', $rs->staff_id)->get();
+
+        $medical = new Medical();
+        $data['medicals'] = $medical->where('staff_id', $rs->staff_id)->get();
 
         $data['staff_id'] = $rs->staff_id;
         $data['staff_nik'] = $rs->staff_nik;

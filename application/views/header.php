@@ -55,8 +55,10 @@
             "common.js"
         ));
         ?>
+
         <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-modal.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-tab.js" type="text/javascript"></script>
+<!--        <script src="<?php echo base_url(); ?>assets/bootstrap/js/jquery.js" type="text/javascript"></script>-->
 
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap-responsive.css"/>

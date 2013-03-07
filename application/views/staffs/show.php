@@ -47,7 +47,7 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <div class="span5">
+                                <div class="span3">
                                     <div class="stat-block">
                                         <h6 class="stat-heading">Name</h6>
                                         <h4>
@@ -57,14 +57,23 @@
                                 </div>
                                 <div class="span2">
                                     <div class="stat-block">
-                                        <h6 class="stat-heading">Employe Status</h6>
+                                        <h6 class="stat-heading">Title</h6>
+                                        <h4>
+                                            <?php echo $staff_jabatan; ?>
+                                        </h4>
+
+                                    </div>
+                                </div>
+                                <div class="span1">
+                                    <div class="stat-block">
+                                        <h6 class="stat-heading">Status</h6>
                                         <h4>
                                             <?php echo $staff_status_karyawan; ?>
                                         </h4>
 
                                     </div>
                                 </div>
-                                <div class="span3">
+                                <div class="span2">
                                     <div class="stat-block">
                                         <h6 class="stat-heading">Branch</h6>
                                         <h4>
@@ -95,8 +104,8 @@
                             <table class="table table-striped">
                                 <tbody>
                                     <tr>
-                                        <th>Title</th>
-                                        <td><?php echo $staff_jabatan; ?></td>
+                                        <th>Absen Code</th>
+                                        <td><?php echo $staff_kode_absen; ?></td>
                                         <th>Phone Home</th>
                                         <td><?php echo $staff_phone_home; ?></td>
                                     </tr>
@@ -123,52 +132,97 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="tab-pane fade" id="families">
-                            <?php
-                                            foreach ($families as $family) {
-                                                echo $family->staff_fam_name;
-                                            }
-                            ?>
-                                        </div>
-                                        <div class="tab-pane fade" id="works">
-                                            Works
-                                            <a class="btn" href="#" id="model_works">Add a Note</a>
-                                        </div>
-                                        <div class="tab-pane fade" id="medicals">
-                                            Medicals
-                                        </div>
-                                        <div class="tab-pane fade" id="edications">
-                                            Educations
-                                        </div>
-                                    </div>
+                            <table class="table table-striped">
+                                <tbody>
+                                    <?php foreach ($families as $family) {
+                                    ?>
+                                                <tr>
+                                                    <td><?php echo $family->staff_fam_order; ?></td>
+                                                    <td><?php echo $family->staff_fam_name; ?></td>
+                                                    <td>
+                                            <?php
+                                                echo $family->staff_fam_birthplace . ', ' . $family->staff_fam_birthdate;
+                                            ?>
+                                            </td>
+                                            <td><?php echo $family->staff_fam_sex; ?></td>
+                                            <td><?php echo $family->staff_fam_relation; ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="clearfix"></div>
+                                    <p>
+                                        <a href="#" class="btn btn-block btn-primary">Add New Family</a>
+                                    </p>
+                                </div>
+                                <div class="tab-pane fade" id="works">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                    <?php foreach ($works as $work) { ?>
+                                                <tr>
+                                                    <td><?php echo $work->history_date ?></td>
+                                                    <td><?php echo $work->history_description ?></td>
+                                                </tr>
+                                    <?php } ?>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <p>
+                                        <a href="#" class="btn btn-block btn-primary">Add New Works</a>
+                                    </p>
 
                                 </div>
+                                <div class="tab-pane fade" id="medicals">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                        <?php foreach ($medicals as $medic) { ?>
+                                                <tr>
+                                                    <td><?php echo $medic->medic_date ?></td>
+                                                    <td><?php echo $work->medic_description ?></td>
+                                                </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <p>
+                                        <a href="#" class="btn btn-block btn-primary">Add New Medicals</a>
+                                    </p>
+                                </div>
+                                <div class="tab-pane fade" id="educations">
+                                   <table class="table table-striped">
+                                        <tbody>
+                                        <?php foreach ($educations as $education) { ?>
+                                                <tr>
+                                                    <td><?php echo $education->edu_year; ?></td>
+                                                    <td><?php echo $education->edu_gelar; ?></td>
+                                                    <td><?php echo $education->edu_name; ?></td>
+                                                </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <p>
+                                        <a href="#" class="btn btn-block btn-primary">Add New Edications</a>
+                                    </p>
 
+                                </div>
                             </div>
+
                         </div>
-                    </div>
 
-                    <script>
-                        $(function () {
-                            $('#myTab a').click(function (e) {
-                                e.preventDefault();
-                                $(this).tab('show');
-                            });
-                            $('#model_works').click(function (e){
-                                $('#ModalFormNotes').modal('show');
-                            });
-                        })
-                    </script>
-                </div>
-
-                <div id="ModalFormNotes" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel">Notes</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p>Loading..</p>
                     </div>
                 </div>
+            </div>
 
+            <script>
+                $(function () {
+                    $('#myTab a').click(function (e) {
+                        e.preventDefault();
+                        $(this).tab('show');
+                    });
+                })
+            </script>
+        </div>
 
 <?php get_footer(); ?>
