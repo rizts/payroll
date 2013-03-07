@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <div class="wrap">
-
+    <?php echo $this->breadcrumb->output(); ?>
     <div class="section section-small">
         <div class="section-header">
             <h5><?php echo $staff->staff_name; ?></h5>

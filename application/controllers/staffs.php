@@ -9,6 +9,7 @@ class Staffs extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->library('breadcrumb');
         $this->load->model('Staff');
         $this->load->model('Branch');
         $this->load->model('Department');
@@ -24,8 +25,8 @@ class Staffs extends CI_Controller {
         $staff_list = new Staff();
         $total_rows = $staff_list->count();
         $data['title'] = "Staffs";
-        $data['btn_add'] = anchor('staffs/add', 'Add New', array('class'=>'btn btn-primary'));
-        $data['btn_home'] = anchor(base_url(), 'Back', array('class'=>'btn'));
+        $data['btn_add'] = anchor('staffs/add', 'Add New', array('class' => 'btn btn-primary'));
+        $data['btn_home'] = anchor(base_url(), 'Back', array('class' => 'btn'));
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
@@ -260,6 +261,9 @@ class Staffs extends CI_Controller {
     }
 
     public function show($id) {
+        $this->breadcrumb->append_crumb('Home', base_url());
+        $this->breadcrumb->append_crumb('Staff Detail', base_url() . '');
+
         $staff = new Staff();
         $data['staff'] = $staff->where('staff_id', $id)->get();
 
@@ -279,7 +283,7 @@ class Staffs extends CI_Controller {
         $data['asset_details'] = $asset_detail->where('staff_id', $data['staff']->staff_id)->get();
 
         $data['btn_back'] = anchor('staffs/', 'Back');
-        $data['btn_edit'] = anchor('staffs/edit/'.$data['staff']->staff_id, 'Edit');
+        $data['btn_edit'] = anchor('staffs/edit/' . $data['staff']->staff_id, 'Edit');
         $this->load->view('staffs/show', $data);
     }
 

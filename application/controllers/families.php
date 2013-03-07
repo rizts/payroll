@@ -20,7 +20,8 @@ class Families extends CI_Controller {
     }
 
     public function index($offset = 0) {
-        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Home', base_url());
+        $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
         $this->breadcrumb->append_crumb('Families', base_url() . '');
 
         $family = new Family();
@@ -49,7 +50,8 @@ class Families extends CI_Controller {
     }
 
     function add() {
-        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Home', base_url());
+        $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
         $this->breadcrumb->append_crumb('Listing Families', base_url() . 'index.php/staffs/' . $this->staff_id . '/families/index');
         $this->breadcrumb->append_crumb('Add New Family', base_url() . '');
 
@@ -87,7 +89,8 @@ class Families extends CI_Controller {
     }
 
     function edit() {
-        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Home', base_url());
+        $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
         $this->breadcrumb->append_crumb('Listing Families', base_url() . 'index.php/staffs/' . $this->staff_id . '/families/index');
         $this->breadcrumb->append_crumb('Update Family', base_url() . '');
 
