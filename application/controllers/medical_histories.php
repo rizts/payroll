@@ -46,7 +46,7 @@ class Medical_Histories extends CI_Controller {
         $data['link_back'] = anchor('staffs/' . $staff_id . '/medical_histories/index', 'Back', array('class' => 'back'));
 
         $data['id'] = '';
-        $data['medic_date'] = array('name' => 'medic_date');
+        $data['medic_date'] = array('name' => 'medic_date', 'id' => 'medic_date');
         $data['medic_description'] = array('name' => 'medic_description');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
@@ -58,7 +58,7 @@ class Medical_Histories extends CI_Controller {
         $medic_id = $this->uri->segment(5);
         $rs = $medical->where('medic_id', $medic_id)->get();
         $data['id'] = $rs->medic_id;
-        $data['medic_date'] = array('name' => 'medic_date', 'value' => $rs->medic_date);
+        $data['medic_date'] = array('name' => 'medic_date', 'id' => 'medic_date', 'value' => $rs->medic_date);
         $data['medic_description'] = array('name' => 'medic_description', 'value' => $rs->medic_description);
 
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Medical');

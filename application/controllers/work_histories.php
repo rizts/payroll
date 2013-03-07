@@ -46,7 +46,7 @@ class Work_Histories extends CI_Controller {
         $data['link_back'] = anchor('staffs/' . $staff_id . '/work_histories/', 'Back');
 
         $data['id'] = '';
-        $data['history_date'] = array('name' => 'history_date');
+        $data['history_date'] = array('name' => 'history_date', 'id' => 'history_date');
         $data['history_description'] = array('name' => 'history_description');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
 
@@ -59,7 +59,7 @@ class Work_Histories extends CI_Controller {
         $staff_id = $this->uri->segment(2);
         $rs = $work->where('history_id', $work_id)->get();
         $data['id'] = $rs->history_id;
-        $data['history_date'] = array('name' => 'history_date', 'value' => $rs->history_date);
+        $data['history_date'] = array('name' => 'history_date', 'id' => 'history_date', 'value' => $rs->history_date);
         $data['history_description'] = array('name' => 'history_description', 'value' => $rs->history_description);
 
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');

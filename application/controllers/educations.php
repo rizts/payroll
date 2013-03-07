@@ -46,7 +46,7 @@ class Educations extends CI_Controller {
         $data['link_back'] = anchor('staffs/' . $staff_id . '/educations/index', 'Back');
 
         $data['id'] = '';
-        $data['edu_year'] = array('name' => 'edu_year');
+        $data['edu_year'] = array('name' => 'edu_year', 'placeholder' => 'Year');
         $data['edu_gelar'] = array('name' => 'edu_gelar');
         $data['edu_name'] = array('name' => 'edu_name');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
@@ -60,10 +60,10 @@ class Educations extends CI_Controller {
         $staff_id = $this->uri->segment(2);
         $rs = $education->where('edu_id', $edu_id)->get();
         $data['id'] = $rs->edu_id;
-        $data['edu_year'] = array('name' => 'edu_year', 'value' => $rs->edu_year);
+        $data['edu_year'] = array('name' => 'edu_year', 'placeholder' => 'Year', 'value' => $rs->edu_year);
         $data['edu_gelar'] = array('name' => 'edu_gelar', 'value' => $rs->edu_gelar);
         $data['edu_name'] = array('name' => 'edu_name', 'value' => $rs->edu_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Education');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
 
         $data['title'] = 'Update';
         $data['message'] = '';

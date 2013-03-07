@@ -3,6 +3,7 @@
 class Work extends DataMapper {
 
     public $table = "work_histories";
+    var $has_many = array('staff');
     public $validation = array(
         'history_date' => array(
             'label' => 'Work Date',

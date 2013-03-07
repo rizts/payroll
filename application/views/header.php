@@ -55,12 +55,19 @@
             "common.js"
         ));
         ?>
+        <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-modal.js" type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-tab.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap-responsive.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/docs.css"/>
+
     </head>
     <body>
         <div class="nav-fixed-left">
             <ul class="nav nav-side-menu">
                 <li>
-                    <a href="#" class="sub-nav-container">
+                    <a href="<?php echo base_url(); ?>" class="sub-nav-container">
                         <i class="icon-photon book_alt"></i>
                         <span class="nav-selection">HRD</span>
                     </a>
@@ -76,6 +83,7 @@
                             <li><?php echo anchor('salaries', 'Salary'); ?></li>
                             <li><?php echo anchor('staffs', 'Staff'); ?></li>
                             <li><?php echo anchor('assets', 'Assets'); ?></li>
+                        </ul>
                     </div>
                 </li>
             </ul>

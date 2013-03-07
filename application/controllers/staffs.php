@@ -16,7 +16,8 @@ class Staffs extends CI_Controller {
         $this->load->model('Marital');
         $this->load->model('Employee_Status');
         $this->load->model('Tax_Employee');
-        $this->output->enable_profiler(TRUE);
+        $this->load->model('Family');
+//        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
@@ -44,7 +45,7 @@ class Staffs extends CI_Controller {
 
     function add() {
         $data['title'] = 'Add New Staff';
-        $data['form_action'] = site_url('staffs/go_upload');
+        $data['form_action'] = site_url('staffs/save');
         $data['link_back'] = anchor('staffs/', 'Back');
 
         $data['id'] = '';
@@ -200,7 +201,7 @@ class Staffs extends CI_Controller {
         $staff->staff_email = $this->input->post('staff_email');
         $staff->staff_email_alternatif = $this->input->post('staff_email_alternatif');
         $staff->staff_phone_home = $this->input->post('staff_phone_home');
-        $staff->taff_phone_hp = $this->input->post('staff_phone_hp');
+        $staff->staff_phone_hp = $this->input->post('staff_phone_hp');
         $staff->staff_status_pajak = $this->input->post('staff_status_pajak');
         $staff->staff_status_nikah = $this->input->post('staff_status_nikah');
         $staff->staff_status_karyawan = $this->input->post('staff_status_karyawan');
@@ -260,9 +261,18 @@ class Staffs extends CI_Controller {
 
     public function show($id) {
         $staff = new Staff();
-        $family = new Family();
-        $data['families'] = $staff->where('staff_id', $id)->get();
         $rs = $staff->where('staff_id', $id)->get();
+
+        $family = new Family();
+        $data['families'] = $family->where('staff_fam_staff_id', $rs->staff_id)->get();
+
+        $work = new Work();
+        $data['work_histories'] = $work->where('staff_id', $rs->staff_id)->get();
+
+        $education = new Education();
+        $data['educations'] = $education->where('staff_id', $rs->staff_id)->get();
+
+        $data['staff_id'] = $rs->staff_id;
         $data['staff_nik'] = $rs->staff_nik;
         $data['staff_kode_absen'] = $rs->staff_kode_absen;
         $data['staff_name'] = $rs->staff_name;
@@ -281,7 +291,8 @@ class Staffs extends CI_Controller {
         $data['staff_birthdate'] = $rs->staff_birthdate;
         $data['staff_birthplace'] = $rs->staff_birthplace;
         $data['staff_sex'] = $rs->staff_sex;
-        $data['back'] = anchor('staffs/', 'Back');
+        $data['btn_back'] = anchor('staffs/', 'Back');
+        $data['btn_edit'] = anchor('staffs/edit/'.$rs->staff_id, 'Edit');
         $this->load->view('staffs/show', $data);
     }
 

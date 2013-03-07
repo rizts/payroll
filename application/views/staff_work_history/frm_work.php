@@ -1,4 +1,11 @@
 <?php get_header(); ?>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#history_date" ).datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+    });   
+</script>
 <div class="wrap">
     <h2>Form Work History</h2>
     <?php echo $this->session->flashdata('message'); ?>

@@ -2,13 +2,15 @@
 
 class Staff extends DataMapper {
 
-    public $table = "staffs";
-    public $has_many = array(
+    var $table = "staffs";
+    var $has_many = array(
         'family',
         'education',
         'work'
     );
-    public $validation = array(
+    var $auto_populate_has_many = TRUE;
+    var $auto_populate_has_one = TRUE;
+    var $validation = array(
         'staff_nik' => array(
             'label' => 'Staff NIK',
             'rules' => array('required')
