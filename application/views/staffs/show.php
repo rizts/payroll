@@ -224,26 +224,53 @@
                                         </tbody>
                                     </table>
                                     <div class="clearfix"></div>
-                                    <p>
-                                <?php echo anchor('#', 'Add New Assets', array('class' => 'btn btn-block btn-primary')); ?>
-                                        </p>
-
-                                    </div>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
                 </div>
-
-                <script>
-                    $(function () {
-                        $('#myTab a').click(function (e) {
-                            e.preventDefault();
-                            $(this).tab('show');
-                        });
-                    })
-                </script>
             </div>
 
+            <script>
+                $(function () {
+                    $('#myTab a').click(function (e) {
+                        e.preventDefault();
+                        $(this).tab('show');
+                    });
+                })
+            </script>
+        </div>
+
+        <script>
+            $(function() {
+                $('#myModalTest').on('click', function(){
+                    var href = $(this).attr('href');
+                    $('.modal-body').load(href,function(){
+                        $(this).modal({
+                            keyboard:true,
+                            backdrop:true
+                        });
+                    }).modal('show');
+                });
+            });
+        </script>
+        <!-- Button to trigger modal -->
+
+        <!--            <a href="http://payroll.me/index.php/staffs/1/work_histories/add" data-target="#myModal" role="button" class="btn" data-toggle="modal" id="myModalTest">Launch demo modal</a>-->
+
+        <!-- Modal -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Modal header</h3>
+            </div>
+            <div class="modal-body">
+                <p>Loading…</p>
+            </div>
+            <div class="modal-footer">
+                <button id="close" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
 <?php get_footer(); ?>

@@ -4,56 +4,55 @@
         <meta charset="utf-8">
         <title>Payroll</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/application.css"/>
-        
         <?php
         echo load_css(array(
             "css_compiled/photon-min.css",
-            "css_compiled/photon-min-part2.css",
-            "css_compiled/photon-responsive-min.css",
+//            "css_compiled/photon-min-part2.css",
+//            "css_compiled/photon-responsive-min.css",
             "dashboard.css"
         ));
         echo load_javascript(array(
             "jquery.min.js",
             "jquery-ui.min.js",
-            "plugins/jquery.pnotify.min.js",
-            "bootstrap/bootstrap.min.js",
-            "plugins/less-1.3.1.min.js",
-            "plugins/xbreadcrumbs.js",
-            "plugins/jquery.maskedinput-1.3.min.js",
-            "plugins/jquery.autotab-1.1b.js",
-            "plugins/charCount.js",
-            "plugins/jquery.textareaCounter.js",
-            "plugins/elrte.min.js",
-            "plugins/elrte.en.js",
-            "plugins/select2.js",
-            "plugins/jquery-picklist.min.js",
-            "plugins/jquery.validate.min.js",
-            "plugins/additional-methods.min.js",
-            "plugins/jquery.form.js",
-            "plugins/jquery.metadata.js",
-            "plugins/jquery.mockjax.js",
-            "plugins/jquery.uniform.min.js",
-            "plugins/jquery.tagsinput.min.js",
-            "plugins/jquery.rating.pack.js",
-            "plugins/farbtastic.js",
-            "plugins/jquery.timeentry.min.js",
-            "plugins/jquery.dataTables.min.js",
-            "plugins/jquery.jstree.js",
-            "plugins/dataTables.bootstrap.js",
-            "plugins/jquery.mousewheel.min.js",
-            "plugins/jquery.mCustomScrollbar.js",
-            "plugins/jquery.flot.js",
-            "plugins/jquery.flot.stack.js",
-            "plugins/jquery.flot.pie.js",
-            "plugins/jquery.flot.resize.js",
-            "plugins/raphael.2.1.0.min.js",
-            "plugins/justgage.1.0.1.min.js",
-            "plugins/jquery.countdown.js",
-            "plugins/jquery.cookie.js",
-            "plugins/bootstrap-fileupload.min.js",
-            "plugins/prettify/prettify.js",
-            "blackify.js",
-            "common.js"
+//            "plugins/jquery.pnotify.min.js",
+//            "bootstrap/bootstrap.min.js",
+//            "plugins/less-1.3.1.min.js",
+//            "plugins/xbreadcrumbs.js",
+//            "plugins/jquery.maskedinput-1.3.min.js",
+//            "plugins/jquery.autotab-1.1b.js",
+//            "plugins/charCount.js",
+//            "plugins/jquery.textareaCounter.js",
+//            "plugins/elrte.min.js",
+//            "plugins/elrte.en.js",
+//            "plugins/select2.js",
+//            "plugins/jquery-picklist.min.js",
+//            "plugins/jquery.validate.min.js",
+//            "plugins/additional-methods.min.js",
+//            "plugins/jquery.form.js",
+//            "plugins/jquery.metadata.js",
+//            "plugins/jquery.mockjax.js",
+//            "plugins/jquery.uniform.min.js",
+//            "plugins/jquery.tagsinput.min.js",
+//            "plugins/jquery.rating.pack.js",
+//            "plugins/farbtastic.js",
+//            "plugins/jquery.timeentry.min.js",
+//            "plugins/jquery.dataTables.min.js",
+//            "plugins/jquery.jstree.js",
+//            "plugins/dataTables.bootstrap.js",
+//            "plugins/jquery.mousewheel.min.js",
+//            "plugins/jquery.mCustomScrollbar.js",
+//            "plugins/jquery.flot.js",
+//            "plugins/jquery.flot.stack.js",
+//            "plugins/jquery.flot.pie.js",
+//            "plugins/jquery.flot.resize.js",
+//            "plugins/raphael.2.1.0.min.js",
+//            "plugins/justgage.1.0.1.min.js",
+//            "plugins/jquery.countdown.js",
+//            "plugins/jquery.cookie.js",
+//            "plugins/bootstrap-fileupload.min.js",
+//            "plugins/prettify/prettify.js",
+//            "blackify.js",
+//            "common.js"
         ));
         ?>
 
@@ -61,7 +60,7 @@
         <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-tab.js" type="text/javascript"></script>
         
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap-responsive.css"/>
+<!--        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap-responsive.css"/>-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/docs.css"/>
         
 

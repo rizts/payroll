@@ -5219,7 +5219,8 @@ input[type="submit"].btn.btn-mini {
 }
 
 .modal.fade.in {
-  top: 10%;
+/*  top: 10%;*/
+top: 65%;
 }
 
 .modal-header {

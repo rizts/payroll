@@ -6,13 +6,24 @@ if (!defined('BASEPATH'))
 class Work_Histories extends CI_Controller {
 
     private $limit = 10;
+    
+    var $staff_id;
+    var $uri_segment;
+    var $work_id;
 
     public function __construct() {
         parent::__construct();
         $this->load->model('Work');
+        $this->load->library('breadcrumb');
+        $this->staff_id = $this->uri->segment(2);
+        $this->uri_segment = $this->uri->segment(5);
+        $this->work_id = $this->uri->segment(5);
     }
 
     public function index($offset = 0) {
+        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/'.$this->staff_id);
+        $this->breadcrumb->append_crumb('Work Histories', base_url() . '');
+
         $work = new Work();
         $data['staff_id'] = $this->uri->segment(2);
         $work->where('staff_id', $data['staff_id'])->order_by('history_date', 'ASC');
@@ -36,10 +47,15 @@ class Work_Histories extends CI_Controller {
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
 
+        $data['breadcrumb'] = $this->breadcrumb->output();
         $this->load->view('staff_work_history/index', $data);
     }
 
     function add() {
+        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/'.$this->staff_id);
+        $this->breadcrumb->append_crumb('Listing Works History', base_url() . 'index.php/staffs/'.$this->staff_id.'/work_histories/index');
+        $this->breadcrumb->append_crumb('Add New Work', base_url() . '');
+
         $data['title'] = 'Add New Work';
         $staff_id = $this->uri->segment(2);
         $data['form_action'] = site_url('staffs/' . $staff_id . '/work_histories/save');
@@ -49,7 +65,8 @@ class Work_Histories extends CI_Controller {
         $data['history_date'] = array('name' => 'history_date', 'id' => 'history_date');
         $data['history_description'] = array('name' => 'history_description');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
-
+        $data['breadcrumb'] = $this->breadcrumb->output();
+        
         $this->load->view('staff_work_history/frm_work', $data);
     }
 

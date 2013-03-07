@@ -159,3 +159,15 @@ a {
     margin: 0;
     text-transform: uppercase;
 }
+
+.breadcrumb {
+    background-color: #F6F6F6;
+    background-image: -moz-linear-gradient(center top , #FAFAFA, #F2F2F2);
+    background-repeat: repeat-x;
+    border: 1px solid #CCCCCC;
+    color: #666666;
+    font-size: 12px;
+}
+.breadcrumb .active a {
+    color: #666666;
+}
