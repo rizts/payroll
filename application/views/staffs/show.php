@@ -4,17 +4,17 @@
 
     <div class="section section-small">
         <div class="section-header">
-            <h5>Data Detail Staff</h5>
+            <h5><?php echo $staff->staff_name; ?></h5>
             <div class="btn-toolbar section-actions">
                 <div style="margin-top: -7px;" class="btn-group">
-                    <?php echo anchor('staffs/edit/' . $staff_id, 'Edit', array('class' => 'btn btn-primary')); ?>
+                    <?php echo anchor('staffs/edit/' . $staff->staff_id, 'Edit', array('class' => 'btn btn-primary')); ?>
 
                     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu pull-right">
                         <li>
-                            <?php echo anchor('staffs/delete/' . $staff_id, 'Delete'); ?>
+                            <?php echo anchor('staffs/delete/' . $staff->staff_id, 'Delete'); ?>
                         </li>
                     </ul>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="span">
                     <div class="row-fluid">
                         <div class="span2 ac">
-                            <img width="100" src="/assets/images/User-icon.png" class="thumbnail" alt="<?php echo $staff_name; ?>">
+                            <img width="100" src="/assets/images/User-icon.png" class="thumbnail" alt="<?php echo $staff->staff_name; ?>">
                         </div>
 
                         <div class="span10">
@@ -34,15 +34,7 @@
                                     <div class="stat-block">
                                         <h6 class="stat-heading">N I K</h6>
                                         <h4>
-                                            <?php echo $staff_nik; ?>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="span3">
-                                    <div class="stat-block">
-                                        <h6 class="stat-heading">Name</h6>
-                                        <h4>
-                                            <?php echo $staff_name; ?>
+                                            <?php echo $staff->staff_nik; ?>
                                         </h4>
                                     </div>
                                 </div>
@@ -50,7 +42,7 @@
                                     <div class="stat-block">
                                         <h6 class="stat-heading">Title</h6>
                                         <h4>
-                                            <?php echo $staff_jabatan; ?>
+                                            <?php echo $staff->staff_jabatan; ?>
                                         </h4>
 
                                     </div>
@@ -59,7 +51,7 @@
                                     <div class="stat-block">
                                         <h6 class="stat-heading">Status</h6>
                                         <h4>
-                                            <?php echo $staff_status_karyawan; ?>
+                                            <?php echo $staff->staff_status_karyawan; ?>
                                         </h4>
 
                                     </div>
@@ -68,7 +60,25 @@
                                     <div class="stat-block">
                                         <h6 class="stat-heading">Branch</h6>
                                         <h4>
-                                            <?php echo $staff_cabang; ?>
+                                            <?php echo $staff->staff_cabang; ?>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span2">
+                                    <div class="stat-block">
+                                        <h6 class="stat-heading">Salary</h6>
+                                        <h4>
+                                            <?php echo "Rp. 0"; ?>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="span2">
+                                    <div class="stat-block">
+                                        <h6 class="stat-heading">Total Salary</h6>
+                                        <h4>
+                                            <?php echo "Rp. 0"; ?>
                                         </h4>
                                     </div>
                                 </div>
@@ -97,25 +107,25 @@
                                 <tbody>
                                     <tr>
                                         <th>Absen Code</th>
-                                        <td><?php echo $staff_kode_absen; ?></td>
+                                        <td><?php echo $staff->staff_kode_absen; ?></td>
                                         <th>Phone Home</th>
-                                        <td><?php echo $staff_phone_home; ?></td>
+                                        <td><?php echo $staff->staff_phone_home; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Marital</th>
-                                        <td><?php echo $staff_status_nikah; ?></td>
+                                        <td><?php echo $staff->staff_status_nikah; ?></td>
                                         <th>Phone HP</th>
-                                        <td><?php echo $staff_phone_hp; ?></td>
+                                        <td><?php echo $staff->staff_phone_hp; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Birthdate</th>
-                                        <td><?php echo $staff_birthdate; ?></td>
+                                        <td><?php echo $staff->staff_birthdate; ?></td>
                                         <th>Email</th>
-                                        <td><?php echo $staff_email; ?></td>
+                                        <td><?php echo $staff->staff_email; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Birthplace</th>
-                                        <td><?php echo $staff_birthplace; ?></td>
+                                        <td><?php echo $staff->staff_birthplace; ?></td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
                                     </tr>
@@ -145,7 +155,7 @@
 
                                     <div class="clearfix"></div>
                                     <p>
-                                <?php echo anchor('staffs/' . $staff_id . '/work_histories/add', 'Add New Families', array('class' => 'btn btn-block btn-primary')); ?>
+                                <?php echo anchor('staffs/' . $staff->staff_id . '/work_histories/add', 'Add New Families', array('class' => 'btn btn-block btn-primary')); ?>
                                         </p>
                                     </div>
                                     <div class="tab-pane fade" id="works">
@@ -162,7 +172,7 @@
                                     </table>
                                     <div class="clearfix"></div>
                                     <p>
-                                <?php echo anchor('staffs/' . $staff_id . '/work_histories/add', 'Add New Works', array('class' => 'btn btn-block btn-primary')); ?>
+                                <?php echo anchor('staffs/' . $staff->staff_id . '/work_histories/add', 'Add New Works', array('class' => 'btn btn-block btn-primary')); ?>
                                         </p>
 
                                     </div>
@@ -180,7 +190,7 @@
                                     </table>
                                     <div class="clearfix"></div>
                                     <p>
-                                <?php echo anchor('staffs/' . $staff_id . '/medical_histories/add', 'Add New Medicals', array('class' => 'btn btn-block btn-primary')); ?>
+                                <?php echo anchor('staffs/' . $staff->staff_id . '/medical_histories/add', 'Add New Medicals', array('class' => 'btn btn-block btn-primary')); ?>
                                         </p>
                                     </div>
                                     <div class="tab-pane fade" id="educations">
@@ -198,7 +208,7 @@
                                     </table>
                                     <div class="clearfix"></div>
                                     <p>
-                                <?php echo anchor('staffs/' . $staff_id . '/educations/add', 'Add New Educations', array('class' => 'btn btn-block btn-primary')); ?>
+                                <?php echo anchor('staffs/' . $staff->staff_id . '/educations/add', 'Add New Educations', array('class' => 'btn btn-block btn-primary')); ?>
                                         </p>
                                     </div>
                                     <div class="tab-pane fade" id="assets">
@@ -206,7 +216,7 @@
                                             <tbody>
                                     <?php foreach ($asset_details as $asset) {
                                     ?>
-                                                <tr>                                                    
+                                                <tr>
                                                     <td><?php echo $asset->descriptions; ?></td>
                                                     <td><?php echo $asset->assetd_status; ?></td>
                                                 </tr>
@@ -215,9 +225,9 @@
                                     </table>
                                     <div class="clearfix"></div>
                                     <p>
-                                <?php echo anchor('#', 'Add New Educations', array('class' => 'btn btn-block btn-primary')); ?>
+                                <?php echo anchor('#', 'Add New Assets', array('class' => 'btn btn-block btn-primary')); ?>
                                         </p>
-            
+
                                     </div>
                                 </div>
 

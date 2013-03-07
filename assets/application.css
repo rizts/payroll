@@ -140,3 +140,22 @@ a {
 .section-large .section-content, .section-large .section-body {
     padding: 18px 20px 0;
 }
+
+.stat-block {
+    color: #454545;
+    margin-bottom: 18px;
+}
+.stat-block h1, .stat-block h2, .stat-block h3, .stat-block h4, .stat-block h5, .stat-block h6 {
+    margin: 0;
+}
+.stat-block .muted, .stat-block .aux {
+    font-size: smaller;
+}
+.row-stats .stat-block {
+    margin-bottom: 0;
+}
+.stat-heading{
+    color: #999999;
+    margin: 0;
+    text-transform: uppercase;
+}
