@@ -155,7 +155,7 @@
 
                                     <div class="clearfix"></div>
                                     <p>
-                                <?php echo anchor('staffs/' . $staff->staff_id . '/work_histories/add', 'Add New Families', array('class' => 'btn btn-block btn-primary')); ?>
+                                <?php echo anchor('staffs/' . $staff->staff_id . '/families/add', 'Add New Families', array('class' => 'btn btn-block btn-primary')); ?>
                                         </p>
                                     </div>
                                     <div class="tab-pane fade" id="works">

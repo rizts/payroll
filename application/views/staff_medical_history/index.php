@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 <div class="wrap">
+    <?php echo $breadcrumb; ?>
     <?php echo $this->session->flashdata('message'); ?>
     <h2>Listing Medical History</h2>
     <table border="1">

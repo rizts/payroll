@@ -6,40 +6,53 @@ if (!defined('BASEPATH'))
 class Educations extends CI_Controller {
 
     private $limit = 10;
+    var $staff_id;
+    var $uri_segment;
+    var $edu_id;
 
     public function __construct() {
         parent::__construct();
         $this->load->model('Education');
+        $this->load->library('breadcrumb');
+        $this->staff_id = $this->uri->segment(2);
+        $this->uri_segment = $this->uri->segment(5);
+        $this->edu_id = $this->uri->segment(5);
     }
 
     public function index($offset = 0) {
+        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Educations', base_url() . '');
+
         $education = new Education();
-        $data['staff_id'] = $this->uri->segment(2);
-        $education->where('staff_id', $data['staff_id'])->order_by('edu_year', 'ASC');
+        $data['staff_id'] = $this->staff_id;
+        $education->where('staff_id', $this->staff_id)->order_by('edu_year', 'ASC');
 
         $total_rows = $education->count();
         $data['title'] = "Family";
-        $data['btn_add'] = anchor('staffs/' . $data['staff_id'] . '/educations/add', 'Add New');
+        $data['btn_add'] = anchor('staffs/' . $this->staff_id . '/educations/add', 'Add New');
         $data['btn_home'] = anchor('staffs', 'Home');
 
-        $uri_segment = 5;
-        $offset = $this->uri->segment($uri_segment);
-
+        $offset = $this->uri->segment($this->uri_segment);
 
         $data['educations'] = $education
-                        ->where('staff_id', $data['staff_id'])
+                        ->where('staff_id', $this->staff_id)
                         ->get($this->limit, $offset)->all;
-        $config['base_url'] = site_url('staffs/' . $data['staff_id'] . '/educations/index');
+        $config['base_url'] = site_url('staffs/' . $this->staff_id . '/educations/index');
         $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->limit;
-        $config['uri_segment'] = $uri_segment;
+        $config['uri_segment'] = $this->uri_segment;
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
+        $data['breadcrumb'] = $this->breadcrumb->output();
 
         $this->load->view('staff_education/index', $data);
     }
 
     function add() {
+        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Listing Education', base_url() . 'index.php/staffs/' . $this->staff_id . '/educations/index');
+        $this->breadcrumb->append_crumb('Add New Education', base_url() . '');
+
         $data['title'] = 'Add New Education';
         $staff_id = $this->uri->segment(2);
         $data['form_action'] = site_url('staffs/' . $staff_id . '/educations/save');
@@ -50,11 +63,16 @@ class Educations extends CI_Controller {
         $data['edu_gelar'] = array('name' => 'edu_gelar');
         $data['edu_name'] = array('name' => 'edu_name');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['breadcrumb'] = $this->breadcrumb->output();
 
         $this->load->view('staff_education/frm_education', $data);
     }
 
     function edit() {
+        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Listing Education', base_url() . 'index.php/staffs/' . $this->staff_id . '/educations/index');
+        $this->breadcrumb->append_crumb('Update Education', base_url() . '');
+
         $education = new Education();
         $edu_id = $this->uri->segment(5);
         $staff_id = $this->uri->segment(2);

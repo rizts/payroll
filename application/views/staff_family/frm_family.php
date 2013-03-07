@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 <div class="wrap">
+    <?php echo $breadcrumb; ?>
     <h2>Form Family</h2>
     <?php echo $this->session->flashdata('message'); ?>
     <?php echo form_open($form_action) . form_hidden('id', $id) ?>

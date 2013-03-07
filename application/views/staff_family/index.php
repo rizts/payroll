@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 <div class="wrap">
+    <?php echo $breadcrumb; ?>
     <h2>Listing Family</h2>
     <?php echo $this->session->flashdata('message'); ?>
     <table border="1">

@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 <div class="wrap">
+    <?php echo $breadcrumb; ?>
     <h2>Listing Education</h2>
     <table border="1">
         <tr>
