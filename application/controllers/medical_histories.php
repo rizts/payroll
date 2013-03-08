@@ -20,7 +20,8 @@ class Medical_Histories extends CI_Controller {
     }
 
     public function index($offset = 0) {
-        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Home', base_url());
+        $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
         $this->breadcrumb->append_crumb('Medicals', base_url() . '');
 
         $medical = new Medical();
@@ -50,10 +51,11 @@ class Medical_Histories extends CI_Controller {
     }
 
     function add() {
-        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Home', base_url());
+        $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
         $this->breadcrumb->append_crumb('Listing Medical', base_url() . 'index.php/staffs/' . $this->staff_id . '/medical_histories/index');
         $this->breadcrumb->append_crumb('Add New Medical', base_url() . '');
-        
+
         $data['title'] = 'Add New Medical History';
         $data['form_action'] = site_url('staffs/' . $this->staff_id . '/medical_histories/save');
         $data['link_back'] = anchor('staffs/' . $this->staff_id . '/medical_histories/index', 'Back', array('class' => 'back'));
@@ -67,11 +69,12 @@ class Medical_Histories extends CI_Controller {
     }
 
     function edit() {
-        $this->breadcrumb->append_crumb('Staff', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Home', base_url());
+        $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
         $this->breadcrumb->append_crumb('Listing Medical', base_url() . 'index.php/staffs/' . $this->staff_id . '/medical_histories/index');
         $this->breadcrumb->append_crumb('Add New Medical', base_url() . '');
 
-        $medical = new Medical();        
+        $medical = new Medical();
         $rs = $medical->where('medic_id', $this->medical_id)->get();
         $data['id'] = $rs->medic_id;
         $data['medic_date'] = array('name' => 'medic_date', 'id' => 'medic_date', 'value' => $rs->medic_date);
@@ -90,7 +93,7 @@ class Medical_Histories extends CI_Controller {
 
     function save() {
         $medical = new Medical();
-        
+
         $medical->staff_id = $this->staff_id;
         $medical->medic_date = $this->input->post('medic_date');
         $medical->medic_description = $this->input->post('medic_description');
