@@ -10,14 +10,13 @@ class Salaries extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Salary');
-//        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
         $salary = new Salary();
         $total_rows = $salary->count();
         $data['title'] = "Salary";
-        $data['btn_add'] = anchor('salaries/add', 'Add New');
+        $data['btn_add'] = anchor('salaries/add', 'Add New', "class='btn btn-primary'");
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
@@ -39,12 +38,12 @@ class Salaries extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Salary';
         $data['form_action'] = site_url('salaries/save');
-        $data['link_back'] = anchor('salaries/', 'Back');
+        $data['link_back'] = anchor('salaries/', 'Back', array('class'=>'btn'));
 
         $data['id'] = '';
         $data['salary_periode'] = array('name' => 'salary_periode');
         $data['salary_staffid'] = array('name' => 'salary_staffid');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class'=>'btn btn-primary');
 
         $this->load->view('salaries/frm_salaries', $data);
     }

@@ -19,7 +19,7 @@ class Families extends CI_Controller {
         $this->family_id = $this->uri->segment(5);
     }
 
-    public function index($offset = 0){
+    public function index($offset = 0) {
         $this->breadcrumb->append_crumb('Home', base_url());
         $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
         $this->breadcrumb->append_crumb('Families', base_url() . '');
@@ -30,7 +30,7 @@ class Families extends CI_Controller {
 
         $total_rows = $family->count();
         $data['title'] = "Family";
-        $data['btn_add'] = anchor('staffs/' . $this->staff_id . '/families/add', 'Add New');
+        $data['btn_add'] = anchor('staffs/' . $this->staff_id . '/families/add', 'Add New', array('class' => 'btn btn-primary'));
         $data['btn_home'] = anchor('staffs', 'Home');
 
         $offset = $this->uri->segment($this->uri_segment);
@@ -57,7 +57,7 @@ class Families extends CI_Controller {
 
         $data['title'] = 'Add New Family';
         $data['form_action'] = site_url('staffs/' . $this->uri->segment(2) . '/families/save');
-        $data['link_back'] = anchor('staffs/' . $this->uri->segment(2) . '/families/index', 'Back');
+        $data['link_back'] = anchor('staffs/' . $this->uri->segment(2) . '/families/index', 'Back', array('class' => 'btn'));
 
         $data['id'] = '';
         $data['staff_id'] = $this->staff_id;
@@ -83,7 +83,7 @@ class Families extends CI_Controller {
         );
         $relation_selected = 'Anak 1';
         $data['staff_fam_relation'] = form_dropdown('staff_fam_relation', $options_relation, $relation_selected);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
         $data['breadcrumb'] = $this->breadcrumb->output();
         $this->load->view('staff_family/frm_family', $data);
     }
@@ -122,12 +122,12 @@ class Families extends CI_Controller {
         );
         $relation_selected = $rs->staff_fam_relation;
         $data['staff_fam_relation'] = form_dropdown('staff_fam_relation', $options_relation, $relation_selected);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Family');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
         $data['breadcrumb'] = $this->breadcrumb->output();
         $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('staffs/' . $staff_id . '/families/update');
-        $data['link_back'] = anchor('staffs/' . $staff_id . '/families/index', 'Back');
+        $data['link_back'] = anchor('staffs/' . $staff_id . '/families/index', 'Back', array('class' => 'btn'));
 
         $this->load->view('staff_family/frm_family', $data);
     }

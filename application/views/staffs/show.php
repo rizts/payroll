@@ -102,7 +102,7 @@
                         <li><a href="#salary">Salary Component</a></li>
                     </ul>
 
-                    <div class="tab-content" id="myTabContent" style="margin-top: -20px;">
+                    <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade in active" id="general">
                             <table class="table table-striped">
                                 <tbody>

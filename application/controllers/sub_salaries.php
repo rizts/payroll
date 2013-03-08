@@ -9,9 +9,9 @@ class Sub_Salaries extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->helper('rupiah');
         $this->load->model('Sub_Salary');
         $this->load->model('Component');
-//        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
@@ -22,7 +22,7 @@ class Sub_Salaries extends CI_Controller {
         $total_rows = $sub_salary->count();
 
         $data['title'] = "Sub Salary";
-        $data['btn_add'] = anchor('salaries/' . $salary_id . '/sub_salaries/add', 'Add New');
+        $data['btn_add'] = anchor('salaries/' . $salary_id . '/sub_salaries/add', 'Add New', array('class' => 'btn btn-primary'));
         $data['btn_home'] = anchor('salaries/', 'Back');
 
         $uri_segment = 5;
@@ -46,7 +46,7 @@ class Sub_Salaries extends CI_Controller {
         $data['title'] = 'Add New Salary';
         $salary_id = $this->uri->segment(2);
         $data['form_action'] = site_url('salaries/' . $salary_id . '/sub_salaries/save');
-        $data['link_back'] = anchor('salaries/' . $salary_id . '/sub_salaries/index', 'Back');
+        $data['link_back'] = anchor('salaries/' . $salary_id . '/sub_salaries/index', 'Back', array('class' => 'btn'));
 
         $data['id'] = '';
         // Component
@@ -58,7 +58,7 @@ class Sub_Salaries extends CI_Controller {
         $data['salary_periode'] = array('name' => 'salary_periode');
         $data['salary_daily_value'] = array('name' => 'salary_daily_value', 'id' => 'salary_daily_value');
         $data['salary_amount_value'] = array('name' => 'salary_amount_value', 'id' => 'salary_amount_value');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
 
         $this->load->view('sub_salaries/frm_sub_salaries', $data);
     }
@@ -77,11 +77,11 @@ class Sub_Salaries extends CI_Controller {
         $data['salary_daily_value'] = array('name' => 'salary_daily_value', 'value' => $rs->salary_daily_value);
         $data['salary_amount_value'] = array('name' => 'salary_amount_value', 'value' => $rs->salary_amount_value);
 
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update';
         $data['form_action'] = site_url('salaries/' . $rs->salary_id . '/sub_salaries/update');
-        $data['link_back'] = anchor('salaries/' . $rs->salary_id . '/sub_salaries/index', 'Back');
+        $data['link_back'] = anchor('salaries/' . $rs->salary_id . '/sub_salaries/index', 'Back', array('class' => 'btn'));
 
         $this->load->view('sub_salaries/frm_sub_salaries', $data);
     }

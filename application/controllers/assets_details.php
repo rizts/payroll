@@ -17,17 +17,16 @@ class Assets_Details extends CI_Controller {
         $this->asset_id = $this->uri->segment(2);
         $this->uri_segment = $this->uri->segment(5);
         $this->detail_id = $this->uri->segment(5);
-//        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
-        $asset_detail = new Asset_Detail();        
+        $asset_detail = new Asset_Detail();
         $asset_detail->where('asset_id', $this->asset_id)->order_by('date', 'ASC');
 
         $total_rows = $asset_detail->count();
         $data['title'] = "Assets Details";
-        $data['btn_add'] = anchor('assets/' . $this->asset_id . '/details/add', 'Add New');
-        $data['btn_home'] = anchor('assets/', 'Home');
+        $data['btn_add'] = anchor('assets/' . $this->asset_id . '/details/add', 'Add New', array('class' => 'btn btn-primary'));
+        $data['btn_home'] = anchor('assets/', 'Home', array('class' => 'btn'));
 
         $offset = $this->uri->segment($this->uri_segment);
 
@@ -48,7 +47,7 @@ class Assets_Details extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Asset';
         $data['form_action'] = site_url('assets/' . $this->asset_id . '/details/save');
-        $data['link_back'] = anchor('assets/' . $this->asset_id . '/details/index', 'Back');
+        $data['link_back'] = anchor('assets/' . $this->asset_id . '/details/index', 'Back', array('class' => 'btn'));
 
         $data['id'] = '';
         $data['date'] = array('name' => 'date', 'id' => 'date');
@@ -67,7 +66,7 @@ class Assets_Details extends CI_Controller {
         );
         $status_selected = '1';
         $data['assetd_status'] = form_dropdown('assetd_status', $options_status, $status_selected);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
 
         $this->load->view('assets_details/frm_assets_detail', $data);
     }
@@ -92,11 +91,11 @@ class Assets_Details extends CI_Controller {
         $data['staff_id'] = form_dropdown('staff_id', $list_staff, $staff_selected);
 
         $data['descriptions'] = array('name' => 'descriptions', 'value' => $rs->date);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update';
         $data['form_action'] = site_url('assets/' . $this->asset_id . '/details/update');
-        $data['link_back'] = anchor('assets/', 'Back');
+        $data['link_back'] = anchor('assets/', 'Back', array('class' => 'btn'));
 
         $this->load->view('assets_details/frm_assets_detail', $data);
     }

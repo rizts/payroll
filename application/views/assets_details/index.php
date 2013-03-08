@@ -1,15 +1,19 @@
 <?php get_header(); ?>
 <div class="wrap">
-    <h2>Listing Asset Detail</h2>
+    <h2 class="rama-title">Listing Sub Asset</h2>
+    <div class="float-right"><?php echo $btn_add ?></div>
+
     <?php echo $this->session->flashdata('message'); ?>
-    <table border="1">
-        <tr>
-            <td>Date</td>
-            <td>Staff</td>
-            <td>Descriptions</td>
-            <td>Status</td>
-            <td>Action</td>
-        </tr>
+    <table class="table boo-table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Staff</th>
+                <th>Descriptions</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
         <?php
         foreach ($assets_details as $row) {
         ?>
@@ -18,7 +22,7 @@
                 <td><?php echo $row->staff_id; ?></td>
                 <td><?php echo $row->descriptions; ?></td>
                 <td><?php echo $row->assetd_status == 1 ? 'Enable' : 'Disable'; ?></td>
-                <td>                
+                <td>
                 <?php echo anchor('assets/' . $row->asset_id . '/details/edit/' . $row->assetd_id, 'Edit'); ?> |
                 <?php echo anchor('assets/' . $row->asset_id . '/details/delete/' . $row->assetd_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
             </td>
@@ -28,9 +32,5 @@
 
         <br>
     <?php echo $pagination; ?>
-            <br>
-            <br>
-    <?php echo $btn_add . " - " . $btn_home; ?>
-
         </div>
 <?php get_footer(); ?>

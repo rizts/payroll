@@ -7,9 +7,8 @@
     <?php echo form_input($salary_periode); ?>
     Salary Staff
     <?php echo form_input($salary_staffid); ?>
-    <?php echo form_submit($btn_save); ?>
+    <?php echo form_submit($btn_save).' '.$link_back; ?>
     <?php echo form_close() ?>
-    <br>
-    <?php echo $link_back; ?>
+    
 </div>
 <?php get_footer(); ?>

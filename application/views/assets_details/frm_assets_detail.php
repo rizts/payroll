@@ -7,7 +7,7 @@
             });
         });
     </script>
-
+    <h2 class="rama-title">Form Sub Asset</h2>
     <?php echo $this->session->flashdata('message'); ?>
     <?php echo form_open($form_action) . form_hidden('id', $id); ?>
     <table>
@@ -29,12 +29,10 @@
         </tr>
         <tr>
             <td></td>
-            <td><?php echo form_submit($btn_save); ?></td>
+            <td><?php echo form_submit($btn_save).' '.$link_back; ?></td>
         </tr>
     </table>
     <?php echo form_close() ?>
 
-    <br>
-    <?php echo $link_back; ?>
 </div>
 <?php get_footer(); ?>

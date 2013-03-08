@@ -1,14 +1,17 @@
 <?php get_header(); ?>
 <div class="wrap">
-    <h2>Listing Salaries</h2>
+    <h2 class="rama-title">Listing Salaries</h2>
+    <div class="float-right"><?php echo $btn_add ?></div>
     <?php echo $this->session->flashdata('message'); ?>
-    <table border="1">
-        <tr>
-            <td>Salary ID</td>
-            <td>Salary Periode</td>
-            <td>Salary Staff</td>
-            <td>Action</td>
-        </tr>
+    <table class="table boo-table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Salary ID</th>
+                <th>Salary Periode</th>
+                <th>Salary Staff</th>
+                <th width="10"></th>
+            </tr>
+        </thead>
         <?php
         foreach ($salaries as $row) {
         ?>
@@ -17,18 +20,22 @@
                 <td><?php echo $row->salary_periode; ?></td>
                 <td><?php echo $row->salary_staffid; ?></td>
                 <td>
-                <?php echo anchor('salaries/' . $row->salary_id . '/sub_salaries/add', 'Add Sub Salaries'); ?>
-                <?php echo anchor('salaries/edit/' . $row->salary_id, 'Edit'); ?>
-                <?php echo anchor('salaries/delete/' . $row->salary_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
-
-            </td>
-        </tr>
+                    <div class="btn-group">
+                        <a href="#" data-toggle="dropdown" class="btn btn-mini dropdown-toggle">
+                            Action
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><?php echo anchor('salaries/' . $row->salary_id . '/sub_salaries/add', '<i class="icon-list"></i> Add Sub Salaries'); ?></li>
+                            <li><?php echo anchor('salaries/edit/' . $row->salary_id, '<i class="icon-pencil"></i> Edit'); ?></li>
+                            <li><?php echo anchor('salaries/delete/' . $row->salary_id, '<i class="icon-trash"></i> Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
         <?php } ?>
-        </table>
-        <br>
+    </table>
+    <br>
     <?php echo $pagination; ?>
-            <br>
-            <br>
-    <?php echo $btn_add . " - " . $btn_home; ?>
-        </div>
+    </div>
 <?php get_footer(); ?>

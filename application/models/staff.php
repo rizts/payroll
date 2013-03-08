@@ -37,7 +37,7 @@ class Staff extends DataMapper {
         $this->db->where('staff_id', $id);
         $this->db->delete($this->table);
     }
-
+    
     function list_drop() {
         $staff = new Staff();
         $staff->get();

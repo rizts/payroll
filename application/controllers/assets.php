@@ -11,15 +11,14 @@ class Assets extends CI_Controller {
         parent::__construct();
         $this->load->model('Asset');
         $this->load->model('Asset_Detail');
-//        $this->output->enable_profiler(TRUE);
     }
 
     public function index($offset = 0) {
         $asset_list = new Asset();
         $total_rows = $asset_list->count();
         $data['title'] = "Assets";
-        $data['btn_add'] = anchor('assets/add', 'Add New');
-        $data['btn_home'] = anchor(base_url(), 'Home');
+        $data['btn_add'] = anchor('assets/add', 'Add New', array('class' => 'btn btn-primary'));
+        $data['btn_home'] = anchor(base_url(), 'Home', array('class' => 'btn'));
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
@@ -40,7 +39,7 @@ class Assets extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Asset';
         $data['form_action'] = site_url('assets/save');
-        $data['link_back'] = anchor('assets/', 'Back');
+        $data['link_back'] = anchor('assets/', 'Back', array('class' => 'btn'));
 
         $data['id'] = '';
         $data['asset_name'] = array('name' => 'asset_name');
@@ -58,7 +57,7 @@ class Assets extends CI_Controller {
         $data['staff_id'] = form_dropdown('staff_id', $list_staff, $staff_selected);
 
         $data['date'] = array('name' => 'date');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
 
         $this->load->view('assets/frm_assets', $data);
     }
@@ -75,7 +74,7 @@ class Assets extends CI_Controller {
         $status_selected = $rs->asset_status;
         $data['asset_status'] = form_dropdown('asset_status', $options_status, $status_selected);
 
-                // Staffs
+        // Staffs
         $staff = new Staff();
         $list_staff = $staff->list_drop();
         $staff_selected = $rs->staff_id;
@@ -83,11 +82,11 @@ class Assets extends CI_Controller {
 
 
         $data['date'] = array('name' => 'date', 'value' => $rs->date);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update';
         $data['form_action'] = site_url('assets/update');
-        $data['link_back'] = anchor('assets/', 'Back');
+        $data['link_back'] = anchor('assets/', 'Back', array('class' => 'btn'));
 
         $this->load->view('assets/frm_assets', $data);
     }
