@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 <div class="wrap">
+    <?php echo $breadcrumb; ?>
     <h2>Listing Salary Component</h2>
     <table border="1">
         <tr>
@@ -30,6 +31,6 @@
     <?php echo $pagination; ?>
             <br>
             <br>
-    <?php echo $btn_add . " - " . $btn_home; ?>
+    <?php echo $btn_add; ?>
         </div>
 <?php get_footer(); ?>

@@ -7,7 +7,7 @@
         <?php
         echo load_css(array(
             "css_compiled/photon-min.css",
-//            "css_compiled/photon-min-part2.css",
+            "css_compiled/photon-min-part2.css",
 //            "css_compiled/photon-responsive-min.css",
             "dashboard.css"
         ));

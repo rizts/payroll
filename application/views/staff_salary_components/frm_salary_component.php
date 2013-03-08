@@ -18,6 +18,7 @@
 </script>
 
 <div class="wrap">
+    <?php echo $breadcrumb; ?>
     <h2>Form Salary Component</h2>
     <?php echo form_open($form_action) . form_hidden('id', $id); ?>
     <table>
@@ -38,9 +39,6 @@
             <td><?php echo form_submit($btn_save); ?></td>
         </tr>
     </table>
-
     <?php echo form_close() ?>
-    <br>
-    <?php echo $link_back; ?>
 </div>
 <?php get_footer(); ?>

@@ -12,6 +12,7 @@ class Salary_Components extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->library('breadcrumb');
         $this->load->model('Salary_Component');
         $this->load->model('Component');
         $this->staff_id = $this->uri->segment(2);
@@ -21,6 +22,10 @@ class Salary_Components extends CI_Controller {
     }
 
     public function index($offset = 0) {
+        $this->breadcrumb->append_crumb('Home', base_url());
+        $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Salary Components', base_url() . '');
+
         $salary_component = new Salary_Component();
 
         $salary_component->where('staff_id', $this->staff_id)->order_by('gaji_id', 'DESC');
@@ -42,11 +47,15 @@ class Salary_Components extends CI_Controller {
         $config['uri_segment'] = $uri_segment;
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
-
+        $data['breadcrumb'] = $this->breadcrumb->output();
         $this->load->view('staff_salary_components/index', $data);
     }
 
     function add() {
+        $this->breadcrumb->append_crumb('Home', base_url());
+        $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Add Salary Component', base_url() . '');
+
         $data['title'] = 'Add New Salary Component';
 
         $data['form_action'] = site_url('staffs/' . $this->staff_id . '/salary_components/save');
@@ -62,11 +71,15 @@ class Salary_Components extends CI_Controller {
         $data['gaji_daily_value'] = array('name' => 'gaji_daily_value');
         $data['gaji_amount_value'] = array('name' => 'gaji_amount_value');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
-
+        $data['breadcrumb'] = $this->breadcrumb->output();
         $this->load->view('staff_salary_components/frm_salary_component', $data);
     }
 
     function edit() {
+        $this->breadcrumb->append_crumb('Home', base_url());
+        $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
+        $this->breadcrumb->append_crumb('Edit Salary Component', base_url() . '');
+
         $salary_component = new Salary_Component();
 
         $rs = $salary_component->where('gaji_id', $this->id)->get();
@@ -86,7 +99,7 @@ class Salary_Components extends CI_Controller {
         $data['title'] = 'Update';
         $data['form_action'] = site_url('staffs/' . $this->staff_id . '/salary_components/update');
         $data['link_back'] = anchor('staffs/' . $this->staff_id . '/salary_components/index', 'Back');
-
+        $data['breadcrumb'] = $this->breadcrumb->output();
         $this->load->view('staff_salary_components/frm_salary_component', $data);
     }
 
@@ -99,13 +112,13 @@ class Salary_Components extends CI_Controller {
         $salary_component->gaji_amount_value = $this->input->post('gaji_amount_value');
         if ($salary_component->save()) {
             $this->session->set_flashdata('message', 'Branch successfully created!');
-            redirect('staffs/'.$this->staff_id.'/salary_components/index');
+            redirect('staffs/' . $this->staff_id . '/salary_components/index');
         } else {
 // Failed
             $salary_component->error_message('custom', 'Field required');
             $msg = $salary_component->error->custom;
             $this->session->set_flashdata('message', $msg);
-            redirect('staffs/'.$this->staff_id.'/salary_components/add');
+            redirect('staffs/' . $this->staff_id . '/salary_components/add');
         }
     }
 
@@ -119,7 +132,7 @@ class Salary_Components extends CI_Controller {
                     'gaji_amount_value' => $this->input->post('gaji_amount_value')
                 ));
         $this->session->set_flashdata('message', 'Update successfully deleted!');
-        redirect('staffs/'.$this->staff_id.'/salary_components/index');
+        redirect('staffs/' . $this->staff_id . '/salary_components/index');
     }
 
     function delete() {
@@ -127,7 +140,7 @@ class Salary_Components extends CI_Controller {
         $salary_component->_delete($this->id);
 
         $this->session->set_flashdata('message', 'Salary successfully deleted!');
-        redirect('staffs/'.$this->staff_id.'/salary_components/index');
+        redirect('staffs/' . $this->staff_id . '/salary_components/index');
     }
 
 }

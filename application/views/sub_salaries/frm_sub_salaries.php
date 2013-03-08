@@ -33,7 +33,7 @@
             <td>Salary Daily Value</td>
             <td><?php echo form_input($salary_daily_value); ?></td>
         </tr>
-        <tr>
+        <tr id="yearly">
             <td>Salary Amount Valur</td>
             <td><?php echo form_input($salary_amount_value); ?></td>
         </tr>

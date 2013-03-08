@@ -19,7 +19,7 @@ class Families extends CI_Controller {
         $this->family_id = $this->uri->segment(5);
     }
 
-    public function index($offset = 0) {
+    public function index($offset = 0){
         $this->breadcrumb->append_crumb('Home', base_url());
         $this->breadcrumb->append_crumb('Staff Detail', base_url() . 'index.php/staffs/show/' . $this->staff_id);
         $this->breadcrumb->append_crumb('Families', base_url() . '');
