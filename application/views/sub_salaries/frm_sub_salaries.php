@@ -1,4 +1,21 @@
 <?php get_header(); ?>
+<script>
+    $(document).ready(function() {
+        $("#daily").hide();
+        $("#salary_component_id").change(function () {
+            var str = "";            
+            $("select option:selected").each(function () {
+                str += $(this).text() + " ";
+                var x = str.indexOf("Daily");
+                if(x > -1) {
+                    $("#daily").show();
+                }else{
+                    $("#daily").hide();
+                }
+            });
+        });
+    });
+</script>
 <div class="wrap">
     <h2>Form Sub Salaries</h2>
     <?php echo $this->session->flashdata('message'); ?>
@@ -12,7 +29,7 @@
             <td>Salary Periode</td>
             <td><?php echo form_input($salary_periode); ?></td>
         </tr>
-        <tr>
+        <tr id="daily">
             <td>Salary Daily Value</td>
             <td><?php echo form_input($salary_daily_value); ?></td>
         </tr>

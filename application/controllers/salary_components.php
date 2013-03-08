@@ -57,7 +57,7 @@ class Salary_Components extends CI_Controller {
         $component = new Component();
         $components = $component->list_drop();
         $comp_selected = '';
-        $data['gaji_component_id'] = form_dropdown('gaji_component_id', $components, $comp_selected);
+        $data['gaji_component_id'] = form_dropdown('gaji_component_id', $components, $comp_selected, 'id="gaji_component_id"');
 
         $data['gaji_daily_value'] = array('name' => 'gaji_daily_value');
         $data['gaji_amount_value'] = array('name' => 'gaji_amount_value');
@@ -76,7 +76,7 @@ class Salary_Components extends CI_Controller {
         $component = new Component();
         $components = $component->list_drop();
         $comp_selected = $rs->gaji_component_id;
-        $data['gaji_component_id'] = form_dropdown('gaji_component_id', $components, $comp_selected);
+        $data['gaji_component_id'] = form_dropdown('gaji_component_id', $components, $comp_selected, 'id="gaji_component_id"');
 
         $data['gaji_daily_value'] = array('name' => 'gaji_daily_value', 'value' => $rs->gaji_daily_value);
         $data['gaji_amount_value'] = array('name' => 'gaji_amount_value', 'value' => $rs->gaji_amount_value);

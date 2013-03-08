@@ -1,4 +1,22 @@
 <?php get_header(); ?>
+<script>
+    $(document).ready(function() {
+        $("#daily").hide();
+        $("#gaji_component_id").change(function () {
+            var str = "";
+            $("select option:selected").each(function () {
+                str += $(this).text() + " ";
+                var x = str.indexOf("Daily");
+                if(x > -1) {
+                    $("#daily").show();
+                }else{
+                    $("#daily").hide();
+                }
+            });
+        });
+    });
+</script>
+
 <div class="wrap">
     <h2>Form Salary Component</h2>
     <?php echo form_open($form_action) . form_hidden('id', $id); ?>
@@ -7,7 +25,7 @@
             <td>Component ID</td>
             <td><?php echo $gaji_component_id; ?></td>
         </tr>
-        <tr>
+        <tr id="daily">
             <td>Gaji Daily</td>
             <td><?php echo form_input($gaji_daily_value); ?></td>
         </tr>
