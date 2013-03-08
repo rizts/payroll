@@ -74,9 +74,9 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <div class="span2">
+                                <div class="span4">
                                     <div class="stat-block">
-                                        <h6 class="stat-heading">Total Salary</h6>
+                                        <h6 class="stat-heading">Total Salary This Year</h6>
                                         <h4>
                                             <?php echo "Rp. 0"; ?>
                                         </h4>
