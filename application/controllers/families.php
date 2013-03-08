@@ -75,6 +75,8 @@ class Families extends CI_Controller {
         $data['staff_fam_sex'] = form_dropdown('staff_fam_sex', $options_sex, $sex_selected);
 
         $options_relation = array(
+            'Suami' => 'Suami',
+            'Istri' => 'Istri',
             'Anak 1' => 'Anak 1',
             'Anak 2' => 'Anak 2',
             'Anak 3' => 'Anak 3',
@@ -114,6 +116,8 @@ class Families extends CI_Controller {
         $data['staff_fam_sex'] = form_dropdown('staff_fam_sex', $options_sex, $sex_selected);
 
         $options_relation = array(
+            'Suami' => 'Suami',
+            'Istri' => 'Istri',
             'Anak 1' => 'Anak 1',
             'Anak 2' => 'Anak 2',
             'Anak 3' => 'Anak 3',

@@ -142,156 +142,159 @@
                                                 <tr>
                                                     <td><?php echo $family->staff_fam_order; ?></td>
                                                     <td><?php echo $family->staff_fam_name; ?></td>
-                                                    <td>
-                                            <?php
-                                                echo $family->staff_fam_birthplace . ', ' . $family->staff_fam_birthdate;
-                                            ?>
-                                            </td>
-                                            <td><?php echo $family->staff_fam_sex; ?></td>
-                                            <td><?php echo $family->staff_fam_relation; ?></td>
-                                            <td>
-                                                <div class="btn-group">
+                                                    <td><?php echo $family->staff_fam_birthplace . ', ' . $family->staff_fam_birthdate; ?></td>
+                                                    <td><?php echo $family->staff_fam_sex; ?></td>
+                                                    <td><?php echo $family->staff_fam_relation; ?></td>
+                                                    <td width="10">
+                                                        <div class="btn-group">
                                                 <?php echo anchor('staffs/' . $family->staff_fam_staff_id . '/families/edit/' . $family->staff_fam_id, 'Edit', array('class' => 'btn btn-mini')); ?>
                                                 <button type="button" data-toggle="dropdown" class="btn btn-mini dropdown-toggle">
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu pull-right">
-                                                    <li>
-                                                        <?php echo anchor('staffs/' . $family->staff_fam_staff_id . '/families/delete/' . $family->staff_fam_id, '<i class="icon-trash"></i> Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
-                                                    </li>
+                                                    <li><?php echo anchor('staffs/' . $family->staff_fam_staff_id . '/families/delete/' . $family->staff_fam_id, '<i class="icon-trash"></i> Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>                                                    </li>
                                                 </ul>
                                             </div>
                                         </td>
                                     </tr>
                                     <?php } ?>
-                                                </tbody>
-                                            </table>
+                                        </tbody>
+                                    </table>
 
-                                            <div class="clearfix"></div>
-                                            <p>
-                                <?php echo anchor('staffs/' . $staff->staff_id . '/families/add', 'Add New Families', array('class' => 'btn btn-block btn-primary')); ?>
-                                                </p>
-                                            </div>
-                                            <div class="tab-pane fade" id="works">
-                                                <table class="table table-striped">
-                                                    <tbody>
-                                    <?php foreach ($works as $work) {
-                                    ?>
-                                                        <tr>
-                                                            <td><?php echo $work->history_date ?></td>
-                                                            <td><?php echo $work->history_description ?></td>
-                                                        </tr>
-                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-                                            <div class="clearfix"></div>
-                                            <p>
-                                <?php echo anchor('staffs/' . $staff->staff_id . '/work_histories/add', 'Add New Works', array('class' => 'btn btn-block btn-primary')); ?>
-                                                </p>
-
-                                            </div>
-                                            <div class="tab-pane fade" id="medicals">
-                                                <table class="table table-striped">
-                                                    <tbody>
-                                    <?php foreach ($medicals as $medic) {
-                                    ?>
-                                                        <tr>
-                                                            <td><?php echo $medic->medic_date ?></td>
-                                                            <td><?php echo $medic->medic_description ?></td>
-                                                        </tr>
-                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-                                            <div class="clearfix"></div>
-                                            <p>
-                                <?php echo anchor('staffs/' . $staff->staff_id . '/medical_histories/add', 'Add New Medicals', array('class' => 'btn btn-block btn-primary')); ?>
-                                                </p>
-                                            </div>
-                                            <div class="tab-pane fade" id="educations">
-                                                <table class="table table-striped">
-                                                    <tbody>
-                                    <?php foreach ($educations as $education) {
-                                    ?>
-                                                        <tr>
-                                                            <td><?php echo $education->edu_year; ?></td>
-                                                            <td><?php echo $education->edu_gelar; ?></td>
-                                                            <td><?php echo $education->edu_name; ?></td>
-                                                        </tr>
-                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-                                            <div class="clearfix"></div>
-                                            <p>
-                                <?php echo anchor('staffs/' . $staff->staff_id . '/educations/add', 'Add New Educations', array('class' => 'btn btn-block btn-primary')); ?>
-                                                </p>
-                                            </div>
-                                            <div class="tab-pane fade" id="assets">
-                                                <table class="table table-striped">
-                                                    <tbody>
-                                    <?php foreach ($asset_details as $asset) {
-                                    ?>
-                                                        <tr>
-                                                            <td><?php echo $asset->descriptions; ?></td>
-                                                            <td><?php echo $asset->assetd_status; ?></td>
-                                                        </tr>
-                                    <?php } ?>
-                                                </tbody>
-                                            </table>
-                                            <div class="clearfix"></div>
+                                    <div class="clearfix"></div>
+                                    <br>
+                            <?php echo anchor('staffs/' . $staff->staff_id . '/families/add', 'Add New Families', array('class' => 'btn btn-block btn-primary')); ?>
                                         </div>
-                                        <div class="tab-pane fade" id="salary">
+                                        <div class="tab-pane fade" id="works">
                                             <table class="table table-striped">
                                                 <tbody>
-                                                </tbody>
-                                            </table>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
+                                    <?php foreach ($works as $work) {
+ ?>
+                                                <tr>
+                                                    <td><?php echo $work->history_date ?></td>
+                                                    <td><?php echo $work->history_description ?></td>
+                                                    <td>
+                                                    <td width="10">
+                                                        <div class="btn-group">
+                                                    <?php echo anchor('staffs/' . $work->staff_id . '/work_histories/edit/' . $work->history_id, 'Edit', array('class' => 'btn btn-mini')); ?>
+                                                <button type="button" data-toggle="dropdown" class="btn btn-mini dropdown-toggle">
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li><?php echo anchor('staffs/' . $work->staff_id . '/work_histories/delete/' . $work->history_id, '<i class="icon-trash"></i> Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?></li>
+                                                </ul>
+                                            </div>
+                                        </td>
 
+                                        </td>
+                                    </tr>
+<?php } ?>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <br>
+<?php echo anchor('staffs/' . $staff->staff_id . '/work_histories/add', 'Add New Works', array('class' => 'btn btn-block btn-primary')); ?>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="medicals">
+                                            <table class="table table-striped">
+                                                <tbody>
+                                    <?php foreach ($medicals as $medic) { ?>
+                                                <tr>
+                                                    <td><?php echo $medic->medic_date ?></td>
+                                                    <td><?php echo $medic->medic_description ?></td>
+                                                </tr>
+                                    <?php } ?>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <br>
+                            <?php echo anchor('staffs/' . $staff->staff_id . '/medical_histories/add', 'Add New Medicals', array('class' => 'btn btn-block btn-primary')); ?>
+                                        </div>
+                                        <div class="tab-pane fade" id="educations">
+                                            <table class="table table-striped">
+                                                <tbody>
+                                    <?php foreach ($educations as $education) {
+                                    ?>
+                                                <tr>
+                                                    <td><?php echo $education->edu_year; ?></td>
+                                                    <td><?php echo $education->edu_gelar; ?></td>
+                                                    <td><?php echo $education->edu_name; ?></td>
+                                                </tr>
+                                    <?php } ?>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <br>
+                            <?php echo anchor('staffs/' . $staff->staff_id . '/educations/add', 'Add New Educations', array('class' => 'btn btn-block btn-primary')); ?>
+                                        </div>
+                                        <div class="tab-pane fade" id="assets">
+                                            <table class="table table-striped">
+                                                <tbody>
+                                    <?php foreach ($asset_details as $asset) {
+                                    ?>
+                                                <tr>
+                                                    <td><?php echo $asset->descriptions; ?></td>
+                                                    <td><?php echo $asset->assetd_status; ?></td>
+                                                </tr>
+                                    <?php } ?>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="tab-pane fade" id="salary">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
-
-                    <script>
-                        $(function () {
-                            $('#myTab a').click(function (e) {
-                                e.preventDefault();
-                                $(this).tab('show');
-                            });
-                        })
-                    </script>
                 </div>
+            </div>
 
-                <script>
-                    $(function() {
-                        $('#myModalTest').on('click', function(){
-                            var href = $(this).attr('href');
-                            $('.modal-body').load(href,function(){
-                                $(this).modal({
-                                    keyboard:true,
-                                    backdrop:true
-                                });
-                            }).modal('show');
-                        });
+            <script>
+                $(function () {
+                    $('#myTab a').click(function (e) {
+                        e.preventDefault();
+                        $(this).tab('show');
                     });
-                </script>
-                <!-- Button to trigger modal -->
+                })
+            </script>
+        </div>
 
-                <!--        <a href="http://payroll.me/index.php/staffs/1/work_histories/add" data-target="#myModal" role="button" class="btn" data-toggle="modal" id="myModalTest">Launch demo modal</a>        -->
+        <script>
+            $(function() {
+                $('#myModalTest').on('click', function(){
+                    var href = $(this).attr('href');
+                    $('.modal-body').load(href,function(){
+                        $(this).modal({
+                            keyboard:true,
+                            backdrop:true
+                        });
+                    }).modal('show');
+                });
+            });
+        </script>
+        <!-- Button to trigger modal -->
 
-                <!-- Modal -->
-                <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel">Modal header</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p>Loading…</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="close" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                        <button class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
+        <!--        <a href="http://payroll.me/index.php/staffs/1/work_histories/add" data-target="#myModal" role="button" class="btn" data-toggle="modal" id="myModalTest">Launch demo modal</a>        -->
+
+        <!-- Modal -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Modal header</h3>
+            </div>
+            <div class="modal-body">
+                <p>Loading…</p>
+            </div>
+            <div class="modal-footer">
+                <button id="close" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
 <?php get_footer(); ?>

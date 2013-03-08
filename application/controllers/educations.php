@@ -56,9 +56,9 @@ class Educations extends CI_Controller {
         $this->breadcrumb->append_crumb('Add New Education', base_url() . '');
 
         $data['title'] = 'Add New Education';
-        $staff_id = $this->uri->segment(2);
-        $data['form_action'] = site_url('staffs/' . $staff_id . '/educations/save');
-        $data['link_back'] = anchor('staffs/' . $staff_id . '/educations/index', 'Back');
+        
+        $data['form_action'] = site_url('staffs/' . $this->staff_id . '/educations/save');
+        $data['link_back'] = anchor('staffs/' . $this->staff_id . '/educations/index', 'Back');
 
         $data['id'] = '';
         $data['edu_year'] = array('name' => 'edu_year', 'placeholder' => 'Year');
@@ -78,7 +78,7 @@ class Educations extends CI_Controller {
 
         $education = new Education();
         $edu_id = $this->uri->segment(5);
-        $staff_id = $this->uri->segment(2);
+        
         $rs = $education->where('edu_id', $edu_id)->get();
         $data['id'] = $rs->edu_id;
         $data['edu_year'] = array('name' => 'edu_year', 'placeholder' => 'Year', 'value' => $rs->edu_year);
@@ -88,35 +88,35 @@ class Educations extends CI_Controller {
 
         $data['title'] = 'Update';
         $data['message'] = '';
-        $data['form_action'] = site_url('staffs/' . $staff_id . '/educations/update');
-        $data['link_back'] = anchor('staffs/' . $staff_id . '/educations/index', 'Back');
-
+        $data['form_action'] = site_url('staffs/' . $this->staff_id . '/educations/update');
+        $data['link_back'] = anchor('staffs/' . $this->staff_id . '/educations/index', 'Back');
+        $data['breadcrumb'] = $this->breadcrumb->output();
         $this->load->view('staff_education/frm_education', $data);
     }
 
     function save() {
         $education = new Education();
-        $staff_id = $this->uri->segment(2);
-        $education->staff_id = $staff_id;
+        
+        $education->staff_id = $this->staff_id;
         $education->edu_year = $this->input->post('edu_year');
         $education->edu_gelar = $this->input->post('edu_gelar');
         $education->edu_name = $this->input->post('edu_name');
 
         if ($education->save()) {
             $this->session->set_flashdata('message', 'Education successfully created!');
-            redirect('staffs/' . $staff_id . '/educations/index');
+            redirect('staffs/' . $this->staff_id . '/educations/index');
         } else {
             // Failed
             $education->error_message('custom', 'Field required');
             $msg = $education->error->custom;
             $this->session->set_flashdata('message', $msg);
-            redirect('staffs/' . $staff_id . '/educations/add');
+            redirect('staffs/' . $this->staff_id . '/educations/add');
         }
     }
 
     function update() {
         $education = new Education();
-        $staff_id = $this->uri->segment(2);
+       
         $id = $this->input->post('id');
         $education->where('edu_id', $id)
                 ->update(array(
@@ -125,14 +125,14 @@ class Educations extends CI_Controller {
                     'edu_name' => $this->input->post('edu_name')
                 ));
         $this->session->set_flashdata('message', 'Education Update successfuly.');
-        redirect('staffs/' . $staff_id . '/educations/index');
+        redirect('staffs/' . $this->staff_id . '/educations/index');
     }
 
     function delete() {
         $education = new Education();
-        $education->_delete($this->uri->segment(5));
+        $education->_delete($this->edu_id);
         $this->session->set_flashdata('message', 'Education deleted.');
-        redirect('staffs/' . $staff_id . '/educations/index');
+        redirect('staffs/' . $this->staff_id . '/educations/index');
     }
 
 }

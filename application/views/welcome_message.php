@@ -21,57 +21,52 @@
                                     <td><?php echo anchor('staffs/show/' . $staff->staff_id, $staff->staff_name); ?></td>
                                     <td><span class="label">Phone</span> <?php echo $staff->staff_phone_hp; ?></td>
                                     <td><span class="label"><?php echo $staff->staff_jabatan; ?></span></td>
-                                    <td>
+                                    <td width="10">
                                         <div class="btn-group">
-                                            <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
-                                                <i class="icon-cog"></i>
-                                                <span class="caret"></span>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                <?php echo anchor('staffs/edit/' . $staff->staff_id, '<i class="icon-pencil"></i> Edit'); ?>
-                                            </li>
-                                            <li>
-                                                <?php echo anchor('staffs/delete/' . $staff->staff_id, '<i class="icon-trash"></i> Destroy', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
-                                            </li>
+                                        <?php echo anchor('staffs/edit/' . $staff->staff_id, 'Edit', array('class' => 'btn btn-mini')); ?>
+                                        <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown" type="button">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><?php echo anchor('staffs/delete/' . $staff->staff_id, '<i class="icon-trash"></i> Destroy', array('onclick' => "return confirm('Are you sure want to delete?')")); ?></li>
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
                             <?php } ?>
-                                        </tbody>
-                                    </table>
-                                    <div style="clear: both;"></div>
-                                    <p style="margin-top: 20px;">
+                                </tbody>
+                            </table>
+                            <div style="clear: both;"></div>
+                            <p style="margin-top: 20px;">
                         <?php echo $btn_new_staff; ?>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="span5">
-                                <div class="section section-small">
-                                    <div class="section-header">
-                                        <h5>Reminders</h5>
-                                    </div>
-                                    <div class="section-content">
-                                        <p>
-                                            in progress
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="span5">
-                                <div class="section section-small">
-                                    <div class="section-header">
-                                        <h5>Reminders</h5>
-                                    </div>
-                                    <div class="section-content">
-                                        <p>
-                                            in progress
-                                        </p>
-                                    </div>
-                                </div>
+                                </p>
                             </div>
                         </div>
                     </div>
+                    <div class="span5">
+                        <div class="section section-small">
+                            <div class="section-header">
+                                <h5>Reminders</h5>
+                            </div>
+                            <div class="section-content">
+                                <p>
+                                    in progress
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span5">
+                        <div class="section section-small">
+                            <div class="section-header">
+                                <h5>Reminders</h5>
+                            </div>
+                            <div class="section-content">
+                                <p>
+                                    in progress
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 <?php get_footer(); ?>
