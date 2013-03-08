@@ -8,8 +8,9 @@
         echo load_css(array(
             "css_compiled/photon-min.css",
             "css_compiled/photon-min-part2.css",
-//            "css_compiled/photon-responsive-min.css",
-            "dashboard.css"
+            "css_compiled/photon-responsive-min.css",
+            "dashboard.css",
+            "boo.css"
         ));
         echo load_javascript(array(
             "jquery.min.js",
@@ -59,7 +60,8 @@
         <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-modal.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-tab.js" type="text/javascript"></script>
         
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css"/>
+        <!-- Bootstrap loaded by boo.css -->
+        <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css"/> -->
 <!--        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap-responsive.css"/>-->
 <!--        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/docs.css"/>-->
         

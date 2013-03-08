@@ -17,8 +17,8 @@ class Branches extends CI_Controller {
         $branch_list = new Branch();
         $total_rows = $branch_list->count();
         $data['title'] = "Branch";
-        $data['btn_add'] = anchor('branches/add', 'Add New');
-        $data['btn_home'] = anchor(base_url(), 'Home');
+        $data['btn_add'] = anchor('branches/add', 'Add New', "class='btn btn-primary'");
+        $data['btn_home'] = anchor(base_url(), 'Home', "class='btn btn-home'");
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
@@ -39,11 +39,11 @@ class Branches extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Branch';
         $data['form_action'] = site_url('branches/save');
-        $data['link_back'] = anchor('branches/', 'Back', array('class' => 'back'));
+        $data['link_back'] = anchor('branches/', 'Back', array('class' => 'btn'));
 
         $data['id'] = '';
         $data['branch_name'] = array('name' => 'branch_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class"=>"btn btn-primary");
 
         $this->load->view('branches/frm_branch', $data);
     }
@@ -54,11 +54,11 @@ class Branches extends CI_Controller {
         $rs = $branch->where('branch_id', $id)->get();
         $data['id'] = $rs->branch_id;
         $data['branch_name'] = array('name' => 'branch_name', 'value' => $rs->branch_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class"=>"btn btn-primary");
 
         $data['title'] = 'Update Branch';
         $data['form_action'] = site_url('branches/update');
-        $data['link_back'] = anchor('branches/', 'Back');
+        $data['link_back'] = anchor('branches/', 'Back', array("class"=>"btn"));
 
         $this->load->view('branches/frm_branch', $data);
     }

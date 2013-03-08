@@ -1,5 +1,5 @@
 ::selection{
-  background: transparent;
+  background: #353A40;
 }
 
 body{
@@ -171,6 +171,7 @@ td.valign{
   bottom:0;
   width: 100%;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, .5);
+  padding-left: 50px;
 }
 
 #footer a{
@@ -178,9 +179,9 @@ td.valign{
 }
 
 #modal-title{
-  background: url(../images/photon/icons/default/edit.png) no-repeat;
+  background: url(../images/edit.png) no-repeat;
   padding-left: 40px;
-  color: #696969
+  color: #E2E2E2;
 }
 
 .foot_pagi{
@@ -258,6 +259,20 @@ td.valign{
   height: auto;
 }
 
+.btn-mobile-wrap{
+  display: none;
+}
+
+td.no-data{
+  font: bold 15px arial;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.rama-title{
+  float: left;
+}
+
 /*override*/
 .bootstrap-tooltip::before{
   content:"";
@@ -300,6 +315,14 @@ td.valign{
   background: url(../images/photon/icons/default/container.png) no-repeat;
 }
 
+.scale{
+  background: url(../images/photon/icons/default/scale.png) no-repeat;
+}
+
+.customer{
+  background: url(../images/photon/icons/default/multi-agents.png) no-repeat;
+}
+
 .form-horizontal .container-fluid{
   margin: 0!important;
 }
@@ -324,10 +347,40 @@ span.nav-selection{
   font-size: 12px;
 }
 
+.select2-container{
+  margin: 5px 0;
+}
+
 /*MOBILE MENU*/
 @media screen and (max-width: 767px){
   .wrap{
     padding-left: 10px;
+    padding-top: 60px;
+  }
+  
+  #footer{
+    clear: both;
+    background: #353A40;
+    padding: 10px;
+    color: white;
+    border-top: 4px solid #CCC;
+    font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, .5);
+  }
+  
+  .btn-mobile-wrap{
+    display: block;
+    position: absolute;
+    background: url('../images/photon/mobile_menu_bck.png');
+    height: 50px;
+    width: 100%;
+  }
+  
+  .custom-fieldset{
+    margin-bottom: 20px;
   }
 }
 

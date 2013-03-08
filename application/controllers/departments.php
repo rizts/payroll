@@ -18,7 +18,7 @@ class Departments extends CI_Controller {
         $total_rows = $dept_list->count();
 
         $data['title'] = "Departments";
-        $data['btn_add'] = anchor('departments/add', 'Add New');
+        $data['btn_add'] = anchor('departments/add', 'Add New', array("class"=>"btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
@@ -40,11 +40,11 @@ class Departments extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Departement';
         $data['form_action'] = site_url('departments/save');
-        $data['link_back'] = anchor('departments/', 'Back');
+        $data['link_back'] = anchor('departments/', 'Back', array("class"=>"btn"));
 
         $data['id'] = '';
         $data['dept_name'] = array('name' => 'dept_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class"=>"btn btn-primary");
 
         $this->load->view('departments/frm_dept', $data);
     }
@@ -55,12 +55,12 @@ class Departments extends CI_Controller {
         $rs = $dept->where('dept_id', $id)->get();
         $data['id'] = $rs->dept_id;
         $data['dept_name'] = array('name' => 'dept_name', 'value' => $rs->dept_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Departement');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class"=>"btn btn-primary");
 
         $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('departments/update');
-        $data['link_back'] = anchor('departments/', 'Back');
+        $data['link_back'] = anchor('departments/', 'Back', array("class"=>"btn"));
 
         $this->load->view('departments/frm_dept', $data);
     }

@@ -17,7 +17,7 @@ class Titles extends CI_Controller {
         $title_list = new Title();
         $total_rows = $title_list->count();
         $data['title'] = "Titles";
-        $data['btn_add'] = anchor('titles/add', 'Add New');
+        $data['btn_add'] = anchor('titles/add', 'Add New', array("class"=>"btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
@@ -39,11 +39,11 @@ class Titles extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Title';
         $data['form_action'] = site_url('titles/save');
-        $data['link_back'] = anchor('titles/', 'Back');
+        $data['link_back'] = anchor('titles/', 'Back', array("class"=>"btn"));
 
         $data['id'] = '';
         $data['title_name'] = array('name' => 'title_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class"=>"btn btn-primary");
 
         $this->load->view('titles/frm_title', $data);
     }
@@ -53,11 +53,11 @@ class Titles extends CI_Controller {
         $rs = $title->where('title_id', $id)->get();
         $data['id'] = $rs->title_id;
         $data['title_name'] = array('name' => 'title_name', 'value' => $rs->title_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class"=>"btn btn-primary");
 
         $data['title'] = 'Update Title';
         $data['form_action'] = site_url('titles/update');
-        $data['link_back'] = anchor('titles/', 'Back');
+        $data['link_back'] = anchor('titles/', 'Back', array("class"=>"btn"));
 
         $this->load->view('titles/frm_title', $data);
     }

@@ -16,7 +16,7 @@ class Maritals_Status extends CI_Controller {
         $marital_list = new Marital();
         $total_rows = $marital_list->count();
         $data['title'] = "Maritals Status";
-        $data['btn_add'] = anchor('maritals_status/add', 'Add New');
+        $data['btn_add'] = anchor('maritals_status/add', 'Add New', array("class"=>"btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
@@ -38,11 +38,11 @@ class Maritals_Status extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Marital Status';
         $data['form_action'] = site_url('maritals_status/save');
-        $data['link_back'] = anchor('maritals_status/', 'Back', array('class' => 'back'));
+        $data['link_back'] = anchor('maritals_status/', 'Back', array('class' => 'btn'));
 
         $data['id'] = '';
         $data['sn_name'] = array('name' => 'sn_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
 
         $this->load->view('maritals_status/frm_maritals_status', $data);
     }
@@ -52,12 +52,12 @@ class Maritals_Status extends CI_Controller {
         $rs = $marital->where('sn_id', $id)->get();
         $data['id'] = $rs->sn_id;
         $data['sn_name'] = array('name' => 'sn_name', 'value' => $rs->sn_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update Status Nikah');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('maritals_status/update');
-        $data['link_back'] = anchor('maritals_status/', 'Back');
+        $data['link_back'] = anchor('maritals_status/', 'Back', array('class' => 'btn'));
 
         $this->load->view('maritals_status/frm_maritals_status', $data);
     }
