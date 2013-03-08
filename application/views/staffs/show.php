@@ -169,14 +169,14 @@
                                             <table class="table table-striped">
                                                 <tbody>
                                     <?php foreach ($works as $work) {
- ?>
+                                    ?>
                                                 <tr>
                                                     <td><?php echo $work->history_date ?></td>
                                                     <td><?php echo $work->history_description ?></td>
                                                     <td>
                                                     <td width="10">
                                                         <div class="btn-group">
-                                                    <?php echo anchor('staffs/' . $work->staff_id . '/work_histories/edit/' . $work->history_id, 'Edit', array('class' => 'btn btn-mini')); ?>
+                                                <?php echo anchor('staffs/' . $work->staff_id . '/work_histories/edit/' . $work->history_id, 'Edit', array('class' => 'btn btn-mini')); ?>
                                                 <button type="button" data-toggle="dropdown" class="btn btn-mini dropdown-toggle">
                                                     <span class="caret"></span>
                                                 </button>
@@ -188,39 +188,51 @@
 
                                         </td>
                                     </tr>
-<?php } ?>
-                                        </tbody>
-                                    </table>
-                                    <div class="clearfix"></div>
-                                    <br>
-<?php echo anchor('staffs/' . $staff->staff_id . '/work_histories/add', 'Add New Works', array('class' => 'btn btn-block btn-primary')); ?>
-
-                                        </div>
-                                        <div class="tab-pane fade" id="medicals">
-                                            <table class="table table-striped">
-                                                <tbody>
-                                    <?php foreach ($medicals as $medic) { ?>
-                                                <tr>
-                                                    <td><?php echo $medic->medic_date ?></td>
-                                                    <td><?php echo $medic->medic_description ?></td>
-                                                </tr>
                                     <?php } ?>
                                         </tbody>
                                     </table>
                                     <div class="clearfix"></div>
                                     <br>
-                            <?php echo anchor('staffs/' . $staff->staff_id . '/medical_histories/add', 'Add New Medicals', array('class' => 'btn btn-block btn-primary')); ?>
+                            <?php echo anchor('staffs/' . $staff->staff_id . '/work_histories/add', 'Add New Works', array('class' => 'btn btn-block btn-primary')); ?>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="medicals">
+                                            <table class="table table-striped">
+                                                <tbody>
+                                    <?php foreach ($medicals as $medic) {
+ ?>
+                                                <tr>
+                                                    <td><?php echo $medic->medic_date ?></td>
+                                                    <td><?php echo $medic->medic_description ?></td>
+                                                </tr>
+<?php } ?>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix"></div>
+                                    <br>
+<?php echo anchor('staffs/' . $staff->staff_id . '/medical_histories/add', 'Add New Medicals', array('class' => 'btn btn-block btn-primary')); ?>
                                         </div>
                                         <div class="tab-pane fade" id="educations">
                                             <table class="table table-striped">
                                                 <tbody>
-                                    <?php foreach ($educations as $education) {
-                                    ?>
+                                    <?php foreach ($educations as $education) { ?>
                                                 <tr>
                                                     <td><?php echo $education->edu_year; ?></td>
                                                     <td><?php echo $education->edu_gelar; ?></td>
                                                     <td><?php echo $education->edu_name; ?></td>
-                                                </tr>
+                                                    <td width="10">
+                                                        <div class="btn-group">
+                                                <?php echo anchor('staffs/' . $education->staff_id . '/educations/edit/' . $education->edu_id, 'Edit', array('class' => 'btn btn-mini')); ?>
+                                                <button type="button" data-toggle="dropdown" class="btn btn-mini dropdown-toggle">
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li><?php echo anchor('staffs/' . $education->staff_id . '/educations/delete/' . $educations->edu_id, '<i class="icon-trash"></i> Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+
+                                    </tr>
                                     <?php } ?>
                                         </tbody>
                                     </table>
