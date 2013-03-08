@@ -61,7 +61,7 @@
         
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css"/>
 <!--        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap-responsive.css"/>-->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/docs.css"/>
+<!--        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/docs.css"/>-->
         
 
     </head>
