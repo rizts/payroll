@@ -355,4 +355,20 @@ class Staffs extends CI_Controller {
 //        $this->load->view('upload_form');
     }
 
+    function hut_reminders() {
+        $staff = new Staff();
+        $staff->get();
+        $hut = array();
+        $year = date('Y-');
+        foreach ($staff as $row) {
+            $month_day = date('m-d', strtotime($row->staff_birthdate));
+            $staff_birthday = $year . $month_day;
+            $hut[] = array('id' => floatval($row->staff_id),
+                'title' => $row->staff_name,
+                'start' => $staff_birthday,
+                'url' => site_url('staffs/show/' . $row->staff_id));
+        }
+        echo json_encode(($hut));
+    }
+
 }

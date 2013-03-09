@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Payroll</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/application.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/fullcalendar.css"/>
         <?php
         echo load_css(array(
             "css_compiled/photon-min.css",
@@ -57,8 +58,8 @@
         ));
         ?>
 
-        <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-modal.js" type="text/javascript"></script>
-        <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap-tab.js" type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/js/fullcalendar/fullcalendar.js" type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>assets/js/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
         
         <!-- Bootstrap loaded by boo.css -->
         <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap/css/bootstrap.css"/> -->
