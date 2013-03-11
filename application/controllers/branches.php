@@ -16,6 +16,24 @@ class Branches extends CI_Controller {
     public function index($offset = 0) {
         $branch_list = new Branch();
         $total_rows = $branch_list->count();
+
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "branch_name";
+                break;
+            case "2":
+                $data['col'] = "branch_id";
+                break;
+            default:
+                $data['col'] = "branch_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
         $data['title'] = "Branch";
         $data['btn_add'] = anchor('branches/add', 'Add New', "class='btn btn-primary'");
         $data['btn_home'] = anchor(base_url(), 'Home', "class='btn btn-home'");
@@ -23,7 +41,8 @@ class Branches extends CI_Controller {
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $branch_list->order_by('branch_name', 'ASC');
+        $branch_list->order_by($data['col'], $data['dir']);
+
         $data['branch_list'] = $branch_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("branches/index");
@@ -43,7 +62,7 @@ class Branches extends CI_Controller {
 
         $data['id'] = '';
         $data['branch_name'] = array('name' => 'branch_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class"=>"btn btn-primary");
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class" => "btn btn-primary");
 
         $this->load->view('branches/frm_branch', $data);
     }
@@ -54,11 +73,11 @@ class Branches extends CI_Controller {
         $rs = $branch->where('branch_id', $id)->get();
         $data['id'] = $rs->branch_id;
         $data['branch_name'] = array('name' => 'branch_name', 'value' => $rs->branch_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class"=>"btn btn-primary");
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class" => "btn btn-primary");
 
         $data['title'] = 'Update Branch';
         $data['form_action'] = site_url('branches/update');
-        $data['link_back'] = anchor('branches/', 'Back', array("class"=>"btn"));
+        $data['link_back'] = anchor('branches/', 'Back', array("class" => "btn"));
 
         $this->load->view('branches/frm_branch', $data);
     }

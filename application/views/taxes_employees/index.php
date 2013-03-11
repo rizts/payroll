@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 <div class="wrap">
-    <h2 class="rama-title">Listing Tax Employees</h2>
+    <h2 class="rama-title">Tax Status</h2>
     <div class="float-right"><?php echo $btn_add ?></div>
     <?php echo $this->session->flashdata('message'); ?>
     <table class="table boo-table table-bordered table-condensed table-hover">

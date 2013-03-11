@@ -74,8 +74,8 @@ class Sub_Salaries extends CI_Controller {
         $comp_selected = $rs->salary_component_id;
         $data['salary_component_id'] = form_dropdown('salary_component_id', $components, $comp_selected, 'id="salary_component_id"');
         $data['salary_periode'] = array('name' => 'salary_periode', 'value' => $rs->salary_periode);
-        $data['salary_daily_value'] = array('name' => 'salary_daily_value', 'value' => $rs->salary_daily_value);
-        $data['salary_amount_value'] = array('name' => 'salary_amount_value', 'value' => $rs->salary_amount_value);
+        $data['salary_daily_value'] = array('name' => 'salary_daily_value', 'value' => $rs->salary_daily_value, 'id' => 'salary_daily_value');
+        $data['salary_amount_value'] = array('name' => 'salary_amount_value', 'value' => $rs->salary_amount_value, 'id' => 'salary_amount_value');
 
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 

@@ -1,5 +1,17 @@
 <?php get_header(); ?>
+<script src="<?php echo base_url(); ?>assets/js/jquery.formatCurrency-1.4.0.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.formatCurrency.all.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $('.currency').blur(function(){
+            $('.currency').formatCurrency('id-ID');
+        });
+    });
+</script>
 <div class="wrap">
+    <h2>Form Staff</h2>
     <?php echo $this->session->flashdata('message'); ?>
     <div class="row">
         <div class="span3">

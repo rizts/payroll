@@ -15,16 +15,33 @@ class Departments extends CI_Controller {
 
     public function index($offset = 0) {
         $dept_list = new Department();
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "dept_name";
+                break;
+            case "2":
+                $data['col'] = "dept_id";
+                break;
+            default:
+                $data['col'] = "dept_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
         $total_rows = $dept_list->count();
 
         $data['title'] = "Departments";
-        $data['btn_add'] = anchor('departments/add', 'Add New', array("class"=>"btn btn-primary"));
+        $data['btn_add'] = anchor('departments/add', 'Add New', array("class" => "btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $dept_list->order_by('dept_id', 'DESC');
+        $dept_list->order_by($data['col'], $data['dir']);
         $data['dept_list'] = $dept_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("departments/index");
@@ -40,11 +57,11 @@ class Departments extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Departement';
         $data['form_action'] = site_url('departments/save');
-        $data['link_back'] = anchor('departments/', 'Back', array("class"=>"btn"));
+        $data['link_back'] = anchor('departments/', 'Back', array("class" => "btn"));
 
         $data['id'] = '';
         $data['dept_name'] = array('name' => 'dept_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class"=>"btn btn-primary");
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class" => "btn btn-primary");
 
         $this->load->view('departments/frm_dept', $data);
     }
@@ -55,12 +72,12 @@ class Departments extends CI_Controller {
         $rs = $dept->where('dept_id', $id)->get();
         $data['id'] = $rs->dept_id;
         $data['dept_name'] = array('name' => 'dept_name', 'value' => $rs->dept_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class"=>"btn btn-primary");
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class" => "btn btn-primary");
 
         $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('departments/update');
-        $data['link_back'] = anchor('departments/', 'Back', array("class"=>"btn"));
+        $data['link_back'] = anchor('departments/', 'Back', array("class" => "btn"));
 
         $this->load->view('departments/frm_dept', $data);
     }

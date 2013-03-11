@@ -1,4 +1,49 @@
 <?php get_header(); ?>
+<?php
+
+function HeaderLink($value, $key, $col, $dir) {
+    $out = "<a href=\"" . site_url('departments') . "?c=";
+    //set column query string value
+    switch ($key) {
+        case "dept_name":
+            $out .= "1";
+            break;
+        case "dept_id":
+            $out .= "2";
+            break;
+        default:
+            $out .= "0";
+    }
+
+    $out .= "&d=";
+
+    //reverse sort if the current column is clicked
+    if ($key == $col) {
+        switch ($dir) {
+            case "ASC":
+                $out .= "1";
+                break;
+            default:
+                $out .= "0";
+        }
+    } else {
+        //pass on current sort direction
+        switch ($dir) {
+            case "ASC":
+                $out .= "0";
+                break;
+            default:
+                $out .= "1";
+        }
+    }
+
+    //complete link
+    $out .= "\">$value</a>";
+
+    return $out;
+}
+?>
+
 <div class="wrap">
     <h2 class="rama-title">Listing Departement</h2>
     <div class="float-right"><?php echo $btn_add ?></div>
@@ -6,8 +51,8 @@
     <table class="table boo-table table-bordered table-condensed table-hover">
         <thead>
           <tr>
-              <th width="45%">Dept ID</th>
-              <th width="45%">Departement Name</th>
+              <th width="45%"><?php echo HeaderLink("Departement ID", "dept_id", $col, $dir); ?></th>
+              <th width="45%"><?php echo HeaderLink("Departement Name", "dept_name", $col, $dir); ?></th>
               <th width="10%" colspan="2" class="action_cell">Action</th>
           </tr>
         </thead>
