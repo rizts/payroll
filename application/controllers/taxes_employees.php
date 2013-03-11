@@ -14,6 +14,26 @@ class Taxes_Employees extends CI_Controller {
 
     public function index($offset = 0) {
         $tax_list = new Tax_Employee();
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "sp_status";
+                break;
+            case "2":
+                $data['col'] = "sp_ptkp";
+                break;
+            case "3":
+                $data['col'] = "sp_id";
+                break;
+            default:
+                $data['col'] = "sp_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
         $total_rows = $tax_list->count();
         $data['title'] = "Taxes Employees";
         $data['btn_add'] = anchor('taxes_employees/add', 'Add New', array("class" => "btn btn-primary"));
@@ -22,7 +42,7 @@ class Taxes_Employees extends CI_Controller {
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $tax_list->order_by('sp_status', 'ASC');
+        $tax_list->order_by($data['col'], $data['dir']);
         $data['tax_list'] = $tax_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("taxes_employees/index");
@@ -67,7 +87,7 @@ class Taxes_Employees extends CI_Controller {
     function save() {
         $te = new Tax_Employee();
         $te->sp_status = $this->input->post('sp_status');
-        $te->sp_ptkp = str_replace($this->input->post('sp_ptkp'),'Rp','');
+        $te->sp_ptkp = str_replace($this->input->post('sp_ptkp'), 'Rp', '');
 
         if ($te->save()) {
             $this->session->set_flashdata('message', 'Taxes Employee successfully created!');
