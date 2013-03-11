@@ -53,7 +53,7 @@ class Staffs extends CI_Controller {
         $data['staff_nik'] = array('name' => 'staff_nik');
         $data['staff_kode_absen'] = array('name' => 'staff_kode_absen');
         $data['staff_name'] = array('name' => 'staff_name');
-        $data['staff_address'] = array('name' => 'staff_address', 'rows' => '6');
+        $data['staff_address'] = array('name' => 'staff_address', 'rows' => '2');
         $data['staff_email'] = array('name' => 'staff_email');
         $data['staff_email_alternatif'] = array('name' => 'staff_email_alternatif');
         $data['staff_phone_home'] = array('name' => 'staff_phone_home');
@@ -106,7 +106,7 @@ class Staffs extends CI_Controller {
         );
         $sex_selected = 'Laki';
         $data['staff_sex'] = form_dropdown('staff_sex', $options_sex, $sex_selected);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
 
         $this->load->view('staffs/frm_staff', $data);
     }
@@ -118,7 +118,7 @@ class Staffs extends CI_Controller {
         $data['staff_nik'] = array('name' => 'staff_nik', 'value' => $rs->staff_nik);
         $data['staff_kode_absen'] = array('name' => 'staff_kode_absen', 'value' => $rs->staff_kode_absen);
         $data['staff_name'] = array('name' => 'staff_name', 'value' => $rs->staff_name);
-        $data['staff_address'] = array('name' => 'staff_address', 'rows' => '6', 'value' => $rs->staff_address);
+        $data['staff_address'] = array('name' => 'staff_address', 'rows' => '2', 'value' => $rs->staff_address);
         $data['staff_email'] = array('name' => 'staff_email', 'value' => $rs->staff_email);
         $data['staff_email_alternatif'] = array('name' => 'staff_email_alternatif', 'value' => $rs->staff_email_alternatif);
         $data['staff_phone_home'] = array('name' => 'staff_phone_home', 'value' => $rs->staff_phone_home);
