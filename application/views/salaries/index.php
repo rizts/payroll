@@ -57,7 +57,7 @@ function HeaderLink($value, $key, $col, $dir) {
                 <th><?php echo HeaderLink("Salary ID", "salary_id", $col, $dir); ?></th>
                 <th><?php echo HeaderLink("Salary Periode", "salary_periode", $col, $dir); ?></th>
                 <th><?php echo HeaderLink("Salary Staff", "salary_staffid", $col, $dir); ?></th>
-                <th width="10"></th>
+                <th width="10">Action</th>
             </tr>
         </thead>
         <?php
@@ -70,7 +70,7 @@ function HeaderLink($value, $key, $col, $dir) {
                 <td>
                     <div class="btn-group">
                         <a href="#" data-toggle="dropdown" class="btn btn-mini dropdown-toggle">
-                            Action
+                            <i class="icon-cog"></i>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu pull-right">

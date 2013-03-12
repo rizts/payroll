@@ -1,6 +1,5 @@
 <?php get_header(); ?>
 <?php
-
 function HeaderLink($value, $key, $salary_id, $col, $dir) {
     $out = "<a href=\"" . site_url('salaries/' . $salary_id . '/sub_salaries/index') . "?c=";
     //set column query string value

@@ -25,13 +25,37 @@ class Staffs extends CI_Controller {
         $staff_list = new Staff();
         switch ($this->input->get('c')) {
             case "1":
-                $data['col'] = "staff_name";
+                $data['col'] = "staff_nik";
                 break;
             case "2":
-                $data['col'] = "sk_id";
+                $data['col'] = "staff_name";
+                break;
+            case "3":
+                $data['col'] = "staff_address";
+                break;
+            case "4":
+                $data['col'] = "staff_email";
+                break;
+            case "5":
+                $data['col'] = "staff_phone_home";
+                break;
+            case "6":
+                $data['col'] = "staff_phone_hp";
+                break;
+            case "7":
+                $data['col'] = "staff_cabang";
+                break;
+            case "8":
+                $data['col'] = "staff_departement";
+                break;
+            case "9":
+                $data['col'] = "staff_jabatan";
+                break;
+            case "10":
+                $data['col'] = "staff_id";
                 break;
             default:
-                $data['col'] = "sk_id";
+                $data['col'] = "staff_id";
         }
 
         if ($this->input->get('d') == "1") {
@@ -48,8 +72,9 @@ class Staffs extends CI_Controller {
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $staff_list->order_by('staff_name', 'ASC');
-        $data['staff_list'] = $staff_list->get($this->limit, $offset)->all;
+        $staff_list->order_by($data['col'], $data['dir']);
+        $data['staff_list'] = $staff_list
+                        ->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("staffs/index");
         $config['total_rows'] = $total_rows;

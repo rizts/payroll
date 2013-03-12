@@ -4,13 +4,15 @@
     <?php echo $breadcrumb; ?>
     <h2>Listing Work History</h2> 
     <?php echo $this->session->flashdata('message'); ?>
-    <table border="1">
-        <tr>
-            <td>Edu ID</td>
-            <td>History Date</td>
-            <td>History Description</td>
-            <td>Action</td>
-        </tr>
+    <table class="table boo-table table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Edu ID</th>
+                <th>History Date</th>
+                <th>History Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
         <?php
         foreach ($work_histories as $row) {
         ?>

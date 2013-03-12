@@ -13,6 +13,7 @@ class Salary_Components extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library('breadcrumb');
+        $this->load->helper('rupiah');
         $this->load->model('Salary_Component');
         $this->load->model('Component');
         $this->staff_id = $this->uri->segment(2);
@@ -32,7 +33,7 @@ class Salary_Components extends CI_Controller {
         $total_rows = $salary_component->count();
 
         $data['title'] = "Salary Component";
-        $data['btn_add'] = anchor('staffs/' . $this->staff_id . '/salary_components/add', 'Add New');
+        $data['btn_add'] = anchor('staffs/' . $this->staff_id . '/salary_components/add', 'Add New', array('class' => 'btn btn-primary'));
         $data['btn_home'] = anchor('staffs/', 'Home');
 
         $uri_segment = 5;
@@ -68,8 +69,8 @@ class Salary_Components extends CI_Controller {
         $comp_selected = '';
         $data['gaji_component_id'] = form_dropdown('gaji_component_id', $components, $comp_selected, 'id="gaji_component_id"');
 
-        $data['gaji_daily_value'] = array('name' => 'gaji_daily_value');
-        $data['gaji_amount_value'] = array('name' => 'gaji_amount_value');
+        $data['gaji_daily_value'] = array('name' => 'gaji_daily_value', 'id' => 'gaji_daily_value');
+        $data['gaji_amount_value'] = array('name' => 'gaji_amount_value', 'id' => 'gaji_amount_value');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
         $data['breadcrumb'] = $this->breadcrumb->output();
         $this->load->view('staff_salary_components/frm_salary_component', $data);
@@ -91,10 +92,10 @@ class Salary_Components extends CI_Controller {
         $comp_selected = $rs->gaji_component_id;
         $data['gaji_component_id'] = form_dropdown('gaji_component_id', $components, $comp_selected, 'id="gaji_component_id"');
 
-        $data['gaji_daily_value'] = array('name' => 'gaji_daily_value', 'value' => $rs->gaji_daily_value);
-        $data['gaji_amount_value'] = array('name' => 'gaji_amount_value', 'value' => $rs->gaji_amount_value);
+        $data['gaji_daily_value'] = array('name' => 'gaji_daily_value', 'id' => 'gaji_daily_value', 'value' => $rs->gaji_daily_value);
+        $data['gaji_amount_value'] = array('name' => 'gaji_amount_value', 'gaji_amount_value' => 'gaji_amount_value', 'value' => $rs->gaji_amount_value);
 
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update';
         $data['form_action'] = site_url('staffs/' . $this->staff_id . '/salary_components/update');
@@ -103,13 +104,19 @@ class Salary_Components extends CI_Controller {
         $this->load->view('staff_salary_components/frm_salary_component', $data);
     }
 
+    function replace_currency($value) {
+        $current = str_replace("Rp", "", $value);
+        $$current_value = str_replace(",", "", $current);
+        return $$current_value;
+    }
+
     function save() {
         $salary_component = new Salary_Component();
 
         $salary_component->staff_id = $this->staff_id;
         $salary_component->gaji_component_id = $this->input->post('gaji_component_id');
-        $salary_component->gaji_daily_value = $this->input->post('gaji_daily_value');
-        $salary_component->gaji_amount_value = $this->input->post('gaji_amount_value');
+        $salary_component->gaji_daily_value = $this->replace_currency($this->input->post('gaji_daily_value'));
+        $salary_component->gaji_amount_value = $this->replace_currency($this->input->post('gaji_amount_value'));
         if ($salary_component->save()) {
             $this->session->set_flashdata('message', 'Branch successfully created!');
             redirect('staffs/' . $this->staff_id . '/salary_components/index');
@@ -128,8 +135,8 @@ class Salary_Components extends CI_Controller {
                 ->update(array(
                     'staff_id' => $this->staff_id,
                     'gaji_component_id' => $this->input->post('gaji_component_id'),
-                    'gaji_daily_value' => $this->input->post('gaji_daily_value'),
-                    'gaji_amount_value' => $this->input->post('gaji_amount_value')
+                    'gaji_daily_value' => $this->replace_currency($this->input->post('gaji_daily_value')),
+                    'gaji_amount_value' => $this->replace_currency($this->input->post('gaji_amount_value'))
                 ));
         $this->session->set_flashdata('message', 'Update successfully deleted!');
         redirect('staffs/' . $this->staff_id . '/salary_components/index');

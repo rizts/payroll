@@ -114,13 +114,19 @@ class Sub_Salaries extends CI_Controller {
         $this->load->view('sub_salaries/frm_sub_salaries', $data);
     }
 
+    function replace_currency($value) {
+        $current = str_replace("Rp", "", $value);
+        $$current_value = str_replace(",", "", $current);
+        return $$current_value;
+    }
+
     function save() {
         $sub_salary = new Sub_Salary();
         $sub_salary->salary_id = $this->uri->segment(2);
         $sub_salary->salary_component_id = $this->input->post('salary_component_id');
         $sub_salary->salary_periode = $this->input->post('salary_periode');
-        $sub_salary->salary_daily_value = $this->input->post('salary_daily_value');
-        $sub_salary->salary_amount_value = $this->input->post('salary_amount_value');
+        $sub_salary->salary_daily_value = $this->replace_currency($this->input->post('salary_daily_value'));
+        $sub_salary->salary_amount_value = $this->replace_currency($this->input->post('salary_amount_value'));
         if ($sub_salary->save()) {
             $this->session->set_flashdata('message', 'Sub Salary successfully created!');
             redirect('salaries/' . $this->uri->segment(2) . '/sub_salaries/index');
@@ -139,8 +145,8 @@ class Sub_Salaries extends CI_Controller {
                 ->update(array(
                     'salary_component_id' => $this->input->post('salary_periode'),
                     'salary_periode' => $this->input->post('salary_periode'),
-                    'salary_daily_value' => $this->input->post('salary_daily_value'),
-                    'salary_amount_value' => $this->input->post('salary_amount_value')
+                    'salary_daily_value' => $this->replace_currency($this->input->post('salary_daily_value')),
+                    'salary_amount_value' => $this->replace_currency($this->input->post('salary_amount_value'))
                 ));
 
         $this->session->set_flashdata('message', 'salary Update successfuly.');

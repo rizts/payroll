@@ -1,4 +1,73 @@
 <?php get_header(); ?>
+<?php
+
+function HeaderLink($value, $key, $col, $dir) {
+    $out = "<a href=\"" . site_url('staffs') . "?c=";
+    //set column query string value
+    switch ($key) {
+        case "staff_nik":
+            $out .= "1";
+            break;
+        case "staff_name":
+            $out .= "2";
+            break;
+        case "staff_address":
+            $out .= "3";
+            break;
+        case "staff_email":
+            $out .= "4";
+            break;
+        case "staff_phone_home":
+            $out .= "5";
+            break;
+        case "staff_phone_hp":
+            $out .= "6";
+            break;
+        case "staff_cabang":
+            $out .= "7";
+            break;
+        case "staff_departement":
+            $out .= "8";
+            break;
+        case "staff_jabatan":
+            $out .= "9";
+            break;
+        case "staff_id":
+            $out .= "10";
+            break;
+        default:
+            $out .= "0";
+    }
+
+    $out .= "&d=";
+
+    //reverse sort if the current column is clicked
+    if ($key == $col) {
+        switch ($dir) {
+            case "ASC":
+                $out .= "1";
+                break;
+            default:
+                $out .= "0";
+        }
+    } else {
+        //pass on current sort direction
+        switch ($dir) {
+            case "ASC":
+                $out .= "0";
+                break;
+            default:
+                $out .= "1";
+        }
+    }
+
+    //complete link
+    $out .= "\">$value</a>";
+
+    return $out;
+}
+?>
+
 <div class="wrap">
     <h2 class="rama-title">Listing Staff</h2>
     <div class="float-right"><?php echo $btn_add ?></div>
@@ -6,15 +75,15 @@
     <table class="table boo-table table-bordered table-condensed table-hover">
         <thead>
             <tr>
-                <th>Staff NIK</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Email</th>
-                <th>Phone Home</th>
-                <th>Phone HP</th>
-                <th>Cabang</th>
-                <th>Departement</th>
-                <th>Jabatan</th>
+                <th><?php echo HeaderLink("NIK", "staff_nik", $col, $dir); ?></th>
+                <th><?php echo HeaderLink("Name", "staff_name", $col, $dir); ?></th>
+                <th><?php echo HeaderLink("Address", "staff_address", $col, $dir); ?></th>
+                <th><?php echo HeaderLink("Email", "staff_email", $col, $dir); ?></th>
+                <th><?php echo HeaderLink("Phone Home", "staff_phone_home", $col, $dir); ?></th>
+                <th><?php echo HeaderLink("Phone HP", "staff_phone_hp", $col, $dir); ?></th>
+                <th><?php echo HeaderLink("Branch", "staff_cabang", $col, $dir); ?></th>
+                <th><?php echo HeaderLink("Departement", "staff_departement", $col, $dir); ?></th>
+                <th><?php echo HeaderLink("Title", "staff_jabatan", $col, $dir); ?></th>
                 <th>Action</th>
             </tr>
         </thead>

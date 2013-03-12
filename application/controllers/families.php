@@ -25,8 +25,41 @@ class Families extends CI_Controller {
         $this->breadcrumb->append_crumb('Families', base_url() . '');
 
         $family = new Family();
+
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "staff_fam_order";
+                break;
+            case "2":
+                $data['col'] = "staff_fam_name";
+                break;
+            case "3":
+                $data['col'] = "staff_fam_birthdate";
+                break;
+            case "4":
+                $data['col'] = "staff_fam_birthplace";
+                break;
+            case "5":
+                $data['col'] = "staff_fam_sex";
+                break;
+            case "6":
+                $data['col'] = "staff_fam_relation";
+                break;
+            case "7":
+                $data['col'] = "staff_fam_id";
+                break;
+            default:
+                $data['col'] = "staff_fam_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
         $data['staff_id'] = $this->staff_id;
-        $family->where('staff_fam_staff_id', $this->staff_id)->order_by('staff_fam_name', 'ASC');
+        $family->where('staff_fam_staff_id', $this->staff_id)->order_by($data['col'], $data['dir']);
 
         $total_rows = $family->count();
         $data['title'] = "Family";
@@ -38,6 +71,7 @@ class Families extends CI_Controller {
 
         $data['families'] = $family
                         ->where('staff_fam_staff_id', $this->staff_id)
+                        ->order_by($data['col'], $data['dir'])
                         ->get($this->limit, $offset)->all;
         $config['base_url'] = site_url('staffs/' . $this->staff_id . '/families/index');
         $config['total_rows'] = $total_rows;

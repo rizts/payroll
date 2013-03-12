@@ -1,4 +1,7 @@
 <?php get_header(); ?>
+<script src="<?php echo base_url(); ?>assets/js/jquery.formatCurrency-1.4.0.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.formatCurrency.all.js" type="text/javascript"></script>
+
 <script>
     $(document).ready(function() {
         $("#daily").hide();
@@ -14,6 +17,13 @@
                 }
             });
         });
+        $('#gaji_daily_value').blur(function(){
+            $('#gaji_daily_value').formatCurrency();
+        });
+        $('#gaji_amount_value').blur(function(){
+            $('#gaji_amount_value').formatCurrency();
+        });
+
     });
 </script>
 
