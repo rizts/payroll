@@ -3,8 +3,7 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.formatCurrency.all.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    $(document).ready(function()
-    {
+    $(document).ready(function(){
         $('.currency').blur(function(){
             $('.currency').formatCurrency('id-ID');
         });
@@ -100,4 +99,14 @@
         </div>
         <?php echo form_close() ?>
     </div>
-    <?php get_footer(); ?>
+    <div class="row" style="text-align: center;">
+        <div class="span6">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#general">Family</a></li>
+                <li><a href="#families">Health</a></li>
+                <li><a href="#medicals">Salary</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php get_footer(); ?>
