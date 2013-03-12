@@ -10,40 +10,41 @@ class Users extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->logged_in = $this->session->userdata('logged_in_id');
-        $this->load->library('Login_Manager');
         $this->load->model('User');
-//        $this->output->enable_profiler(TRUE);
-//        $this->logged_in != '' ? redirect('users/sign_in') : redirect('welcome');
+        $this->output->enable_profiler(TRUE);
     }
 
     function sign_in() {
+        $staff = new Staff();
+        $query = $staff->get_where(
+                        'staff_email', $this->input->post('email'),
+                        'staff_password', md5($this->input->post('password'))
+                )->row();
 
-        $this->load->view('users/sign_in');
+        $data['action'] = site_url('users/process_login');
+        $data['email'] = array('name' => 'email',
+            'placeholder' => 'Email',
+            'class' => 'input-block-level'
+        );
+        $data['password'] = array('name' => 'password',
+            'placeholder' => 'password',
+            'class' => 'input-block-level'
+        );
+        $data['btn_sign_in'] = array('name' => 'btn_sign_in',
+            'value' => 'Sign In',
+            'class' => 'btn btn-primary btn-large'
+        );
+
+        $this->load->view('users/sign_in', $data);
     }
 
     function process_login() {
-        // Create a user to store the login validation
-        $user = new User();
-        if ($this->input->post('username') !== FALSE) {
-            // A login was attempted, load the user data
-            $user->from_array($_POST, array('username', 'password'));
-            // get the result of the login request
-            $login_redirect = $this->login_manager->process_login($user);
-            if ($login_redirect) {
-                if ($login_redirect === TRUE) {
-                    // if the result was simply TRUE, redirect to the welcome page.
-                    redirect('welcome');
-                } else {
-                    // otherwise, redirect to the stored page that was last accessed.
-                    redirect($login_redirect);
-                }
-            }
+        $staff = new Staff();
+        if ($staff->_login() == TRUE) {
+            echo '<p>You have successfully logged in</p>';
+        } else {
+            echo '<p>please check your account</p>';
         }
-    }
-
-    function sign_up() {
-        $user = $this->login_manager->get_user();
-        $this->load->view('users/sign_in');
     }
 
 }

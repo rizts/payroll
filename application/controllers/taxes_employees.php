@@ -84,10 +84,16 @@ class Taxes_Employees extends CI_Controller {
         $this->load->view('taxes_employees/frm_taxes_employees', $data);
     }
 
+    function replace_currency($value) {
+        $current = str_replace("Rp", "", $value);
+        $current_value = str_replace(",", "", $current);
+        return $current_value;
+    }
+
     function save() {
         $te = new Tax_Employee();
         $te->sp_status = $this->input->post('sp_status');
-        $te->sp_ptkp = str_replace($this->input->post('sp_ptkp'), 'Rp', '');
+        $te->sp_ptkp = $this->replace_currency($this->input->post('sp_ptkp'));
 
         if ($te->save()) {
             $this->session->set_flashdata('message', 'Taxes Employee successfully created!');
@@ -106,7 +112,7 @@ class Taxes_Employees extends CI_Controller {
         $te->where('sp_id', $this->input->post('id'))
                 ->update(array(
                     'sp_status' => $this->input->post('sp_status'),
-                    'sp_ptkp' => $this->input->post('sp_ptkp')
+                    'sp_ptkp' => $this->replace_currency($this->input->post('sp_ptkp'))
                         )
         );
 
