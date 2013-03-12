@@ -23,6 +23,23 @@ class Staffs extends CI_Controller {
 
     public function index($offset = 0) {
         $staff_list = new Staff();
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "staff_name";
+                break;
+            case "2":
+                $data['col'] = "sk_id";
+                break;
+            default:
+                $data['col'] = "sk_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
         $total_rows = $staff_list->count();
         $data['title'] = "Staffs";
         $data['btn_add'] = anchor('staffs/add', 'Add New', array('class' => 'btn btn-primary'));

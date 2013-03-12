@@ -6,36 +6,64 @@ if (!defined('BASEPATH'))
 class Sub_Salaries extends CI_Controller {
 
     private $limit = 10;
+    var $salary_id;
+    var $uri_segment;
+    var $sub_id;
 
     public function __construct() {
         parent::__construct();
         $this->load->helper('rupiah');
         $this->load->model('Sub_Salary');
         $this->load->model('Component');
+        $this->salary_id = $this->uri->segment(2);
+        $this->uri_segment = $this->uri->segment(5);
+        $this->sub_id = $this->uri->segment(5);
     }
 
     public function index($offset = 0) {
         $sub_salary = new Sub_Salary();
-        $salary_id = $this->uri->segment(2);
-        $sub_salary->where('salary_id', $salary_id)->order_by('sub_id', 'DESC');
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "salary_periode";
+                break;
+            case "2":
+                $data['col'] = "salary_daily_value";
+                break;
+            case "3":
+                $data['col'] = "salary_amount_value";
+                break;
+            case "4":
+                $data['col'] = "sub_id";
+                break;
+            default:
+                $data['col'] = "sub_id";
+        }
 
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
+        $sub_salary->where('salary_id', $this->salary_id)->order_by($data['col'], $data['dir']);
         $total_rows = $sub_salary->count();
 
         $data['title'] = "Sub Salary";
-        $data['btn_add'] = anchor('salaries/' . $salary_id . '/sub_salaries/add', 'Add New', array('class' => 'btn btn-primary'));
+        $data['salary_id'] = $this->salary_id;
+        $data['btn_add'] = anchor('salaries/' . $this->salary_id . '/sub_salaries/add', 'Add New', array('class' => 'btn btn-primary'));
         $data['btn_home'] = anchor('salaries/', 'Back');
 
-        $uri_segment = 5;
-        $offset = $this->uri->segment($uri_segment);
+        $offset = $this->uri->segment($this->uri_segment);
 
         $data['sub_salaries'] = $sub_salary
-                        ->where('salary_id', $salary_id)
+                        ->where('salary_id', $this->salary_id)
+                        ->order_by($data['col'], $data['dir'])
                         ->get($this->limit, $offset)->all;
 
-        $config['base_url'] = site_url('salaries/' . $salary_id . '/sub_salaries/index');
+        $config['base_url'] = site_url('salaries/' . $this->salary_id . '/sub_salaries/index');
         $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->limit;
-        $config['uri_segment'] = $uri_segment;
+        $config['uri_segment'] = $this->uri_segment;
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
 

@@ -14,15 +14,35 @@ class Components extends CI_Controller {
 
     public function index($offset = 0) {
         $component = new Component();
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "comp_name";
+                break;
+            case "2":
+                $data['col'] = "comp_type";
+                break;
+            case "3":
+                $data['col'] = "comp_id";
+                break;
+            default:
+                $data['col'] = "comp_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
         $total_rows = $component->count();
         $data['title'] = "Component";
-        $data['btn_add'] = anchor('components/add', 'Add New', array("class"=>"btn btn-primary"));
+        $data['btn_add'] = anchor('components/add', 'Add New', array("class" => "btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $component->order_by('comp_name', 'ASC');
+        $component->order_by($data['col'], $data['dir']);
         $data['components'] = $component->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("components/index");
@@ -38,7 +58,7 @@ class Components extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Gaji';
         $data['form_action'] = site_url('components/save');
-        $data['link_back'] = anchor('components/', 'Back', array("class"=>"btn"));
+        $data['link_back'] = anchor('components/', 'Back', array("class" => "btn"));
 
         $options = array(
             'Daily' => 'Daily',
@@ -49,7 +69,7 @@ class Components extends CI_Controller {
         $selected = 'Monthly';
         $data['comp_name'] = array('name' => 'comp_name');
         $data['comp_type'] = form_dropdown('comp_type', $options, $selected);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class"=>"btn btn-primary");
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class" => "btn btn-primary");
 
         $this->load->view('components/frm_components', $data);
     }
@@ -66,11 +86,11 @@ class Components extends CI_Controller {
         $data['id'] = $rs->comp_id;
         $data['comp_type'] = form_dropdown('comp_type', $options, $selected);
         $data['comp_name'] = array('name' => 'comp_name', 'value' => $rs->comp_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class'=>'btn btn-primary');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update';
         $data['form_action'] = site_url('components/update');
-        $data['link_back'] = anchor('components/', 'Back', array("class"=>"btn"));
+        $data['link_back'] = anchor('components/', 'Back', array("class" => "btn"));
 
         $this->load->view('components/frm_components', $data);
     }

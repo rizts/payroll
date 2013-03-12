@@ -14,15 +14,32 @@ class Maritals_Status extends CI_Controller {
 
     public function index($offset = 0) {
         $marital_list = new Marital();
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "sn_name";
+                break;
+            case "2":
+                $data['col'] = "sn_id";
+                break;
+            default:
+                $data['col'] = "sn_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
         $total_rows = $marital_list->count();
         $data['title'] = "Maritals Status";
-        $data['btn_add'] = anchor('maritals_status/add', 'Add New', array("class"=>"btn btn-primary"));
+        $data['btn_add'] = anchor('maritals_status/add', 'Add New', array("class" => "btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $marital_list->order_by('sn_name', 'ASC');
+        $marital_list->order_by($data['col'], $data['dir']);
         $data['marital_list'] = $marital_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("maritals_status/index");

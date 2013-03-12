@@ -15,15 +15,32 @@ class Titles extends CI_Controller {
 
     public function index($offset = 0) {
         $title_list = new Title();
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "title_name";
+                break;
+            case "2":
+                $data['col'] = "title_id";
+                break;
+            default:
+                $data['col'] = "title_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
         $total_rows = $title_list->count();
         $data['title'] = "Titles";
-        $data['btn_add'] = anchor('titles/add', 'Add New', array("class"=>"btn btn-primary"));
+        $data['btn_add'] = anchor('titles/add', 'Add New', array("class" => "btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $title_list->order_by('title_id', 'DESC');
+        $title_list->order_by($data['col'], $data['dir']);
         $data['title_list'] = $title_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("titles/index");
@@ -39,11 +56,11 @@ class Titles extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Title';
         $data['form_action'] = site_url('titles/save');
-        $data['link_back'] = anchor('titles/', 'Back', array("class"=>"btn"));
+        $data['link_back'] = anchor('titles/', 'Back', array("class" => "btn"));
 
         $data['id'] = '';
         $data['title_name'] = array('name' => 'title_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class"=>"btn btn-primary");
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class" => "btn btn-primary");
 
         $this->load->view('titles/frm_title', $data);
     }
@@ -53,11 +70,11 @@ class Titles extends CI_Controller {
         $rs = $title->where('title_id', $id)->get();
         $data['id'] = $rs->title_id;
         $data['title_name'] = array('name' => 'title_name', 'value' => $rs->title_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class"=>"btn btn-primary");
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class" => "btn btn-primary");
 
         $data['title'] = 'Update Title';
         $data['form_action'] = site_url('titles/update');
-        $data['link_back'] = anchor('titles/', 'Back', array("class"=>"btn"));
+        $data['link_back'] = anchor('titles/', 'Back', array("class" => "btn"));
 
         $this->load->view('titles/frm_title', $data);
     }

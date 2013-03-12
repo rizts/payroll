@@ -1,4 +1,52 @@
 <?php get_header(); ?>
+<?php
+
+function HeaderLink($value, $key, $col, $dir) {
+    $out = "<a href=\"" . site_url('salaries') . "?c=";
+    //set column query string value
+    switch ($key) {
+        case "salary_periode":
+            $out .= "1";
+            break;
+        case "salary_staffid":
+            $out .= "2";
+            break;
+        case "salary_id":
+            $out .= "3";
+            break;
+        default:
+            $out .= "0";
+    }
+
+    $out .= "&d=";
+
+    //reverse sort if the current column is clicked
+    if ($key == $col) {
+        switch ($dir) {
+            case "ASC":
+                $out .= "1";
+                break;
+            default:
+                $out .= "0";
+        }
+    } else {
+        //pass on current sort direction
+        switch ($dir) {
+            case "ASC":
+                $out .= "0";
+                break;
+            default:
+                $out .= "1";
+        }
+    }
+
+    //complete link
+    $out .= "\">$value</a>";
+
+    return $out;
+}
+?>
+
 <div class="wrap">
     <h2 class="rama-title">Listing Salaries</h2>
     <div class="float-right"><?php echo $btn_add ?></div>
@@ -6,9 +54,9 @@
     <table class="table boo-table table-bordered table-condensed table-hover">
         <thead>
             <tr>
-                <th>Salary ID</th>
-                <th>Salary Periode</th>
-                <th>Salary Staff</th>
+                <th><?php echo HeaderLink("Salary ID", "salary_id", $col, $dir); ?></th>
+                <th><?php echo HeaderLink("Salary Periode", "salary_periode", $col, $dir); ?></th>
+                <th><?php echo HeaderLink("Salary Staff", "salary_staffid", $col, $dir); ?></th>
                 <th width="10"></th>
             </tr>
         </thead>

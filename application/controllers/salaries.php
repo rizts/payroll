@@ -14,6 +14,26 @@ class Salaries extends CI_Controller {
 
     public function index($offset = 0) {
         $salary = new Salary();
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "salary_periode";
+                break;
+            case "2":
+                $data['col'] = "salary_staffid";
+                break;
+            case "3":
+                $data['col'] = "salary_id";
+                break;
+            default:
+                $data['col'] = "salary_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
         $total_rows = $salary->count();
         $data['title'] = "Salary";
         $data['btn_add'] = anchor('salaries/add', 'Add New', "class='btn btn-primary'");
@@ -22,7 +42,7 @@ class Salaries extends CI_Controller {
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $salary->order_by('salary_periode', 'ASC');
+        $salary->order_by($data['col'], $data['dir']);
         $data['salaries'] = $salary->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("salaries/index");
@@ -38,12 +58,12 @@ class Salaries extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Salary';
         $data['form_action'] = site_url('salaries/save');
-        $data['link_back'] = anchor('salaries/', 'Back', array('class'=>'btn'));
+        $data['link_back'] = anchor('salaries/', 'Back', array('class' => 'btn'));
 
         $data['id'] = '';
         $data['salary_periode'] = array('name' => 'salary_periode');
         $data['salary_staffid'] = array('name' => 'salary_staffid');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class'=>'btn btn-primary');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
 
         $this->load->view('salaries/frm_salaries', $data);
     }
