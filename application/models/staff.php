@@ -37,7 +37,17 @@ class Staff extends DataMapper {
         $this->db->where('staff_id', $id);
         $this->db->delete($this->table);
     }
-    
+
+    function _login() {
+        $staff = new Staff();
+        $query = $staff->get_where(
+                        array(
+                            'staff_email' => $this->input->post('email'),
+                            'staff_password' => md5($this->input->post('password')))
+                )->row();
+        return $query;
+    }
+
     function list_drop() {
         $staff = new Staff();
         $staff->get();
