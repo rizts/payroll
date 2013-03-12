@@ -11,10 +11,10 @@ class Sub_Salaries extends CI_Controller {
     var $sub_id;
 
     public function __construct() {
-        parent::__construct();
-        $this->load->helper('rupiah');
+        parent::__construct();        
         $this->load->model('Sub_Salary');
         $this->load->model('Component');
+        $this->load->helper('rupiah');
         $this->salary_id = $this->uri->segment(2);
         $this->uri_segment = $this->uri->segment(5);
         $this->sub_id = $this->uri->segment(5);
@@ -71,10 +71,9 @@ class Sub_Salaries extends CI_Controller {
     }
 
     function add() {
-        $data['title'] = 'Add New Salary';
-        $salary_id = $this->uri->segment(2);
-        $data['form_action'] = site_url('salaries/' . $salary_id . '/sub_salaries/save');
-        $data['link_back'] = anchor('salaries/' . $salary_id . '/sub_salaries/index', 'Back', array('class' => 'btn'));
+        $data['title'] = 'Add New Salary';        
+        $data['form_action'] = site_url('salaries/' . $this->salary_id . '/sub_salaries/save');
+        $data['link_back'] = anchor('salaries/' . $this->salary_id . '/sub_salaries/index', 'Back', array('class' => 'btn'));
 
         $data['id'] = '';
         // Component
@@ -93,9 +92,8 @@ class Sub_Salaries extends CI_Controller {
 
     function edit() {
         $sub_salary = new Sub_Salary();
-        $id = $this->uri->segment(5);
-        $rs = $sub_salary->where('sub_id', $id)->get();
-        $data['id'] = $rs->sub_id;
+        $rs = $sub_salary->where('sub_id', $this->sub_id)->get();
+        $data['id'] = $this->sub_id;
         // Component
         $component = new Component();
         $components = $component->list_drop();
@@ -108,34 +106,34 @@ class Sub_Salaries extends CI_Controller {
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update';
-        $data['form_action'] = site_url('salaries/' . $rs->salary_id . '/sub_salaries/update');
-        $data['link_back'] = anchor('salaries/' . $rs->salary_id . '/sub_salaries/index', 'Back', array('class' => 'btn'));
+        $data['form_action'] = site_url('salaries/' . $this->salary_id . '/sub_salaries/update');
+        $data['link_back'] = anchor('salaries/' . $this->salary_id . '/sub_salaries/index', 'Back', array('class' => 'btn'));
 
         $this->load->view('sub_salaries/frm_sub_salaries', $data);
     }
 
     function replace_currency($value) {
         $current = str_replace("Rp", "", $value);
-        $$current_value = str_replace(",", "", $current);
-        return $$current_value;
+        $current_value = str_replace(",", "", $current);
+        return $current_value;
     }
 
     function save() {
         $sub_salary = new Sub_Salary();
-        $sub_salary->salary_id = $this->uri->segment(2);
+        $sub_salary->salary_id = $this->salary_id;
         $sub_salary->salary_component_id = $this->input->post('salary_component_id');
         $sub_salary->salary_periode = $this->input->post('salary_periode');
         $sub_salary->salary_daily_value = $this->replace_currency($this->input->post('salary_daily_value'));
         $sub_salary->salary_amount_value = $this->replace_currency($this->input->post('salary_amount_value'));
         if ($sub_salary->save()) {
             $this->session->set_flashdata('message', 'Sub Salary successfully created!');
-            redirect('salaries/' . $this->uri->segment(2) . '/sub_salaries/index');
+            redirect('salaries/' . $this->salary_id . '/sub_salaries/index');
         } else {
             // Failed
             $sub_salary->error_message('custom', 'Field required');
             $msg = $sub_salary->error->custom;
             $this->session->set_flashdata('message', $msg);
-            redirect('salaries/' . $this->uri->segment(2) . '/sub_salaries/add');
+            redirect('salaries/' . $this->salary_id . '/sub_salaries/add');
         }
     }
 
@@ -150,16 +148,15 @@ class Sub_Salaries extends CI_Controller {
                 ));
 
         $this->session->set_flashdata('message', 'salary Update successfuly.');
-        redirect('salaries/' . $this->uri->segment(2) . '/sub_salaries/index');
+        redirect('salaries/' . $this->salary_id . '/sub_salaries/index');
     }
 
-    function delete($id) {
+    function delete() {
         $sub_salary = new Sub_Salary();
-        $id = $this->uri->segment(5);
-        $sub_salary->_delete($id);
+        $sub_salary->_delete($this->sub_id);
 
-        $this->session->set_flashdata('message', 'Salary successfully deleted!');
-        redirect('salaries/' . $this->uri->segment(2) . '/sub_salaries/index');
+        $this->session->set_flashdata('message', 'Sub Salary successfully deleted!');
+        redirect('salaries/' . $this->salary_id . '/sub_salaries/index');
     }
 
 }

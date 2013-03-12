@@ -60,7 +60,7 @@ class Salary_Components extends CI_Controller {
         $data['title'] = 'Add New Salary Component';
 
         $data['form_action'] = site_url('staffs/' . $this->staff_id . '/salary_components/save');
-        $data['link_back'] = anchor('staffs/' . $this->staff_id . '/salary_components/index', 'Back', array('class' => 'back'));
+        $data['link_back'] = anchor('staffs/' . $this->staff_id . '/salary_components/index', 'Back', array('class' => 'btn'));
 
         $data['id'] = '';
 // Component
@@ -71,7 +71,7 @@ class Salary_Components extends CI_Controller {
 
         $data['gaji_daily_value'] = array('name' => 'gaji_daily_value', 'id' => 'gaji_daily_value');
         $data['gaji_amount_value'] = array('name' => 'gaji_amount_value', 'id' => 'gaji_amount_value');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
         $data['breadcrumb'] = $this->breadcrumb->output();
         $this->load->view('staff_salary_components/frm_salary_component', $data);
     }
@@ -106,8 +106,8 @@ class Salary_Components extends CI_Controller {
 
     function replace_currency($value) {
         $current = str_replace("Rp", "", $value);
-        $$current_value = str_replace(",", "", $current);
-        return $$current_value;
+        $current_value = str_replace(",", "", $current);
+        return $current_value;
     }
 
     function save() {
