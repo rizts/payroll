@@ -8,18 +8,29 @@
             $('.currency').formatCurrency('id-ID');
         });
     });
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#preview').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 </script>
 <div class="wrap">
     <h2>Form Staff</h2>
     <?php echo $this->session->flashdata('message'); ?>
     <div class="row">
+        <?php echo form_open_multipart($form_action) . form_hidden('id', $id); ?>
         <div class="span3">
             <div class="form-signin">
-                Photo
+                <img src="<?php echo isset($staff_photo['value']) ? assets_url('upload/'.$staff_photo['value']):assets_url('images/no_photo.jpg'); ?>" alt="" id="preview" />
             </div>
-            <input type="file" name="photo"/>
+            <input type="file" name="photo" onchange="readURL(this)"/>
         </div>
-        <?php echo form_open_multipart($form_action) . form_hidden('id', $id); ?>
         <div class="span4">
             <table>
                 <tr>

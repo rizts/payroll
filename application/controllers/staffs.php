@@ -251,10 +251,22 @@ class Staffs extends CI_Controller {
         $staff->staff_cabang = $this->input->post('staff_cabang');
         $staff->staff_departement = $this->input->post('staff_departement');
         $staff->staff_jabatan = $this->input->post('staff_jabatan');
-        $staff->staff_photo = $this->input->post('staff_photo');
+        //$staff->staff_photo = $this->input->post('staff_photo');
         $staff->staff_birthdate = $this->input->post('staff_birthdate');
         $staff->staff_birthplace = $this->input->post('staff_birthplace');
         $staff->staff_sex = $this->input->post('staff_sex');
+        // upload photo
+        $config['upload_path'] = 'assets/upload';
+        $config['allowed_types'] = 'gif|jpg|png|bmp';
+        $this->load->library("upload", $config);
+        if($this->upload->do_upload("photo")){
+          $data = $this->upload->data();
+          print_r($data);
+          $staff->staff_photo = $data["file_name"];
+        }else{
+          //$this->staff_photo = "";
+          print_r($this->upload->display_errors());
+        }
 
         if ($staff->save()) {
             $this->session->set_flashdata('message', 'Staff successfully created!');
@@ -270,6 +282,15 @@ class Staffs extends CI_Controller {
 
     function update() {
         $staff = new Staff();
+        // upload photo
+        $config['upload_path'] = 'assets/upload';
+        $config['allowed_types'] = 'gif|jpg|png|bmp';
+        $this->load->library("upload", $config);
+        if($this->upload->do_upload("photo")){
+          $data = $this->upload->data();
+        }else{
+          //print_r($this->upload->display_errors());
+        }
         $staff->where('staff_id', $this->input->post('id'))
                 ->update(array(
                     'staff_nik' => $this->input->post('staff_nik'),
@@ -286,7 +307,7 @@ class Staffs extends CI_Controller {
                     'staff_cabang' => $this->input->post('staff_cabang'),
                     'staff_departement' => $this->input->post('staff_departement'),
                     'staff_jabatan' => $this->input->post('staff_jabatan'),
-                    'staff_photo' => $this->input->post('staff_photo'),
+                    'staff_photo' => $data["file_name"],
                     'staff_birthdate' => $this->input->post('staff_birthdate'),
                     'staff_birthplace' => $this->input->post('staff_birthplace'),
                     'staff_sex' => $this->input->post('staff_sex')
