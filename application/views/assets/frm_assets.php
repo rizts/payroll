@@ -1,4 +1,11 @@
 <?php get_header(); ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#date" ).datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
 <div class="wrap">
     <h2 class="rama-title">Form Asset</h2>
     <?php echo $this->session->flashdata('message'); ?>
@@ -22,7 +29,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><?php echo form_submit($btn_save).' '.$link_back; ?></td>
+            <td><?php echo form_submit($btn_save) . ' ' . $link_back; ?></td>
         </tr>
     </table>
     <?php echo form_close() ?>

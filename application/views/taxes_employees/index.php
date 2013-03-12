@@ -66,7 +66,7 @@ function HeaderLink($value, $key, $col, $dir) {
             <tr>
                 <td><?php echo $row->sp_id; ?></td>
                 <td><?php echo $row->sp_status; ?></td>
-                <td><?php echo $row->sp_ptkp; ?></td>
+                <td><?php echo rupiah($row->sp_ptkp); ?></td>
                 <td class="action_cell"><?php echo anchor('taxes_employees/edit/' . $row->sp_id, img(array("src" => assets_url('images/photon/icons/default/edit.png')))); ?></td>
                 <td class="action_cell"><?php echo anchor('taxes_employees/delete/' . $row->sp_id, img(array("src" => assets_url('images/photon/icons/default/delete-item.png'))), array('onclick' => "return confirm('Are you sure want to delete?')")); ?></td>
             </tr>

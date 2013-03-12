@@ -24,7 +24,8 @@
             <div class="row-fluid">
                 <div class="span">
                     <div class="row-fluid">
-                        <div class="span2 ac">
+                        <div class="span2 ac">                            
+                            <?php echo img('images/picture.jpg'); ?>
                             <img width="100" src="/assets/images/User-icon.png" class="thumbnail" alt="<?php echo $staff->staff_name; ?>">
                         </div>
 
@@ -200,29 +201,30 @@
                                             <table class="table table-striped">
                                                 <tbody>
                                     <?php foreach ($medicals as $medic) {
- ?>
+                                    ?>
                                                 <tr>
                                                     <td><?php echo $medic->medic_date ?></td>
                                                     <td><?php echo $medic->medic_description ?></td>
                                                 </tr>
-<?php } ?>
+                                    <?php } ?>
                                         </tbody>
                                     </table>
                                     <div class="clearfix"></div>
                                     <br>
-<?php echo anchor('staffs/' . $staff->staff_id . '/medical_histories/add', 'Add New Medicals', array('class' => 'btn btn-block btn-primary')); ?>
+                            <?php echo anchor('staffs/' . $staff->staff_id . '/medical_histories/add', 'Add New Medicals', array('class' => 'btn btn-block btn-primary')); ?>
                                         </div>
                                         <div class="tab-pane fade" id="educations">
                                             <table class="table table-striped">
                                                 <tbody>
-                                    <?php foreach ($educations as $education) { ?>
+                                    <?php foreach ($educations as $education) {
+ ?>
                                                 <tr>
                                                     <td><?php echo $education->edu_year; ?></td>
                                                     <td><?php echo $education->edu_gelar; ?></td>
                                                     <td><?php echo $education->edu_name; ?></td>
                                                     <td width="10">
                                                         <div class="btn-group">
-                                                <?php echo anchor('staffs/' . $education->staff_id . '/educations/edit/' . $education->edu_id, 'Edit', array('class' => 'btn btn-mini')); ?>
+<?php echo anchor('staffs/' . $education->staff_id . '/educations/edit/' . $education->edu_id, 'Edit', array('class' => 'btn btn-mini')); ?>
                                                 <button type="button" data-toggle="dropdown" class="btn btn-mini dropdown-toggle">
                                                     <span class="caret"></span>
                                                 </button>
@@ -233,18 +235,17 @@
                                         </td>
 
                                     </tr>
-                                    <?php } ?>
+<?php } ?>
                                         </tbody>
                                     </table>
                                     <div class="clearfix"></div>
                                     <br>
-                            <?php echo anchor('staffs/' . $staff->staff_id . '/educations/add', 'Add New Educations', array('class' => 'btn btn-block btn-primary')); ?>
+<?php echo anchor('staffs/' . $staff->staff_id . '/educations/add', 'Add New Educations', array('class' => 'btn btn-block btn-primary')); ?>
                                         </div>
                                         <div class="tab-pane fade" id="assets">
                                             <table class="table table-striped">
                                                 <tbody>
-                                    <?php foreach ($asset_details as $asset) {
-                                    ?>
+                                    <?php foreach ($asset_details as $asset) { ?>
                                                 <tr>
                                                     <td><?php echo $asset->descriptions; ?></td>
                                                     <td><?php echo $asset->assetd_status; ?></td>

@@ -11,16 +11,10 @@ class Users extends CI_Controller {
         parent::__construct();
         $this->logged_in = $this->session->userdata('logged_in_id');
         $this->load->model('User');
-        $this->output->enable_profiler(TRUE);
+//        $this->output->enable_profiler(TRUE);
     }
 
     function sign_in() {
-        $staff = new Staff();
-        $query = $staff->get_where(
-                        'staff_email', $this->input->post('email'),
-                        'staff_password', md5($this->input->post('password'))
-                )->row();
-
         $data['action'] = site_url('users/process_login');
         $data['email'] = array('name' => 'email',
             'placeholder' => 'Email',
@@ -39,12 +33,45 @@ class Users extends CI_Controller {
     }
 
     function process_login() {
-        $staff = new Staff();
-        if ($staff->_login() == TRUE) {
-            echo '<p>You have successfully logged in</p>';
+        $email = $this->input->post('email', TRUE);
+        $password = $this->input->post('password', TRUE);
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('message', '<div class="alert alert-error">' . validation_errors() . '</div>');
+            redirect('login');
         } else {
-            echo '<p>please check your account</p>';
+            # Periksa Login Untuk Administrator #
+            if ($this->check_user($email, $password) == TRUE) {
+                $userdata = array(
+                    'username' => $email,
+                    'logged_in' => TRUE
+                );
+                $this->session->set_userdata($userdata);
+                redirect('welcome');
+            } else {
+                # jika login username dan pass tidak sama #
+                //$msg = '<div class="error_login"></div>';
+                $msg = '<div class="alert alert-error">Periksa Username And Password!</div>';
+                $this->session->set_flashdata('message', $msg);
+                redirect('users/sign_in');
+            }
         }
+    }
+
+    function check_user($email, $password) {
+        $query = $this->db->get_where('staffs',
+                        array(
+                            'staff_email' => $email,
+                            'staff_password' => md5($password))
+                )->row();
+
+        return $query;
+    }
+
+    function logout() {
+        $this->session->sess_destroy();
+        redirect('users/sign_in');
     }
 
 }

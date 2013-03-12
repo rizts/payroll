@@ -4,21 +4,21 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.currency').blur(function(){
-            $('.currency').formatCurrency('id-ID');
+        $("#staff_birthdate" ).datepicker({
+            dateFormat: "yy-mm-dd"
         });
     });
     function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-      reader.onload = function (e) {
-        $('#preview').attr('src', e.target.result);
-      }
+            reader.onload = function (e) {
+                $('#preview').attr('src', e.target.result);
+            }
 
-      reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(input.files[0]);
+        }
     }
-  }
 </script>
 <div class="wrap">
     <h2>Form Staff</h2>
@@ -27,7 +27,7 @@
         <?php echo form_open_multipart($form_action) . form_hidden('id', $id); ?>
         <div class="span3">
             <div class="form-signin">
-                <img src="<?php echo isset($staff_photo['value']) ? assets_url('upload/'.$staff_photo['value']):assets_url('images/no_photo.jpg'); ?>" alt="" id="preview" />
+                <img src="<?php echo isset($staff_photo['value']) ? assets_url('upload/' . $staff_photo['value']) : assets_url('images/User-icon.png'); ?>" alt="" id="preview" />
             </div>
             <input type="file" name="photo" onchange="readURL(this)"/>
         </div>
@@ -109,15 +109,6 @@
             </table>
         </div>
         <?php echo form_close() ?>
-    </div>
-    <div class="row" style="text-align: center;">
-        <div class="span6">
-            <ul class="nav nav-tabs" id="myTab">
-                <li class="active"><a href="#general">Family</a></li>
-                <li><a href="#families">Health</a></li>
-                <li><a href="#medicals">Salary</a></li>
-            </ul>
-        </div>
     </div>
 </div>
 <?php get_footer(); ?>

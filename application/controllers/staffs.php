@@ -139,7 +139,7 @@ class Staffs extends CI_Controller {
 
 
         $data['staff_photo'] = array('name' => 'staff_photo');
-        $data['staff_birthdate'] = array('name' => 'staff_birthdate');
+        $data['staff_birthdate'] = array('name' => 'staff_birthdate', 'id' => 'staff_birthdate');
         $data['staff_birthplace'] = array('name' => 'staff_birthplace');
 
         $options_sex = array(
@@ -216,7 +216,7 @@ class Staffs extends CI_Controller {
 
 
         $data['staff_photo'] = array('name' => 'staff_photo', 'value' => $staff->staff_photo);
-        $data['staff_birthdate'] = array('name' => 'staff_birthdate', 'value' => $staff->staff_birthdate);
+        $data['staff_birthdate'] = array('name' => 'staff_birthdate', 'id' => 'staff_birthdate', 'value' => $staff->staff_birthdate);
         $data['staff_birthplace'] = array('name' => 'staff_birthplace', 'value' => $staff->staff_birthplace);
 
         $options_sex = array(
@@ -225,7 +225,8 @@ class Staffs extends CI_Controller {
         );
         $sex_selected = $staff->staff_sex;
         $data['staff_sex'] = form_dropdown('staff_sex', $options_sex, $sex_selected);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
+        $data['staff_password'] = array('name'=>'staff_password');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update Staff';
         $data['message'] = '';
@@ -255,17 +256,18 @@ class Staffs extends CI_Controller {
         $staff->staff_birthdate = $this->input->post('staff_birthdate');
         $staff->staff_birthplace = $this->input->post('staff_birthplace');
         $staff->staff_sex = $this->input->post('staff_sex');
+        $staff->staff_password = md5('qwerty');
         // upload photo
         $config['upload_path'] = 'assets/upload';
         $config['allowed_types'] = 'gif|jpg|png|bmp';
         $this->load->library("upload", $config);
-        if($this->upload->do_upload("photo")){
-          $data = $this->upload->data();
-          print_r($data);
-          $staff->staff_photo = $data["file_name"];
-        }else{
-          //$this->staff_photo = "";
-          print_r($this->upload->display_errors());
+        if ($this->upload->do_upload("photo")) {
+            $data = $this->upload->data();
+            print_r($data);
+            $staff->staff_photo = $data["file_name"];
+        } else {
+            //$this->staff_photo = "";
+            print_r($this->upload->display_errors());
         }
 
         if ($staff->save()) {
@@ -286,10 +288,10 @@ class Staffs extends CI_Controller {
         $config['upload_path'] = 'assets/upload';
         $config['allowed_types'] = 'gif|jpg|png|bmp';
         $this->load->library("upload", $config);
-        if($this->upload->do_upload("photo")){
-          $data = $this->upload->data();
-        }else{
-          //print_r($this->upload->display_errors());
+        if ($this->upload->do_upload("photo")) {
+            $data = $this->upload->data();
+        } else {
+            //print_r($this->upload->display_errors());
         }
         $staff->where('staff_id', $this->input->post('id'))
                 ->update(array(
@@ -307,10 +309,11 @@ class Staffs extends CI_Controller {
                     'staff_cabang' => $this->input->post('staff_cabang'),
                     'staff_departement' => $this->input->post('staff_departement'),
                     'staff_jabatan' => $this->input->post('staff_jabatan'),
-                    'staff_photo' => $data["file_name"],
+//                    'staff_photo' => $data["file_name"],
                     'staff_birthdate' => $this->input->post('staff_birthdate'),
                     'staff_birthplace' => $this->input->post('staff_birthplace'),
-                    'staff_sex' => $this->input->post('staff_sex')
+                    'staff_sex' => $this->input->post('staff_sex'),
+                    'staff_password' => md5($this->input->post('staff_password'))
                         )
         );
         $this->session->set_flashdata('message', 'Staff Update successfuly.');

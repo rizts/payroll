@@ -15,6 +15,34 @@ class Assets extends CI_Controller {
 
     public function index($offset = 0) {
         $asset_list = new Asset();
+        $data['staff'] = new Staff();
+
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "asset_name";
+                break;
+            case "2":
+                $data['col'] = "asset_status";
+                break;
+            case "3":
+                $data['col'] = "staff_id";
+                break;
+            case "4":
+                $data['col'] = "date";
+                break;
+            case "5":
+                $data['col'] = "asset_id";
+                break;
+            default:
+                $data['col'] = "asset_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
         $total_rows = $asset_list->count();
         $data['title'] = "Assets";
         $data['btn_add'] = anchor('assets/add', 'Add New', array('class' => 'btn btn-primary'));
@@ -23,7 +51,7 @@ class Assets extends CI_Controller {
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $asset_list->order_by('asset_name', 'ASC');
+        $asset_list->order_by($data['col'], $data['dir']);
         $data['asset_list'] = $asset_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("assets/index");
@@ -56,7 +84,7 @@ class Assets extends CI_Controller {
         $staff_selected = '';
         $data['staff_id'] = form_dropdown('staff_id', $list_staff, $staff_selected);
 
-        $data['date'] = array('name' => 'date');
+        $data['date'] = array('name' => 'date', 'id' => 'date');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
 
         $this->load->view('assets/frm_assets', $data);
@@ -81,7 +109,7 @@ class Assets extends CI_Controller {
         $data['staff_id'] = form_dropdown('staff_id', $list_staff, $staff_selected);
 
 
-        $data['date'] = array('name' => 'date', 'value' => $rs->date);
+        $data['date'] = array('name' => 'date', 'id' => 'date', 'value' => $rs->date);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update';

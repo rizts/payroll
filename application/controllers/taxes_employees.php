@@ -10,6 +10,7 @@ class Taxes_Employees extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Tax_Employee');
+        $this->load->helper('rupiah');
     }
 
     public function index($offset = 0) {

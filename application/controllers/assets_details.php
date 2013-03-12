@@ -21,9 +21,37 @@ class Assets_Details extends CI_Controller {
 
     public function index($offset = 0) {
         $asset_detail = new Asset_Detail();
-        $asset_detail->where('asset_id', $this->asset_id)->order_by('date', 'ASC');
+        $data['staff'] = new Staff();
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "date";
+                break;
+            case "2":
+                $data['col'] = "staff_id";
+                break;
+            case "3":
+                $data['col'] = "descriptions";
+                break;
+            case "4":
+                $data['col'] = "assetd_status";
+                break;
+            case "5":
+                $data['col'] = "assetd_id";
+                break;
+            default:
+                $data['col'] = "assetd_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
+        $asset_detail->where('asset_id', $this->asset_id)->order_by($data['col'], $data['dir']);
 
         $total_rows = $asset_detail->count();
+        $data['asset_id'] = $this->asset_id;
         $data['title'] = "Assets Details";
         $data['btn_add'] = anchor('assets/' . $this->asset_id . '/details/add', 'Add New', array('class' => 'btn btn-primary'));
         $data['btn_home'] = anchor('assets/', 'Home', array('class' => 'btn'));
@@ -32,6 +60,7 @@ class Assets_Details extends CI_Controller {
 
         $data['assets_details'] = $asset_detail
                         ->where('asset_id', $this->asset_id)
+                        ->order_by($data['col'], $data['dir'])
                         ->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url('assets/' . $this->asset_id . '/details/index');
