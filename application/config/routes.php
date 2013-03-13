@@ -101,6 +101,15 @@ $route["salaries/(:num)/sub_salaries/delete/(:num)"] = "sub_salaries/delete";
 $route["salaries/(:num)/sub_salaries/save"] = "sub_salaries/save";
 $route["salaries/(:num)/sub_salaries/update"] = "sub_salaries/update";
 
+//User role detail
+$route["users/roles/(:num)/role_details/index"] = "role_details/index";
+$route["users/roles/(:num)/role_details/index/(:num)"] = "role_details/index";
+$route["users/roles/(:num)/role_details/add"] = "role_details/add";
+$route["users/roles/(:num)/role_details/edit"] = "role_details/edit";
+$route["users/roles/(:num)/role_details/delete"] = "role_details/delete";
+$route["users/roles/(:num)/role_details/save"] = "role_details/save";
+$route["users/roles/(:num)/role_details/update"] = "role_details/update";
+
 $route['404_override'] = '';
 
 

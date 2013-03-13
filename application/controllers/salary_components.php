@@ -19,7 +19,7 @@ class Salary_Components extends CI_Controller {
         $this->staff_id = $this->uri->segment(2);
         $this->uri_segment = $this->uri->segment(5);
         $this->id = $this->uri->segment(5);
-//        $this->output->enable_profiler(TRUE);
+        $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
     public function index($offset = 0) {

@@ -10,6 +10,7 @@ class Maritals_Status extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Marital');
+        $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
     public function index($offset = 0) {

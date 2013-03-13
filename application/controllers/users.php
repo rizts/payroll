@@ -6,17 +6,18 @@ if (!defined('BASEPATH'))
 class Users extends CI_Controller {
 
     var $logged_in;
+    private $limit = 10;
 
     function __construct() {
         parent::__construct();
-//        $this->load->model('User');
-//        $this->output->enable_profiler(TRUE);
+        $this->load->model('User');
+//        $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
     function sign_in() {
         $data['action'] = site_url('users/process_login');
-        $data['email'] = array('name' => 'email',
-            'placeholder' => 'Email',
+        $data['username'] = array('name' => 'username',
+            'placeholder' => 'Username',
             'class' => 'input-block-level'
         );
         $data['password'] = array('name' => 'password',
@@ -32,18 +33,18 @@ class Users extends CI_Controller {
     }
 
     function process_login() {
-        $email = $this->input->post('email', TRUE);
+        $username = $this->input->post('username', TRUE);
         $password = $this->input->post('password', TRUE);
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('message', '<div class="alert alert-error">' . validation_errors() . '</div>');
             redirect('login');
         } else {
             # Periksa Login Untuk Administrator #
-            if ($this->check_user($email, $password) == TRUE) {
+            if ($this->check_user($username, $password) == TRUE) {
                 $userdata = array(
-                    'username' => $email,
+                    'username' => $username,
                     'logged_in' => TRUE
                 );
                 $this->session->set_userdata($userdata);
@@ -58,14 +59,112 @@ class Users extends CI_Controller {
         }
     }
 
-    function check_user($email, $password) {
-        $query = $this->db->get_where('staffs',
+    function check_user($username, $password) {
+        $query = $this->db->get_where('users',
                         array(
-                            'staff_email' => $email,
-                            'staff_password' => md5($password))
+                            'username' => $username,
+                            'password' => md5($password))
                 )->row();
 
         return $query;
+    }
+
+    function add_role() {
+        $data['action'] = site_url('users/save_role');
+        $data['role_name'] = array('name' => 'role_name');
+        $data['btn_save'] = array('name' => 'btn_save',
+            'value' => 'Save',
+            'class' => 'btn btn-primary btn-large'
+        );
+
+        $this->load->view('users/add_role', $data);
+    }
+
+    function edit_role($id) {
+        $role = new Role();
+        $row = $role->where('role_id', $id)->get();
+        $data['action'] = site_url('users/update_role/' . $id);
+        $data['role_name'] = array('name' => 'role_name', 'value' => $row->role_name);
+        $data['btn_save'] = array('name' => 'btn_save',
+            'value' => 'Update',
+            'class' => 'btn btn-primary btn-large'
+        );
+
+        $this->load->view('users/add_role', $data);
+    }
+
+    function update_role($id) {
+        $role = new Role();
+        $role->where('role_id', $id)
+                ->update('role_name', $this->input->post('role_name'));
+
+        $this->session->set_flashdata('message', 'Role Update successfuly.');
+        redirect('users/roles');
+    }
+
+    function delete_role($id) {
+        $role = new Role();
+        $role->_delete($id);
+
+        $this->session->set_flashdata('message', 'Role successfully deleted!');
+        redirect('users/roles');
+    }
+
+    function save_role() {
+        $role = new Role();
+        $role->role_name = $this->input->post('role_name');
+        if ($role->save()) {
+            $this->session->set_flashdata('message', 'Role successfully created!');
+            redirect('users/roles');
+        } else {
+            // Failed
+            $role->error_message('custom', 'Role Name required');
+            $msg = $role->error->custom;
+            $this->session->set_flashdata('message', $msg);
+            redirect('users/add_role');
+        }
+    }
+
+    function roles() {
+        $role = new Role();
+        $total_rows = $role->count();
+
+        switch ($this->input->get('c')) {
+            case "1":
+                $data['col'] = "role_name";
+                break;
+            case "2":
+                $data['col'] = "role_id";
+                break;
+            default:
+                $data['col'] = "role_id";
+        }
+
+        if ($this->input->get('d') == "1") {
+            $data['dir'] = "DESC";
+        } else {
+            $data['dir'] = "ASC";
+        }
+
+        $data['title'] = "Roles";
+        $data['btn_add'] = anchor('users/add_role', 'Add New', "class='btn btn-primary'");
+        $data['btn_home'] = anchor(base_url(), 'Home', "class='btn btn-home'");
+
+        $uri_segment = 3;
+        $offset = $this->uri->segment($uri_segment);
+
+        $role->order_by($data['col'], $data['dir']);
+
+        $data['role_list'] = $role->get($this->limit, $offset)->all;
+
+        $config['base_url'] = site_url("users/roles");
+        $config['total_rows'] = $total_rows;
+        $config['per_page'] = $this->limit;
+        $config['uri_segment'] = $uri_segment;
+        $this->pagination->initialize($config);
+        $data['pagination'] = $this->pagination->create_links();
+
+        $this->load->view('users/index_roles', $data);
     }
 
     function logout() {

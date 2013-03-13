@@ -10,7 +10,7 @@ class Employees_Status extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Employee_Status');
-//        $this->output->enable_profiler(TRUE);
+        $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
     public function index($offset = 0) {
@@ -34,7 +34,7 @@ class Employees_Status extends CI_Controller {
 
         $total_rows = $es_list->count();
         $data['title'] = "Employees Status";
-        $data['btn_add'] = anchor('employees_status/add', 'Add New', array("class"=>"btn btn-primary"));
+        $data['btn_add'] = anchor('employees_status/add', 'Add New', array("class" => "btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
@@ -56,11 +56,11 @@ class Employees_Status extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Employee Status';
         $data['form_action'] = site_url('employees_status/save');
-        $data['link_back'] = anchor('employees_status/', 'Back', array("class"=>"btn"));
+        $data['link_back'] = anchor('employees_status/', 'Back', array("class" => "btn"));
 
         $data['id'] = '';
         $data['sk_name'] = array('name' => 'sk_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class'=>'btn btn-primary');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
 
         $this->load->view('employees_status/frm_employees_status', $data);
     }
@@ -71,12 +71,12 @@ class Employees_Status extends CI_Controller {
         $rs = $es->where('sk_id', $id)->get();
         $data['id'] = $rs->sk_id;
         $data['sk_name'] = array('name' => 'sk_name', 'value' => $rs->sk_name);
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class'=>'btn btn-primary');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('employees_status/update');
-        $data['link_back'] = anchor('employees_status/', 'Back', array("class"=>"btn"));
+        $data['link_back'] = anchor('employees_status/', 'Back', array("class" => "btn"));
 
         $this->load->view('employees_status/frm_employees_status', $data);
     }

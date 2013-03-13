@@ -18,7 +18,7 @@ class Staffs extends CI_Controller {
         $this->load->model('Employee_Status');
         $this->load->model('Tax_Employee');
         $this->load->model('Family');
-//        $this->output->enable_profiler(TRUE);
+        $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
     public function index($offset = 0) {
@@ -225,7 +225,7 @@ class Staffs extends CI_Controller {
         );
         $sex_selected = $staff->staff_sex;
         $data['staff_sex'] = form_dropdown('staff_sex', $options_sex, $sex_selected);
-        $data['staff_password'] = array('name'=>'staff_password');
+        $data['staff_password'] = array('name' => 'staff_password');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
 
         $data['title'] = 'Update Staff';

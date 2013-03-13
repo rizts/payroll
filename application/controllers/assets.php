@@ -11,6 +11,7 @@ class Assets extends CI_Controller {
         parent::__construct();
         $this->load->model('Asset');
         $this->load->model('Asset_Detail');
+        $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
     public function index($offset = 0) {

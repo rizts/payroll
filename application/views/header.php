@@ -82,6 +82,8 @@
                             <li><?php echo anchor('salaries', 'Salary'); ?></li>
                             <li><?php echo anchor('staffs', 'Staff'); ?></li>
                             <li><?php echo anchor('assets', 'Assets'); ?></li>
+                            <li><?php echo anchor('users/roles', 'Roles'); ?></li>
+                            <li><?php echo anchor('users/logout', 'Logout'); ?></li>
                         </ul>
                     </div>
                 </li>

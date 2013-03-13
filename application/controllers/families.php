@@ -17,6 +17,7 @@ class Families extends CI_Controller {
         $this->staff_id = $this->uri->segment(2);
         $this->uri_segment = $this->uri->segment(5);
         $this->family_id = $this->uri->segment(5);
+        $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
     public function index($offset = 0) {

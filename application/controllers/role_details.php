@@ -3,56 +3,39 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Branches extends CI_Controller {
+class Role_Details extends CI_Controller {
 
     private $limit = 10;
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Branch');
+        $this->load->model('Role_Detail');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
     public function index($offset = 0) {
-        $branch_list = new Branch();
-        $total_rows = $branch_list->count();
+        $role_detail = new Role_Detail();
+        $total_rows = $role_detail->count();
 
-        switch ($this->input->get('c')) {
-            case "1":
-                $data['col'] = "branch_name";
-                break;
-            case "2":
-                $data['col'] = "branch_id";
-                break;
-            default:
-                $data['col'] = "branch_id";
-        }
-
-        if ($this->input->get('d') == "1") {
-            $data['dir'] = "DESC";
-        } else {
-            $data['dir'] = "ASC";
-        }
-
-        $data['title'] = "Branch";
-        $data['btn_add'] = anchor('branches/add', 'Add New', "class='btn btn-primary'");
+        $data['title'] = "Role Details";
+        $data['btn_add'] = anchor('role_details/add', 'Add New', "class='btn btn-primary'");
         $data['btn_home'] = anchor(base_url(), 'Home', "class='btn btn-home'");
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $branch_list->order_by($data['col'], $data['dir']);
+        $role_detail->order_by('roled_id', 'DESC');
 
-        $data['branch_list'] = $branch_list->get($this->limit, $offset)->all;
+        $data['branch_list'] = $role_detail->get($this->limit, $offset)->all;
 
-        $config['base_url'] = site_url("branches/index");
+        $config['base_url'] = site_url("role_details/index");
         $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->limit;
         $config['uri_segment'] = $uri_segment;
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
 
-        $this->load->view('branches/index', $data);
+        $this->load->view('role_details/index', $data);
     }
 
     function add() {
