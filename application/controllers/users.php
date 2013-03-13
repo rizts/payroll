@@ -9,8 +9,7 @@ class Users extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->logged_in = $this->session->userdata('logged_in_id');
-        $this->load->model('User');
+//        $this->load->model('User');
 //        $this->output->enable_profiler(TRUE);
     }
 

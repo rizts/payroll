@@ -125,21 +125,22 @@ function HeaderLink($value, $key, $col, $dir) {
     </table>
     <div class="clearfix"></div>
     <br>
-    <div class="well">
+    <?php echo $pagination; ?>
+<!--    <div class="well">
         <div class="row-fluid">
             <div class="span2">
-                <?php echo $btn_add . ' ' . $btn_home; ?>
+                <?php //echo $btn_add . ' ' . $btn_home; ?>
             </div>
             <div class="span10" style="margin-top: -23px;">
                 <div class="pagination pagination-right">
                     <ul>
-                        <?php echo $pagination; ?>
+                        
                     </ul>
                 </div>
 
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
 
 <?php get_footer(); ?>
