@@ -14,13 +14,13 @@
                 alert(event.title + ' was moved ' + delta + ' days\n' +
                     '(should probably update your database)');
             }
-//            loading: function(bool) {
-//                if (bool) {
-//                    $('#loading').show();
-//                }else{
-//                    $('#loading').hide();
-//                }
-//            }
+            //            loading: function(bool) {
+            //                if (bool) {
+            //                    $('#loading').show();
+            //                }else{
+            //                    $('#loading').hide();
+            //                }
+            //            }
         });
     });
 
@@ -70,6 +70,20 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+                        <div class="section section-small">
+                            <div class="section-header">
+                                <h5>Statistic</h5>
+                            </div>
+                            <div class="section-content">
+                                <p>
+                                in progress
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="span6">
