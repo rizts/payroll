@@ -101,7 +101,7 @@
         </div>
     </div>
     <div class="well-small">
-        <?php echo form_submit($btn_save); ?>
+        <?php echo form_submit($btn_save).' '.$link_back; ?>
     </div>
 </form>
 </div>
