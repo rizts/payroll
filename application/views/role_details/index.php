@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <div class="wrap">
     <h2 class="rama-title">Listing Role Detail</h2>
-    <div class="float-right"><?php echo $btn_add ?></div>
+    <div class="float-right"><?php echo $link_back.' '.$btn_add ?></div>
     <?php echo $this->session->flashdata('message'); ?>
     <table class="table boo-table table-bordered table-condensed table-hover">
         <thead>

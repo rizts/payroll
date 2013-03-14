@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 
 class Role_Details extends CI_Controller {
 
-    private $limit = 10;
+    private $limit = 20;
     var $role_id;
     var $uri_segment;
     var $roled_id;
@@ -26,11 +26,11 @@ class Role_Details extends CI_Controller {
         $data['title'] = "Role Details";
         $data['role_id'] = $this->role_id;
         $data['btn_add'] = anchor('users/roles/' . $this->role_id . '/role_details/add', 'Add New', "class='btn btn-primary'");
-        $data['btn_home'] = anchor(base_url(), 'Home', "class='btn btn-home'");
+        $data['link_back'] = anchor('users/roles/', 'Back', array('class' => 'btn'));
 
         $offset = $this->uri->segment($this->uri_segment);
 
-        $role_detail->order_by('roled_id', 'DESC');
+        $role_detail->where('role_id', $this->role_id)->order_by('roled_id', 'DESC');
 
         $data['roled_list'] = $role_detail->get($this->limit, $offset)->all;
 
@@ -46,11 +46,31 @@ class Role_Details extends CI_Controller {
 
     function add() {
         $data['title'] = 'Add New Role';
-        $data['form_action'] = site_url('branches/save');
-        $data['link_back'] = anchor('branches/', 'Back', array('class' => 'btn'));
+        $data['form_action'] = site_url('users/roles/' . $this->role_id . '/role_details/save');
+        $data['link_back'] = anchor('users/roles/', 'Back', array('class' => 'btn'));
 
         $data['id'] = '';
         $data['roled_module'] = array('name' => 'roled_module');
+
+        $data['module_1'] = array('name' => 'module_1', 'id' => 'module_1', 'value' => 'Branch'); /* Branch */
+        $data['module_2'] = array('name' => 'module_2', 'id' => 'module_2', 'value' => 'Departement'); /* Departement */
+        $data['module_3'] = array('name' => 'module_3', 'id' => 'module_3', 'value' => 'Tax_Employee'); /* Tax Employee */
+        $data['module_4'] = array('name' => 'module_4', 'id' => 'module_4', 'value' => 'Employee_Status'); /* Employee Status */
+        $data['module_5'] = array('name' => 'module_5', 'id' => 'module_5', 'value' => 'Marital_Status'); /* Marital Status */
+        $data['module_6'] = array('name' => 'module_6', 'id' => 'module_6', 'value' => 'Title'); /* Title */
+        $data['module_7'] = array('name' => 'module_7', 'id' => 'module_7', 'value' => 'Component'); /* Component */
+        $data['module_8'] = array('name' => 'module_8', 'id' => 'module_8', 'value' => 'Salary'); /* Salary */
+        $data['module_9'] = array('name' => 'module_9', 'id' => 'module_9', 'value' => 'Staff'); /* Staff */
+        $data['module_10'] = array('name' => 'module_10', 'id' => 'module_10', 'value' => 'Assets'); /* Assets */
+        $data['module_11'] = array('name' => 'module_11', 'id' => 'module_11', 'value' => 'Users'); /* User */
+        $data['module_12'] = array('name' => 'module_12', 'id' => 'module_12', 'value' => 'Role_Details'); /* Roled */
+
+
+        $data['privileges_1'] = array('name' => 'privileges_1', 'id' => 'privileges_1', 'value' => '1'); /* INSERT */
+        $data['privileges_2'] = array('name' => 'privileges_2', 'id' => 'privileges_2', 'value' => '1'); /* UPDATE */
+        $data['privileges_3'] = array('name' => 'privileges_3', 'id' => 'privileges_3', 'value' => '1'); /* DELETE */
+        $data['privileges_4'] = array('name' => 'privileges_4', 'id' => 'privileges_4', 'value' => '1'); /* APPROVAL */
+
         $data['roled_add'] = array('name' => 'roled_add');
         $data['roled_edit'] = array('name' => 'roled_edit');
         $data['roled_delete'] = array('name' => 'roled_delete');
@@ -76,18 +96,20 @@ class Role_Details extends CI_Controller {
     }
 
     function save() {
-        $branch = new Branch();
-        $branch->branch_name = $this->input->post('branch_name');
-        if ($branch->save()) {
-            $this->session->set_flashdata('message', 'Branch successfully created!');
-            redirect('branches/');
-        } else {
-            // Failed
-            $branch->error_message('custom', 'Branch Name required');
-            $msg = $branch->error->custom;
-            $this->session->set_flashdata('message', $msg);
-            redirect('branches/add');
+        $roled = new Role_Detail();
+        for ($x = 1; $x <= 12; $x++) {
+            if (isset($_POST['module_' . $x])) {
+                $roled->role_id = $this->role_id;
+                $roled->roled_module = $this->input->post('module_' . $x);
+                $roled->roled_add = $this->input->post('privileges_1');
+                $roled->roled_edit = $this->input->post('privileges_2');
+                $roled->roled_delete = $this->input->post('privileges_3');
+                $roled->roled_approval = $this->input->post('privileges_4');
+                $roled->save();
+            }
         }
+
+        redirect('users/roles/' . $this->role_id . '/role_details/index');
     }
 
     function update() {
