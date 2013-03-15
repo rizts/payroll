@@ -19,6 +19,16 @@ class Role extends DataMapper {
         $this->db->delete($this->table);
     }
 
+    function list_drop() {
+        $role = new Role();
+        $role->get();
+        foreach ($role as $row) {
+            $data[''] = '[ User Role ]';
+            $data[$row->role_id] = $row->role_name;
+        }
+        return $data;
+    }
+
 }
 
 ?>

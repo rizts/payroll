@@ -4,12 +4,16 @@ Class User extends DataMapper {
 
     var $table = 'users';
     var $validation = array(
-        'first_name' => array(
-            'label' => 'First Name',
+        'username' => array(
+            'label' => 'Username',
             'rules' => array('required')
         ),
-        'last_name' => array(
-            'label' => 'Last Name',
+        'staff_id' => array(
+            'label' => 'Staff ID',
+            'rules' => array('required')
+        ),
+        'role_id' => array(
+            'label' => 'Role ID',
             'rules' => array('required')
         ),
         'password' => array(
@@ -17,11 +21,6 @@ Class User extends DataMapper {
             'rules' => array('required', 'encrypt'),
             'type' => 'password'
         )
-//        'confirm_password' => array(
-//            'label' => 'Confirm Password',
-//            'rules' => array('required', 'encrypt', 'matches' => 'password', 'min_length' => 3, 'max_length' => 40),
-//            'type' => 'password'
-//            )
     );
 
     function __construct() {

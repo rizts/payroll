@@ -14,6 +14,30 @@ class Users extends CI_Controller {
 //        $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
+    function index() {
+        $user = new User();
+        $total_rows = $user->count();
+        $data['title'] = "Users";
+        $data['btn_add'] = anchor('users/sign_up', 'Add New', "class='btn btn-primary'");
+        $data['btn_home'] = anchor(base_url(), 'Home', "class='btn btn-home'");
+
+        $uri_segment = 3;
+        $offset = $this->uri->segment($uri_segment);
+
+        $user->order_by('username', 'ASC');
+
+        $data['user_list'] = $user->get($this->limit, $offset)->all;
+
+        $config['base_url'] = site_url("users/index");
+        $config['total_rows'] = $total_rows;
+        $config['per_page'] = $this->limit;
+        $config['uri_segment'] = $uri_segment;
+        $this->pagination->initialize($config);
+        $data['pagination'] = $this->pagination->create_links();
+
+        $this->load->view('users/index', $data);
+    }
+
     function sign_in() {
         $data['action'] = site_url('users/process_login');
         $data['username'] = array('name' => 'username',
@@ -30,6 +54,35 @@ class Users extends CI_Controller {
         );
 
         $this->load->view('users/sign_in', $data);
+    }
+
+    function sign_up() {
+        // Staffs
+        $staff = new Staff();
+        $list_staff = $staff->list_drop();
+        $staff_selected = '';
+        $data['staff_id'] = form_dropdown('staff_id', $list_staff, $staff_selected);
+
+        // Role
+        $role = new Role();
+        $list_role = $role->list_drop();
+        $role_selected = '';
+        $data['role_id'] = form_dropdown('role_id', $list_role, $role_selected);
+
+        $data['username'] = array('name' => 'username',
+            'placeholder' => 'Username',
+            'class' => 'input-block-level'
+        );
+        $data['password'] = array('name' => 'password',
+            'placeholder' => 'password',
+            'class' => 'input-block-level'
+        );
+        $data['btn_sign_up'] = array('name' => 'btn_sign_up',
+            'value' => 'Sign Up',
+            'class' => 'btn btn-primary btn-large'
+        );
+
+        $this->load->view('users/sign_up', $data);
     }
 
     function process_login() {
@@ -165,6 +218,23 @@ class Users extends CI_Controller {
         $data['pagination'] = $this->pagination->create_links();
 
         $this->load->view('users/index_roles', $data);
+    }
+
+    function save_user() {
+        $user = new User();
+        $user->staff_id = $this->input->post('staff_id');
+        $user->role_id = $this->input->post('role_id');
+        $user->username = $this->input->post('username');
+        $user->password = md5($this->input->post('password'));
+        $user->created_at = date('c');
+        $user->updated_at = date('c');
+
+        if ($user->save()) {
+            $this->session->set_flashdata('message', 'Role Update successfuly.');
+            redirect('users/index');
+        } else {
+            
+        }
     }
 
     function logout() {
