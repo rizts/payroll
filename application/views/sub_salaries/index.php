@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 <?php
+
 function HeaderLink($value, $key, $salary_id, $col, $dir) {
     $out = "<a href=\"" . site_url('salaries/' . $salary_id . '/sub_salaries/index') . "?c=";
     //set column query string value
@@ -77,7 +78,12 @@ function HeaderLink($value, $key, $salary_id, $col, $dir) {
             </tr>
         <?php } ?>
     </table>
+    <div class="clearfix"></div>
     <br>
-    <?php echo $pagination; ?>
+    <div class="pagination pagination-right">
+        <ul>
+            <?php echo $pagination; ?>
+        </ul>
     </div>
+</div>
 <?php get_footer(); ?>

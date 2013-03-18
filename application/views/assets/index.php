@@ -72,7 +72,6 @@ function HeaderLink($value, $key, $col, $dir) {
         <?php
         foreach ($asset_list as $row) {
             $row_staff = $staff->where('staff_id', $row->staff_id)->get();
-        
         ?>
             <tr>
                 <td><?php echo $row->asset_id; ?></td>
@@ -96,7 +95,12 @@ function HeaderLink($value, $key, $col, $dir) {
             </tr>
         <?php } ?>
     </table>
+    <div class="clearfix"></div>
     <br>
-    <?php echo $pagination; ?>
+    <div class="pagination pagination-right">
+        <ul>
+            <?php echo $pagination; ?>
+        </ul>
     </div>
+</div>
 <?php get_footer(); ?>

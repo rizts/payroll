@@ -72,8 +72,13 @@ function HeaderLink($value, $key, $col, $dir) {
             </tr>
         <?php } ?>
     </table>
+    <div class="clearfix"></div>
     <br>
-    <?php echo $pagination; ?>
+    <div class="pagination pagination-right">
+        <ul>
+            <?php echo $pagination; ?>
+        </ul>
     </div>
+</div>
 
 <?php get_footer(); ?>

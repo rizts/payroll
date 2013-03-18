@@ -27,10 +27,12 @@
             }
         ?>
         </table>
-        <br>
-    <?php echo $pagination; ?>
-            <br>
-            <br>
-    <?php echo $btn_add . " - " . $btn_home; ?>
-        </div>
+        <div class="clearfix"></div>
+        <br>    
+        <div class="pagination pagination-right">    
+            <ul>    
+            <?php echo $pagination; ?>
+        </ul>
+    </div>
+</div>
 <?php get_footer(); ?>

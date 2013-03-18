@@ -6,10 +6,6 @@ if (!defined('BASEPATH'))
 class Departments extends CI_Controller {
 
     private $limit = 10;
-    var $add;
-    var $edit;
-    var $delete;
-    var $aproval;
 
     public function __construct() {
         parent::__construct();

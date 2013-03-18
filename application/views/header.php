@@ -5,6 +5,7 @@
         <title>Payroll</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/application.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/fullcalendar.css"/>
+
         <?php
         echo load_css(array(
             "css_compiled/photon-min.css",
@@ -60,7 +61,7 @@
 
         <script src="<?php echo base_url(); ?>assets/js/fullcalendar/fullcalendar.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/js/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>                
-
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/docs.css"/>
     </head>
     <body>
         <div class="nav-fixed-left">
@@ -84,7 +85,7 @@
                             <li><?php echo anchor('assets', 'Assets'); ?></li>
                             <li><?php echo anchor('users/index', 'Users'); ?></li>
                             <li><?php echo anchor('users/roles', 'Roles'); ?></li>
-                            <li><?php echo anchor('users/logout', 'Logout ('.$this->session->userdata('username').')'); ?></li>
+                            <li><?php echo anchor('users/logout', 'Logout (' . $this->session->userdata('username') . ')'); ?></li>
                         </ul>
                     </div>
                 </li>

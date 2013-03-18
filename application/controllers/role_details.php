@@ -35,7 +35,7 @@ class Role_Details extends CI_Controller {
 
         $data['roled_list'] = $role_detail->get($this->limit, $offset)->all;
 
-        $config['base_url'] = site_url("users/roles/' . $this->role_id . '/role_details/add");
+        $config['base_url'] = site_url('users/roles/' . $this->role_id . '/role_details/index');
         $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->limit;
         $config['uri_segment'] = $this->uri_segment;

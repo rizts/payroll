@@ -78,14 +78,18 @@ function HeaderLink($value, $key, $asset_id, $col, $dir) {
                 <td><?php echo $row->descriptions; ?></td>
                 <td><?php echo $row->assetd_status == 1 ? 'Enable' : 'Disable'; ?></td>
                 <td>
-<?php echo anchor('assets/' . $row->asset_id . '/details/edit/' . $row->assetd_id, 'Edit'); ?> |
+                <?php echo anchor('assets/' . $row->asset_id . '/details/edit/' . $row->assetd_id, 'Edit'); ?> |
                 <?php echo anchor('assets/' . $row->asset_id . '/details/delete/' . $row->assetd_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
             </td>
         </tr>
-<?php } ?>
-    </table>
-
-    <br>
-<?php echo $pagination; ?>
+        <?php } ?>
+        </table>
+        <div class="clearfix"></div>
+        <br>
+        <div class="pagination pagination-right">
+            <ul>
+            <?php echo $pagination; ?>
+        </ul>
     </div>
+</div>
 <?php get_footer(); ?>

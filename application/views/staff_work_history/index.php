@@ -1,8 +1,9 @@
 <?php get_header(); ?>
 <div class="wrap">
-
     <?php echo $breadcrumb; ?>
-    <h2>Listing Work History</h2> 
+    <h2 class="rama-title">Listing Work History</h2>
+    <div class="float-right"><?php echo $btn_add ?></div>
+
     <?php echo $this->session->flashdata('message'); ?>
     <table class="table boo-table table-bordered table-condensed table-hover">
         <thead>
@@ -29,10 +30,12 @@
             }
         ?>
         </table>
+        <div class="clearfix"></div>
         <br>
-    <?php echo $pagination; ?>
-            <br>
-            <br>
-    <?php echo $btn_add . " - " . $btn_home; ?>
-        </div>
+        <div class="pagination pagination-right">
+            <ul>
+            <?php echo $pagination; ?>
+        </ul>
+    </div>
+</div>
 <?php get_footer(); ?>
