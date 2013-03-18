@@ -10,6 +10,9 @@ class Employees_Status extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Employee_Status');
+        $this->sess_username = $this->session->userdata('username');
+        $this->sess_role_id = $this->session->userdata('sess_role_id');
+        $this->sess_staff_id = $this->session->userdata('sess_staff_id');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
@@ -54,6 +57,8 @@ class Employees_Status extends CI_Controller {
     }
 
     function add() {
+        $this->filter_access('Employee_Status', 'roled_add', 'employees_status/index');
+        
         $data['title'] = 'Add New Employee Status';
         $data['form_action'] = site_url('employees_status/save');
         $data['link_back'] = anchor('employees_status/', 'Back', array("class" => "btn"));
@@ -66,8 +71,9 @@ class Employees_Status extends CI_Controller {
     }
 
     function edit($id) {
+        $this->filter_access('Employee_Status', 'roled_edit', 'employees_status/index');
+        
         $es = new Employee_Status();
-
         $rs = $es->where('sk_id', $id)->get();
         $data['id'] = $rs->sk_id;
         $data['sk_name'] = array('name' => 'sk_name', 'value' => $rs->sk_name);
@@ -82,6 +88,8 @@ class Employees_Status extends CI_Controller {
     }
 
     function save() {
+        $this->filter_access('Employee_Status', 'roled_add', 'employees_status/index');
+        
         $es = new Employee_Status();
         $es->sk_name = $this->input->post('sk_name');
         if ($es->save()) {
@@ -97,6 +105,8 @@ class Employees_Status extends CI_Controller {
     }
 
     function update() {
+        $this->filter_access('Employee_Status', 'roled_edit', 'employees_status/index');
+        
         $es = new Employee_Status();
         $es->where('sk_id', $this->input->post('id'))
                 ->update('sk_name', $this->input->post('sk_name'));
@@ -106,10 +116,23 @@ class Employees_Status extends CI_Controller {
     }
 
     function delete($id) {
+        $this->filter_access('Employee_Status', 'roled_delete', 'employees_status/index');
+        
         $es = new Employee_Status();
         $es->_delete($id);
         $this->session->set_flashdata('message', 'Employee Status successfully deleted!');
         redirect('employees_status/');
+    }
+
+    function filter_access($module, $field, $page) {
+        $user = new User();
+        $status_access = $user->get_access($this->sess_role_id, $module, $field);
+
+        if ($status_access == false) {
+            $msg = '<div class="alert alert-error">You do not have access to this page, please contact administrator</div>';
+            $this->session->set_flashdata('message', $msg);
+            redirect($page);
+        }
     }
 
 }

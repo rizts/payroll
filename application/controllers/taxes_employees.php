@@ -6,11 +6,18 @@ if (!defined('BASEPATH'))
 class Taxes_Employees extends CI_Controller {
 
     private $limit = 10;
+    var $add;
+    var $edit;
+    var $delete;
+    var $aproval;
 
     public function __construct() {
         parent::__construct();
         $this->load->model('Tax_Employee');
         $this->load->helper('rupiah');
+        $this->sess_username = $this->session->userdata('username');
+        $this->sess_role_id = $this->session->userdata('sess_role_id');
+        $this->sess_staff_id = $this->session->userdata('sess_staff_id');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
@@ -58,6 +65,8 @@ class Taxes_Employees extends CI_Controller {
     }
 
     function add() {
+        $this->filter_access('Tax_Employee', 'roled_add', 'taxes_employees/index');
+        
         $data['title'] = 'Add New Tax Employee';
         $data['form_action'] = site_url('taxes_employees/save');
         $data['link_back'] = anchor('taxes_employees/', 'Back', array("class" => "btn"));
@@ -71,6 +80,8 @@ class Taxes_Employees extends CI_Controller {
     }
 
     function edit($id) {
+        $this->filter_access('Tax_Employee', 'roled_edit', 'taxes_employees/index');
+        
         $te = new Tax_Employee();
         $rs = $te->where('sp_id', $id)->get();
         $data['id'] = $rs->sp_id;
@@ -93,6 +104,8 @@ class Taxes_Employees extends CI_Controller {
     }
 
     function save() {
+        $this->filter_access('Tax_Employee', 'roled_add', 'taxes_employees/index');
+        
         $te = new Tax_Employee();
         $te->sp_status = $this->input->post('sp_status');
         $te->sp_ptkp = $this->replace_currency($this->input->post('sp_ptkp'));
@@ -110,6 +123,8 @@ class Taxes_Employees extends CI_Controller {
     }
 
     function update() {
+        $this->filter_access('Tax_Employee', 'roled_edit', 'taxes_employees/index');
+        
         $te = new Tax_Employee();
         $te->where('sp_id', $this->input->post('id'))
                 ->update(array(
@@ -123,10 +138,23 @@ class Taxes_Employees extends CI_Controller {
     }
 
     function delete($id) {
+        $this->filter_access('Tax_Employee', 'roled_delete', 'taxes_employees/index');
+        
         $te = new Tax_Employee();
         $te->_delete($id);
         $this->session->set_flashdata('message', 'Taxes Employees successfully deleted!');
         redirect('taxes_employees/');
+    }
+
+    function filter_access($module, $field, $page) {
+        $user = new User();
+        $status_access = $user->get_access($this->sess_role_id, $module, $field);
+
+        if ($status_access == false) {
+            $msg = '<div class="alert alert-error">You do not have access to this page, please contact administrator</div>';
+            $this->session->set_flashdata('message', $msg);
+            redirect($page);
+        }
     }
 
 }

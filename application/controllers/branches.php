@@ -6,10 +6,17 @@ if (!defined('BASEPATH'))
 class Branches extends CI_Controller {
 
     private $limit = 10;
+    var $add;
+    var $edit;
+    var $delete;
+    var $aproval;
 
     public function __construct() {
         parent::__construct();
         $this->load->model('Branch');
+        $this->sess_username = $this->session->userdata('username');
+        $this->sess_role_id = $this->session->userdata('sess_role_id');
+        $this->sess_staff_id = $this->session->userdata('sess_staff_id');        
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
@@ -56,6 +63,8 @@ class Branches extends CI_Controller {
     }
 
     function add() {
+        $this->filter_access('Branch', 'roled_add', 'branches/index');
+
         $data['title'] = 'Add New Branch';
         $data['form_action'] = site_url('branches/save');
         $data['link_back'] = anchor('branches/', 'Back', array('class' => 'btn'));
@@ -68,8 +77,9 @@ class Branches extends CI_Controller {
     }
 
     function edit($id) {
+        $this->filter_access('Branch', 'roled_edit', 'branches/index');
+        
         $branch = new Branch();
-
         $rs = $branch->where('branch_id', $id)->get();
         $data['id'] = $rs->branch_id;
         $data['branch_name'] = array('name' => 'branch_name', 'value' => $rs->branch_name);
@@ -83,6 +93,8 @@ class Branches extends CI_Controller {
     }
 
     function save() {
+        $this->filter_access('Branch', 'roled_add', 'branches/index');
+
         $branch = new Branch();
         $branch->branch_name = $this->input->post('branch_name');
         if ($branch->save()) {
@@ -98,6 +110,8 @@ class Branches extends CI_Controller {
     }
 
     function update() {
+        $this->filter_access('Branch', 'roled_edit', 'branches/index');
+
         $branch = new Branch();
         $branch->where('branch_id', $this->input->post('id'))
                 ->update('branch_name', $this->input->post('branch_name'));
@@ -107,11 +121,24 @@ class Branches extends CI_Controller {
     }
 
     function delete($id) {
+        $this->filter_access('Branch', 'roled_delete', 'branches/index');
+        
         $branch = new Branch();
         $branch->_delete($id);
 
         $this->session->set_flashdata('message', 'Branch successfully deleted!');
         redirect('branches/');
+    }
+
+    function filter_access($module, $field, $page) {
+        $user = new User();
+        $status_access = $user->get_access($this->sess_role_id, $module, $field);
+
+        if ($status_access == false) {
+            $msg = '<div class="alert alert-error">You do not have access to this page, please contact administrator</div>';
+            $this->session->set_flashdata('message', $msg);
+            redirect($page);
+        }
     }
 
 }

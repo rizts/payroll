@@ -44,24 +44,39 @@ Class User extends DataMapper {
         }
     }
 
-// --------------------------------------------------------------------
-
-    /**
-     * Encrypt (prep)
-     *
-     * Encrypts this objects password with a random salt.
-     *
-     * @access    private
-     * @param    string
-     * @return    void
-     */
-    function _encrypt($field) {
-        if (!empty($this->{$field})) {
-            if (empty($this->salt)) {
-                $this->salt = md5(uniqid(rand(), true));
+    function direct_page_access($access, $page, $status) {
+        if ($access == '0') {
+            switch ($status) {
+                case'add': $pesan = 'Anda Tidak Punya Akses Untuk Menambah Data, Hubungi Administrator!';
+                    break;
+                case'edit': $pesan = 'Anda Tidak Punya Akses Untuk Koreksi Data, Hubungi Administrator!';
+                    break;
+                case'delete': $pesan = 'Anda Tidak Punya Akses Untuk Hapus Data, Hubungi Administrator!';
+                    break;
+                case'approval': $pesan = 'Anda Tidak Punya Akses Untuk Menyetujui, Hubungi Administrator!';
+                    break;
+                default: $pesan = 'Anda Tidak Punya Akses, Hubungi Administrator!';
             }
 
-            $this->{$field} = sha1($this->salt . $this->{$field});
+            $data = '<div class="error"><p>' . $pesan . '</p></div>';
+            $this->session->set_flashdata('message', $data);
+            redirect($page);
+        } else {
+
+            return false;
+        }
+    }
+
+    function get_access($role_id, $module, $field) {
+        $query = $this->db->get_where('user_roled', array(
+                    'role_id' => $role_id,
+                    'roled_module' => $module,
+                    $field => true)
+                )->row();
+        if ($query) {
+            return true;
+        } else {
+            return false;
         }
     }
 

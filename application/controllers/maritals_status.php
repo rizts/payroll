@@ -10,6 +10,9 @@ class Maritals_Status extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Marital');
+        $this->sess_username = $this->session->userdata('username');
+        $this->sess_role_id = $this->session->userdata('sess_role_id');
+        $this->sess_staff_id = $this->session->userdata('sess_staff_id');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
@@ -54,6 +57,8 @@ class Maritals_Status extends CI_Controller {
     }
 
     function add() {
+        $this->filter_access('Marital_Status', 'roled_add', 'maritals_status/index');
+
         $data['title'] = 'Add New Marital Status';
         $data['form_action'] = site_url('maritals_status/save');
         $data['link_back'] = anchor('maritals_status/', 'Back', array('class' => 'btn'));
@@ -66,6 +71,8 @@ class Maritals_Status extends CI_Controller {
     }
 
     function edit($id) {
+        $this->filter_access('Marital_Status', 'roled_edit', 'maritals_status/index');
+
         $marital = new Marital();
         $rs = $marital->where('sn_id', $id)->get();
         $data['id'] = $rs->sn_id;
@@ -81,6 +88,8 @@ class Maritals_Status extends CI_Controller {
     }
 
     function save() {
+        $this->filter_access('Marital_Status', 'roled_add', 'maritals_status/index');
+
         $marital = new Marital();
         $marital->sn_name = $this->input->post('sn_name');
         if ($marital->save()) {
@@ -96,6 +105,8 @@ class Maritals_Status extends CI_Controller {
     }
 
     function update() {
+        $this->filter_access('Marital_Status', 'roled_edit', 'maritals_status/index');
+
         $marital = new Marital();
         $marital->where('sn_id', $this->input->post('id'))
                 ->update('sn_name', $this->input->post('sn_name'));
@@ -105,12 +116,23 @@ class Maritals_Status extends CI_Controller {
     }
 
     function delete($id) {
+        $this->filter_access('Marital_Status', 'roled_delete', 'maritals_status/index');
+
         $marital = new Marital();
         $marital->_delete($id);
-
         $this->session->set_flashdata('message', 'Maritals successfully deleted!');
-
         redirect('maritals_status/');
+    }
+
+    function filter_access($module, $field, $page) {
+        $user = new User();
+        $status_access = $user->get_access($this->sess_role_id, $module, $field);
+
+        if ($status_access == false) {
+            $msg = '<div class="alert alert-error">You do not have access to this page, please contact administrator</div>';
+            $this->session->set_flashdata('message', $msg);
+            redirect($page);
+        }
     }
 
 }

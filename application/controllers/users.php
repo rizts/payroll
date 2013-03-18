@@ -6,12 +6,13 @@ if (!defined('BASEPATH'))
 class Users extends CI_Controller {
 
     var $logged_in;
+    var $dir_path;
     private $limit = 10;
 
     function __construct() {
         parent::__construct();
         $this->load->model('User');
-//        $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
+        $this->dir_path = './uploads/avatar/';
     }
 
     function index() {
@@ -61,6 +62,7 @@ class Users extends CI_Controller {
         $staff = new Staff();
         $list_staff = $staff->list_drop();
         $staff_selected = '';
+        $data['form_action'] = '';
         $data['staff_id'] = form_dropdown('staff_id', $list_staff, $staff_selected);
 
         // Role
@@ -92,20 +94,21 @@ class Users extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('message', '<div class="alert alert-error">' . validation_errors() . '</div>');
-            redirect('login');
+            redirect('users/sign_in');
         } else {
-            # Periksa Login Untuk Administrator #
             if ($this->check_user($username, $password) == TRUE) {
+                $user = new User();
+                $rs = $user->where('username', $username)->get();
                 $userdata = array(
                     'username' => $username,
+                    'sess_role_id' => $rs->role_id,
+                    'sess_staff_id' => $rs->staff_id,
                     'logged_in' => TRUE
                 );
                 $this->session->set_userdata($userdata);
                 redirect('welcome');
             } else {
-                # jika login username dan pass tidak sama #
-                //$msg = '<div class="error_login"></div>';
-                $msg = '<div class="alert alert-error">Periksa Username And Password!</div>';
+                $msg = '<div class="alert alert-error">Please check Username And Password!</div>';
                 $this->session->set_flashdata('message', $msg);
                 redirect('users/sign_in');
             }
@@ -222,6 +225,8 @@ class Users extends CI_Controller {
 
     function save_user() {
         $user = new User();
+        $staff = new Staff();
+
         $user->staff_id = $this->input->post('staff_id');
         $user->role_id = $this->input->post('role_id');
         $user->username = $this->input->post('username');
@@ -230,10 +235,16 @@ class Users extends CI_Controller {
         $user->updated_at = date('c');
 
         if ($user->save()) {
-            $this->session->set_flashdata('message', 'Role Update successfuly.');
+            /* Upload Images */
+
+            $this->session->set_flashdata('message', 'User successfuly save.');
             redirect('users/index');
         } else {
-            
+            // Failed
+            $user->error_message('custom', 'Field required');
+            $msg = $user->error->custom;
+            $this->session->set_flashdata('message', $msg);
+            redirect('users/sign_up');
         }
     }
 

@@ -44,9 +44,9 @@ function HeaderLink($value, $key, $col, $dir) {
 }
 ?>
 <div class="wrap">
+    <?php echo $this->session->flashdata('message'); ?>
     <h2 class="rama-title">Listing Branch</h2>
     <div class="float-right"><?php echo $btn_add ?></div>
-<?php echo $this->session->flashdata('message'); ?>
     <table class="table boo-table table-bordered table-condensed table-hover">
         <thead>
             <tr>
@@ -64,10 +64,10 @@ function HeaderLink($value, $key, $col, $dir) {
                 <td class="action_cell"><?php echo anchor('branches/edit/' . $row->branch_id, img(array("src" => assets_url('images/photon/icons/default/edit.png')))); ?></td>
                 <td class="action_cell"><?php echo anchor('branches/delete/' . $row->branch_id, img(array("src" => assets_url('images/photon/icons/default/delete-item.png'))), array('onclick' => "return confirm('Are you sure want to delete?')")); ?></td>
             </tr>
-<?php } ?>
+        <?php } ?>
     </table>
     <br>
-<?php echo $pagination; ?>
+    <?php echo $pagination; ?>
         <br>
         <br>
     </div>

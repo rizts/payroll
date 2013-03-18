@@ -14,13 +14,6 @@
                 alert(event.title + ' was moved ' + delta + ' days\n' +
                     '(should probably update your database)');
             }
-            //            loading: function(bool) {
-            //                if (bool) {
-            //                    $('#loading').show();
-            //                }else{
-            //                    $('#loading').hide();
-            //                }
-            //            }
         });
     });
 
@@ -79,7 +72,7 @@
                             </div>
                             <div class="section-content">
                                 <p>
-                                in progress
+                                <div id="container_chart"></div>
                                 </p>
                             </div>
                         </div>

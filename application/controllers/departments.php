@@ -6,10 +6,17 @@ if (!defined('BASEPATH'))
 class Departments extends CI_Controller {
 
     private $limit = 10;
+    var $add;
+    var $edit;
+    var $delete;
+    var $aproval;
 
     public function __construct() {
         parent::__construct();
         $this->load->model('Department');
+        $this->sess_username = $this->session->userdata('username');
+        $this->sess_role_id = $this->session->userdata('sess_role_id');
+        $this->sess_staff_id = $this->session->userdata('sess_staff_id');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
@@ -55,6 +62,8 @@ class Departments extends CI_Controller {
     }
 
     function add() {
+        $this->filter_access('Departement', 'roled_add', 'departments/index');
+
         $data['title'] = 'Add New Departement';
         $data['form_action'] = site_url('departments/save');
         $data['link_back'] = anchor('departments/', 'Back', array("class" => "btn"));
@@ -67,8 +76,9 @@ class Departments extends CI_Controller {
     }
 
     function edit($id) {
-        $dept = new Department();
+        $this->filter_access('Departement', 'roled_edit', 'departments/index');
 
+        $dept = new Department();
         $rs = $dept->where('dept_id', $id)->get();
         $data['id'] = $rs->dept_id;
         $data['dept_name'] = array('name' => 'dept_name', 'value' => $rs->dept_name);
@@ -83,6 +93,8 @@ class Departments extends CI_Controller {
     }
 
     function save() {
+        $this->filter_access('Departement', 'roled_add', 'departments/index');
+        
         $dept = new Department();
         $dept->dept_name = $this->input->post('dept_name');
         if ($dept->save()) {
@@ -98,6 +110,8 @@ class Departments extends CI_Controller {
     }
 
     function update() {
+        $this->filter_access('Departement', 'roled_edit', 'departments/index');
+        
         $dept = new Department();
         $dept->where('dept_id', $this->input->post('id'))
                 ->update('dept_name', $this->input->post('dept_name'));
@@ -107,11 +121,24 @@ class Departments extends CI_Controller {
     }
 
     function delete($id) {
+        $this->filter_access('Departement', 'roled_delete', 'departments/index');
+
         $dept = new Department();
         $dept->_delete($id);
 
         $this->session->set_flashdata('message', 'Department successfully deleted!');
         redirect('departments/');
+    }
+
+    function filter_access($module, $field, $page) {
+        $user = new User();
+        $status_access = $user->get_access($this->sess_role_id, $module, $field);
+
+        if ($status_access == false) {
+            $msg = '<div class="alert alert-error">You do not have access to this page, please contact administrator</div>';
+            $this->session->set_flashdata('message', $msg);
+            redirect($page);
+        }
     }
 
 }

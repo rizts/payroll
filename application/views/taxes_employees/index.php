@@ -48,9 +48,9 @@ function HeaderLink($value, $key, $col, $dir) {
 ?>
 
 <div class="wrap">
-    <h2 class="rama-title">Tax Status</h2>
-    <div class="float-right"><?php echo $btn_add ?></div>
     <?php echo $this->session->flashdata('message'); ?>
+    <h2 class="rama-title">Tax Status</h2>
+    <div class="float-right"><?php echo $btn_add ?></div>    
     <table class="table boo-table table-bordered table-condensed table-hover">
         <thead>
             <tr>

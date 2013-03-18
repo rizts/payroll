@@ -54,6 +54,7 @@ class Titles extends CI_Controller {
     }
 
     function add() {
+        $this->filter_access('Title', 'roled_add', 'titles/index');
         $data['title'] = 'Add New Title';
         $data['form_action'] = site_url('titles/save');
         $data['link_back'] = anchor('titles/', 'Back', array("class" => "btn"));
@@ -66,6 +67,7 @@ class Titles extends CI_Controller {
     }
 
     function edit($id) {
+        $this->filter_access('Title', 'roled_edit', 'titles/index');
         $title = new Title();
         $rs = $title->where('title_id', $id)->get();
         $data['id'] = $rs->title_id;
@@ -80,6 +82,7 @@ class Titles extends CI_Controller {
     }
 
     function save() {
+        $this->filter_access('Title', 'roled_add', 'titles/index');
         $title = new Title();
         $title->title_name = $this->input->post('title_name');
         if ($title->save()) {
@@ -95,6 +98,7 @@ class Titles extends CI_Controller {
     }
 
     function update() {
+        $this->filter_access('Title', 'roled_edit', 'titles/index');
         $title = new Title();
         $title->where('title_id', $this->input->post('id'))
                 ->update('title_name', $this->input->post('title_name'));
@@ -104,10 +108,22 @@ class Titles extends CI_Controller {
     }
 
     function delete($id) {
+        $this->filter_access('Title', 'roled_delete', 'titles/index');
         $title = new Title();
         $title->_delete($id);
         $this->session->set_flashdata('message', 'Title successfully deleted!');
         redirect('titles/');
+    }
+
+    function filter_access($module, $field, $page) {
+        $user = new User();
+        $status_access = $user->get_access($this->sess_role_id, $module, $field);
+
+        if ($status_access == false) {
+            $msg = '<div class="alert alert-error">You do not have access to this page, please contact administrator</div>';
+            $this->session->set_flashdata('message', $msg);
+            redirect($page);
+        }
     }
 
 }
