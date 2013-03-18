@@ -182,7 +182,7 @@ class Role_Details extends CI_Controller {
         $field = $this->input->post('name');
         $value = $this->input->post('value');
 
-        if (!empty($value)) {
+        if (!empty($id)) {
             $roled->where('roled_id', $id)->update($field, $value);
         } else {
             header('HTTP 400 Bad Request', true, 400);

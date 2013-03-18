@@ -15,6 +15,8 @@ class Assets extends CI_Controller {
     }
 
     public function index($offset = 0) {
+        $this->filter_access('Assets', 'roled_select', base_url());
+
         $asset_list = new Asset();
         $data['staff'] = new Staff();
 
@@ -66,6 +68,8 @@ class Assets extends CI_Controller {
     }
 
     function add() {
+        $this->filter_access('Assets', 'roled_add', 'assets/index');
+
         $data['title'] = 'Add New Asset';
         $data['form_action'] = site_url('assets/save');
         $data['link_back'] = anchor('assets/', 'Back', array('class' => 'btn'));
@@ -92,6 +96,7 @@ class Assets extends CI_Controller {
     }
 
     function edit($id) {
+        $this->filter_access('Assets', 'roled_edit', 'assets/index');
         $asset = new Asset();
         $rs = $asset->where('asset_id', $id)->get();
         $data['id'] = $rs->asset_id;
@@ -121,6 +126,7 @@ class Assets extends CI_Controller {
     }
 
     function save() {
+        $this->filter_access('Assets', 'roled_add', 'assets/index');
         $asset = new Asset();
         $asset->asset_name = $this->input->post('asset_name');
         $asset->asset_status = $this->input->post('asset_status');
@@ -139,6 +145,7 @@ class Assets extends CI_Controller {
     }
 
     function update() {
+        $this->filter_access('Assets', 'roled_edit', 'assets/index');
         $asset = new Asset();
         $asset->where('asset_id', $this->input->post('id'))
                 ->update(array(
@@ -154,11 +161,23 @@ class Assets extends CI_Controller {
     }
 
     function delete($id) {
+        $this->filter_access('Assets', 'roled_delete', 'assets/index');
         $asset = new Asset();
         $asset->_delete($id);
 
         $this->session->set_flashdata('message', 'Asset successfully deleted!');
         redirect('assets/');
+    }
+
+    function filter_access($module, $field, $page) {
+        $user = new User();
+        $status_access = $user->get_access($this->sess_role_id, $module, $field);
+
+        if ($status_access == false) {
+            $msg = '<div class="alert alert-error">You do not have access to this page, please contact administrator</div>';
+            $this->session->set_flashdata('message', $msg);
+            redirect($page);
+        }
     }
 
 }

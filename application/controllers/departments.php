@@ -21,6 +21,7 @@ class Departments extends CI_Controller {
     }
 
     public function index($offset = 0) {
+        $this->filter_access('Departement', 'roled_select', base_url());
         $dept_list = new Department();
         switch ($this->input->get('c')) {
             case "1":
