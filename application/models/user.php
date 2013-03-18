@@ -67,6 +67,18 @@ Class User extends DataMapper {
         }
     }
 
+    function exist_module($role_id, $module) {
+        $query = $this->db->get_where('user_roled', array(
+                    'role_id' => $role_id,
+                    'roled_module' => $module)
+                )->row();
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function get_access($role_id, $module, $field) {
         $query = $this->db->get_where('user_roled', array(
                     'role_id' => $role_id,
@@ -80,6 +92,10 @@ Class User extends DataMapper {
         }
     }
 
+    function _delete($id) {
+        $this->db->where('id', $id);
+        $this->db->delete($this->table);
+    }
 }
 
 ?>

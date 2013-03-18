@@ -21,7 +21,7 @@ class Role_Details extends CI_Controller {
 
     public function index($offset = 0) {
         $role_detail = new Role_Detail();
-        $total_rows = $role_detail->count();
+        $total_rows = $role_detail->where('role_id', $this->role_id)->count();
 
         $data['title'] = "Role Details";
         $data['role_id'] = $this->role_id;
@@ -30,11 +30,8 @@ class Role_Details extends CI_Controller {
         $data['link_back'] = anchor('users/roles/', 'Back', array('class' => 'btn'));
 
         $offset = $this->uri->segment($this->uri_segment);
-
         $role_detail->where('role_id', $this->role_id)->order_by('roled_id', 'DESC');
-
         $data['roled_list'] = $role_detail->get($this->limit, $offset)->all;
-
         $config['base_url'] = site_url('users/roles/' . $this->role_id . '/role_details/index');
         $config['total_rows'] = $total_rows;
         $config['per_page'] = $this->limit;

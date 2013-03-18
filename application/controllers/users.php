@@ -12,7 +12,8 @@ class Users extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('User');
-        $this->dir_path = './uploads/avatar/';
+        $this->load->model('Staff');
+        $this->dir_path = '/uploads/avatar/';
     }
 
     function index() {
@@ -236,7 +237,7 @@ class Users extends CI_Controller {
 
         if ($user->save()) {
             /* Upload Images */
-
+//            $staff->do_upload_fix($this->dir_path, $_FILES['file']);
             $this->session->set_flashdata('message', 'User successfuly save.');
             redirect('users/index');
         } else {
@@ -251,6 +252,12 @@ class Users extends CI_Controller {
     function logout() {
         $this->session->sess_destroy();
         redirect('users/sign_in');
+    }
+
+    function delete($id) {
+        $user = new User();
+        $user->_delete($id);
+        redirect('users/index');
     }
 
 }
