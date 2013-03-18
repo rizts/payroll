@@ -34,7 +34,7 @@ class Work_Histories extends CI_Controller {
 
         $total_rows = $work->count();
         $data['title'] = "Work Histories";
-        $data['btn_add'] = anchor('staffs/' . $this->staff_id . '/work_histories/add', 'Add New');
+        $data['btn_add'] = anchor('staffs/' . $this->staff_id . '/work_histories/add', 'Add New', "class='btn btn-primary'");
         $data['btn_home'] = anchor('staffs', 'Home');
 
         $offset = $this->uri->segment($this->uri_segment);
@@ -63,12 +63,12 @@ class Work_Histories extends CI_Controller {
         $data['title'] = 'Add New Work';
 
         $data['form_action'] = site_url('staffs/' . $this->staff_id . '/work_histories/save');
-        $data['link_back'] = anchor('staffs/' . $this->staff_id . '/work_histories/index', 'Back');
+        $data['link_back'] = anchor('staffs/' . $this->staff_id . '/work_histories/index', 'Back', array('class' => "btn btn-primary"));
 
         $data['id'] = '';
         $data['history_date'] = array('name' => 'history_date', 'id' => 'history_date');
         $data['history_description'] = array('name' => 'history_description');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
         $data['breadcrumb'] = $this->breadcrumb->output();
 
         $this->load->view('staff_work_history/frm_work', $data);
@@ -87,7 +87,7 @@ class Work_Histories extends CI_Controller {
         $data['history_date'] = array('name' => 'history_date', 'id' => 'history_date', 'value' => $rs->history_date);
         $data['history_description'] = array('name' => 'history_description', 'value' => $rs->history_description);
 
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', 'class' => 'btn btn-primary');
         $data['breadcrumb'] = $this->breadcrumb->output();
         $data['title'] = 'Update Work History';
         $data['message'] = '';
