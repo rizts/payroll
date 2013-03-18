@@ -175,4 +175,19 @@ class Role_Details extends CI_Controller {
         redirect('users/roles/' . $this->role_id . '/role_details/index');
     }
 
+    function update_role_value_from_edittable() {
+        sleep(1);
+        $roled = new Role_Detail();
+        $id = $this->input->post('pk');
+        $field = $this->input->post('name');
+        $value = $this->input->post('value');
+
+        if (!empty($value)) {
+            $roled->where('roled_id', $id)->update($field, $value);
+        } else {
+            header('HTTP 400 Bad Request', true, 400);
+            echo "This field is required!";
+        }
+    }
+
 }

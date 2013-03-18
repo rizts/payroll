@@ -18,7 +18,9 @@
     });
 
 </script>
+
 <div class="wrap">
+    <?php echo $this->session->flashdata('message'); ?>
     <div class="row">
         <div class="span6">
             <div class="row-fluid">

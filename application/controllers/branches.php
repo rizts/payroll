@@ -21,6 +21,8 @@ class Branches extends CI_Controller {
     }
 
     public function index($offset = 0) {
+        $this->filter_access('Branch', 'roled_select', base_url());
+        
         $branch_list = new Branch();
         $total_rows = $branch_list->count();
 
