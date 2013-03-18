@@ -85,7 +85,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th colspan="4" align="center">
+                        <th colspan="5" align="center">
                             All Privileges
                         </th>
                     </tr>
@@ -93,8 +93,9 @@
                 <tr>
                     <td><?php echo form_checkbox($privileges_1); ?> INSERT</td>
                     <td><?php echo form_checkbox($privileges_2); ?> UPDATE</td>
-                    <td><?php echo form_checkbox($privileges_3); ?> DELETE</td>
+                    <td><?php echo form_checkbox($privileges_3); ?> DELETE</td>                    
                     <td><?php echo form_checkbox($privileges_4); ?> APPROVAL</td>
+                    <td><?php echo form_checkbox($privileges_5); ?> SELECT</td>
                 </tr>
             </table>
 

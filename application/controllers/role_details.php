@@ -5,7 +5,7 @@ if (!defined('BASEPATH'))
 
 class Role_Details extends CI_Controller {
 
-    private $limit = 20;
+    private $limit = 25;
     var $role_id;
     var $uri_segment;
     var $roled_id;
@@ -71,6 +71,7 @@ class Role_Details extends CI_Controller {
         $data['privileges_2'] = array('name' => 'privileges_2', 'id' => 'privileges_2', 'value' => '1'); /* UPDATE */
         $data['privileges_3'] = array('name' => 'privileges_3', 'id' => 'privileges_3', 'value' => '1'); /* DELETE */
         $data['privileges_4'] = array('name' => 'privileges_4', 'id' => 'privileges_4', 'value' => '1'); /* APPROVAL */
+        $data['privileges_5'] = array('name' => 'privileges_5', 'id' => 'privileges_5', 'value' => '1'); /* SELECT */
 
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class" => "btn btn-primary");
 
@@ -116,6 +117,8 @@ class Role_Details extends CI_Controller {
             'checked' => $roled->get_privileges($this->role_id, 'roled_delete', true) == true ? 'checked' : ''); /* DELETE */
         $data['privileges_4'] = array('name' => 'privileges_4', 'id' => 'privileges_4', 'value' => '1',
             'checked' => $roled->get_privileges($this->role_id, 'roled_approval', true) == true ? 'checked' : ''); /* APPROVAL */
+        $data['privileges_5'] = array('name' => 'privileges_5', 'id' => 'privileges_5', 'value' => '1',
+            'checked' => $roled->get_privileges($this->role_id, 'roled_select', true) == true ? 'checked' : ''); /* APPROVAL */
 
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class" => "btn btn-primary");
 
@@ -136,6 +139,7 @@ class Role_Details extends CI_Controller {
                 $roled->roled_edit = $this->input->post('privileges_2');
                 $roled->roled_delete = $this->input->post('privileges_3');
                 $roled->roled_approval = $this->input->post('privileges_4');
+                $roled->roled_select = $this->input->post('privileges_5');
                 $roled->save();
             }
         }
@@ -154,6 +158,7 @@ class Role_Details extends CI_Controller {
                 $roled->roled_edit = $this->input->post('privileges_2');
                 $roled->roled_delete = $this->input->post('privileges_3');
                 $roled->roled_approval = $this->input->post('privileges_4');
+                $roled->roled_select = $this->input->post('privileges_5');
                 $roled->save();
             }
         }
