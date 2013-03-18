@@ -84,7 +84,7 @@
                             <li><?php echo anchor('assets', 'Assets'); ?></li>
                             <li><?php echo anchor('users/index', 'Users'); ?></li>
                             <li><?php echo anchor('users/roles', 'Roles'); ?></li>
-                            <li><?php echo anchor('users/logout', 'Logout'); ?></li>
+                            <li><?php echo anchor('users/logout', 'Logout ('.$this->session->userdata('username').')'); ?></li>
                         </ul>
                     </div>
                 </li>

@@ -17,6 +17,11 @@
                 $("#module_10").attr('checked', true);
                 $("#module_11").attr('checked', true);
                 $("#module_12").attr('checked', true);
+                $("#module_13").attr('checked', true);
+                $("#module_14").attr('checked', true);
+                $("#module_15").attr('checked', true);
+                $("#module_16").attr('checked', true);
+                $("#module_17").attr('checked', true);
             }
             else {
                 $("#module_1").attr('checked', false);
@@ -31,6 +36,11 @@
                 $("#module_10").attr('checked', false);
                 $("#module_11").attr('checked', false);
                 $("#module_12").attr('checked', false);
+                $("#module_13").attr('checked', false);
+                $("#module_14").attr('checked', false);
+                $("#module_15").attr('checked', false);
+                $("#module_16").attr('checked', false);
+                $("#module_17").attr('checked', false);
 
             }
             
@@ -76,6 +86,18 @@
                     <td><?php echo form_checkbox($module_10); ?> Assets</td>
                     <td><?php echo form_checkbox($module_11); ?> Users</td>
                     <td><?php echo form_checkbox($module_12); ?> Roled</td>
+                </tr>
+                <tr>
+                    <td><?php echo form_checkbox($module_13); ?> Work Histories</td>
+                    <td><?php echo form_checkbox($module_14); ?> Families</td>
+                    <td><?php echo form_checkbox($module_15); ?> Educations</td>
+                    <td><?php echo form_checkbox($module_16); ?> Medical Histories</td>
+                </tr>
+                <tr>
+                    <td><?php echo form_checkbox($module_17); ?> Salary Component</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
         </div>

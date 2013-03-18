@@ -17,6 +17,9 @@ class Work_Histories extends CI_Controller {
         $this->staff_id = $this->uri->segment(2);
         $this->uri_segment = $this->uri->segment(5);
         $this->work_id = $this->uri->segment(5);
+        $this->sess_username = $this->session->userdata('username');
+        $this->sess_role_id = $this->session->userdata('sess_role_id');
+        $this->sess_staff_id = $this->session->userdata('sess_staff_id');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
@@ -58,7 +61,7 @@ class Work_Histories extends CI_Controller {
         $this->breadcrumb->append_crumb('Add New Work', base_url() . '');
 
         $data['title'] = 'Add New Work';
-        
+
         $data['form_action'] = site_url('staffs/' . $this->staff_id . '/work_histories/save');
         $data['link_back'] = anchor('staffs/' . $this->staff_id . '/work_histories/index', 'Back');
 
@@ -78,7 +81,7 @@ class Work_Histories extends CI_Controller {
         $this->breadcrumb->append_crumb('Update Work History', base_url() . '');
 
         $work = new Work();
-                
+
         $rs = $work->where('history_id', $this->work_id)->get();
         $data['id'] = $rs->history_id;
         $data['history_date'] = array('name' => 'history_date', 'id' => 'history_date', 'value' => $rs->history_date);
@@ -116,7 +119,7 @@ class Work_Histories extends CI_Controller {
     function update() {
         $work = new Work();
         $id = $this->input->post('id');
-        
+
         $work->where('history_id', $id)->update(array(
             'history_date' => $this->input->post('history_date'),
             'history_description' => $this->input->post('history_description')
@@ -126,10 +129,22 @@ class Work_Histories extends CI_Controller {
     }
 
     function delete() {
+        $this->filter_access('Branch', 'roled_delete', 'branches/index');
         $work = new Work();
 
         $work->_delete($this->work_id);
         redirect('staffs/' . $this->staff_id . '/work_histories/index');
+    }
+
+    function filter_access($module, $field, $page) {
+        $user = new User();
+        $status_access = $user->get_access($this->sess_role_id, $module, $field);
+
+        if ($status_access == false) {
+            $msg = '<div class="alert alert-error">You do not have access to this page, please contact administrator</div>';
+            $this->session->set_flashdata('message', $msg);
+            redirect($page);
+        }
     }
 
 }

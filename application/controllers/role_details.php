@@ -65,6 +65,11 @@ class Role_Details extends CI_Controller {
         $data['module_10'] = array('name' => 'module_10', 'id' => 'module_10', 'value' => 'Assets'); /* Assets */
         $data['module_11'] = array('name' => 'module_11', 'id' => 'module_11', 'value' => 'Users'); /* User */
         $data['module_12'] = array('name' => 'module_12', 'id' => 'module_12', 'value' => 'Role_Details'); /* Roled */
+        $data['module_13'] = array('name' => 'module_13', 'id' => 'module_13', 'value' => 'Work_Histories'); /* Work_Histories */
+        $data['module_14'] = array('name' => 'module_14', 'id' => 'module_14', 'value' => 'Families'); /* Families */
+        $data['module_15'] = array('name' => 'module_15', 'id' => 'module_15', 'value' => 'Educations'); /* Education */
+        $data['module_16'] = array('name' => 'module_16', 'id' => 'module_16', 'value' => 'Medical_Histories'); /* medical_histories */
+        $data['module_17'] = array('name' => 'module_17', 'id' => 'module_17', 'value' => 'Salary_Components'); /* Salary_Components */
 
 
         $data['privileges_1'] = array('name' => 'privileges_1', 'id' => 'privileges_1', 'value' => '1'); /* INSERT */
@@ -107,6 +112,17 @@ class Role_Details extends CI_Controller {
             'checked' => $roled->get_privileges($this->role_id, 'roled_module', 'Users') == true ? 'checked' : ''); /* User */
         $data['module_12'] = array('name' => 'module_12', 'id' => 'module_12', 'value' => 'Role_Details',
             'checked' => $roled->get_privileges($this->role_id, 'roled_module', 'Role_Details') == true ? 'checked' : ''); /* Roled */
+        $data['module_13'] = array('name' => 'module_13', 'id' => 'module_13', 'value' => 'Work_Histories',
+            'checked' => $roled->get_privileges($this->role_id, 'roled_module', 'Work_Histories') == true ? 'checked' : ''); /* Work_Histories */
+
+        $data['module_14'] = array('name' => 'module_14', 'id' => 'module_14', 'value' => 'Families',
+            'checked' => $roled->get_privileges($this->role_id, 'roled_module', 'Families') == true ? 'checked' : ''); /* Families */
+        $data['module_15'] = array('name' => 'module_15', 'id' => 'module_15', 'value' => 'Educations',
+            'checked' => $roled->get_privileges($this->role_id, 'roled_module', 'Educations') == true ? 'checked' : ''); /* Education */
+        $data['module_16'] = array('name' => 'module_16', 'id' => 'module_16', 'value' => 'Medical_Histories',
+                'checked' => $roled->get_privileges($this->role_id, 'roled_module', 'Medical_Histories') == true ? 'checked' : ''); /* medical_histories */
+        $data['module_17'] = array('name' => 'module_17', 'id' => 'module_17', 'value' => 'Salary_Components',
+            'checked' => $roled->get_privileges($this->role_id, 'roled_module', 'Salary_Components') == true ? 'checked' : '');/* Salary_Components */
 
 
         $data['privileges_1'] = array('name' => 'privileges_1', 'id' => 'privileges_1', 'value' => '1',
@@ -131,7 +147,7 @@ class Role_Details extends CI_Controller {
 
     function save() {
         $roled = new Role_Detail();
-        for ($x = 1; $x <= 12; $x++) {
+        for ($x = 1; $x <= 17; $x++) {
             if (isset($_POST['module_' . $x])) {
                 $roled->role_id = $this->role_id;
                 $roled->roled_module = $this->input->post('module_' . $x);
@@ -150,7 +166,7 @@ class Role_Details extends CI_Controller {
     function update() {
         $roled = new Role_Detail();
         $roled->delete_by_role_id($this->role_id);
-        for ($x = 1; $x <= 12; $x++) {
+        for ($x = 1; $x <= 17; $x++) {
             if (isset($_POST['module_' . $x])) {
                 $roled->role_id = $this->role_id;
                 $roled->roled_module = $this->input->post('module_' . $x);
