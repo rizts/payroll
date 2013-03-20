@@ -18,14 +18,11 @@
         </tr>
         <tr>
             <td></td>
-            <td><?php echo form_submit($btn_save); ?></td>
+            <td><?php echo form_submit($btn_save).' '.$link_back; ?></td>
         </tr>
     </table>
 
     <?php echo form_close() ?>
-    <br>
-    <?php echo $link_back; ?>
-
 </div>
 <?php get_footer(); ?>
 

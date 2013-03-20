@@ -14,6 +14,9 @@ class Assets_Details extends CI_Controller {
         parent::__construct();
         $this->load->model('Asset');
         $this->load->model('Asset_Detail');
+        $this->sess_username = $this->session->userdata('username');
+        $this->sess_role_id = $this->session->userdata('sess_role_id');
+        $this->sess_staff_id = $this->session->userdata('sess_staff_id');
         $this->asset_id = $this->uri->segment(2);
         $this->uri_segment = $this->uri->segment(5);
         $this->detail_id = $this->uri->segment(5);
@@ -171,6 +174,17 @@ class Assets_Details extends CI_Controller {
 
         $this->session->set_flashdata('message', 'Asset detail successfully deleted!');
         redirect('assets/' . $this->asset_id . '/details/index');
+    }
+
+    function filter_access($module, $field, $page) {
+        $user = new User();
+        $status_access = $user->get_access($this->sess_role_id, $module, $field);
+
+        if ($status_access == false) {
+            $msg = '<div class="alert alert-error">You do not have access to this page, please contact administrator</div>';
+            $this->session->set_flashdata('message', $msg);
+            redirect($page);
+        }
     }
 
 }

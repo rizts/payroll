@@ -31,7 +31,7 @@ class Educations extends CI_Controller {
 
         $total_rows = $education->count();
         $data['title'] = "Family";
-        $data['btn_add'] = anchor('staffs/' . $this->staff_id . '/educations/add', 'Add New');
+        $data['btn_add'] = anchor('staffs/' . $this->staff_id . '/educations/add', 'Add New', array('class' => 'btn btn-primary'));
         $data['btn_home'] = anchor('staffs', 'Home');
 
         $offset = $this->uri->segment($this->uri_segment);
@@ -57,15 +57,15 @@ class Educations extends CI_Controller {
         $this->breadcrumb->append_crumb('Add New Education', base_url() . '');
 
         $data['title'] = 'Add New Education';
-        
+
         $data['form_action'] = site_url('staffs/' . $this->staff_id . '/educations/save');
-        $data['link_back'] = anchor('staffs/' . $this->staff_id . '/educations/index', 'Back');
+        $data['link_back'] = anchor('staffs/' . $this->staff_id . '/educations/index', 'Back', array('class'=>'btn'));
 
         $data['id'] = '';
         $data['edu_year'] = array('name' => 'edu_year', 'placeholder' => 'Year');
         $data['edu_gelar'] = array('name' => 'edu_gelar');
         $data['edu_name'] = array('name' => 'edu_name');
-        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save');
+        $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
         $data['breadcrumb'] = $this->breadcrumb->output();
 
         $this->load->view('staff_education/frm_education', $data);
@@ -79,7 +79,7 @@ class Educations extends CI_Controller {
 
         $education = new Education();
         $edu_id = $this->uri->segment(5);
-        
+
         $rs = $education->where('edu_id', $edu_id)->get();
         $data['id'] = $rs->edu_id;
         $data['edu_year'] = array('name' => 'edu_year', 'placeholder' => 'Year', 'value' => $rs->edu_year);
@@ -97,7 +97,7 @@ class Educations extends CI_Controller {
 
     function save() {
         $education = new Education();
-        
+
         $education->staff_id = $this->staff_id;
         $education->edu_year = $this->input->post('edu_year');
         $education->edu_gelar = $this->input->post('edu_gelar');
@@ -117,7 +117,7 @@ class Educations extends CI_Controller {
 
     function update() {
         $education = new Education();
-       
+
         $id = $this->input->post('id');
         $education->where('edu_id', $id)
                 ->update(array(
