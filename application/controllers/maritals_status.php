@@ -61,7 +61,7 @@ class Maritals_Status extends CI_Controller {
 
         $data['title'] = 'Add New Marital Status';
         $data['form_action'] = site_url('maritals_status/save');
-        $data['link_back'] = anchor('maritals_status/', 'Back', array('class' => 'btn'));
+        $data['link_back'] = anchor('maritals_status/', 'Back', array('class' => 'btn btn-danger'));
 
         $data['id'] = '';
         $data['sn_name'] = array('name' => 'sn_name');
@@ -82,7 +82,7 @@ class Maritals_Status extends CI_Controller {
         $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('maritals_status/update');
-        $data['link_back'] = anchor('maritals_status/', 'Back', array('class' => 'btn'));
+        $data['link_back'] = anchor('maritals_status/', 'Back', array('class' => 'btn btn-danger'));
 
         $this->load->view('maritals_status/frm_maritals_status', $data);
     }

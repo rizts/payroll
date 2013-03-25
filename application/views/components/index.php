@@ -47,37 +47,53 @@ function HeaderLink($value, $key, $col, $dir) {
 }
 ?>
 
-<div class="wrap">
+<div class="body">
+  <div class="content">
     <?php echo $this->session->flashdata('message'); ?>
-    <h2 class="rama-title">Listing Component(Gaji)</h2>
-    <div class="float-right"><?php echo $btn_add ?></div>
-    <table class="table boo-table table-bordered table-condensed table-hover">
-        <thead>
-            <tr>
-                <th width="30%"><?php echo HeaderLink("Comp ID", "comp_id", $col, $dir); ?></th>
-                <th width="30%"><?php echo HeaderLink("Comp Name", "comp_name", $col, $dir); ?></th>
-                <th width="30%"><?php echo HeaderLink("Comp Type", "comp_type", $col, $dir); ?></th>
-                <th width="10%" colspan="2" class="action_cell">Action</th>
-            </tr>
-        </thead>
-        <?php
-        foreach ($components as $row) {
-        ?>
-            <tr>
-                <td><?php echo $row->comp_id; ?></td>
-                <td><?php echo $row->comp_name; ?></td>
-                <td><?php echo $row->comp_type; ?></td>
-                <td class="action_cell"><?php echo anchor('components/edit/' . $row->comp_id, img(array("src" => assets_url('images/photon/icons/default/edit.png')))); ?></td>
-                <td class="action_cell"><?php echo anchor('components/delete/' . $row->comp_id, img(array("src" => assets_url('images/photon/icons/default/delete-item.png'))), array('onclick' => "return confirm('Are you sure want to delete?')")); ?></td>
-            </tr>
-        <?php } ?>
+    <div class="page-header">
+      <div class="icon">
+        <span class="ico-money-bag"></span>
+      </div>
+      <h1>Salary component
+      <small>Manage salary component</small>
+      </h1>
+    </div>
+    <br class="cl" />
+    <div class="head blue">
+      <?php echo header_btn_group("#", "components/add");?>
+    </div>
+    <div id="search_bar" class="widget-header">
+      <?php search_form(array(""=>"By","comp_name"=>"Component name", "comp_type"=>"Component Type")); ?>
+    </div>
+    <table class="table fpTable table-hover">
+      <thead>
+        <tr>
+          <th width="10%"><?php echo HeaderLink("Comp ID", "comp_id", $col, $dir); ?></th>
+          <th width="40%"><?php echo HeaderLink("Comp Name", "comp_name", $col, $dir); ?></th>
+          <th width="40%"><?php echo HeaderLink("Comp Type", "comp_type", $col, $dir); ?></th>
+          <th width="10%" colspan="2" class="action_cell">Action</th>
+        </tr>
+      </thead>
+      <?php
+      foreach ($components as $row) {
+      ?>
+          <tr>
+            <td><?php echo $row->comp_id; ?></td>
+            <td><?php echo $row->comp_name; ?></td>
+            <td><?php echo $row->comp_type; ?></td>
+            <td class="action_cell">
+              <?php btn_action('components/edit/'.$row->comp_id, "Edit User", "components/delete/". $row->comp_id); ?>
+            </td>
+          </tr>
+      <?php } ?>
     </table>
     <div class="clearfix"></div>
     <br>
     <div class="pagination pagination-right">
-        <ul>
-            <?php echo $pagination; ?>
-        </ul>
+      <ul>
+        <?php echo $pagination; ?>
+      </ul>
     </div>
+  </div>
 </div>
 <?php get_footer(); ?>

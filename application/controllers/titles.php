@@ -10,6 +10,7 @@ class Titles extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Title');
+        $this->sess_role_id = $this->session->userdata('sess_role_id');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
@@ -57,7 +58,7 @@ class Titles extends CI_Controller {
         $this->filter_access('Title', 'roled_add', 'titles/index');
         $data['title'] = 'Add New Title';
         $data['form_action'] = site_url('titles/save');
-        $data['link_back'] = anchor('titles/', 'Back', array("class" => "btn"));
+        $data['link_back'] = anchor('titles/', 'Back', array("class" => "btn btn-danger"));
 
         $data['id'] = '';
         $data['title_name'] = array('name' => 'title_name');
@@ -76,7 +77,7 @@ class Titles extends CI_Controller {
 
         $data['title'] = 'Update Title';
         $data['form_action'] = site_url('titles/update');
-        $data['link_back'] = anchor('titles/', 'Back', array("class" => "btn"));
+        $data['link_back'] = anchor('titles/', 'Back', array("class" => "btn btn-danger"));
 
         $this->load->view('titles/frm_title', $data);
     }
@@ -119,7 +120,7 @@ class Titles extends CI_Controller {
         $user = new User();
         $status_access = $user->get_access($this->sess_role_id, $module, $field);
 
-        if ($status_access == false) {
+        if ($status_access == true) {
             $msg = '<div class="alert alert-error">You do not have access to this page, please contact administrator</div>';
             $this->session->set_flashdata('message', $msg);
             redirect($page);

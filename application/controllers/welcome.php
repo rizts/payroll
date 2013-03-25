@@ -15,7 +15,7 @@ class Welcome extends CI_Controller {
         $staff = new Staff();
         $data['staffs'] = $staff->get();
         $data['staff_count'] = $staff->count();
-        $data['btn_new_staff'] = anchor('staffs/add', 'Add New Employee', array('class' => 'btn btn-block btn-primary'));
+        $data['btn_new_staff'] = anchor('staffs/add', '<span class="icon-white icon-plus"></span>', array('class' => 'btn btn-primary bootstrap-tooltip', 'data-placement'=>'top', 'data-title'=>'Add new Employee'));
         $this->load->view('welcome_message', $data);
     }
 

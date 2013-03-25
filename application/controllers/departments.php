@@ -63,7 +63,7 @@ class Departments extends CI_Controller {
 
         $data['title'] = 'Add New Departement';
         $data['form_action'] = site_url('departments/save');
-        $data['link_back'] = anchor('departments/', 'Back', array("class" => "btn"));
+        $data['link_back'] = anchor('departments/', 'Back', array("class" => "btn btn-danger"));
 
         $data['id'] = '';
         $data['dept_name'] = array('name' => 'dept_name');
@@ -84,7 +84,7 @@ class Departments extends CI_Controller {
         $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('departments/update');
-        $data['link_back'] = anchor('departments/', 'Back', array("class" => "btn"));
+        $data['link_back'] = anchor('departments/', 'Back', array("class" => "btn btn-danger"));
 
         $this->load->view('departments/frm_dept', $data);
     }

@@ -11,21 +11,39 @@
     });
 </script>
 
-<div class="wrap">
-    <h2>Form Tax Employee</h2>
+<div class="body">
+  <div class="content">
     <?php echo $this->session->flashdata('message'); ?>
+    <div class="page-header">
+      <div class="icon">
+        <span class="ico-credit"></span>
+      </div>
+      <h1>Add Tax Status
+      <small>Add new tax status</small>
+      </h1>
+    </div>
+    <br class="cl" />
     <?php echo form_open($form_action) . form_hidden('id', $id); ?>
     <table width="100%">
         <tr>
-            <td width="20%">SP Status</td>
-            <td><?php echo form_input($sp_status); ?></td>
+          <td width="20%">Status</td>
+          <td><div class="span1"><?php echo form_input($sp_status); ?></div></td>
         </tr>
         <tr>
-            <td width="20%">SP PTKP</td>
-            <td><?php echo form_input($sp_ptkp); ?></td>
+          <td width="20%">Nilai PTKP</td>
+          <td><div class="span2 input-prepend">
+            <span class="btn">Rp.</span>
+            <?php echo form_input($sp_ptkp); ?></div>
+          </td>
+        </tr>
+        <tr>
+          <td width="20%">Note</td>
+          <td>
+            <?php echo form_textarea($sp_note); ?>
+          </td>
         </tr>
     </table>
     <?php echo form_submit($btn_save); ?> <?php echo $link_back; ?>
-    <?php echo form_close() ?>
+    <?php echo form_close() ?></div>
 </div>
 <?php get_footer(); ?>

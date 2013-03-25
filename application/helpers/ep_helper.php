@@ -25,7 +25,7 @@ function load_css($files=null, $media="all"){
   return $out;
 }
 
-function load_javascript($files=null){
+function load_js($files=null){
   $out = null;
   $js_url = assets_url()."/js";
   if($files!==null){
@@ -189,6 +189,76 @@ function init_paginate($base_url = "#", $total_rows = 5, $per_page = 5){
     $config[$k] = $v;
   }
   return $config;
+}
+
+function header_btn_group($download_url = "#", $add_url = "#"){
+  ?>
+  <div class="btn-group float-right">
+    <a href="<?php echo base_url('dashboard/index'); ?>" class="btn btn-primary bootstrap-tooltip" data-placement="top" data-title="Back to Dashboard">
+      <span class="icon-home icon-white"></span>
+    </a>
+    <a href="<?php echo site_url($download_url); ?>" class="btn btn-primary bootstrap-tooltip" data-placement="top" data-title="Download XLS">
+      <span class="icon-download-alt icon-white"></span>
+    </a>
+    <a href="<?php echo site_url($add_url); ?>" class="btn btn-primary bootstrap-tooltip" data-placement="top" data-title="Add New">
+      <span class="icon-plus icon-white"></span>
+    </a>
+  </div>
+  <br class="cl" />
+  <?php
+}
+
+function search_form($search_by){
+  $ci = &get_instance();
+  $ci->load->library("session");
+  $q = $ci->input->get('q');
+  $sb = $ci->input->get('search_by');
+  ?>
+  <div id="view" class="span2">
+    <form action="" method="get" id="view_form">
+      <?php echo form_dropdown("perpage", array(
+        "10"=>"10",
+        "50"=>"50",
+        "100"=>"100",
+        "250"=>"250",
+        "500"=>"500"
+      ),$ci->session->userdata("to_page"), 'class="select_perpage" id="select_perpage"'); ?>
+      <span id="view_label">to page</span>
+    </form>
+  </div>
+  <div id="search" class="span4">
+    <?php
+      if(strlen($q) > 0){
+        echo anchor(uri_string(), '<span class="ico-remove"></span>', array(
+          "class"=>"clear-search bootstrap-tooltip",
+          "data-placement"=>"top",
+          "data-title"=>"Clear search"
+        ));
+      }
+    ?>
+    <form action="" method="get" id="search_form">
+      <?php echo form_dropdown("search_by", $search_by, $sb, 'id="search_by" class="search_by"'); ?>
+      <input type="text" id="search_input" name="q" value="<?php echo $q; ?>" />
+      <input type="submit" name="search" id="search_btn" />
+      <br class="cl"/>
+    </form>
+  </div>
+  <?php
+}
+
+function btn_action($edit_url = "#", $edit_title = "Untitled", $delete_url = "#"){
+  ?>
+  <div class="btn-group">
+    <a href="<?php echo base_url($edit_url); ?>" class="btn btn-primary bootstrap-tooltip" data-title="Edit">
+      <span class="icon-edit icon-white"></span>
+    </a>
+    <?php echo anchor($delete_url, '<span class="icon-remove icon-white"></span>', array(
+      "class"=>"delete btn btn-danger bootstrap-tooltip",
+      "data-placement"=>"top",
+      "data-title"=>"Delete"
+    )); ?>
+  </div>
+  <?php
 }
 
 

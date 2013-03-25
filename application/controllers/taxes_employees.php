@@ -65,11 +65,12 @@ class Taxes_Employees extends CI_Controller {
         
         $data['title'] = 'Add New Tax Employee';
         $data['form_action'] = site_url('taxes_employees/save');
-        $data['link_back'] = anchor('taxes_employees/', 'Back', array("class" => "btn"));
+        $data['link_back'] = anchor('taxes_employees/', 'Back', array("class" => "btn btn-danger"));
 
         $data['id'] = '';
         $data['sp_status'] = array('name' => 'sp_status', 'id' => 'sp_status');
-        $data['sp_ptkp'] = array('name' => 'sp_ptkp', 'id' => 'sp_ptkp');
+        $data['sp_ptkp'] = array('name' => 'sp_ptkp', 'id' => 'sp_ptkp', 'class'=>'auto-coma', 'style'=>'margin:0!important');
+        $data['sp_note'] = array('name' => 'sp_note', 'id' => 'sp_note');
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', "class" => "btn btn-primary");
 
         $this->load->view('taxes_employees/frm_taxes_employees', $data);
@@ -82,13 +83,14 @@ class Taxes_Employees extends CI_Controller {
         $rs = $te->where('sp_id', $id)->get();
         $data['id'] = $rs->sp_id;
         $data['sp_status'] = array('name' => 'sp_status', 'value' => $rs->sp_status);
-        $data['sp_ptkp'] = array('name' => 'sp_ptkp', 'id' => 'sp_ptkp', 'value' => $rs->sp_ptkp);
+        $data['sp_ptkp'] = array('name' => 'sp_ptkp', 'id' => 'sp_ptkp', 'value' => rupiah($rs->sp_ptkp), 'class'=>'auto-coma', 'style'=>'margin:0!important');
+        $data['sp_note'] = array('name' => 'sp_note', 'id' => 'sp_note', 'value' => $rs->sp_note);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class" => "btn btn-primary");
 
         $data['title'] = 'Update Taxes Employees';
         $data['message'] = '';
         $data['form_action'] = site_url('taxes_employees/update');
-        $data['link_back'] = anchor('taxes_employees/', 'Back', array("class" => "btn"));
+        $data['link_back'] = anchor('taxes_employees/', 'Back', array("class" => "btn btn-danger"));
 
         $this->load->view('taxes_employees/frm_taxes_employees', $data);
     }
@@ -105,6 +107,7 @@ class Taxes_Employees extends CI_Controller {
         $te = new Tax_Employee();
         $te->sp_status = $this->input->post('sp_status');
         $te->sp_ptkp = $this->replace_currency($this->input->post('sp_ptkp'));
+        $te->sp_note = $this->input->post("sp_note");
 
         if ($te->save()) {
             $this->session->set_flashdata('message', 'Taxes Employee successfully created!');
@@ -125,7 +128,8 @@ class Taxes_Employees extends CI_Controller {
         $te->where('sp_id', $this->input->post('id'))
                 ->update(array(
                     'sp_status' => $this->input->post('sp_status'),
-                    'sp_ptkp' => $this->replace_currency($this->input->post('sp_ptkp'))
+                    'sp_ptkp' => $this->replace_currency($this->input->post('sp_ptkp')),
+                    'sp_note'=>$this->input->post("sp_note")
                         )
         );
 

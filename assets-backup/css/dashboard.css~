@@ -1,0 +1,143 @@
+::selection{
+  background: transparent;
+}
+
+html,body{
+  height: 100%;
+}
+
+#nav{
+  width: 17%;
+  background: #353a40;
+  height: 100%;
+  font-size: 12px;
+  float: left;
+}
+
+#nav ul{
+  list-style: none;
+  margin-left: 10px;
+}
+
+#nav li{
+  padding: 5px 0;
+}
+
+#nav ul li a, #nav ul li i{
+  color: #eee;
+}
+
+#nav ul li i{
+  margin-right: 5px;
+}
+
+#nav ul.subnav{
+  display: none;
+  margin-left: -20px;
+  background: #202020;
+  padding-left: 60px;
+  box-shadow: inset 1px 1px 7px black;
+}
+
+.separator{
+  border-bottom: 1px solid #6F6F6F;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.wrap{
+  width:81%;
+  padding: 10px;
+  float: left;
+}
+
+.blackify{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,.5);
+  text-align: center;
+}
+
+.blackify img{
+  width: 32px;
+  height: auto;
+  float: right;
+  margin: 10px 10px 0 0;
+}
+
+.table thead th{
+  font-weight: bold;
+}
+
+table tr:hover td{
+  background: #ECF8FF!important;
+}
+
+td.valign{
+  vertical-align: middle;
+}
+
+.custom-fieldset{
+  border:1px solid #ccc;
+  width: 95%;
+  position: static;
+}
+
+.custom-fieldset legend{
+  border: 0;
+  background:transparent;
+  padding: 0 5px;
+  width: auto;
+}
+
+.mylabel{
+  width: 40%;
+  float:left;
+}
+.input{
+  width: 57%;
+  margin-left: 2%;
+  float:left
+}
+
+.spacer{
+  clear: both;
+  height: 20px;
+  border:3px solid #696969;
+  margin-bottom: 20px;
+}
+
+.cl{
+  display: block;
+  clear: both;
+}
+
+/*override*/
+.bootstrap-tooltip::before{
+  content:"";
+}
+
+.dashboard-title{
+  margin: 10px auto;
+  padding-left: 35px;
+  color: #616161;
+  font-size: 23px;
+  line-height: 35px;
+}
+
+.agent{
+  background: url(../images/photon/icons/default/agent.png) no-repeat;
+}
+
+.fancy-globe{
+  background: url(../images/photon/icons/default/fancy-globe.png) no-repeat;
+}
+
+.form-horizontal .container-fluid{
+  margin: 0!important;
+}
+
+input{
+  margin:5px 0!important;
+}

@@ -1,0 +1,194 @@
+body {
+    background-color: #CCCCCC;
+    margin: 40px;
+    font: 13px/20px normal Helvetica, Arial, sans-serif;
+    color: #4F5155;
+}
+
+a {
+    color: #003399;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.section {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    margin-bottom: 18px;
+}
+.section-header {
+    background-color: #F6F6F6;
+    background-image: -moz-linear-gradient(center top , #FAFAFA, #F2F2F2);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #FFFFFF;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    height: 46px;
+    padding: 0 15px;
+}
+.section-header h3, .section-header h5, .section-header h4  {
+    color: #555555;
+    float: left;
+    text-shadow: 1px 1px 0 #FFFFFF;
+    text-transform: uppercase;
+}
+.section-header h3 {
+    line-height: 28px;
+}
+.section-header ul.actions {
+    border: 0 none;
+    float: right;
+    font-size: 11px;
+    line-height: 40px;
+    margin: 0;
+    padding: 0;
+    text-shadow: 1px 1px 0 #FFFFFF;
+    text-transform: uppercase;
+}
+.section-header ul.actions:before, .section-header ul.actions:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.section-header ul.actions:after {
+    clear: both;
+}
+.section-header ul.actions li {
+    display: inline-block;
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.section-header ul.actions li {
+    font-weight: bold;
+}
+.section-header ul.actions li a {
+    color: #666666;
+    outline: medium none;
+    text-decoration: none;
+}
+.section-header ul.actions li a:hover {
+    color: #008EE8;
+}
+.section-header ul.actions li a.btn:hover {
+    color: #333333;
+}
+.section-header ul.actions li .btn {
+    font-family: "Lucida Grande",Verdana,sans-serif;
+    font-size: 10px;
+}
+.section-actions {
+    float: right;
+    margin-bottom: 0;
+    margin-top: 9px;
+}
+.section-content, .section-body {
+    min-height: 18px;
+    padding: 9px 15px 0;
+}
+.section-content {
+    border-top: 1px solid #EBEBEB;
+}
+.section-header + .section-content, .section .section-content:first-child {
+    border-top: 0 none;
+}
+.section-striped .section-content:nth-child(2n+1) {
+    background-color: #F9F9F9;
+}
+.section-hover:hover {
+    background-color: #F5F5F5;
+}
+.section-small .section-header {
+    height: 37px;
+    line-height: 37px;
+    padding: 0 11px;
+}
+.section-small .section-header h5 {
+    font-size: 12px;
+    line-height: 20px;
+}
+.section-small .section-header .section-actions {
+    margin-top: 4px;
+}
+.section-small .section-header ul.actions {
+    line-height: 35px;
+}
+.section-large .section-header {
+    height: 55px;
+    line-height: 55px;
+}
+.section-large .section-header h3 {
+    line-height: 37px;
+}
+.section-large .section-header .section-actions {
+    margin-top: 2px;
+}
+.section-large .section-header ul.actions {
+    line-height: 55px;
+}
+.section-large .section-content, .section-large .section-body {
+    padding: 18px 20px 0;
+}
+
+.stat-block {
+    color: #454545;
+    margin-bottom: 18px;
+}
+.stat-block h1, .stat-block h2, .stat-block h3, .stat-block h4, .stat-block h5, .stat-block h6 {
+    margin: 0;
+}
+.stat-block .muted, .stat-block .aux {
+    font-size: smaller;
+}
+.row-stats .stat-block {
+    margin-bottom: 0;
+}
+.stat-heading{
+    color: #999999;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.breadcrumbx {
+    background-color: #F6F6F6;
+    background-image: -moz-linear-gradient(center top , #FAFAFA, #F2F2F2);
+    background-repeat: repeat-x;
+    border: 1px solid #CCCCCC;
+    color: #666666;
+    font-size: 12px;
+}
+.breadcrumbx .active a {
+    color: #666666;
+}
+
+.form-signin {
+    max-width: 300px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+}

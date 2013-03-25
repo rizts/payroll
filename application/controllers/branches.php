@@ -65,7 +65,7 @@ class Branches extends CI_Controller {
 
         $data['title'] = 'Add New Branch';
         $data['form_action'] = site_url('branches/save');
-        $data['link_back'] = anchor('branches/', 'Back', array('class' => 'btn'));
+        $data['link_back'] = anchor('branches/', 'Back', array('class' => 'btn btn-danger'));
 
         $data['id'] = '';
         $data['branch_name'] = array('name' => 'branch_name');
@@ -85,7 +85,7 @@ class Branches extends CI_Controller {
 
         $data['title'] = 'Update Branch';
         $data['form_action'] = site_url('branches/update');
-        $data['link_back'] = anchor('branches/', 'Back', array("class" => "btn"));
+        $data['link_back'] = anchor('branches/', 'Back', array("class" => "btn btn-danger"));
 
         $this->load->view('branches/frm_branch', $data);
     }

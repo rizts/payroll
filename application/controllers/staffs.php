@@ -18,6 +18,7 @@ class Staffs extends CI_Controller {
         $this->load->model('Employee_Status');
         $this->load->model('Tax_Employee');
         $this->load->model('Family');
+        $this->load->model('Medical');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
@@ -89,7 +90,7 @@ class Staffs extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Staff';
         $data['form_action'] = site_url('staffs/save');
-        $data['link_back'] = anchor('staffs/', 'Back');
+        $data['link_back'] = anchor('staffs/', 'Back', array('class'=>'btn btn-danger'));
 
         $data['id'] = '';
         $data['staff_nik'] = array('name' => 'staff_nik');
@@ -271,8 +272,35 @@ class Staffs extends CI_Controller {
         }
 
         if ($staff->save()) {
+            $staff_id = $this->db->insert_id();
             $this->session->set_flashdata('message', 'Staff successfully created!');
-            redirect('staffs/');
+            // family data
+            // save routine for family
+            $family = new Family();
+            $families = $this->input->post("families");
+            foreach($families as $f){
+              list($order, $name, $birthdate, $birthplace, $sex, $relation) = explode(";", $f);
+              $family->staff_fam_staff_id = $staff_id;
+              $family->staff_fam_order = $order;
+              $family->staff_fam_name = $name;
+              $family->staff_fam_birthdate = $birthdate;
+              $family->staff_fam_birthplace = $birthplace;
+              $family->staff_fam_sex = $sex;
+              $family->staff_fam_relation = $relation;
+              $family->save();
+            }
+            // medic data
+            // save routine for medical history
+            $medic = new Medical();
+            $medics = $this->input->post("medics");
+            foreach($medics as $m){
+              list($date, $description) = explode(";", $m);
+              $medic->staff_id = $staff_id;
+              $medic->medic_date = $date;
+              $medic->medic_description = $description;
+              $medic->save();	
+            }
+            //redirect('staffs/');
         } else {
 // Failed
             $staff->error_message('custom', 'Field required');

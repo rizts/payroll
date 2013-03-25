@@ -61,7 +61,7 @@ class Employees_Status extends CI_Controller {
         
         $data['title'] = 'Add New Employee Status';
         $data['form_action'] = site_url('employees_status/save');
-        $data['link_back'] = anchor('employees_status/', 'Back', array("class" => "btn"));
+        $data['link_back'] = anchor('employees_status/', 'Back', array("class" => "btn btn-danger"));
 
         $data['id'] = '';
         $data['sk_name'] = array('name' => 'sk_name');
@@ -82,7 +82,7 @@ class Employees_Status extends CI_Controller {
         $data['title'] = 'Update';
         $data['message'] = '';
         $data['form_action'] = site_url('employees_status/update');
-        $data['link_back'] = anchor('employees_status/', 'Back', array("class" => "btn"));
+        $data['link_back'] = anchor('employees_status/', 'Back', array("class" => "btn btn-danger"));
 
         $this->load->view('employees_status/frm_employees_status', $data);
     }

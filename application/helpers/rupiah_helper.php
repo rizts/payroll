@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 if (!function_exists('rupiah')) {
 
     function rupiah($var = '') {
-        $x = number_format($var, 2, ",", ".");
+        $x = number_format($var, 2, ".", ",");
         return $x;
     }
 

@@ -1,0 +1,196 @@
+<?php 
+header("Content-type: application/javascript"); 
+$url = urldecode($_GET["url"]);
+?>
+var ppn = true;
+var currency = "Rp";
+function calculate(row){
+  var $hands = $("#handsontable");
+  var qty = $hands.handsontable('getDataAtCell', row, 4); // qty cell
+  var price = $hands.handsontable('getDataAtCell', row, 5); // price cell
+  var disc = $hands.handsontable('getDataAtCell', row, 6); // discount cell
+  qty = (qty === null) ? 0:qty;
+  price = (price === null) ? 0:price;
+  disc = (disc === null) ? 0:disc;
+  // calculate amount
+  var disc_amount = (qty * price / 100)  * disc;
+  var amount = qty * price - disc_amount;
+  $("#handsontable").handsontable('setDataAtCell', row, 7, amount);
+  calculate_total();
+}
+
+function calculate_total(){
+  var $hands = $("#handsontable");
+  // calculate subtotal 
+  // get all amount from every row
+  var num_rows = $hands.handsontable('countRows');
+  var subtotal = 0;
+  for(i=0; i<num_rows; i++){
+    var amnt = $hands.handsontable('getDataAtCell', i, 7);
+    subtotal += amnt;
+  }
+  $("#subtotal_inline").val(accounting.formatMoney(subtotal, ""));
+  // subtotal - discount
+  var subtotal_disc = $("#po_disc").val();
+  var subtotal2 = subtotal;
+  if(subtotal_disc > 0){
+    var subtotal_disc_amount = (subtotal / 100) * subtotal_disc;
+    subtotal2 = subtotal - subtotal_disc_amount;
+  }
+  $("#subtotal2_inline").val(accounting.formatMoney(subtotal2, ""));
+  // total - ppn
+  console.log("ppn = "+ppn);
+  var po_total = subtotal2;
+  if(ppn){
+    var ppn_amount = (subtotal2 / 100) * 10; //
+    $("#po_ppn").val(accounting.formatMoney(ppn_amount, ""));
+    po_total = subtotal2 + ppn_amount;
+  }
+  $("#po_total").val(accounting.formatMoney(po_total, ""));
+}
+
+$(document).ready(function(){
+  // calculate discount onkeyup
+  $("#po_disc").on("keyup", function(){
+    var subtotal = $("#subtotal_inline").val().replace(/,/g, "");
+    var disc = isNaN(parseInt($("#po_disc").val())) ? 0:parseInt($("#po_disc").val());
+    var subtotal2 = subtotal;
+    if(disc > 0){
+      var disc_amount = (subtotal / 100) * disc;
+      subtotal2 = subtotal - disc_amount;
+    }
+    $("#subtotal2_inline").val(accounting.formatMoney(subtotal2, ""));
+    // total - ppn
+    var po_total = subtotal2;
+    if(ppn){
+      var ppn_amount = (subtotal2 / 100) * 10; //
+      $("#po_ppn").val(accounting.formatMoney(ppn_amount, ""));
+      po_total = subtotal2 + ppn_amount;
+    }
+    $("#po_total").val(accounting.formatMoney(po_total, ""));
+  });
+  
+  var $instance = $("#handsontable").handsontable({
+    startCols: 9,
+    startRows: 3,
+    colWidths: [35, 35, 150, 300, 80, 100, 80, 150, 120],
+    colHeaders: ["No","ID", "Code", "Description", "Qty","Price","Disc.","amount","Del. Date"],
+    contextMenu: true,
+    onChange: function(updatedData, source){
+      if(source === "populateFromArray" && (updatedData[0][1] == 4 || updatedData[0][1] == 6)){ // if change on qty and disc
+        var row = updatedData[0][0];
+        calculate(row);
+      }
+      if(source === "edit" && updatedData[0][1] == 2){ // if change on code cell
+        var currentRow = updatedData[0][0];
+        var value = updatedData[0][3];
+        var url = '<?php echo $url."purchase_order/get_all_barang/supplier_stockcode"; ?>/'+value;
+        $.getJSON(url, function(data){
+          $.each(data, function(i, v){
+            $("#handsontable").handsontable('setDataAtCell', currentRow, 1, v.id); // set id column
+            $("#handsontable").handsontable('setDataAtCell', currentRow, 3, v.supplier_stockname); // set name column
+            $("#handsontable").handsontable('setDataAtCell', currentRow, 5, v.supplier_stockprice); // set price column
+            calculate(currentRow);
+          });
+        });
+      }
+    },
+    columns:[
+      {},
+      {readOnly:true},
+      {
+        type: 'autocomplete',
+        source:function(query, process){
+          var url = '<?php echo $url."purchase_order/get_all_barang/supplier_stockcode"; ?>/'+query;
+          $.getJSON(url, function(data){
+            var items = [];
+            $.each(data, function(i,v){
+              items.push(v.supplier_stockcode);
+            });
+            process(items);
+          });
+        },
+        strict: true,
+        options: {items: 20}
+      },
+      {},
+      {type:'numeric'},
+      {type:'numeric', format:'0,0.00', readOnly:true},
+      {type:'numeric'},
+      {type:'numeric', format:'0,0.00', readOnly:true},
+      {type:'date'}
+    ]
+  });
+  // save items to an hidden input
+  $(".getData").click(function(e){
+    var data = $("#handsontable").handsontable("getData");
+    var data_len = data.length;
+    var item = '';
+    var empty = 0;
+    for(j = 0; j < data_len; j++){
+      var id = (data[j][1] === null) ? "":data[j][1];
+      var qty = (data[j][4] === null) ? "":data[j][4];
+      var price = (data[j][5] === null) ? "":data[j][5];
+      var discount = (data[j][6] === null) ? "":data[j][6];
+      var del_date = (data[j][8] === null) ? "":data[j][8];
+      console.log(data[j][4]);
+      // only need to put : stock_id, qty, harga_satuan, discount, delivery_date
+      if(id != "" && qty != "" && price != ""){
+        item += '<input type="hidden" name="items[]" value="'+id+';'+qty+';'+price+';'+discount+';'+del_date+'">';  
+      }else{
+        empty++;
+      }
+    }
+    if(empty > 0){
+      jAlert("Please note, some rows have empty \"ID\", \"Qty\" and \"Price\" these rows won't be saved.", "some rows are empty")
+    }
+    $("#items_container").html(item);
+  });
+  
+  $(".supplier_dd").on("change", function(e){
+    var id = $(this).val();
+    var url = "<?php echo $url.'purchase_order/get_supplier/'; ?>/"+id;
+    $.getJSON(url, function(data){
+      $.each(data, function(i, val){
+        currency = val.currency;
+        $("#supplier_attn").html(val.sattn);
+        $("#supplier_phone").html(val.sphone);
+        $("#supplier_fax").html(val.sfax);
+        $("#supplier_address").html(val.saddr);
+        $(".currency").html(currency);
+        if(val.sppn == "non_ppn"){
+          ppn = false;
+          $("#ppn_input_wrapper").hide();
+          calculate_total();
+        }else{
+          ppn = true;
+          $("#ppn_input_wrapper").show();
+          $("#po_ppn").val("0.00");
+          calculate_total();
+        }
+      });
+    });
+  });
+  
+  // gudang detail
+  $(".gudang_dd").on("change", function(e){
+    var id = $(this).val();
+    var url = "<?php echo $url.'purchase_order/get_gudang/'; ?>/"+id;
+    $.getJSON(url, function(data){
+      $.each(data, function(i, val){
+        $("#gudang_address").html(val.alamat);
+        $("#gudang_phone").html("Telp : "+val.telp);
+        $("#gudang_fax").html("Fax : "+ val.fax);
+      });
+    });
+  });
+  
+  $("#po_status").iphoneStyle({
+    checkedLabel: "Approved",
+    uncheckedLabel: "Unapproved",
+    onChange: function(e, checked){
+      if(checked) $(e).attr("checked", "checked");
+      else $(e).removeAttr("checked");
+    }
+  });
+});

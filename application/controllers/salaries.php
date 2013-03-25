@@ -59,7 +59,7 @@ class Salaries extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Salary';
         $data['form_action'] = site_url('salaries/save');
-        $data['link_back'] = anchor('salaries/', 'Back', array('class' => 'btn'));
+        $data['link_back'] = anchor('salaries/', 'Back', array('class' => 'btn btn-danger'));
 
         $data['id'] = '';
         $data['salary_periode'] = array('name' => 'salary_periode');
@@ -80,7 +80,7 @@ class Salaries extends CI_Controller {
 
         $data['title'] = 'Update';
         $data['form_action'] = site_url('salaries/update');
-        $data['link_back'] = anchor('salaries/', 'Back');
+        $data['link_back'] = anchor('salaries/', 'Back', array('class'=>'btn  btn-danger'));
 
         $this->load->view('salaries/frm_salaries', $data);
     }
