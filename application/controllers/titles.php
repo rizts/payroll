@@ -33,15 +33,21 @@ class Titles extends CI_Controller {
             $data['dir'] = "ASC";
         }
 
-        $total_rows = $title_list->count();
+
         $data['title'] = "Titles";
         $data['btn_add'] = anchor('titles/add', 'Add New', array("class" => "btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
-
-        $title_list->order_by($data['col'], $data['dir']);
+        if ($this->input->get('search_by')) {
+            $total_rows = $title_list->like($_GET['search_by'], $_GET['q'])->count();
+            $title_list->like($_GET['search_by'], $_GET['q'])->order_by($data['col'], $data['dir']);
+        } else {
+            $total_rows = $title_list->count();
+            $title_list->order_by($data['col'], $data['dir']);
+        }
+        
         $data['title_list'] = $title_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("titles/index");

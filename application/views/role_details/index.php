@@ -28,56 +28,57 @@
     }
 
 </script>
-
-<div class="wrap">
-    <h2 class="rama-title">Listing Role Detail</h2>
-    <div class="float-right"><?php echo $link_back . ' ' . $btn_add ?></div>
-    <?php echo $this->session->flashdata('message'); ?>
-    <table id="user_role" class="table boo-table table-bordered table-condensed table-hover">
-        <thead>
-            <tr>
-                <th>Roled ID</th>
-                <th>Roled Module</th>
-                <th>Roled Add</th>
-                <th>Roled Edit</th>
-                <th>Roled Delete</th>
-                <th>Roled Approval</th>
-                <th>Roled Select</th>
-                <!--th width="10%" colspan="2" class="action_cell">Action</th-->
-            </tr>
-        </thead>
-        <?php
-        foreach ($roled_list as $row) {
-        ?>
-            <tr>
-                <td><?php echo $row->roled_id; ?></td>
-                <td><?php echo $row->roled_module; ?></td>
-                <td>
-                    <a style="font-size: 15px;" id="roled_add_<?php echo $row->roled_id; ?>" href="#" onclick="edit_row_table('roled_add_<?php echo $row->roled_id; ?>', 'roled_add', <?php echo $row->roled_id; ?>)" class="editable editable-click"><?php echo $row->roled_add; ?></a>
-                </td>
-                <td>
-                    <a style="font-size: 15px;" id="roled_edit_<?php echo $row->roled_id; ?>" href="#" onclick="edit_row_table('roled_edit_<?php echo $row->roled_id; ?>', 'roled_edit', <?php echo $row->roled_id; ?>)" class="editable editable-click"><?php echo $row->roled_edit; ?></a>
-                </td>
-                <td>
-                    <a style="font-size: 15px;" id="roled_delete_<?php echo $row->roled_id; ?>" href="#" onclick="edit_row_table('roled_delete_<?php echo $row->roled_id; ?>', 'roled_delete', <?php echo $row->roled_id; ?>)" class="editable editable-click"><?php echo $row->roled_delete; ?></a>
-                </td>
-                <td>
-                    <a style="font-size: 15px;" id="roled_approval_<?php echo $row->roled_id; ?>" href="#" onclick="edit_row_table('roled_approval_<?php echo $row->roled_id; ?>', 'roled_approval', <?php echo $row->roled_id; ?>)" class="editable editable-click"><?php echo $row->roled_approval; ?></a>
-                </td>
-                <td>
-                    <a style="font-size: 15px;" id="roled_select_<?php echo $row->roled_id; ?>" href="#" onclick="edit_row_table('roled_select_<?php echo $row->roled_id; ?>', 'roled_select', <?php echo $row->roled_id; ?>)" class="editable editable-click"><?php echo $row->roled_select; ?></a>
-                </td>
-                <!--td class="action_cell"><?php echo anchor('users/roles/' . $role_id . '/role_details/edit/' . $row->roled_id, img(array("src" => assets_url('images/photon/icons/default/edit.png')))); ?></td>
-                <td class="action_cell"><?php echo anchor('users/roles/' . $role_id . '/role_details/delete/' . $row->roled_id, img(array("src" => assets_url('images/photon/icons/default/delete-item.png'))), array('onclick' => "return confirm('Are you sure want to delete?')")); ?></td-->
-            </tr>
-        <?php } ?>
-    </table>
-    <div class="clearfix"></div>
-    <br>
-    <div class="pagination pagination-right">
-        <ul>
-            <?php echo $pagination; ?>
-        </ul>
+<div class="body">
+    <div class="content">
+        <h2 class="rama-title">Listing Role Detail</h2>
+        <div class="float-right"><?php echo $link_back . ' ' . $btn_add ?></div>
+        <?php echo $this->session->flashdata('message'); ?>
+        <table id="user_role" class="table boo-table table-bordered table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Roled ID</th>
+                    <th>Roled Module</th>
+                    <th>Roled Add</th>
+                    <th>Roled Edit</th>
+                    <th>Roled Delete</th>
+                    <th>Roled Approval</th>
+                    <th>Roled Select</th>
+                    <!--th width="10%" colspan="2" class="action_cell">Action</th-->
+                </tr>
+            </thead>
+            <?php
+            foreach ($roled_list as $row) {
+            ?>
+                <tr>
+                    <td><?php echo $row->roled_id; ?></td>
+                    <td><?php echo $row->roled_module; ?></td>
+                    <td>
+                        <a style="font-size: 15px;" id="roled_add_<?php echo $row->roled_id; ?>" href="#" onclick="edit_row_table('roled_add_<?php echo $row->roled_id; ?>', 'roled_add', <?php echo $row->roled_id; ?>)" class="editable editable-click"><?php echo $row->roled_add; ?></a>
+                    </td>
+                    <td>
+                        <a style="font-size: 15px;" id="roled_edit_<?php echo $row->roled_id; ?>" href="#" onclick="edit_row_table('roled_edit_<?php echo $row->roled_id; ?>', 'roled_edit', <?php echo $row->roled_id; ?>)" class="editable editable-click"><?php echo $row->roled_edit; ?></a>
+                    </td>
+                    <td>
+                        <a style="font-size: 15px;" id="roled_delete_<?php echo $row->roled_id; ?>" href="#" onclick="edit_row_table('roled_delete_<?php echo $row->roled_id; ?>', 'roled_delete', <?php echo $row->roled_id; ?>)" class="editable editable-click"><?php echo $row->roled_delete; ?></a>
+                    </td>
+                    <td>
+                        <a style="font-size: 15px;" id="roled_approval_<?php echo $row->roled_id; ?>" href="#" onclick="edit_row_table('roled_approval_<?php echo $row->roled_id; ?>', 'roled_approval', <?php echo $row->roled_id; ?>)" class="editable editable-click"><?php echo $row->roled_approval; ?></a>
+                    </td>
+                    <td>
+                        <a style="font-size: 15px;" id="roled_select_<?php echo $row->roled_id; ?>" href="#" onclick="edit_row_table('roled_select_<?php echo $row->roled_id; ?>', 'roled_select', <?php echo $row->roled_id; ?>)" class="editable editable-click"><?php echo $row->roled_select; ?></a>
+                    </td>
+                    <!--td class="action_cell"><?php echo anchor('users/roles/' . $role_id . '/role_details/edit/' . $row->roled_id, img(array("src" => assets_url('images/photon/icons/default/edit.png')))); ?></td>
+                    <td class="action_cell"><?php echo anchor('users/roles/' . $role_id . '/role_details/delete/' . $row->roled_id, img(array("src" => assets_url('images/photon/icons/default/delete-item.png'))), array('onclick' => "return confirm('Are you sure want to delete?')")); ?></td-->
+                </tr>
+            <?php } ?>
+        </table>
+        <div class="clearfix"></div>
+        <br>
+        <div class="pagination pagination-right">
+            <ul>
+                <?php echo $pagination; ?>
+            </ul>
+        </div>
     </div>
 </div>
 <?php get_footer(); ?>

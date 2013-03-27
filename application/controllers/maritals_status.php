@@ -35,15 +35,21 @@ class Maritals_Status extends CI_Controller {
             $data['dir'] = "ASC";
         }
 
-        $total_rows = $marital_list->count();
+
         $data['title'] = "Maritals Status";
         $data['btn_add'] = anchor('maritals_status/add', 'Add New', array("class" => "btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
+        if ($this->input->get('search_by')) {
+            $total_rows = $marital_list->like($_GET['search_by'], $_GET['q'])->count();
+            $marital_list->like($_GET['search_by'], $_GET['q'])->order_by($data['col'], $data['dir']);
+        } else {
+            $total_rows = $marital_list->count();
+            $marital_list->order_by($data['col'], $data['dir']);
+        }
 
-        $marital_list->order_by($data['col'], $data['dir']);
         $data['marital_list'] = $marital_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("maritals_status/index");

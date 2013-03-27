@@ -43,44 +43,60 @@ function HeaderLink($value, $key, $col, $dir) {
     return $out;
 }
 ?>
+<div class="body">
+    <div class="content">
+        <?php echo $this->session->flashdata('message'); ?>
+        <div class="page-header">
+            <div class="icon">
+                <span class="ico-tag"></span>
+            </div>
+            <h1>Listing Role
+                <small>Manage title</small>
+            </h1>
+        </div>
+        <br class="cl" />
+        <div class="head blue">
+            <?php echo header_btn_group("#", "users/add_role"); ?>
+        </div>
+        <div id="search_bar" class="widget-header">
+            <?php search_form(array("" => "By", "role_name" => "Name")); ?>
+        </div>
 
-<div class="wrap">
-    <h2 class="rama-title">Listing Role</h2>
-    <div class="float-right"><?php echo $btn_add ?></div>
-    <?php echo $this->session->flashdata('message'); ?>
-    <table class="table boo-table table-bordered table-condensed table-hover">
-        <thead>
-            <tr>
-                <th><?php echo HeaderLink("Role ID", "role_id", $col, $dir); ?></th>
-                <th><?php echo HeaderLink("Role Name", "role_name", $col, $dir); ?></th>
-                <th width="10">Action</th>
-            </tr>
-        </thead>
-        <?php
-        foreach ($role_list as $row) {
-        ?>
-            <tr>
-                <td><?php echo $row->role_id; ?></td>
-                <td><?php echo $row->role_name; ?></td>
-                <td>
-                    <div class="btn-group">
-                        <a href="#" data-toggle="dropdown" class="btn btn-mini dropdown-toggle">
-                            <i class="icon-cog"></i>
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><?php echo anchor('users/roles/' . $row->role_id . '/role_details/index/', '<i class="icon-list"></i> Add Privileges'); ?></li>
-                            <li><?php echo anchor('users/edit_role/' . $row->role_id, '<i class="icon-pencil"></i> Edit'); ?></li>
-                            <li><?php echo anchor('users/delete_role/' . $row->role_id, '<i class="icon-trash"></i> Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?></li>
-                        </ul>
-                    </div>    
-                </td>
-            </tr>
-        <?php } ?>
-    </table>
+        <table class="table boo-table table-bordered table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th><?php echo HeaderLink("Role ID", "role_id", $col, $dir); ?></th>
+                    <th><?php echo HeaderLink("Role Name", "role_name", $col, $dir); ?></th>
+                    <th width="10">Action</th>
+                </tr>
+            </thead>
+            <?php
+            foreach ($role_list as $row) {
+            ?>
+                <tr>
+                    <td><?php echo $row->role_id; ?></td>
+                    <td><?php echo $row->role_name; ?></td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="#" data-toggle="dropdown" class="btn btn-mini dropdown-toggle">
+                                <i class="icon-cog"></i>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><?php echo anchor('users/roles/' . $row->role_id . '/role_details/index/', '<i class="icon-list"></i> Add Privileges'); ?></li>
+                                <li><?php echo anchor('users/edit_role/' . $row->role_id, '<i class="icon-pencil"></i> Edit'); ?></li>
+                                <li><?php echo anchor('users/delete_role/' . $row->role_id, '<i class="icon-trash"></i> Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
 
-    <br>
-    <?php echo $pagination; ?>
         <br>
+        <?php echo $pagination; ?>
+            <br>
+
+        </div>
     </div>
 <?php get_footer(); ?>

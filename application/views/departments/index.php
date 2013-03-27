@@ -60,7 +60,7 @@ function HeaderLink($value, $key, $col, $dir) {
       <?php echo header_btn_group("#", "departments/add");?>
     </div>
     <div id="search_bar" class="widget-header">
-      <?php search_form(array(""=>"By","dept_name"=>"Department name")); ?>
+      <?php search_form(array(""=>"By","dept_name"=>"Name")); ?>
     </div>
     <table class="table fpTable table-hover">
       <thead>

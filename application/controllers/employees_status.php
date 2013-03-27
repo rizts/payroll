@@ -35,15 +35,21 @@ class Employees_Status extends CI_Controller {
             $data['dir'] = "ASC";
         }
 
-        $total_rows = $es_list->count();
+
         $data['title'] = "Employees Status";
         $data['btn_add'] = anchor('employees_status/add', 'Add New', array("class" => "btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
 
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
+        if ($this->input->get('search_by')) {
+            $total_rows = $es_list->like($_GET['search_by'], $_GET['q'])->count();
+            $es_list->like($_GET['search_by'], $_GET['q'])->order_by($data['col'], $data['dir']);
+        } else {
+            $total_rows = $es_list->count();
+            $es_list->order_by($data['col'], $data['dir']);
+        }
 
-        $es_list->order_by($data['col'], $data['dir']);
         $data['es_list'] = $es_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("employees_status/index");
@@ -58,7 +64,7 @@ class Employees_Status extends CI_Controller {
 
     function add() {
         $this->filter_access('Employee_Status', 'roled_add', 'employees_status/index');
-        
+
         $data['title'] = 'Add New Employee Status';
         $data['form_action'] = site_url('employees_status/save');
         $data['link_back'] = anchor('employees_status/', 'Back', array("class" => "btn btn-danger"));
@@ -72,7 +78,7 @@ class Employees_Status extends CI_Controller {
 
     function edit($id) {
         $this->filter_access('Employee_Status', 'roled_edit', 'employees_status/index');
-        
+
         $es = new Employee_Status();
         $rs = $es->where('sk_id', $id)->get();
         $data['id'] = $rs->sk_id;
@@ -89,7 +95,7 @@ class Employees_Status extends CI_Controller {
 
     function save() {
         $this->filter_access('Employee_Status', 'roled_add', 'employees_status/index');
-        
+
         $es = new Employee_Status();
         $es->sk_name = $this->input->post('sk_name');
         if ($es->save()) {
@@ -106,7 +112,7 @@ class Employees_Status extends CI_Controller {
 
     function update() {
         $this->filter_access('Employee_Status', 'roled_edit', 'employees_status/index');
-        
+
         $es = new Employee_Status();
         $es->where('sk_id', $this->input->post('id'))
                 ->update('sk_name', $this->input->post('sk_name'));
@@ -117,7 +123,7 @@ class Employees_Status extends CI_Controller {
 
     function delete($id) {
         $this->filter_access('Employee_Status', 'roled_delete', 'employees_status/index');
-        
+
         $es = new Employee_Status();
         $es->_delete($id);
         $this->session->set_flashdata('message', 'Employee Status successfully deleted!');

@@ -19,6 +19,7 @@ class Departments extends CI_Controller {
     public function index($offset = 0) {
         $this->filter_access('Departement', 'roled_select', base_url());
         $dept_list = new Department();
+
         switch ($this->input->get('c')) {
             case "1":
                 $data['col'] = "dept_name";
@@ -36,8 +37,6 @@ class Departments extends CI_Controller {
             $data['dir'] = "ASC";
         }
 
-        $total_rows = $dept_list->count();
-
         $data['title'] = "Departments";
         $data['btn_add'] = anchor('departments/add', 'Add New', array("class" => "btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
@@ -45,7 +44,15 @@ class Departments extends CI_Controller {
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $dept_list->order_by($data['col'], $data['dir']);
+        if ($this->input->get('search_by')) {
+            $total_rows = $dept_list->like($_GET['search_by'], $_GET['q'])->count();
+            $dept_list->like($_GET['search_by'], $_GET['q'])->order_by($data['col'], $data['dir']);
+        } else {
+            $total_rows = $dept_list->count();
+            $dept_list->order_by($data['col'], $data['dir']);
+        }
+
+
         $data['dept_list'] = $dept_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("departments/index");
@@ -91,7 +98,7 @@ class Departments extends CI_Controller {
 
     function save() {
         $this->filter_access('Departement', 'roled_add', 'departments/index');
-        
+
         $dept = new Department();
         $dept->dept_name = $this->input->post('dept_name');
         if ($dept->save()) {
@@ -108,7 +115,7 @@ class Departments extends CI_Controller {
 
     function update() {
         $this->filter_access('Departement', 'roled_edit', 'departments/index');
-        
+
         $dept = new Department();
         $dept->where('dept_id', $this->input->post('id'))
                 ->update('dept_name', $this->input->post('dept_name'));

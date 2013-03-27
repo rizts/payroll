@@ -12,15 +12,14 @@ class Branches extends CI_Controller {
         $this->load->model('Branch');
         $this->sess_username = $this->session->userdata('username');
         $this->sess_role_id = $this->session->userdata('sess_role_id');
-        $this->sess_staff_id = $this->session->userdata('sess_staff_id');        
+        $this->sess_staff_id = $this->session->userdata('sess_staff_id');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
     public function index($offset = 0) {
         $this->filter_access('Branch', 'roled_select', base_url());
-        
+
         $branch_list = new Branch();
-        $total_rows = $branch_list->count();
 
         switch ($this->input->get('c')) {
             case "1":
@@ -46,7 +45,13 @@ class Branches extends CI_Controller {
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $branch_list->order_by($data['col'], $data['dir']);
+        if ($this->input->get('search_by')) {
+            $total_rows = $branch_list->like($_GET['search_by'], $_GET['q'])->count();
+            $branch_list->like($_GET['search_by'], $_GET['q'])->order_by($data['col'], $data['dir']);
+        } else {
+            $total_rows = $branch_list->count();
+            $branch_list->order_by($data['col'], $data['dir']);
+        }
 
         $data['branch_list'] = $branch_list->get($this->limit, $offset)->all;
 
@@ -76,7 +81,7 @@ class Branches extends CI_Controller {
 
     function edit($id) {
         $this->filter_access('Branch', 'roled_edit', 'branches/index');
-        
+
         $branch = new Branch();
         $rs = $branch->where('branch_id', $id)->get();
         $data['id'] = $rs->branch_id;
@@ -120,7 +125,7 @@ class Branches extends CI_Controller {
 
     function delete($id) {
         $this->filter_access('Branch', 'roled_delete', 'branches/index');
-        
+
         $branch = new Branch();
         $branch->_delete($id);
 
