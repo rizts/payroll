@@ -134,17 +134,21 @@ class Branches extends CI_Controller {
     }
 
     function get_employee_per_branch() {
+        sleep(1);
         $arr = array();
         $bln = array();
-        $query = $this->db->query("SELECT DISTINCT DATE_FORMAT(created_at, '%Y-%m') AS Month, COUNT(staff_id) AS iCount FROM staffs GROUP BY Month ORDER BY Month ASC");
+        $query = $this->db->query("SELECT DISTINCT DATE_FORMAT(created_at, '%Y-%m') 
+            AS Month, COUNT(staff_id)
+            AS iCount FROM staffs GROUP BY Month ORDER BY Month ASC");
         foreach ($query->result() as $row) {
-            $arr[] = $row['iCount'];
-            $bln[] = $row['Month'];
+            $arr[] = $row->iCount;
+            $bln[] = $row->Month;
         }
         $b = json_encode($bln);
         $x = json_encode($arr);
         $y = str_replace('"', '', $x);
-        return array($y, $b);
+        $result= array($y, $b);
+        echo json_encode($bln);
     }
 
     function filter_access($module, $field, $page) {

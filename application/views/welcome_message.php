@@ -81,9 +81,9 @@
 
 <div class="body">
     <?php echo $this->session->flashdata('message'); ?>
-    <div class="content">
+    <div class="content" style="padding-top: 0;">
         <div class="page-header">
-            <h2>Welcome (<?php echo $this->session->userdata('username'); ?>)</h2>
+            <h3>Welcome (<?php echo $this->session->userdata('username'); ?>)</h3>
         </div>
         <br class="cl" />
         <div class="section section-small">
