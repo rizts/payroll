@@ -43,7 +43,7 @@
             "plugins/jquery.jstree.js",
             "accounting.js",
             "plugins.js",
-            "charts.js",
+//            "charts.js",
             "actions.js",
             "custom.js"
         ));
@@ -84,8 +84,6 @@
                                     <?php echo $salary == true ? '<li>' . anchor('salaries', 'Salary') . '</li>' : ''; ?>
                                     <?php echo $staff == true ? '<li>' . anchor('staffs', 'Staff') . '</li>' : ''; ?>
                                     <?php echo $assets == true ? '<li>' . anchor('assets', 'Assets') . '</li>' : ''; ?>
-                                    <?php echo $users == true ? '<li>' . anchor('users/index', 'Users') . '</li>' : ''; ?>
-                                    <?php echo $role_details == true ? '<li>' . anchor('users/roles', 'Roles') . '</li>' : ''; ?>
                                 </ul>
                                 <?php } ?>
                             </ul>
@@ -100,6 +98,8 @@
                                 <?php echo $marital_status == true ? '<li>' . anchor('maritals_status', 'Marital Status') . '</li>' : ''; ?>
                                 <?php echo $title == true ? '<li>' . anchor('titles', 'Title') . '</li>' : ''; ?>
                                 <?php echo $component == true ? '<li>' . anchor('components', 'Component(Gaji)') . '</li>' : ''; ?>
+                                <?php echo $users == true ? '<li>' . anchor('users/index', 'Users') . '</li>' : ''; ?>
+                                <?php echo $role_details == true ? '<li>' . anchor('users/roles', 'Roles') . '</li>' : ''; ?>
                             </ul>
                         </li>
 

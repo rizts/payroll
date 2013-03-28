@@ -133,6 +133,20 @@ class Branches extends CI_Controller {
         redirect('branches/');
     }
 
+    function get_employee_per_branch() {
+        $arr = array();
+        $bln = array();
+        $query = $this->db->query("SELECT DISTINCT DATE_FORMAT(created_at, '%Y-%m') AS Month, COUNT(staff_id) AS iCount FROM staffs GROUP BY Month ORDER BY Month ASC");
+        foreach ($query->result() as $row) {
+            $arr[] = $row['iCount'];
+            $bln[] = $row['Month'];
+        }
+        $b = json_encode($bln);
+        $x = json_encode($arr);
+        $y = str_replace('"', '', $x);
+        return array($y, $b);
+    }
+
     function filter_access($module, $field, $page) {
         $user = new User();
         $status_access = $user->get_access($this->sess_role_id, $module, $field);
@@ -145,3 +159,4 @@ class Branches extends CI_Controller {
     }
 
 }
+

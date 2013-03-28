@@ -10,6 +10,9 @@ class Components extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Component');
+        $this->sess_username = $this->session->userdata('username');
+        $this->sess_role_id = $this->session->userdata('sess_role_id');
+        $this->sess_staff_id = $this->session->userdata('sess_staff_id');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
@@ -37,7 +40,7 @@ class Components extends CI_Controller {
             $data['dir'] = "ASC";
         }
 
-        $total_rows = $component->count();
+
         $data['title'] = "Component";
         $data['btn_add'] = anchor('components/add', 'Add New', array("class" => "btn btn-primary"));
         $data['btn_home'] = anchor(base_url(), 'Home');
@@ -45,7 +48,15 @@ class Components extends CI_Controller {
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $component->order_by($data['col'], $data['dir']);
+        if ($this->input->get('search_by')) {
+            $total_rows = $component->like($_GET['search_by'], $_GET['q'])->count();
+            $component->like($_GET['search_by'], $_GET['q'])->order_by($data['col'], $data['dir']);
+        } else {
+            $total_rows = $component->count();
+            $component->order_by($data['col'], $data['dir']);
+        }
+
+
         $data['components'] = $component->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("components/index");

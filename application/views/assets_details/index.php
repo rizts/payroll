@@ -52,44 +52,45 @@ function HeaderLink($value, $key, $asset_id, $col, $dir) {
     return $out;
 }
 ?>
+<div class="body">
+    <div class="content">
+        <h2 class="rama-title">Listing Sub Asset</h2>
+        <div class="float-right"><?php echo $btn_add ?></div>
 
-<div class="wrap">
-    <h2 class="rama-title">Listing Sub Asset</h2>
-    <div class="float-right"><?php echo $btn_add ?></div>
-
-    <?php echo $this->session->flashdata('message'); ?>
-    <table class="table boo-table table-bordered table-condensed table-hover">
-        <thead>
-            <tr>
-                <th><?php echo HeaderLink("Date", "date", $asset_id, $col, $dir); ?></th>
-                <th><?php echo HeaderLink("Staff", "staff_id", $asset_id, $col, $dir); ?></th>
-                <th><?php echo HeaderLink("Descriptions", "descriptions", $asset_id, $col, $dir); ?></th>
-                <th><?php echo HeaderLink("Status", "assetd_status", $asset_id, $col, $dir); ?></th>
-                <th>Action</th>
+        <?php echo $this->session->flashdata('message'); ?>
+        <table class="table boo-table table-bordered table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th><?php echo HeaderLink("Date", "date", $asset_id, $col, $dir); ?></th>
+                    <th><?php echo HeaderLink("Staff", "staff_id", $asset_id, $col, $dir); ?></th>
+                    <th><?php echo HeaderLink("Descriptions", "descriptions", $asset_id, $col, $dir); ?></th>
+                    <th><?php echo HeaderLink("Status", "assetd_status", $asset_id, $col, $dir); ?></th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <?php
+            foreach ($assets_details as $row) {
+                $row_staff = $staff->where('staff_id', $row->staff_id)->get();
+            ?>
+                <tr>
+                    <td><?php echo $row->date; ?></td>
+                    <td><?php echo $row_staff->staff_name; ?></td>
+                    <td><?php echo $row->descriptions; ?></td>
+                    <td><?php echo $row->assetd_status == 1 ? 'Enable' : 'Disable'; ?></td>
+                    <td>
+                    <?php echo anchor('assets/' . $row->asset_id . '/details/edit/' . $row->assetd_id, 'Edit'); ?> |
+                    <?php echo anchor('assets/' . $row->asset_id . '/details/delete/' . $row->assetd_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
+                </td>
             </tr>
-        </thead>
-        <?php
-        foreach ($assets_details as $row) {
-            $row_staff = $staff->where('staff_id', $row->staff_id)->get();
-        ?>
-            <tr>
-                <td><?php echo $row->date; ?></td>
-                <td><?php echo $row_staff->staff_name; ?></td>
-                <td><?php echo $row->descriptions; ?></td>
-                <td><?php echo $row->assetd_status == 1 ? 'Enable' : 'Disable'; ?></td>
-                <td>
-                <?php echo anchor('assets/' . $row->asset_id . '/details/edit/' . $row->assetd_id, 'Edit'); ?> |
-                <?php echo anchor('assets/' . $row->asset_id . '/details/delete/' . $row->assetd_id, 'Delete', array('onclick' => "return confirm('Are you sure want to delete?')")); ?>
-            </td>
-        </tr>
-        <?php } ?>
-        </table>
-        <div class="clearfix"></div>
-        <br>
-        <div class="pagination pagination-right">
-            <ul>
-            <?php echo $pagination; ?>
-        </ul>
+            <?php } ?>
+            </table>
+            <div class="clearfix"></div>
+            <br>
+            <div class="pagination pagination-right">
+                <ul>
+                <?php echo $pagination; ?>
+            </ul>
+        </div>
     </div>
 </div>
 <?php get_footer(); ?>
