@@ -1,6 +1,6 @@
 
-<script src="http://code.highcharts.com/highcharts.js"></script>
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/highcharts.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/exporting.js"></script>
     </div> <!-- // wrapper -->
   </body>
 </html>

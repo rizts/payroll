@@ -18,7 +18,7 @@ class Users extends CI_Controller {
 
     function index() {
         $user = new User();
-        $total_rows = $user->count();
+
         $data['title'] = "Users";
         $data['btn_add'] = anchor('users/sign_up', 'Add New', "class='btn btn-primary'");
         $data['btn_home'] = anchor(base_url(), 'Home', "class='btn btn-home'");
@@ -26,7 +26,14 @@ class Users extends CI_Controller {
         $uri_segment = 3;
         $offset = $this->uri->segment($uri_segment);
 
-        $user->order_by('username', 'ASC');
+        if ($this->input->get('search_by')) {
+            $total_rows = $user->like($_GET['search_by'], $_GET['q'])->count();
+            $user->like($_GET['search_by'], $_GET['q'])->order_by('username', 'ASC');
+        } else {
+            $total_rows = $user->count();
+            $user->order_by('username', 'ASC');
+        }
+
 
         $data['user_list'] = $user->get($this->limit, $offset)->all;
 
