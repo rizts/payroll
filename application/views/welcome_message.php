@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 <script type='text/javascript'>
 
     $(document).ready(function() {
@@ -17,72 +16,65 @@
             }
         });
 
-        $(function () {
-            $('#container_chart').highcharts({
-                chart: {
-                    type: 'column'
-                },
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container_chart',
+                type: 'column',
+                marginRight: 130,
+                marginBottom: 25,
+                events: {
+                    load: requestData
+                }
+            },
+            yAxis: {
                 title: {
-                    text: 'Branches'
+                    text: 'Menções'
                 },
-                subtitle: {
-                    text: null
-                },
-                xAxis: {
-                    categories: [
-                        'Jan',
-                        'Feb',
-                        'Mar',
-                        'Apr'
-                    ]
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Count Eployees'
-                    }
-                },
-                tooltip: {
-                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>{point.y:.1f} em</b></td></tr>',
-                    footerFormat: '</table>',
-                    shared: true,
-                    useHTML: true
-                },
-                plotOptions: {
-                    column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0
-                    }
-                },
-                series: [{
-                        name: 'Bandung',
-                        data: [49.9, 71.5, 106.4, 129.2]
-
-                    }, {
-                        name: 'Jakarta',
-                        data: [83.6, 78.8, 98.5, 93.4]
-
-                    }, {
-                        name: 'Surabaya',
-                        data: [48.9, 38.8, 39.3, 41.4]
-
-                    }, {
-                        name: 'Bali',
-                        data: [42.4, 33.2, 34.5, 39.7]
-
+                plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
                     }]
-            });
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [
+                {
+                    name: 'mentions',
+                    data: []
+                }
+            ]
         });
+        
     });
+
+    function requestData() {
+        $.ajax({
+            url: '<?php echo site_url('branches/get_employee_per_branch'); ?>',
+            type: "GET",
+            dataType: "json",            
+            success: function(data) {
+                chart.addSeries({
+                    name: "mentions",
+                    data: data.month_mentions_graphic
+                });
+            },
+            cache: false
+        });
+    }
 
 </script>
 
 <div class="body">
     <?php echo $this->session->flashdata('message'); ?>
     <div class="content" style="padding-top: 0;">
-        <div class="page-header">
+        <div class="page-header" style="padding: 0;">
             <h3>Welcome (<?php echo $this->session->userdata('username'); ?>)</h3>
         </div>
         <br class="cl" />

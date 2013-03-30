@@ -9,6 +9,7 @@ class Branches extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->helper('bulan');
         $this->load->model('Branch');
         $this->sess_username = $this->session->userdata('username');
         $this->sess_role_id = $this->session->userdata('sess_role_id');
@@ -142,7 +143,7 @@ class Branches extends CI_Controller {
             AS iCount FROM staffs GROUP BY Month ORDER BY Month ASC");
         foreach ($query->result() as $row) {
             $arr[] = $row->iCount;
-            $bln[] = $row->Month;
+            $bln[] = bulan($row->Month);
         }
         $b = json_encode($bln);
         $x = json_encode($arr);
