@@ -148,8 +148,12 @@ class Branches extends CI_Controller {
         $b = json_encode($bln);
         $x = json_encode($arr);
         $y = str_replace('"', '', $x);
-        $result= array($y, $b);
+        $result = array($y, $b);
         echo json_encode($bln);
+    }
+
+    function to_excel() {
+        $this->load->view('branches/to_excel');
     }
 
     function filter_access($module, $field, $page) {

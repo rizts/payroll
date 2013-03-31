@@ -47,7 +47,7 @@ class Titles extends CI_Controller {
             $total_rows = $title_list->count();
             $title_list->order_by($data['col'], $data['dir']);
         }
-        
+
         $data['title_list'] = $title_list->get($this->limit, $offset)->all;
 
         $config['base_url'] = site_url("titles/index");
@@ -120,6 +120,10 @@ class Titles extends CI_Controller {
         $title->_delete($id);
         $this->session->set_flashdata('message', 'Title successfully deleted!');
         redirect('titles/');
+    }
+
+    function to_excel() {
+        $this->load->view('titles/to_excel');
     }
 
     function filter_access($module, $field, $page) {

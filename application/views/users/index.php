@@ -56,7 +56,7 @@ function HeaderLink($value, $key, $col, $dir) {
         </div>
         <br class="cl" />
         <div class="head blue">
-            <?php echo header_btn_group("#", "users/sign_up"); ?>
+            <?php echo header_btn_group("users/to_excel", "users/sign_up"); ?>
         </div>
         <div id="search_bar" class="widget-header">
             <?php search_form(array("" => "By", "username" => "Username")); ?>

@@ -165,6 +165,10 @@
           <td>Mobile</td>
           <td><div class="span2"><?php echo form_input($staff_phone_hp); ?></div></td>
         </tr>
+        <tr>
+          <td>Gender</td>
+          <td><div class="span2"><?php echo $staff_sex; ?></div></td>
+        </tr>
       </table>
     </div>
     <div class="one_third lastcolumn">

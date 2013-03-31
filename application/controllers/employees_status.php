@@ -130,6 +130,10 @@ class Employees_Status extends CI_Controller {
         redirect('employees_status/');
     }
 
+    function to_excel() {
+        $this->load->view('employees_status/to_excel');
+    }
+
     function filter_access($module, $field, $page) {
         $user = new User();
         $status_access = $user->get_access($this->sess_role_id, $module, $field);

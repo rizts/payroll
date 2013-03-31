@@ -150,6 +150,10 @@ class Components extends CI_Controller {
         redirect('components/');
     }
 
+    function to_excel() {
+        $this->load->view('components/to_excel');
+    }
+
     function filter_access($module, $field, $page) {
         $user = new User();
         $status_access = $user->get_access($this->sess_role_id, $module, $field);

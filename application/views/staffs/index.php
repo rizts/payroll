@@ -81,7 +81,7 @@ function HeaderLink($value, $key, $col, $dir) {
     </div>
     <br class="cl" />
     <div class="head blue">
-      <?php echo header_btn_group("#", "staffs/add");?>
+      <?php echo header_btn_group("staffs/to_excel", "staffs/add");?>
     </div>
     <div id="search_bar" class="widget-header">
       <?php search_form(array(""=>"By","salary_period"=>"Period")); ?>

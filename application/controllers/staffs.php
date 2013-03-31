@@ -90,7 +90,7 @@ class Staffs extends CI_Controller {
     function add() {
         $data['title'] = 'Add New Staff';
         $data['form_action'] = site_url('staffs/save');
-        $data['link_back'] = anchor('staffs/', 'Back', array('class'=>'btn btn-danger'));
+        $data['link_back'] = anchor('staffs/', 'Back', array('class' => 'btn btn-danger'));
 
         $data['id'] = '';
         $data['staff_nik'] = array('name' => 'staff_nik');
@@ -278,27 +278,27 @@ class Staffs extends CI_Controller {
             // save routine for family
             $family = new Family();
             $families = $this->input->post("families");
-            foreach($families as $f){
-              list($order, $name, $birthdate, $birthplace, $sex, $relation) = explode(";", $f);
-              $family->staff_fam_staff_id = $staff_id;
-              $family->staff_fam_order = $order;
-              $family->staff_fam_name = $name;
-              $family->staff_fam_birthdate = $birthdate;
-              $family->staff_fam_birthplace = $birthplace;
-              $family->staff_fam_sex = $sex;
-              $family->staff_fam_relation = $relation;
-              $family->save();
+            foreach ($families as $f) {
+                list($order, $name, $birthdate, $birthplace, $sex, $relation) = explode(";", $f);
+                $family->staff_fam_staff_id = $staff_id;
+                $family->staff_fam_order = $order;
+                $family->staff_fam_name = $name;
+                $family->staff_fam_birthdate = $birthdate;
+                $family->staff_fam_birthplace = $birthplace;
+                $family->staff_fam_sex = $sex;
+                $family->staff_fam_relation = $relation;
+                $family->save();
             }
             // medic data
             // save routine for medical history
             $medic = new Medical();
             $medics = $this->input->post("medics");
-            foreach($medics as $m){
-              list($date, $description) = explode(";", $m);
-              $medic->staff_id = $staff_id;
-              $medic->medic_date = $date;
-              $medic->medic_description = $description;
-              $medic->save();	
+            foreach ($medics as $m) {
+                list($date, $description) = explode(";", $m);
+                $medic->staff_id = $staff_id;
+                $medic->medic_date = $date;
+                $medic->medic_description = $description;
+                $medic->save();
             }
             //redirect('staffs/');
         } else {
@@ -463,6 +463,10 @@ class Staffs extends CI_Controller {
                 'url' => site_url('staffs/show/' . $row->staff_id));
         }
         echo json_encode(($hut));
+    }
+
+    function to_excel() {
+        $this->load->view('staffs/to_excel');
     }
 
 }

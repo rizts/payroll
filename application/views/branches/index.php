@@ -56,7 +56,7 @@ function HeaderLink($value, $key, $col, $dir) {
     </div>
     <br class="cl" />
     <div class="head blue">
-      <?php echo header_btn_group("#", "branches/add");?>
+      <?php echo header_btn_group("branches/to_excel", "branches/add");?>
     </div>
     <div id="search_bar" class="widget-header">
       <?php search_form(array(""=>"By","branch_name"=>"Branch name")); ?>

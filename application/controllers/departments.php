@@ -134,6 +134,10 @@ class Departments extends CI_Controller {
         redirect('departments/');
     }
 
+    function to_excel() {
+        $this->load->view('departments/to_excel');
+    }
+
     function filter_access($module, $field, $page) {
         $user = new User();
         $status_access = $user->get_access($this->sess_role_id, $module, $field);

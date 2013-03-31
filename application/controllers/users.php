@@ -267,6 +267,10 @@ class Users extends CI_Controller {
         redirect('users/index');
     }
 
+    function to_excel() {
+        $this->load->view('users/to_excel');
+    }
+
 }
 
 ?>
