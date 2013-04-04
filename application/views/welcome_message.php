@@ -1,4 +1,5 @@
 <?php get_header(); ?>
+
 <script type='text/javascript'>
 
     $(document).ready(function() {
@@ -16,59 +17,95 @@
             }
         });
 
-        chart = new Highcharts.Chart({
+        $('#container_chart').highcharts({
             chart: {
-                renderTo: 'container_chart',
-                type: 'column',
-                marginRight: 130,
-                marginBottom: 25,
-                events: {
-                    load: requestData
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: null
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                percentageDecimals: 1
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.point.y;
+                        }
+                    }
                 }
+            },
+            series: [{
+                    type: 'pie',
+                    name: 'Jumlah',
+                    data: <?php echo $highchart_cabang; ?>
+                }]
+        });
+
+
+        $('#container_chart2').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Departement Per Cabang'
+            },
+            xAxis: {
+                categories: <?php echo $highchart_get_name_branch; ?>
             },
             yAxis: {
+                min: 0,
                 title: {
-                    text: 'Menções'
-                },
-                plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -10,
-                y: 100,
-                borderWidth: 0
-            },
-            series: [
-                {
-                    name: 'mentions',
-                    data: []
+                    text: null
                 }
-            ]
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                    name: 'Accunting',
+                    data: [49, 71, 106]
+
+                }, {
+                    name: 'Marketing',
+                    data: [83, 78, 98]
+
+                }, {
+                    name: 'Reservation',
+                    data: [48, 38, 39]
+
+                }, {
+                    name: 'Operation',
+                    data: [42, 33, 34]
+
+                }, {
+                    name: 'Transportaion',
+                    data: [42, 33, 34]
+
+                }]
         });
         
     });
-
-    function requestData() {
-        $.ajax({
-            url: '<?php echo site_url('branches/get_employee_per_branch'); ?>',
-            type: "GET",
-            dataType: "json",            
-            success: function(data) {
-                chart.addSeries({
-                    name: "mentions",
-                    data: data.month_mentions_graphic
-                });
-            },
-            cache: false
-        });
-    }
-
 </script>
 
 <div class="body">
@@ -76,6 +113,18 @@
     <div class="content" style="padding-top: 0;">
         <div class="page-header" style="padding: 0;">
             <h3>Welcome (<?php echo $this->session->userdata('username'); ?>)</h3>
+            <?php
+            $cabang = array();
+            $query = $this->db->query("SELECT staff_cabang AS Cabang,
+                                    COUNT(staff_id) AS JML
+                                    FROM staffs
+                                    GROUP BY Cabang");
+            foreach ($query->result() as $row) {
+                $cabang[] = array('name' => $row->Cabang, 'data' => array(floatval($row->JML)));
+            }
+
+            echo json_encode($cabang);
+            ?>
         </div>
         <br class="cl" />
         <div class="section section-small">
@@ -129,10 +178,13 @@
                 <div class="one_half">
                     <div class="section section-small">
                         <div class="section-header">
-                            <h5>Statistic</h5>
+                            <h5>Statistic Branches</h5>
                         </div>
                         <div class="section-content">
-                            <p><div id="container_chart"></div></p>
+                            <p>
+                            <div id="container_chart"></div>
+                            <div id="container_chart2"></div>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -150,7 +202,16 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="span10" style="margin-left: 0; width: 100%;">
+                <div class="section section-small">
+                    <div class="section-header">
+                        <h5>Reminder</h5>
+                    </div>
+                    <div class="section-content">
 
+                    </div>
+                </div>
             </div>
         </div>
 <?php get_footer(); ?>
