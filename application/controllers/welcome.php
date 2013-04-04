@@ -47,17 +47,27 @@ class Welcome extends CI_Controller {
 
         return json_encode($cabang);
     }
-    
+
     function highchart_get_name_dept() {
         $cabang = array();
-        $query = $this->db->query("SELECT DISTINCT staff_cabang
-                                    FROM staffs ORDER BY staff_cabang ASC");
+        $query = $this->db->query("SELECT staff_cabang AS Cabang,
+                                    COUNT(staff_id) AS JML
+                                    FROM staffs
+                                    GROUP BY Cabang");
         foreach ($query->result() as $row) {
-            return $row->staff_cabang;
+            $cabang[] = array('name' => $row->Cabang, 'data' => array(floatval($row->JML)));
         }
+
+        return json_encode($cabang);
     }
 
 }
 
+//SELECT d.dept_id, d.dept_name, e_cnt.how_many num_employees
+//     FROM departments d INNER JOIN
+//     (SELECT staff_departement, COUNT(*) how_many
+//       FROM staffs
+//       GROUP BY staff_departement) e_cnt
+//       ON d.dept_name = e_cnt.staff_departement;
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */

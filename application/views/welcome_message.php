@@ -82,27 +82,7 @@
                     borderWidth: 0
                 }
             },
-            series: [{
-                    name: 'Accunting',
-                    data: [49, 71, 106]
-
-                }, {
-                    name: 'Marketing',
-                    data: [83, 78, 98]
-
-                }, {
-                    name: 'Reservation',
-                    data: [48, 38, 39]
-
-                }, {
-                    name: 'Operation',
-                    data: [42, 33, 34]
-
-                }, {
-                    name: 'Transportaion',
-                    data: [42, 33, 34]
-
-                }]
+            series: <?php echo $highchart_get_name_dept; ?>
         });
         
     });
@@ -113,18 +93,6 @@
     <div class="content" style="padding-top: 0;">
         <div class="page-header" style="padding: 0;">
             <h3>Welcome (<?php echo $this->session->userdata('username'); ?>)</h3>
-            <?php
-            $cabang = array();
-            $query = $this->db->query("SELECT staff_cabang AS Cabang,
-                                    COUNT(staff_id) AS JML
-                                    FROM staffs
-                                    GROUP BY Cabang");
-            foreach ($query->result() as $row) {
-                $cabang[] = array('name' => $row->Cabang, 'data' => array(floatval($row->JML)));
-            }
-
-            echo json_encode($cabang);
-            ?>
         </div>
         <br class="cl" />
         <div class="section section-small">
