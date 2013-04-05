@@ -9,7 +9,7 @@
                 center: 'title',
                 right: 'month,basicWeek,basicDay'
             },
-            events: '<?php echo site_url('staffs/hut_reminders'); ?>',
+            events: '<?php echo site_url('staffs/hut_staffs_and_families'); ?>',
             editable: true,
             eventDrop: function(event, delta) {
                 alert(event.title + ' was moved ' + delta + ' days\n' +
