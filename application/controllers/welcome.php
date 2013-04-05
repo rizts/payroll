@@ -20,6 +20,8 @@ class Welcome extends CI_Controller {
         $data['highchart_get_name_dept'] = $this->highchart_get_name_dept();
 
 
+
+
         $data['btn_new_staff'] = anchor('staffs/add', '<span class="icon-white icon-plus"></span>', array('class' => 'btn btn-primary bootstrap-tooltip', 'data-placement' => 'top', 'data-title' => 'Add new Employee'));
         $this->load->view('welcome_message', $data);
     }
@@ -39,35 +41,45 @@ class Welcome extends CI_Controller {
 
     function highchart_get_name_branch() {
         $cabang = array();
-        $query = $this->db->query("SELECT branch_name
-                                    FROM branches ORDER BY branch_name ASC");
+        $query = $this->db->query("SELECT DISTINCT staff_cabang
+                                    FROM staffs ORDER BY staff_cabang ASC");
         foreach ($query->result() as $row) {
-            $cabang[] = $row->branch_name;
+            $cabang[] = $row->staff_cabang;
         }
 
         return json_encode($cabang);
     }
 
     function highchart_get_name_dept() {
+        $staff = new Staff();
+
         $cabang = array();
-        $query = $this->db->query("SELECT staff_cabang AS Cabang,
-                                    COUNT(staff_id) AS JML
-                                    FROM staffs
-                                    GROUP BY Cabang");
+        $query = $this->db->query("SELECT COUNT( staffs.staff_departement ) AS JML, staffs.staff_cabang AS Cabang, staffs.staff_departement AS Dept
+                            FROM staffs
+                            INNER JOIN branches ON branches.branch_name = staffs.staff_cabang
+                            GROUP BY Cabang, Dept");
         foreach ($query->result() as $row) {
-            $cabang[] = array('name' => $row->Cabang, 'data' => array(floatval($row->JML)));
+            $rs = $staff->where('staff_cabang', $row->Cabang)
+                            ->where('staff_departement', $row->Dept)->count();
+
+            $cabang[] = array(
+                'name' => $row->Dept,
+                'data' => array($rs)
+            );
         }
 
         return json_encode($cabang);
     }
 
+    function get_count_dep($cb, $dept) {
+        $staff = new Staff();
+        $query = $staff->where('staff_cabang', 'Bandung')
+                        ->where('staff_departement', 'Accounting')->count();
+
+        return $query;
+    }
+
 }
 
-//SELECT d.dept_id, d.dept_name, e_cnt.how_many num_employees
-//     FROM departments d INNER JOIN
-//     (SELECT staff_departement, COUNT(*) how_many
-//       FROM staffs
-//       GROUP BY staff_departement) e_cnt
-//       ON d.dept_name = e_cnt.staff_departement;
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */

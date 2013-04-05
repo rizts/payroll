@@ -93,6 +93,7 @@
     <div class="content" style="padding-top: 0;">
         <div class="page-header" style="padding: 0;">
             <h3>Welcome (<?php echo $this->session->userdata('username'); ?>)</h3>
+            
         </div>
         <br class="cl" />
         <div class="section section-small">

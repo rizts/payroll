@@ -57,6 +57,11 @@
         <div class="wrapper">
             <div class="sidebar">
                 <div class="nContainer">
+                    <div style="padding: 5px;">
+                        <form action="searches" method="get">
+                            <input autofocus="autofocus" type="text" name="q" placeholder="Search Advance" style="width: 215px;">
+                        </form>
+                    </div>
                     <ul class="navigation">
                         <li><?php echo anchor("/", "Dashboard"); ?></li>
                         <li>

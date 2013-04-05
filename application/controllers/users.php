@@ -51,6 +51,7 @@ class Users extends CI_Controller {
         $data['action'] = site_url('users/process_login');
         $data['username'] = array('name' => 'username',
             'placeholder' => 'Username',
+            'autofocus' => 'autofocus',
             'class' => 'input-block-level'
         );
         $data['password'] = array('name' => 'password',
