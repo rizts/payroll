@@ -464,6 +464,22 @@ class Staffs extends CI_Controller {
         }
         echo json_encode(($hut));
     }
+    
+    function hut_staffs_and_families(){
+        $hut = array();
+        $year = date('Y-');
+
+        $query = $this->db->query(" SELECT staff_birthdate AS TGL, staff_name AS NAMA FROM staffs
+                                    UNION SELECT staff_fam_birthdate AS TGL, staff_fam_name AS NAMA FROM families");
+        foreach($query->result() as $row){
+            $month_day = date('m-d', strtotime($row->TGL));
+            $staff_birthday = $year . $month_day;
+            $hut[] = array('title' => $row->NAMA,
+                'start' => $staff_birthday,
+                );   
+        }
+        echo json_encode(($hut));
+    }
 
     function to_excel() {
         $this->load->view('staffs/to_excel');
