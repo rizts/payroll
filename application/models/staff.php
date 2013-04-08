@@ -6,7 +6,9 @@ class Staff extends DataMapper {
     var $has_many = array(
         'family',
         'education',
-        'work'
+        'work',
+        'salary_component_a',
+        'salary_component_b'
     );
     var $auto_populate_has_many = TRUE;
     var $auto_populate_has_one = TRUE;

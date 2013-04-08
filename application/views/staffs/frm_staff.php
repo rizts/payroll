@@ -1,101 +1,43 @@
 <?php get_header(); ?>
 <script src="<?php echo base_url(); ?>assets/js/jquery.formatCurrency-1.4.0.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.formatCurrency.all.js" type="text/javascript"></script>
+<?php echo load_js(array(
+  "staff.php?url=".urlencode(site_url())
+)); ?>
 
+<?php 
+  // components A
+  $comp_a_data = '';
+  foreach($component_a as $gaji){
+    $component = get_components($gaji->gaji_component_id);
+    $comp_a_data .= '["'.$gaji->gaji_component_id.'", "'.$component->comp_name.'", "'.$component->comp_type.'", "'.$gaji->gaji_daily_value.'", "'.number_format($gaji->gaji_amount_value, 2, ".", ",").'"],';
+  }
+  $comp_a_data = substr($comp_a_data, 0, (strlen($comp_a_data)-1));
+  
+  // components B
+  $comp_b_data = '';
+  foreach($component_b as $gaji){
+    $component = get_components($gaji->gaji_component_id);
+    $comp_b_data .= '["'.$gaji->gaji_component_id.'", "'.$component->comp_name.'", "'.$component->comp_type.'", "'.$gaji->gaji_daily_value.'", "'.number_format($gaji->gaji_amount_value, 2, ".", ",").'"],';
+  }
+  $comp_b_data = substr($comp_b_data, 0, (strlen($comp_b_data)-1));
+  
+  // family 
+  $families = '';
+  foreach($family as $f){
+    $families .= '["'.$f->staff_fam_order.'", "'.$f->staff_fam_name.'", "'.$f->staff_fam_birthdate.'", "'.$f->staff_fam_birthplace.'", "'.$f->staff_fam_sex.'", "'.$f->staff_fam_relation.'"],';
+  }
+  $families = substr($families, 0, (strlen($families)-1));
+ ?>
 <script type="text/javascript">
-    $(document).ready(function(){
-      $("#staff_birthdate" ).datepicker({
-        dateFormat: "yy-mm-dd"
-      });
-      
-      var relation = ["Suami", "Anak Ke-1", "Anak Ke-2", "Anak Ke-3", "Anak Ke-4", "Anak Ke-5", "Lainnya (tls sendiri)"];
-      $("#family_table").handsontable({
-        colHeaders: ["Order", "Name", "Birthdate", "Birthplace", "Sex", "Relation"],
-        startCols: 6,
-        startRows: 3,
-        colWidths: [60, 120, 80, 80, 60, 120],
-        onChange : function(changes, source){
-          console.log(source+" "+changes);
-          if(source == "edit" && changes[0][1]==4){
-            console.log(changes);
-            if(changes[0][3] == "Male"){
-              relation[0] = "Istri";
-            }else{
-              relation[0] = "Suami";
-            }
-          }
-        },
-        columns: [
-          {},
-          {},
-          {type:'date'},
-          {},
-          {
-            type: "autocomplete",
-            source: ["Male", "Female"],
-            strict: true
-          },
-          {
-            type: "autocomplete",
-            source: relation
-          }
-        ]
-      });
-      $("#add_families").on("click", function(e){
-        e.preventDefault();
-        var $instance = $("#family_table");
-        var data = $instance.handsontable('getData'); // data di simpan dalam bentuk array multidimensi, indexnya sesuai dengan posisi column. ex. column order, maka index 0
-        var row_length = data.length;
-        var families = "";
-        for(i=0; i<row_length; i++){
-          if(data[i][0]!=null && 
-          data[i][1]!=null && 
-          data[i][2]!=null && 
-          data[i][3]!=null && 
-          data[i][4]!=null && 
-          data[i][5]!=null){
-            families += '<input type="hidden" name="families[]" value="'+data[i][0]+';'+data[i][1]+';'+data[i][2]+';'+data[i][3]+';'+data[i][4]+';'+data[i][5]+'">'; 
-          }
-        }
-        $("#families_hidden").html(families);
-      });
-      
-      /*Medic table*/
-      $("#medic_table").handsontable({
-        colHeaders: ["Date", "Description"],
-        startCols: 2,
-        startRows: 3,
-        colWidths: [50, 500],
-        columns: [
-          {type:'date'},
-          {}
-        ]
-      });
-      $("#add_medics").on("click", function(e){
-        e.preventDefault();
-        var $instance = $("#medic_table");
-        var data = $instance.handsontable('getData');
-        var row_length = data.length;
-        var medics = "";
-        for(i=0; i<row_length; i++){
-          if(data[i][0] != null && data[i][1] != null){
-            medics += '<input type="hidden" name="medics[]" value="'+data[i][0]+';'+data[i][1]+'">';
-          }
-        }
-        $("#medics_hidden").html(medics);
-      });
-    });
-    
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#preview').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
+  var comp_a_data = [<?php echo $comp_a_data; ?>];
+  var comp_b_data = [<?php echo $comp_b_data; ?>];
+  var family = [<?php echo $family; ?>];
+  $(document).ready(function(){
+    $("#salary_component_a").handsontable("loadData", comp_a_data);
+    $("#salary_component_b").handsontable("loadData", comp_b_data);
+    $("#family_table").handsontable("loadData", family);
+  });
 </script>
 <div class="body">
   <div class="content">
@@ -105,8 +47,8 @@
       <div class="icon">
         <span class="ico-coins"></span>
       </div>
-      <h1>Salaries
-      <small>Manage salaries</small>
+      <h1>Staffs
+      <small>Manage staffs</small>
       </h1>
     </div>
     <br class="cl" />
@@ -206,24 +148,48 @@
     <ul class="nav nav-tabs">
       <li class="active"><a href="#family" data-toggle="tab">Family</a></li>
       <li><a href="#health" data-toggle="tab">Health</a></li>
-      <li><a href="#date" data-toggle="tab">Work</a></li>
-      <li><a href="#salary" data-toggle="tab">Salary</a></li>
+      <li><a href="#works" data-toggle="tab">Work</a></li>
     </ul>
     <div class="tab-content" style="overflow: visible">
       <div class="tab-pane active" id="family">
-        <div class="ta_right"><a href="#" class="btn" id="add_families">Add Family</a></div>
         <div id="family_table"></div>
-        <div id="families_hidden"></div>
       </div>
       <div class="tab-pane" id="health">
-        <div class="ta_right"><a href="#" class="btn" id="add_medics">Add medic history</a></div>
         <div id="medic_table"></div>
-        <div id="medics_hidden"></div>
       </div>
-      <div class="tab-pane"></div>
-      <div class="tab-pane"></div>
+      <div class="tab-pane" id="works">
+        <div id="works_table"></div>
+      </div>
     </div>
+    <!-- tabs salary -->
+    <h3>Salaries</h3>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#salary_components" data-toggle="tab">Salary Component</a></li>
+      <li><a href="#salary_history" data-toggle="tab">Salary History</a></li>
+    </ul>
+    <div class="tab-content" style="overflow: visible">
+      <div class="tab-pane active" id="salary_components">
+        <div class="one_half">
+          <h5>Component A</h5>
+          <div id="salary_component_a"></div>
+        </div>
+        <div class="one_half lastcolumn">
+          <h5>Component B</h5>
+          <div id="salary_component_b"></div>
+        </div>
+      </div>
+      <div class="tab-pane" id="salary_history">
+        <h5>Salary histories</h5>
+        <div id="salary_histories"></div>
+      </div>
+    </div>
+    <br class="cl" />
     <div class="spacer2"></div>
+    <div id="families_hidden"></div>
+    <div id="medics_hidden"></div>
+    <div id="works_hidden"></div>
+    <div id="salary_comp_a"></div>
+    <div id="salary_comp_b"></div>
     <?php echo form_submit($btn_save); ?> <?php echo $link_back; ?>
     <?php echo form_close() ?>
   </div>

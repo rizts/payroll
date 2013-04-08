@@ -260,6 +260,13 @@ function btn_action($edit_url = "#", $edit_title = "Untitled", $delete_url = "#"
   </div>
   <?php
 }
+function get_components($id){
+  $ci = &get_instance();
+  $result = $ci->db->get("components", array("comp_id"=>$id))->row();
+  return $result;
+}
+
+?>
 
 
 

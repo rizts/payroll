@@ -164,5 +164,26 @@ class Components extends CI_Controller {
             redirect($page);
         }
     }
+    
+    function get_components(){
+      $component = new Component();
+      $components = $component->get()->all;
+      $data = array();
+      $i = 0;
+      foreach($components as $x){
+        $data[$i]["comp_name"] = $x->comp_name;
+        $data[$i]["comp_type"] = $x->comp_type;
+        $i++;
+      }
+      echo json_encode($data);
+    }
+    
+    function get_where_component(){
+      $comp = urldecode($this->uri->segment(3));
+      $component = new Component();
+      $component = $component->where("comp_name", $comp)->get();
+      $components = array("comp_type"=>$component->comp_type, "id"=>$component->comp_id);
+      echo json_encode($components);
+    }
 
 }

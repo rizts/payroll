@@ -19,6 +19,8 @@ class Staffs extends CI_Controller {
         $this->load->model('Tax_Employee');
         $this->load->model('Family');
         $this->load->model('Medical');
+        $this->load->model('Salary_Component_A');
+        $this->load->model('Salary_Component_B');
         $this->session->userdata('logged_in') == true ? '' : redirect('users/sign_in');
     }
 
@@ -233,6 +235,15 @@ class Staffs extends CI_Controller {
         $data['message'] = '';
         $data['form_action'] = site_url('staffs/update');
         $data['link_back'] = anchor('staffs/', 'Back');
+        
+        $component_a = new Salary_Component_A();
+        $data["component_a"] = $component_a->get()->all;
+        
+        $component_b = new Salary_Component_B();
+        $data["component_b"] = $component_b->get()->all;
+        
+        $family = new Family();
+        $data["family"] = $family->get()->all;
 
         $this->load->view('staffs/frm_staff', $data);
     }
@@ -277,29 +288,25 @@ class Staffs extends CI_Controller {
             // family data
             // save routine for family
             $family = new Family();
-            $families = $this->input->post("families");
-            foreach ($families as $f) {
-                list($order, $name, $birthdate, $birthplace, $sex, $relation) = explode(";", $f);
-                $family->staff_fam_staff_id = $staff_id;
-                $family->staff_fam_order = $order;
-                $family->staff_fam_name = $name;
-                $family->staff_fam_birthdate = $birthdate;
-                $family->staff_fam_birthplace = $birthplace;
-                $family->staff_fam_sex = $sex;
-                $family->staff_fam_relation = $relation;
-                $family->save();
-            }
+            $this->_saveFamily($family, $staff_id);
+            
             // medic data
             // save routine for medical history
             $medic = new Medical();
-            $medics = $this->input->post("medics");
-            foreach ($medics as $m) {
-                list($date, $description) = explode(";", $m);
-                $medic->staff_id = $staff_id;
-                $medic->medic_date = $date;
-                $medic->medic_description = $description;
-                $medic->save();
-            }
+            $this->_saveMedic($medic, $staff_id);
+            
+            // work data
+            $work = new Work();
+            $this->_saveWork($work, $staff_id);
+            
+            // component A data
+            $comp_a = new Salary_Component_A();
+            $this->_saveCompA($comp_a, $staff_id);
+            
+            // component B data
+            $comp_b = new Salary_Component_B();
+            $this->_saveCompB($comp_b, $staff_id);
+            
             //redirect('staffs/');
         } else {
 // Failed
@@ -483,6 +490,67 @@ class Staffs extends CI_Controller {
 
     function to_excel() {
         $this->load->view('staffs/to_excel');
+    }
+    
+    private function _saveFamiliy($family, $staff_id){
+      $families = $this->input->post("families");
+      foreach ($families as $f) {
+          list($order, $name, $birthdate, $birthplace, $sex, $relation) = explode(";", $f);
+          $family->staff_fam_staff_id = $staff_id;
+          $family->staff_fam_order = $order;
+          $family->staff_fam_name = $name;
+          $family->staff_fam_birthdate = $birthdate;
+          $family->staff_fam_birthplace = $birthplace;
+          $family->staff_fam_sex = $sex;
+          $family->staff_fam_relation = $relation;
+          $family->save();
+      }
+    }
+    
+    private function _saveMedic($medic, $staff_id){
+      $medics = $this->input->post("medics");
+      foreach ($medics as $m) {
+          list($date, $description) = explode(";", $m);
+          $medic->staff_id = $staff_id;
+          $medic->medic_date = $date;
+          $medic->medic_description = $description;
+          $medic->save();
+      }
+    }
+    
+    private function _saveWork($work, $staff_id){
+      $works = $this->input->post("works");
+      foreach($works as $w){
+        list($date, $description) = explode(";", $w);
+        $work->staff_id = $staff_id;
+        $work->history_date = $date;
+        $work->history_description = $description;
+        $work->save();
+      }
+    }
+    
+    private function _saveCompA($comp, $staff_id){
+      $comps = $this->input->post("comp_a");
+      foreach($comps as $c){
+        list($comp_id, $daily, $amount) = explode(";", $c);
+        $comp->staff_id = $staff_id;
+        $comp->gaji_component_id = $comp_id;
+        $comp->gaji_daily_value = $daily;
+        $comp->gaji_amount_value = $amount;
+        $comp->save();
+      }
+    }
+    
+    private function _saveCompB($comp, $staff_id){
+      $comps = $this->input->post("comp_b");
+      foreach($comps as $c){
+        list($comp_id, $daily, $amount) = explode(";", $c);
+        $comp->staff_id = $staff_id;
+        $comp->gaji_component_id = $comp_id;
+        $comp->gaji_daily_value = $daily;
+        $comp->gaji_amount_value = $amount;
+        $comp->save();
+      }
     }
 
 }
