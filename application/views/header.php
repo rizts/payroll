@@ -105,6 +105,7 @@
                                 <?php echo $component == true ? '<li>' . anchor('components', 'Component(Gaji)') . '</li>' : ''; ?>
                                 <?php echo $users == true ? '<li>' . anchor('users/index', 'Users') . '</li>' : ''; ?>
                                 <?php echo $role_details == true ? '<li>' . anchor('users/roles', 'Roles') . '</li>' : ''; ?>
+                                <?php echo $role_details == true ? '<li>' . anchor('settings', 'Settings') . '</li>' : ''; ?>
                             </ul>
                         </li>
 
