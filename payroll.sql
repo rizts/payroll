@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2013 at 09:08 PM
+-- Generation Time: Apr 10, 2013 at 10:20 PM
 -- Server version: 5.5.28
--- PHP Version: 5.3.10-1ubuntu3.4
+-- PHP Version: 5.3.10-1ubuntu3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -353,6 +353,31 @@ CREATE TABLE IF NOT EXISTS `salary_components_b` (
   `gaji_amount_value` decimal(10,0) NOT NULL,
   PRIMARY KEY (`gaji_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `name`, `value`) VALUES
+(1, 'COMPANY_NAME', 'Rama Tours'),
+(2, 'ADDRESS', 'Jl. Riau No. 265'),
+(3, 'COMPANY_PHONE', '(022) 6798 987 89'),
+(4, 'PPH21_PERCENT', '10'),
+(5, 'PENSIUN', 'N'),
+(6, 'LOGO', '-');
 
 -- --------------------------------------------------------
 

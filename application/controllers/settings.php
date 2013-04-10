@@ -84,7 +84,7 @@ class Settings extends CI_Controller {
     }
 
     function edit($id) {
-        $this->filter_access('Config', 'roled_edit', 'settings/index');
+//        $this->filter_access('Config', 'roled_edit', 'settings/index');
 
         $setting = new Setting();
         $rs = $setting->where('id', $id)->get();

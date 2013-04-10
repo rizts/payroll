@@ -249,7 +249,7 @@ function search_form($search_by){
 function btn_action($edit_url = "#", $edit_title = "Untitled", $delete_url = "#"){
   ?>
   <div class="btn-group">
-    <a href="<?php echo base_url($edit_url); ?>" class="btn btn-primary bootstrap-tooltip" data-title="Edit">
+    <a href="<?php echo site_url($edit_url); ?>" class="btn btn-primary bootstrap-tooltip" data-title="Edit">
       <span class="icon-edit icon-white"></span>
     </a>
     <?php echo anchor($delete_url, '<span class="icon-remove icon-white"></span>', array(
@@ -286,10 +286,3 @@ function get_components($id){
 }
 
 ?>
-
-
-
-
-
-
-
