@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2013 at 08:42 AM
+-- Generation Time: Apr 10, 2013 at 09:08 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.3.10-1ubuntu3.4
 
@@ -19,6 +19,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `payroll`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `absensi`
+--
+
+CREATE TABLE IF NOT EXISTS `absensi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `hari_masuk` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `absensi`
+--
+
+INSERT INTO `absensi` (`id`, `staff_id`, `date`, `hari_masuk`) VALUES
+(1, 1, '2013-04-10', 24),
+(2, 2, '2013-04-10', 24),
+(3, 7, '2013-04-10', 8);
 
 -- --------------------------------------------------------
 
@@ -366,9 +389,9 @@ CREATE TABLE IF NOT EXISTS `staffs` (
 --
 
 INSERT INTO `staffs` (`staff_id`, `staff_nik`, `staff_kode_absen`, `staff_name`, `staff_address`, `staff_email`, `staff_email_alternatif`, `staff_phone_home`, `staff_phone_hp`, `staff_status_pajak`, `staff_status_nikah`, `staff_status_karyawan`, `staff_cabang`, `staff_departement`, `staff_jabatan`, `staff_photo`, `staff_birthdate`, `staff_birthplace`, `staff_sex`, `staff_password`) VALUES
-(1, 6305280, 'JK', 'Budi Setiawan', 'Jl. RE. Martadinata No. 15', 'budi@gmail.com', 'budi@gmail.com', '541000000', '082116914774', 'K1', 'Married', 'Tetap', 'Bandung', 'Transportation', 'Supervisor', '-', '1985-03-13', 'Bandung', '0', ''),
-(2, 6305281, 'JK - ', 'Puteri Berlianty', 'Komp. Margahayu Kencana Blok I 1 No. 19', 'jasmine@gmail.com', 'jasmine@gmail.com', '541000000', '08512121212', 'K2', 'Single', 'Tetap', 'Bandung', 'Accounting', 'Manager', '', '2011-03-21', 'Bandung', '0', ''),
-(7, 9876, '9876A', 'Kunyun', 'Pharmindo', 'kunyun@gmail.com', '', '1234567879', '12345678', 'TK', 'Single', 'Tetap', '1', 'Transportation', 'Staff', '', '2010-05-31', 'Bandung', 'Laki', 'd8578edf8458ce06fbc5bb76a58c5ca4');
+(1, 6305280, '3101', 'Budi Setiawan', 'Jl. RE. Martadinata No. 15', 'budi@gmail.com', 'budi@gmail.com', '541000000', '082116914774', 'K1', 'Married', 'Tetap', 'Bandung', 'Transportation', 'Supervisor', '-', '1985-03-13', 'Bandung', '0', ''),
+(2, 6305281, '3102', 'Puteri Berlianty', 'Komp. Margahayu Kencana Blok I 1 No. 19', 'jasmine@gmail.com', 'jasmine@gmail.com', '541000000', '08512121212', 'K2', 'Single', 'Tetap', 'Bandung', 'Accounting', 'Manager', '', '2011-03-21', 'Bandung', '0', ''),
+(7, 9876, '3103', 'Kunyun', 'Pharmindo', 'kunyun@gmail.com', '', '1234567879', '12345678', 'TK', 'Single', 'Tetap', '1', 'Transportation', 'Staff', '', '2010-05-31', 'Bandung', 'Laki', 'd8578edf8458ce06fbc5bb76a58c5ca4');
 
 -- --------------------------------------------------------
 
