@@ -260,6 +260,25 @@ function btn_action($edit_url = "#", $edit_title = "Untitled", $delete_url = "#"
   </div>
   <?php
 }
+
+function get_component_a($id){
+  $ci = &get_instance();
+  $result = $ci->db->get_where("salary_components_a", array("staff_id"=>$id));
+  return $result;
+}
+
+function get_component_b($id){
+  $ci = &get_instance();
+  $result = $ci->db->get_where("salary_components_b", array("staff_id"=>$id));
+  return $result;
+}
+
+function get_families($id){
+  $ci = &get_instance();
+  $result = $ci->db->get_where("families", array("staff_fam_staff_id"=>$id));
+  return $result;
+}
+
 function get_components($id){
   $ci = &get_instance();
   $result = $ci->db->get("components", array("comp_id"=>$id))->row();

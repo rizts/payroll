@@ -152,6 +152,10 @@ class Staffs extends CI_Controller {
         $sex_selected = 'Laki';
         $data['staff_sex'] = form_dropdown('staff_sex', $options_sex, $sex_selected);
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Save', 'class' => 'btn btn-primary');
+        
+        $data["component_a"] = false;
+        $data["component_b"] = false;
+        $data["family"] = false;
 
         $this->load->view('staffs/frm_staff', $data);
     }
@@ -236,14 +240,14 @@ class Staffs extends CI_Controller {
         $data['form_action'] = site_url('staffs/update');
         $data['link_back'] = anchor('staffs/', 'Back');
         
-        $component_a = new Salary_Component_A();
+        /*$component_a = new Salary_Component_A();
         $data["component_a"] = $component_a->get()->all;
         
         $component_b = new Salary_Component_B();
         $data["component_b"] = $component_b->get()->all;
         
         $family = new Family();
-        $data["family"] = $family->get()->all;
+        $data["family"] = $family->get()->all;*/
 
         $this->load->view('staffs/frm_staff', $data);
     }

@@ -6,33 +6,46 @@
 )); ?>
 
 <?php 
+  // load them all
+  $component_a = get_component_a($id);
+  $component_b = get_component_b($id);
+  $family = get_families($id);
   // components A
   $comp_a_data = '';
-  foreach($component_a as $gaji){
-    $component = get_components($gaji->gaji_component_id);
-    $comp_a_data .= '["'.$gaji->gaji_component_id.'", "'.$component->comp_name.'", "'.$component->comp_type.'", "'.$gaji->gaji_daily_value.'", "'.number_format($gaji->gaji_amount_value, 2, ".", ",").'"],';
+  if($component_a){
+    foreach($component_a->result() as $gaji){
+      $component = get_components($gaji->gaji_component_id);
+      $comp_a_data .= '["'.$gaji->gaji_component_id.'", "'.$component->comp_name.'", "'.$component->comp_type.'", "'.$gaji->gaji_daily_value.'", "'.number_format($gaji->gaji_amount_value, 2, ".", ",").'"],';
+    }
+    $comp_a_data = substr($comp_a_data, 0, (strlen($comp_a_data)-1));
   }
-  $comp_a_data = substr($comp_a_data, 0, (strlen($comp_a_data)-1));
+  
   
   // components B
   $comp_b_data = '';
-  foreach($component_b as $gaji){
-    $component = get_components($gaji->gaji_component_id);
-    $comp_b_data .= '["'.$gaji->gaji_component_id.'", "'.$component->comp_name.'", "'.$component->comp_type.'", "'.$gaji->gaji_daily_value.'", "'.number_format($gaji->gaji_amount_value, 2, ".", ",").'"],';
+  if($component_b){
+    foreach($component_b->result() as $gaji){
+      $component = get_components($gaji->gaji_component_id);
+      $comp_b_data .= '["'.$gaji->gaji_component_id.'", "'.$component->comp_name.'", "'.$component->comp_type.'", "'.$gaji->gaji_daily_value.'", "'.number_format($gaji->gaji_amount_value, 2, ".", ",").'"],';
+    }
+    $comp_b_data = substr($comp_b_data, 0, (strlen($comp_b_data)-1));
   }
-  $comp_b_data = substr($comp_b_data, 0, (strlen($comp_b_data)-1));
+  
   
   // family 
   $families = '';
-  foreach($family as $f){
-    $families .= '["'.$f->staff_fam_order.'", "'.$f->staff_fam_name.'", "'.$f->staff_fam_birthdate.'", "'.$f->staff_fam_birthplace.'", "'.$f->staff_fam_sex.'", "'.$f->staff_fam_relation.'"],';
+  if($family){
+    foreach($family->result() as $f){
+      $families .= '["'.$f->staff_fam_order.'", "'.$f->staff_fam_name.'", "'.$f->staff_fam_birthdate.'", "'.$f->staff_fam_birthplace.'", "'.$f->staff_fam_sex.'", "'.$f->staff_fam_relation.'"],';
+    }
+    $families = substr($families, 0, (strlen($families)-1));
   }
-  $families = substr($families, 0, (strlen($families)-1));
+  
  ?>
 <script type="text/javascript">
   var comp_a_data = [<?php echo $comp_a_data; ?>];
   var comp_b_data = [<?php echo $comp_b_data; ?>];
-  var family = [<?php echo $family; ?>];
+  var family = [<?php echo $families; ?>];
   $(document).ready(function(){
     $("#salary_component_a").handsontable("loadData", comp_a_data);
     $("#salary_component_b").handsontable("loadData", comp_b_data);

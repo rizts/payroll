@@ -14,6 +14,7 @@ $(document).ready(function(){
     colHeaders: ["Order", "Name", "Birthdate", "Birthplace", "Sex", "Relation"],
     startCols: 6,
     startRows: 3,
+    minSpareRows: 1,
     colWidths: [60, 120, 80, 80, 60, 120],
     onChange : function(changes, source){
       if(source == "edit" && changes[0][1]==4){
@@ -48,6 +49,7 @@ $(document).ready(function(){
     colHeaders: ["Date", "Description"],
     startCols: 2,
     startRows: 3,
+    minSpareRows: 1,
     colWidths: [50, 500],
     columns: [
       {type:'date'},
@@ -59,6 +61,7 @@ $(document).ready(function(){
   $("#works_table").handsontable({
     startCols: 2,
     startRows: 3,
+    minSpareRows: 1,
     colHeaders: ["Date", "Description"],
     colWidths: [50, 500],
     columns: [{type: 'date'}, {}],
@@ -70,6 +73,7 @@ $(document).ready(function(){
     contextMenu: true,
     startCols: 5,
     startRows: 3,
+    minSpareRows: 1,
     colHeaders: ["", "Component", "Type", "Daily value (Rp)", "Monthly value (Rp)"],
     colWidths: [1, 150, 80, 100, 120],
     columns: [
@@ -121,6 +125,7 @@ $(document).ready(function(){
     contextMenu: true,
     startCols: 5,
     startRows: 3,
+    minSpareRows: 1,
     colHeaders: ["", "Component", "Type", "Daily value", "Monthly value"],
     colWidths: [1, 150, 80, 100, 120],
     columns: [
