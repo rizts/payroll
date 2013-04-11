@@ -58,7 +58,7 @@
             <div class="sidebar">
                 <div class="nContainer">
                     <div style="padding: 5px;">
-                        <form action="searches" method="get">
+                        <form action="<?php echo site_url('searches')?> " method="get">
                             <input autofocus="autofocus" type="text" name="q" placeholder="Search Advance" style="width: 215px;">
                         </form>
                     </div>
