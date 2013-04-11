@@ -90,6 +90,7 @@ class Settings extends CI_Controller {
         $setting = new Setting();
         $rs = $setting->where('id', $id)->get();
         $data['id'] = $rs->id;
+        $data['logo'] = array('name' => 'logo', 'value' => $rs->logo);
         $data['company_name'] = array('name' => 'company_name', 'value' => $rs->company_name);
         $data['address'] = array('name' => 'address', 'value' => $rs->address);
         $data['phone'] = array('name' => 'phone', 'value' => $rs->phone);
@@ -137,6 +138,7 @@ class Settings extends CI_Controller {
         $setting = new Setting();
         $setting->where('id', $this->input->post('id'))
                 ->update(array(
+                    'logo' => $this->input->post('logo'),
                     'company_name' => $this->input->post('company_name'),
                     'address' => $this->input->post('address'),
                     'phone' => $this->input->post('phone'),
