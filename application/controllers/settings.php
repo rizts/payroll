@@ -90,7 +90,7 @@ class Settings extends CI_Controller {
         $setting = new Setting();
         $rs = $setting->where('id', $id)->get();
         $data['id'] = $rs->id;
-        $data['logo'] = array('name' => 'logo', 'value' => $rs->logo);
+        $data['logo'] = $rs->logo;
         $data['company_name'] = array('name' => 'company_name', 'value' => $rs->company_name);
         $data['address'] = array('name' => 'address', 'value' => $rs->address);
         $data['phone'] = array('name' => 'phone', 'value' => $rs->phone);
@@ -112,6 +112,7 @@ class Settings extends CI_Controller {
 //        $this->filter_access('Config', 'roled_add', 'settings/index');
         redirect('settings/edit/1');
         $setting = new Setting();
+        $setting->logo = $this->input->post('logo');
         $setting->company_name = $this->input->post('company_name');
         $setting->address = $this->input->post('address');
         $setting->phone = $this->input->post('phone');
@@ -133,12 +134,23 @@ class Settings extends CI_Controller {
     }
 
     function update() {
-//        $this->filter_access('Config', 'roled_edit', 'settings/index');
-
         $setting = new Setting();
+
+        // upload photo
+        $config['upload_path'] = 'assets/upload';
+        $config['allowed_types'] = 'gif|jpg|png|bmp';
+        $this->load->library("upload", $config);
+        if ($this->upload->do_upload("logo")) {
+            $data = $this->upload->data();
+            //print_r($data["file_name"]);
+            //$setting->logo = $data["file_name"];
+        } else {
+            //print_r($this->upload->display_errors());
+        }
+        
         $setting->where('id', $this->input->post('id'))
                 ->update(array(
-                    'logo' => $this->input->post('logo'),
+                    'logo' => $data["file_name"],
                     'company_name' => $this->input->post('company_name'),
                     'address' => $this->input->post('address'),
                     'phone' => $this->input->post('phone'),
@@ -180,3 +192,4 @@ class Settings extends CI_Controller {
     }
 
 }
+
