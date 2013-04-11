@@ -365,6 +365,7 @@ CREATE TABLE IF NOT EXISTS `salary_components_b` (
 
 CREATE TABLE IF NOT EXISTS `settings` (
   `id` int(11) NOT NULL auto_increment,
+  `logo` varchar(255) NOT NULL,
   `company_name` varchar(255) NOT NULL,
   `address` text NOT NULL,
   `phone` varchar(255) NOT NULL,
@@ -379,8 +380,8 @@ CREATE TABLE IF NOT EXISTS `settings` (
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `company_name`, `address`, `phone`, `fax`, `email`, `city`, `no_npwp`) VALUES
-(1, 'Rama Tours', '234 St. Washington', '+622 000 111 222', '+622 222 111 333', 'ramatours@hrd.ramatour.com', 'Bandung', '34.345.567.78.789.09');
+INSERT INTO `settings` (`id`, `logo`, `company_name`, `address`, `phone`, `fax`, `email`, `city`, `no_npwp`) VALUES
+(1, 'logo.png', 'Rama Tours', '234 St. Washington', '+622 000 111 222', '+622 222 111 333', 'ramatours@hrd.ramatour.com', 'Bandung', '34.345.567.78.789.09');
 
 -- --------------------------------------------------------
 
