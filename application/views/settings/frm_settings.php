@@ -1,4 +1,17 @@
 <?php get_header(); ?>
+
+<script type="text/javascript">
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#preview').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+</script>
 <div class="body">
     <div class="content">
         <div class="page-header">
@@ -10,15 +23,30 @@
             </h1>
         </div>
         <br class="cl" />
-        <?php echo $this->session->flashdata('message'); ?>
-        <?php echo form_open($form_action) . form_hidden('id', $id); ?>
-        <table width="100%">
+        <?php echo $this->session->flashdata('message'); ?>        
+        <?php echo form_open_multipart($form_action) . form_hidden('id', $id); ?>
+            <table width="100%">
+            <tr>
+                <td width="20%">Logo</td>
+                <td>
+                <div class="one_third">                
+                  <div class="form-signin">
+                    <img src="<?php echo isset($_POST['logo']) ? assets_url('upload/' . $_POST['logo']) : assets_url('images/User-icon.png'); ?>" alt="" id="preview" />
+                  </div>
+                  <div class="input-append file">
+                    <input type="file" name="logo" onchange="readURL(this)" style="display:none;" />
+                    <input type="text" style="width:243px"/>
+                    <a href="#" class="btn">Browse</a>
+                  </div>
+                </div>
+                </td>
+            </tr>
             <tr>
                 <td width="20%">Company Name</td>
                 <td>
                     <div class="span3"><?php echo form_input($company_name); ?></div>
                 </td>
-            </tr>
+            </tr>            
             <tr>
                 <td width="20%" valign="top">Address</td>
                 <td>
