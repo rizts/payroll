@@ -18,6 +18,7 @@ class Settings extends CI_Controller {
 
     public function index($offset = 0) {
 //        $this->filter_access('settings', 'roled_select', base_url());
+        redirect('settings/edit/1');
 
         $settings = new Setting();
 
@@ -70,7 +71,7 @@ class Settings extends CI_Controller {
 
     function add() {
 //        $this->filter_access('settings', 'roled_add', 'settings/index');
-
+        redirect('settings/edit/1');
         $data['title'] = 'Add New';
         $data['form_action'] = site_url('settings/save');
         $data['link_back'] = anchor('settings/', 'Back', array('class' => 'btn btn-danger'));
@@ -89,8 +90,14 @@ class Settings extends CI_Controller {
         $setting = new Setting();
         $rs = $setting->where('id', $id)->get();
         $data['id'] = $rs->id;
-        $data['name'] = array('name' => 'name', 'value' => $rs->name);
-        $data['value'] = array('name' => 'value', 'value' => $rs->value);
+        $data['company_name'] = array('name' => 'company_name', 'value' => $rs->company_name);
+        $data['address'] = array('name' => 'address', 'value' => $rs->address);
+        $data['phone'] = array('name' => 'phone', 'value' => $rs->phone);
+        $data['fax'] = array('name' => 'fax', 'value' => $rs->fax);
+        $data['email'] = array('name' => 'email', 'value' => $rs->email);
+        $data['city'] = array('name' => 'city', 'value' => $rs->city);
+        $data['no_npwp'] = array('name' => 'no_npwp', 'value' => $rs->no_npwp);
+
         $data['btn_save'] = array('name' => 'btn_save', 'value' => 'Update', "class" => "btn btn-primary");
 
         $data['title'] = 'Update Setting';
@@ -102,10 +109,16 @@ class Settings extends CI_Controller {
 
     function save() {
 //        $this->filter_access('Config', 'roled_add', 'settings/index');
-
+        redirect('settings/edit/1');
         $setting = new Setting();
-        $setting->name = $this->input->post('name');
-        $setting->value = $this->input->post('value');
+        $setting->company_name = $this->input->post('company_name');
+        $setting->address = $this->input->post('address');
+        $setting->phone = $this->input->post('phone');
+        $setting->fax = $this->input->post('fax');
+        $setting->email = $this->input->post('email');
+        $setting->city = $this->input->post('city');
+        $setting->no_npwp = $this->input->post('no_npwp');
+
         if ($setting->save()) {
             $this->session->set_flashdata('message', 'Setting successfully created!');
             redirect('settings/');
@@ -124,16 +137,22 @@ class Settings extends CI_Controller {
         $setting = new Setting();
         $setting->where('id', $this->input->post('id'))
                 ->update(array(
-                    'name' => $this->input->post('name'),
-                    'value' => $this->input->post('value')
+                    'company_name' => $this->input->post('company_name'),
+                    'address' => $this->input->post('address'),
+                    'phone' => $this->input->post('phone'),
+                    'fax' => $this->input->post('fax'),
+                    'email' => $this->input->post('email'),
+                    'city' => $this->input->post('city'),
+                    'no_npwp' => $this->input->post('no_npwp')
                         )
         );
 
         $this->session->set_flashdata('message', 'Config Update successfuly.');
-        redirect('settings/');
+        redirect('settings/edit/1');
     }
 
     function delete($id) {
+        redirect('settings/edit/1');
         $this->filter_access('Config', 'roled_delete', 'settings/index');
 
         $setting = new Setting();
@@ -159,4 +178,3 @@ class Settings extends CI_Controller {
     }
 
 }
-
