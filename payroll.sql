@@ -1,20 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
+-- version 2.11.2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2013 at 10:20 PM
--- Server version: 5.5.28
--- PHP Version: 5.3.10-1ubuntu3.5
+-- Generation Time: Apr 11, 2013 at 03:00 PM
+-- Server version: 5.0.45
+-- PHP Version: 5.2.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `payroll`
@@ -27,11 +20,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `absensi` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `staff_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `hari_masuk` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -50,12 +43,12 @@ INSERT INTO `absensi` (`id`, `staff_id`, `date`, `hari_masuk`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `assets` (
-  `asset_id` int(11) NOT NULL AUTO_INCREMENT,
+  `asset_id` int(11) NOT NULL auto_increment,
   `asset_name` varchar(30) NOT NULL,
   `asset_status` tinyint(1) NOT NULL,
   `staff_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
-  PRIMARY KEY (`asset_id`)
+  PRIMARY KEY  (`asset_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -74,13 +67,13 @@ INSERT INTO `assets` (`asset_id`, `asset_name`, `asset_status`, `staff_id`, `dat
 --
 
 CREATE TABLE IF NOT EXISTS `asset_details` (
-  `assetd_id` int(11) NOT NULL AUTO_INCREMENT,
+  `assetd_id` int(11) NOT NULL auto_increment,
   `asset_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `staff_id` int(11) NOT NULL,
   `descriptions` text NOT NULL,
   `assetd_status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`assetd_id`)
+  PRIMARY KEY  (`assetd_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
@@ -98,9 +91,9 @@ INSERT INTO `asset_details` (`assetd_id`, `asset_id`, `date`, `staff_id`, `descr
 --
 
 CREATE TABLE IF NOT EXISTS `branches` (
-  `branch_id` int(11) NOT NULL AUTO_INCREMENT,
+  `branch_id` int(11) NOT NULL auto_increment,
   `branch_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`branch_id`)
+  PRIMARY KEY  (`branch_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
@@ -119,10 +112,10 @@ INSERT INTO `branches` (`branch_id`, `branch_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `components` (
-  `comp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `comp_id` int(11) NOT NULL auto_increment,
   `comp_name` varchar(20) NOT NULL,
   `comp_type` varchar(8) NOT NULL COMMENT 'kalau Opsi daily ketika input gaji maka opsi amount_daily muncul, misalnya uang makan',
-  PRIMARY KEY (`comp_id`)
+  PRIMARY KEY  (`comp_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
@@ -142,9 +135,9 @@ INSERT INTO `components` (`comp_id`, `comp_name`, `comp_type`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `departments` (
-  `dept_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dept_id` int(11) NOT NULL auto_increment,
   `dept_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`dept_id`)
+  PRIMARY KEY  (`dept_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
@@ -166,12 +159,12 @@ INSERT INTO `departments` (`dept_id`, `dept_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `educations` (
-  `edu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `edu_id` int(11) NOT NULL auto_increment,
   `staff_id` int(11) NOT NULL,
   `edu_year` int(4) NOT NULL,
   `edu_gelar` varchar(10) NOT NULL,
   `edu_name` varchar(30) NOT NULL,
-  PRIMARY KEY (`edu_id`)
+  PRIMARY KEY  (`edu_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
@@ -192,9 +185,9 @@ INSERT INTO `educations` (`edu_id`, `staff_id`, `edu_year`, `edu_gelar`, `edu_na
 --
 
 CREATE TABLE IF NOT EXISTS `employees_status` (
-  `sk_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sk_id` int(11) NOT NULL auto_increment,
   `sk_name` varchar(10) NOT NULL,
-  PRIMARY KEY (`sk_id`)
+  PRIMARY KEY  (`sk_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
@@ -213,7 +206,7 @@ INSERT INTO `employees_status` (`sk_id`, `sk_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `families` (
-  `staff_fam_id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_fam_id` int(11) NOT NULL auto_increment,
   `staff_fam_staff_id` int(11) NOT NULL,
   `staff_fam_order` varchar(20) NOT NULL,
   `staff_fam_name` varchar(30) NOT NULL,
@@ -221,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `families` (
   `staff_fam_birthplace` varchar(30) NOT NULL,
   `staff_fam_sex` varchar(10) NOT NULL,
   `staff_fam_relation` varchar(10) NOT NULL,
-  PRIMARY KEY (`staff_fam_id`)
+  PRIMARY KEY  (`staff_fam_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
@@ -244,9 +237,14 @@ INSERT INTO `families` (`staff_fam_id`, `staff_fam_staff_id`, `staff_fam_order`,
 --
 
 CREATE TABLE IF NOT EXISTS `fiscals` (
-  `date` varchar(6) NOT NULL DEFAULT '000000',
-  `status` varchar(5) NOT NULL DEFAULT 'open'
+  `date` varchar(6) NOT NULL default '000000',
+  `status` varchar(5) NOT NULL default 'open'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fiscals`
+--
+
 
 -- --------------------------------------------------------
 
@@ -255,9 +253,9 @@ CREATE TABLE IF NOT EXISTS `fiscals` (
 --
 
 CREATE TABLE IF NOT EXISTS `maritals_status` (
-  `sn_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sn_id` int(11) NOT NULL auto_increment,
   `sn_name` varchar(8) NOT NULL,
-  PRIMARY KEY (`sn_id`)
+  PRIMARY KEY  (`sn_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
@@ -276,11 +274,11 @@ INSERT INTO `maritals_status` (`sn_id`, `sn_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `medical_histories` (
-  `medic_id` int(11) NOT NULL AUTO_INCREMENT,
+  `medic_id` int(11) NOT NULL auto_increment,
   `staff_id` int(11) NOT NULL,
   `medic_date` date NOT NULL,
   `medic_description` text NOT NULL,
-  PRIMARY KEY (`medic_id`)
+  PRIMARY KEY  (`medic_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
@@ -303,10 +301,10 @@ INSERT INTO `medical_histories` (`medic_id`, `staff_id`, `medic_date`, `medic_de
 --
 
 CREATE TABLE IF NOT EXISTS `salaries` (
-  `salary_id` int(11) NOT NULL AUTO_INCREMENT,
+  `salary_id` int(11) NOT NULL auto_increment,
   `salary_periode` date NOT NULL,
   `salary_staffid` int(11) NOT NULL,
-  PRIMARY KEY (`salary_id`)
+  PRIMARY KEY  (`salary_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -323,12 +321,12 @@ INSERT INTO `salaries` (`salary_id`, `salary_periode`, `salary_staffid`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `salary_components_a` (
-  `gaji_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gaji_id` int(11) NOT NULL auto_increment,
   `staff_id` int(11) NOT NULL,
   `gaji_component_id` int(11) NOT NULL,
   `gaji_daily_value` decimal(10,0) NOT NULL,
   `gaji_amount_value` decimal(10,0) NOT NULL,
-  PRIMARY KEY (`gaji_id`)
+  PRIMARY KEY  (`gaji_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -336,8 +334,8 @@ CREATE TABLE IF NOT EXISTS `salary_components_a` (
 --
 
 INSERT INTO `salary_components_a` (`gaji_id`, `staff_id`, `gaji_component_id`, `gaji_daily_value`, `gaji_amount_value`) VALUES
-(1, 7, 4, 0, 1000000),
-(2, 7, 5, 0, 500000);
+(1, 7, 4, '0', '1000000'),
+(2, 7, 5, '0', '500000');
 
 -- --------------------------------------------------------
 
@@ -346,13 +344,18 @@ INSERT INTO `salary_components_a` (`gaji_id`, `staff_id`, `gaji_component_id`, `
 --
 
 CREATE TABLE IF NOT EXISTS `salary_components_b` (
-  `gaji_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gaji_id` int(11) NOT NULL auto_increment,
   `staff_id` int(11) NOT NULL,
   `gaji_component_id` int(11) NOT NULL,
   `gaji_daily_value` decimal(10,0) NOT NULL,
   `gaji_amount_value` decimal(10,0) NOT NULL,
-  PRIMARY KEY (`gaji_id`)
+  PRIMARY KEY  (`gaji_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `salary_components_b`
+--
+
 
 -- --------------------------------------------------------
 
@@ -361,23 +364,23 @@ CREATE TABLE IF NOT EXISTS `salary_components_b` (
 --
 
 CREATE TABLE IF NOT EXISTS `settings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL auto_increment,
+  `company_name` varchar(255) NOT NULL,
+  `address` text NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `fax` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `no_npwp` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `name`, `value`) VALUES
-(1, 'COMPANY_NAME', 'Rama Tours'),
-(2, 'ADDRESS', 'Jl. Riau No. 265'),
-(3, 'COMPANY_PHONE', '(022) 6798 987 89'),
-(4, 'PPH21_PERCENT', '10'),
-(5, 'PENSIUN', 'N'),
-(6, 'LOGO', '-');
+INSERT INTO `settings` (`id`, `company_name`, `address`, `phone`, `fax`, `email`, `city`, `no_npwp`) VALUES
+(1, 'Rama Tours', '234 St. Washington', '+622 000 111 222', '+622 222 111 333', 'ramatours@hrd.ramatour.com', 'Bandung', '34.345.567.78.789.09');
 
 -- --------------------------------------------------------
 
@@ -386,7 +389,7 @@ INSERT INTO `settings` (`id`, `name`, `value`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `staffs` (
-  `staff_id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_id` int(11) NOT NULL auto_increment,
   `staff_nik` int(10) NOT NULL,
   `staff_kode_absen` varchar(5) NOT NULL,
   `staff_name` varchar(50) NOT NULL,
@@ -406,7 +409,7 @@ CREATE TABLE IF NOT EXISTS `staffs` (
   `staff_birthplace` varchar(20) NOT NULL,
   `staff_sex` varchar(10) NOT NULL,
   `staff_password` varchar(255) NOT NULL,
-  PRIMARY KEY (`staff_id`)
+  PRIMARY KEY  (`staff_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
@@ -425,13 +428,13 @@ INSERT INTO `staffs` (`staff_id`, `staff_nik`, `staff_kode_absen`, `staff_name`,
 --
 
 CREATE TABLE IF NOT EXISTS `sub_salaries` (
-  `sub_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sub_id` int(11) NOT NULL auto_increment,
   `salary_id` int(11) NOT NULL,
   `salary_periode` date NOT NULL,
   `salary_component_id` int(11) NOT NULL,
   `salary_daily_value` decimal(10,0) NOT NULL,
   `salary_amount_value` decimal(10,0) NOT NULL,
-  PRIMARY KEY (`sub_id`)
+  PRIMARY KEY  (`sub_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
@@ -439,8 +442,8 @@ CREATE TABLE IF NOT EXISTS `sub_salaries` (
 --
 
 INSERT INTO `sub_salaries` (`sub_id`, `salary_id`, `salary_periode`, `salary_component_id`, `salary_daily_value`, `salary_amount_value`) VALUES
-(1, 2, '2013-01-01', 2013, 9000, 1500000),
-(6, 2, '2010-01-01', 4, 0, 2350000);
+(1, 2, '2013-01-01', 2013, '9000', '1500000'),
+(6, 2, '2010-01-01', 4, '0', '2350000');
 
 -- --------------------------------------------------------
 
@@ -449,11 +452,11 @@ INSERT INTO `sub_salaries` (`sub_id`, `salary_id`, `salary_periode`, `salary_com
 --
 
 CREATE TABLE IF NOT EXISTS `taxes_employees` (
-  `sp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sp_id` int(11) NOT NULL auto_increment,
   `sp_status` varchar(3) NOT NULL,
   `sp_ptkp` int(11) NOT NULL,
   `sp_note` varchar(255) NOT NULL,
-  PRIMARY KEY (`sp_id`)
+  PRIMARY KEY  (`sp_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
@@ -474,9 +477,9 @@ INSERT INTO `taxes_employees` (`sp_id`, `sp_status`, `sp_ptkp`, `sp_note`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `titles` (
-  `title_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title_id` int(11) NOT NULL auto_increment,
   `title_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`title_id`)
+  PRIMARY KEY  (`title_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
@@ -496,7 +499,7 @@ INSERT INTO `titles` (`title_id`, `title_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `staff_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -504,7 +507,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `role_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -522,7 +525,7 @@ INSERT INTO `users` (`id`, `staff_id`, `username`, `password`, `avatar`, `role_i
 --
 
 CREATE TABLE IF NOT EXISTS `user_roled` (
-  `roled_id` int(11) NOT NULL AUTO_INCREMENT,
+  `roled_id` int(11) NOT NULL auto_increment,
   `role_id` int(11) NOT NULL,
   `roled_module` varchar(20) NOT NULL,
   `roled_add` tinyint(1) NOT NULL,
@@ -530,7 +533,7 @@ CREATE TABLE IF NOT EXISTS `user_roled` (
   `roled_delete` tinyint(1) NOT NULL,
   `roled_approval` tinyint(1) NOT NULL,
   `roled_select` tinyint(1) NOT NULL,
-  PRIMARY KEY (`roled_id`)
+  PRIMARY KEY  (`roled_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
 
 --
@@ -607,9 +610,9 @@ INSERT INTO `user_roled` (`roled_id`, `role_id`, `roled_module`, `roled_add`, `r
 --
 
 CREATE TABLE IF NOT EXISTS `user_roles` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL auto_increment,
   `role_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`role_id`)
+  PRIMARY KEY  (`role_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
@@ -629,11 +632,11 @@ INSERT INTO `user_roles` (`role_id`, `role_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `work_histories` (
-  `history_id` int(11) NOT NULL AUTO_INCREMENT,
+  `history_id` int(11) NOT NULL auto_increment,
   `staff_id` int(11) NOT NULL,
   `history_date` date NOT NULL,
   `history_description` text NOT NULL,
-  PRIMARY KEY (`history_id`)
+  PRIMARY KEY  (`history_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
@@ -646,7 +649,3 @@ INSERT INTO `work_histories` (`history_id`, `staff_id`, `history_date`, `history
 (12, 1, '2010-03-21', 'General Manager PT. LEN'),
 (13, 1, '2012-03-21', 'Manager Marketing Garuda Travel'),
 (14, 3, '2013-04-03', 'IT Manager at PT.Waybe Home Appliance');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
