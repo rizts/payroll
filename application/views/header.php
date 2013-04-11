@@ -89,6 +89,7 @@
                                     <?php echo $salary == true ? '<li>' . anchor('salaries', 'Salary') . '</li>' : ''; ?>
                                     <?php echo $staff == true ? '<li>' . anchor('staffs', 'Staff') . '</li>' : ''; ?>
                                     <?php echo $assets == true ? '<li>' . anchor('assets', 'Assets') . '</li>' : ''; ?>
+                                    <li><?php echo anchor('absensi', 'Absensi')?></li>
                                 </ul>
                                 <?php } ?>
                             </ul>

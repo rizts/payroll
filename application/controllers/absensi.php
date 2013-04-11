@@ -4,7 +4,7 @@ class Absensi extends CI_Controller{
   function __construct(){
     parent::__construct();
     $this->load->model("Absensi_model", "absensi");
-    $this->load->helper("absensi");
+    $this->load->helper("staff");
   }
   
   function index(){
