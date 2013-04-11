@@ -31,7 +31,11 @@
                 <td>
                 <div class="one_third">                
                   <div class="form-signin">
-                    <img src="<?php echo isset($_POST['logo']) ? assets_url('upload/' . $_POST['logo']) : assets_url('images/User-icon.png'); ?>" alt="" id="preview" />
+                    <?php if($logo ==''){ ?>
+                    <img src="<?php echo isset($_POST['logo']) ? assets_url('upload/' . $_POST['logo']) : '' ?>" alt="" id="preview" />
+                    <?php }else{ ?>
+                    <img src="<?php echo assets_url('upload/' . $logo); ?>" alt="" id="preview" />
+                    <?php } ?>
                   </div>
                   <div class="input-append file">
                     <input type="file" name="logo" onchange="readURL(this)" style="display:none;" />
