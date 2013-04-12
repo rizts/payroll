@@ -76,7 +76,7 @@
                             <div class="open"></div>
                             <ul>
                                 <?php
-                                if ($this->session->userdata('logged_in') == true) {
+                                //if ($this->session->userdata('logged_in') == true) {
                                     $user = new User();
                                     $role_id = $this->session->userdata('sess_role_id');
                                     $branch = $user->exist_module($role_id, 'Branch');
@@ -97,8 +97,10 @@
                                     <?php echo $staff == true ? '<li>' . anchor('staffs', 'Staff') . '</li>' : ''; ?>
                                     <?php echo $assets == true ? '<li>' . anchor('assets', 'Assets') . '</li>' : ''; ?>
                                     <li><?php echo anchor('absensi', 'Absensi')?></li>
+                                    <li><?php echo anchor('izin', 'Izin')?></li>
+                                    <li><?php echo anchor('cuti', 'Cuti')?></li>
                                 </ul>
-                                <?php } ?>
+                                <?php //} ?>
                             </ul>
                         <li>
                             <a href="#" class="blgreen">CONFIG</a>
