@@ -24,7 +24,7 @@
         </div>
         <br class="cl" />
         <?php echo $this->session->flashdata('message'); ?>        
-        <?php echo form_open_multipart($form_action) . form_hidden('id', $id); ?>
+        <?php echo form_open_multipart($form_action); ?>
             <table width="100%">
             <tr>
                 <td width="20%">Logo</td>
