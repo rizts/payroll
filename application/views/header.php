@@ -58,6 +58,13 @@
             <div class="sidebar">
                 <div class="nContainer">
                     <div style="padding: 5px;">
+                        <?php
+                            $setting = new Setting();                            
+                        ?>
+                        <div><img src="<?php echo assets_url('upload/' . $setting->get_val('logo')) ?>" style="width: 216px; height: 100px;" /></div>
+                        <div style="font-size: 20px; padding: 5px; color: #fff; font-weight: bold;">
+                            <?php echo $setting->get_val('company_name'); ?>
+                        </div>
                         <form action="<?php echo site_url('searches')?> " method="get">
                             <input autofocus="autofocus" type="text" name="q" placeholder="Search Advance" style="width: 215px;">
                         </form>
