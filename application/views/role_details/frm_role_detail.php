@@ -55,77 +55,70 @@
         }
     }
 </script>
-<div style="margin-left: 100px;">
+<div class="body">
     <div class="content">
-        <?php echo $this->session->flashdata('message'); ?>
+      	<div class="page-header">
+      		<div class="icon">
+        		<span class="ico-site-map"></span>
+      		</div>
+	      	<h1>Add Role Detail
+	      		<small>Add new role detail</small>
+	      	</h1>
+    	</div>
+    	<br class="cl" />
+      	<?php echo $this->session->flashdata('message'); ?>
+      	<div class="head blue">
+      		<div class="btn-group float-right">
+			    <a href="<?php echo base_url('dashboard/index'); ?>" class="btn btn-primary bootstrap-tooltip" data-placement="top" data-title="Back to Dashboard">
+			      <span class="icon-home icon-white"></span>
+			    </a>
+			    <a id="btnAdd" class="btn btn-primary bootstrap-tooltip" data-placement="top" data-title="Add New">
+		      	<span class="icon-plus icon-white"></span>
+		    	</a>
+		  	</div>
+		  	<br class="cl" />
+        </div>
         <?php echo form_open($form_action); ?>
-        <div class="row">
-            <div class="span6">
-                <h3>Form Roled Detail</h3>
+        <h3>Form Roled Detail</h3>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th colspan="4" align="center">
-                                <input type="checkbox" onclick="check_all(this)" name="all_module" id="all_module"/> Roled Module
-                            </th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <td><?php echo form_checkbox($module_1); ?> Branch</td>
-                        <td><?php echo form_checkbox($module_2); ?> Departement</td>
-                        <td><?php echo form_checkbox($module_3); ?> Tax Employee</td>
-                        <td><?php echo form_checkbox($module_4); ?> Employee Status</td>
-                    </tr>
-                    <tr>
-                        <td><?php echo form_checkbox($module_5); ?> Marital Status</td>
-                        <td><?php echo form_checkbox($module_6); ?> Title</td>
-                        <td><?php echo form_checkbox($module_7); ?> Component(Gaji)</td>
-                        <td><?php echo form_checkbox($module_8); ?> Salary</td>
-                    </tr>
-                    <tr>
-                        <td><?php echo form_checkbox($module_9); ?> Staff</td>
-                        <td><?php echo form_checkbox($module_10); ?> Assets</td>
-                        <td><?php echo form_checkbox($module_11); ?> Users</td>
-                        <td><?php echo form_checkbox($module_12); ?> Roled</td>
-                    </tr>
-                    <tr>
-                        <td><?php echo form_checkbox($module_13); ?> Work Histories</td>
-                        <td><?php echo form_checkbox($module_14); ?> Families</td>
-                        <td><?php echo form_checkbox($module_15); ?> Educations</td>
-                        <td><?php echo form_checkbox($module_16); ?> Medical Histories</td>
-                    </tr>
-                    <tr>
-                        <td><?php echo form_checkbox($module_17); ?> Salary Component</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="row-fluid" style="margin-top: 20px;">
-            <div class="span6">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th colspan="5" align="center">
-                                All Privileges
-                            </th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <td><?php echo form_checkbox($privileges_1); ?> INSERT</td>
-                        <td><?php echo form_checkbox($privileges_2); ?> UPDATE</td>
-                        <td><?php echo form_checkbox($privileges_3); ?> DELETE</td>
-                        <td><?php echo form_checkbox($privileges_4); ?> APPROVAL</td>
-                        <td><?php echo form_checkbox($privileges_5); ?> SELECT</td>
-                    </tr>
-                </table>
-
-            </div>
-        </div>
+        <table id="tblRoled" class="table">
+            <thead>
+                <tr>
+                    <th rowspan="2">No</th>
+                    <th rowspan="2">Module</th>
+                    <th colspan="5">Privilidge</th>
+                </tr>
+                <tr>
+                    <th>Add</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Approval</th>
+                    <th>Select</th>
+                </tr>
+            </thead>
+            <?php
+            $i=0;
+            foreach($roled_list as $row) {
+            	$i++;
+            ?>
+            <tbody id="roleds">
+	            <tr>
+	            	<td><?=$i;?></td>
+	                <td><?php echo form_hidden('roled_module'.$i,$row['module']);form_hidden('input_type'.$i,$input_type);echo $row['module']; ?></td>
+	                <td><?php echo form_checkbox('roled_add'.$i,$row['roled_add'],false,'id="roled_add'.$i.'"'); ?></td>
+	                <td><?php echo form_checkbox('roled_edit'.$i,$row['roled_edit'],false,'id="roled_edit'.$i.'"'); ?></td>
+	                <td><?php echo form_checkbox('roled_delete'.$i,$row['roled_delete'],false,'id="roled_delete'.$i.'"'); ?></td>
+	                <td><?php echo form_checkbox('roled_approval'.$i,$row['roled_approval'],false,'id="roled_approval'.$i.'"'); ?></td>
+	                <td><?php echo form_checkbox('roled_select'.$i,$row['roled_select'],false,'id="roled_select'.$i.'"'); ?></td>
+	            </tr>
+            </tbody>
+            <?php
+            }
+            ?>
+        </table>
         <div class="well-small">
+        	<input type="hidden" id="count" name="count" value="<?=count($roled_list);?>" />
+        	<input type="hidden" id="role_id" name="role_id" value="<?=$role_id;?>" />
             <?php echo form_submit($btn_save) . ' ' . $link_back; ?>
         </div>
         </form>
